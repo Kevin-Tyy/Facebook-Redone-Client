@@ -1,9 +1,13 @@
 // import React from 'react'
 
+import Login from "./pages/Auth/Login"
+
 
 const App = () => {
   return (
-    <div className="h-screen w-full bg-black text-white">App</div>
+    <div>
+      <Login/>
+    </div>
   )
 }
 
