@@ -1,0 +1,195 @@
+import { makeStyles } from '@mui/styles';
+import bgImage from '../../assets/bg-cover.jpg'
+import { useState} from 'react'
+import { Button,TextField,  Stepper, Step, StepLabel } from '@mui/material';
+
+const useStyles = makeStyles(() => ({
+  formContainer: {
+    maxWidth: 400,
+    margin: '0 auto',
+    // padding: theme.spacing(2),
+  },
+  buttonContainer: {  
+    display: 'flex',
+    justifyContent: 'flex-end',
+    // marginTop: theme.,
+  },
+}));
+
+const RegisterForm : React.FC = () => {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    gender: '',
+    username: '',
+    email: '',
+    phoneNumber: '',
+    hometown: '',
+    password: '',
+  });
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event:any) => {
+    event.preventDefault();
+    console.log(formData); // You can submit the form data to the server here
+  };
+
+  const steps = ['Step 1: Personal Information', 'Step 2: Account Information', 'Step 3: Additional Information'];
+
+  const renderStepContent = (step:any) => {
+    switch (step) {
+      case 0:
+        return (
+          <div>
+            {/* <TextField
+              label="First Name"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            /> */}
+            <input 
+              value={formData.firstName}
+              onChange={handleInputChange}
+            />
+            <input 
+              value={formData.lastName}
+              onChange={handleInputChange}
+            />
+            {/* <TextField
+              label="Last Name"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            /> */}
+            <input 
+              value={formData.gender}
+              onChange={handleInputChange}
+            />
+            {/* <TextField
+              label="Gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            /> */}
+          </div>
+        );
+      case 1:
+        return (
+          <div>
+            <TextField
+              label="Username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Phone Number"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            />
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            <TextField
+              label="Home Town"
+              name="hometown"
+              value={formData.hometown}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Password"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="relative">
+      <img src={bgImage} alt="" className='fixed h-screen w-full object-cover top-0 right-0 bottom-0 left-0 z-[-3]'/>
+      <div className='fixed top-0 right-0 left-0 bottom-0 h-screen w-full bg-gradient-to-r from-gray-900/40 via-gray-900 to-gray-950 z-[-2]'></div>
+      <div className='fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black flex justify-center items-center'>
+        <form onSubmit={handleSubmit} className='w-[400px]'>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+
+          {renderStepContent(activeStep)}
+
+          <div className={classes.buttonContainer}>
+            {activeStep !== 0 && (
+              <Button variant="contained" color="secondary" onClick={handleBack}>
+                Back
+              </Button>
+            )}
+            {activeStep !== steps.length - 1 && (
+              <Button variant="contained" color="primary" onClick={handleNext} style={{ marginLeft: 8 }}>
+                Next
+              </Button>
+            )}
+            {activeStep === steps.length - 1 && (
+              <Button variant="contained" color="primary" type="submit" style={{ marginLeft: 8 }}>
+                Submit
+              </Button>
+            )}
+          </div>
+        </form>
+
+      </div>
+    </div>
+  );
+};
+
+export default RegisterForm;
