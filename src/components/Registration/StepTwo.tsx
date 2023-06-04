@@ -14,10 +14,10 @@ const StepTwo = ({ formData, handleInputChange }: Props) => {
 
 	setTimeout(()=> {
 		setIsPasswordConfVisible(false)
-	}, 1500)
+	}, 5000)
 	setTimeout(()=> {
 		setIsPasswordVisible(false)
-	}, 1500)
+	}, 5000)
 
 	return (
 		<div className="flex flex-col gap-7">

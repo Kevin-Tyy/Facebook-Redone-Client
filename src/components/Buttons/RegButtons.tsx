@@ -1,66 +1,78 @@
-import { useStyles } from '../../hooks/mui';
-import { Button } from '@mui/material'
+import { useStyles } from "../../hooks/mui";
+import { Button, CircularProgress } from "@mui/material";
 
 interface Props {
-	activeStep : number;
-	handleBack : (value : any) => void;
-	handleNext : (value : any) => void;
-	steps : Array<string>
+	activeStep: number;
+	handleBack: (value: any) => void;
+	handleNext: (value: any) => void;
+	isLoading: boolean;
+	steps: Array<string>;
 }
 
-const RegButton = ({activeStep , handleBack , handleNext , steps}: Props) => {
-	const classes = useStyles()
-  return (
-    <div>
-        		<div className={classes.buttonContainer}>
-						{activeStep !== 0 && (
-						<Button
-							className={classes.myButton}
-							variant="contained"
-							color="secondary"
-							onClick={handleBack}
-							style={{
-								borderRadius: "999px",
-								padding: "12px",
-								textTransform: "capitalize",
-							}}>
-							Back
-						</Button>
+const RegButton = ({isLoading,activeStep,handleBack,handleNext,steps}: Props) => {
+	const classes = useStyles();
+	return (
+		<div>
+			<div className={classes.buttonContainer}>
+				{activeStep !== 0 && (
+					<Button
+						disabled={isLoading}
+						className={classes.myButton}
+						onClick={handleBack}
+						sx={{
+							color: "white",
+							backgroundColor: "rgb(180, 44, 250)",
+							borderRadius: "9999px",
+							textTransform: "capitalize",
+							p: "12px",
+							"&:hover": { backgroundColor: "rgb(211, 44, 220)" },
+							"&:focus": { backgroundColor: "rgb(211, 44, 211)" },
+						}}>
+						Back
+					</Button>
+				)}
+				{activeStep !== steps.length - 1 && (
+					<Button
+						className={classes.myButton}
+						variant="contained"
+						color="primary"
+						onClick={handleNext}
+						sx={{
+							color: "white",
+							backgroundColor: "rgb(30 , 58 , 138)",
+							borderRadius: "9999px",
+							textTransform: "capitalize",
+							p: "12px",
+							"&:hover": { backgroundColor: "rgb(40 , 58 , 138)" },
+							"&:focus": { backgroundColor: "rgb(40 , 58 , 138" },
+						}}>
+						Next
+					</Button>
+				)}
+				{activeStep === steps.length - 1 && (
+					<Button
+						disabled={isLoading}
+						className={classes.myButton}
+						type="submit"
+						sx={{
+							color: "white",
+							backgroundColor: "rgb(30 , 58 , 138)",
+							borderRadius: "9999px",
+							textTransform: "capitalize",
+							p: "12px",
+							"&:hover": { backgroundColor: "rgb(40 , 58 , 138)" },
+							"&:focus": { backgroundColor: "rgb(40 , 58 , 138" },
+						}}>
+						{isLoading ? (
+							<CircularProgress size={20} sx={{ color : '#fff'}} />
+						) : (
+							"Submit"
 						)}
-						{activeStep !== steps.length - 1 && (
-							<Button
-								className={classes.myButton}
-								variant="contained"
-								color="primary"
-								onClick={handleNext}
-								style={{
-									marginLeft: 8,
-									borderRadius: "999px",
-									textTransform: "capitalize",
-									padding: "12px",
-								}}>
-								Next
-							</Button>
-						)}
-						{activeStep === steps.length - 1 && (
-							<Button
-								className={classes.myButton}
-								variant="contained"
-								color="primary"
-								type="submit"
-								style={{
-									marginLeft: 8,
-									borderRadius: "999px",
-									padding: "12px",
-									textTransform: "capitalize",
-								}}>
-								Submit
-							</Button>
-						)}
-					</div>
+					</Button>
+				)}
+			</div>
+		</div>
+	);
+};
 
-    </div>
-  )
-}
-
-export default RegButton
+export default RegButton;
