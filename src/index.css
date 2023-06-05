@@ -1,3 +1,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import 'tailwindcss/base';
+
+h3{
+    color : #010a13
+}

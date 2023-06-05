@@ -20,8 +20,8 @@ const Navbar = (props: Props) => {
         <input type="text" className="w-full bg-transparent outline-none text-white" placeholder="Search facebook"/>
       </div>
       <div className="flex gap-4 ">
-        {navObj.map((nav)=> (
-          <div className="bg-gray-950 p-1.5 flex items-center justify-center rounded-full text-primary-100 cursor-pointer hover:bg-primary-300 transition duration-150">
+        {navObj.map((nav ,index)=> (
+          <div key={index} className="bg-gray-950 p-1.5 flex items-center justify-center rounded-full text-primary-100 cursor-pointer hover:bg-primary-300 transition duration-150">
             {nav.icon}
           </div>
         ))}
