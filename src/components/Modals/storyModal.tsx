@@ -54,7 +54,7 @@ const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
 	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		submitPostDetails(`${BaseURL}/story`);
+		submitPostDetails(`${BaseURL}/stories`);
 	};
 	const handleFileInput = (e: any) => {
 		const file = e.target.files[0];
