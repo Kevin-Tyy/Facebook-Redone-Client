@@ -59,6 +59,7 @@ const RegisterForm: FC = () => {
 				navigate("/home");
 			}
 		} catch (error) {
+			set
 			console.log(error);
 		}
 	};

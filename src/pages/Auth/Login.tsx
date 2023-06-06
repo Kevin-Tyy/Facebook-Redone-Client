@@ -12,7 +12,10 @@ import { Button, CircularProgress } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { BaseURL } from "../../utils/Link";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast';
+import {useSelector,useDispatch} from 'react-redux';
+import { logout, user } from '../../redux/features/AuthSlice';
+
 
 interface FormData {
 	username : string,
@@ -21,6 +24,7 @@ interface FormData {
 
 
 const Login : FC  = () => {
+// re
 	const navigate = useNavigate()
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isLoading , setIsLoading] = useState<boolean>(false)
@@ -35,6 +39,7 @@ const Login : FC  = () => {
 	}
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
+
 		setIsLoading(true)
 		const { data } = await axios.post(`${BaseURL}/user/login` ,{
 			...formData
@@ -44,6 +49,7 @@ const Login : FC  = () => {
 			toast.error(data?.msg)
 		}
 		else{
+			localStorage.setItem('token' , data.token)
 			toast.success(data?.msg)
 			navigate('/home')
 		}

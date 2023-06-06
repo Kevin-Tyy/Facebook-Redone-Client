@@ -5,3 +5,17 @@
 h3{
     color : #010a13
 }
+::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(39, 39, 39);
+    border-radius: 10px;
+    height: 200px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgb(151, 151, 151);
+}
