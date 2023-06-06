@@ -10,13 +10,11 @@ import { Avatar, Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";
-
+import { motion } from "framer-motion";
 interface Props {
 	handleStoryToggle: (value: any) => void;
-	userInfo: any ;
-	
+	userInfo: any;
 }
-
 
 const utilIcons = [
 	<EmojiEmotionsOutlined fontSize="large" />,
@@ -35,7 +33,7 @@ const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
 			const { data } = await axios.post(url, {
 				storyCaption,
 				storyMedia,
-				userId
+				userId,
 			});
 			console.log(data);
 			if (data) {
@@ -69,7 +67,15 @@ const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
 		<div
 			className="backdrop-blur-sm bg-gray-950/50 h-screen w-full fixed top-0 right-0 bottom-0 left-0 z-[10] flex justify-center items-center "
 			onClick={() => handleStoryToggle(false)}>
-			<div
+			<motion.div
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: false, amount: 0.1 }}
+				transition={{ duration: 0.1 }}
+				variants={{
+					hidden: { opacity: 0, y: -20 },
+					visible: { opacity: 1, y: 0 },
+				}}
 				onClick={(e) => e.stopPropagation()}
 				className="relative bg-primary-200 w-full  max-w-[550px] p-3 rounded-lg ">
 				<div className="p-3 border-b border-gray-700">
@@ -98,7 +104,7 @@ const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
 						<label
 							htmlFor="imagepost"
 							className="flex flex-col items-center justify-center h-96 border border-dashed rounded-md cursor-pointer border-gray-700 my-3">
-                                {storyMedia && <p className="text-light">Change image</p>}
+							{storyMedia && <p className="text-light">Change image</p>}
 							{storyMedia ? (
 								<img
 									src={storyMedia}
@@ -118,7 +124,7 @@ const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
 
 						<div className="w-full border border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
 							<input
-								onChange={(e)=> setStoryCaption(e.target.value)}
+								onChange={(e) => setStoryCaption(e.target.value)}
 								placeholder="Add a caption"
 								className="text-light bg-transparent outline-none w-full"
 							/>
@@ -157,7 +163,7 @@ const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
 						</Button>
 					</form>
 				</div>
-			</div>
+			</motion.div>
 			<Toaster />
 		</div>
 	);

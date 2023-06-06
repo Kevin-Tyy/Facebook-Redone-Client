@@ -1,6 +1,6 @@
 import { Add } from "@mui/icons-material";
 import { useState, useEffect } from "react";
-import StoryModal from "../Modals/storyModal";
+import StoryModal from "../Modals/StoryModal";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 

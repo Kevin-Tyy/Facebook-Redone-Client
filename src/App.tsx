@@ -5,7 +5,7 @@ import HomePage from './pages/Homepage/HomePage'
 import Register from './pages/Auth/Register'
 import { BrowserRouter , Navigate, Route, Routes } from 'react-router-dom'
 import NotFound from "./pages/NotFound/NotFound"
-import Posts from './components/Posts/Posts'
+import Posts from './components/Posts'
 
 const App = () => {
   return (

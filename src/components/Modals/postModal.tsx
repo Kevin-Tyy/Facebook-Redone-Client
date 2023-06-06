@@ -11,6 +11,7 @@ import { Image } from "@mui/icons-material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 interface Props {
 	setIsPostModal: (value: any) => void;
@@ -26,29 +27,28 @@ const utilIcons = [
 const PostModal = ({ setIsPostModal, userInfo }: Props) => {
 	const [postText, setPostText] = useState<string | null>("");
 	const [postMedia, setPostMedia] = useState<any>("");
-	const [isLoading , setIsLoading ] = useState<boolean>(false);
-	// const userId = userInfo.userId; 
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	// const userId = userInfo.userId;
 	const submitPostDetails = async (url: string) => {
 		try {
-			setIsLoading(true)
+			setIsLoading(true);
 			const { data } = await axios.post(url, {
 				postText,
 				postMedia,
 				// userId
 			});
 			console.log(data);
-			if(data){
-				setIsLoading(false)
+			if (data) {
+				setIsLoading(false);
 				if (data.success) {
 					toast.success(data.msg);
 				} else {
 					toast.error(data.msg);
 				}
-
 			}
 		} catch (error) {
-			setIsLoading(false)
-			console.log(error)
+			setIsLoading(false);
+			console.log(error);
 			toast.error("Something went wrong, try again later");
 		}
 	};
@@ -69,7 +69,15 @@ const PostModal = ({ setIsPostModal, userInfo }: Props) => {
 		<div
 			className="backdrop-blur-sm bg-gray-950/50 h-screen w-full fixed top-0 right-0 bottom-0 left-0 z-[10] flex justify-center items-center "
 			onClick={() => setIsPostModal(false)}>
-			<div
+			<motion.div
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, amount: 0.1 }}
+				transition={{ duration: 0.1 }}
+				variants={{
+					hidden: { opacity: 0, y: -20 },
+					visible: { opacity: 1, y: 0 },
+				}}
 				onClick={(e) => e.stopPropagation()}
 				className="relative bg-primary-200 w-full  max-w-[550px] p-3 rounded-lg ">
 				<div className="p-3 border-b border-gray-700">
@@ -98,7 +106,9 @@ const PostModal = ({ setIsPostModal, userInfo }: Props) => {
 						<textarea
 							rows={7}
 							onChange={(e) => setPostText(e.target.value)}
-							className={`w-full resize-none outline-none  bg-transparent text-2xl text-light p-2 ${postMedia ?  'h-20': 'h-40' }`}
+							className={`w-full resize-none outline-none  bg-transparent text-2xl text-light p-2 ${
+								postMedia ? "h-20" : "h-40"
+							}`}
 							placeholder="What's on your mind, John?"></textarea>
 						{postMedia && (
 							<img
@@ -126,7 +136,13 @@ const PostModal = ({ setIsPostModal, userInfo }: Props) => {
 								{utilIcons.map((icon, index) => (
 									<span
 										key={index}
-										className={`${index == 0 ? "text-yellow-400": index == 1 ? "text-sky-800": "text-gray-600"}`}>
+										className={`${
+											index == 0
+												? "text-yellow-400"
+												: index == 1
+												? "text-sky-800"
+												: "text-gray-600"
+										}`}>
 										{icon}
 									</span>
 								))}
@@ -143,11 +159,15 @@ const PostModal = ({ setIsPostModal, userInfo }: Props) => {
 								textTransform: "capitalize",
 							}}
 							className="text-white rounded-md transtition duration-75">
-							{isLoading ? <CircularProgress size={24} sx={{ color : '#f5f5f5'}}/> : 'Post'}
+							{isLoading ? (
+								<CircularProgress size={24} sx={{ color: "#f5f5f5" }} />
+							) : (
+								"Post"
+							)}
 						</Button>
 					</form>
 				</div>
-			</div>
+			</motion.div>
 			<Toaster />
 		</div>
 	);

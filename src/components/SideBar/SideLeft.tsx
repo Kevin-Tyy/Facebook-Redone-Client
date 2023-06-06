@@ -23,33 +23,35 @@ const UtilObj = [
 
 const Sidebar = () => {
 	return (
-		<div className="bg-primary-200 py-4 px-2 w-[500px] flex flex-col rounded-lg gap-4">
-			<div className="flex items-center gap-3 border-b-[3px] border-primary-100 p-5">
-				<Avatar>J</Avatar>
-				<p className="text-white">John Doe</p>
+		<div>
+			<div className="bg-primary-200 py-4 px-2 w-[400px] flex flex-col rounded-lg gap-4 sticky top-[105px]">
+				<div className="flex items-center gap-3 border-b-[3px] border-primary-100 p-5">
+					<Avatar>J</Avatar>
+					<p className="text-white">John Doe</p>
+				</div>
+				<div className="flex flex-col gap-4">
+					{UtilObj.map((obj, index) => (
+						<div
+							className="flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-xl  w-full hover:bg-gray-950"
+							key={index}>
+							<span className="text-white">{obj.icon}</span>
+							<p className="text-white">{obj.title}</p>
+						</div>
+					))}
+				</div>
+				<Button
+					sx={{
+						backgroundColor: "#010a13",
+						p: 1.5,
+						"&:hover": { backgroundColor: "#010a13" },
+						textTransform: "capitalize",
+						fontWeight: "bold",
+						borderRadius: "7px",
+					}}
+					className=" text-primary-100 ">
+					See more
+				</Button>
 			</div>
-			<div className="flex flex-col gap-4">
-				{UtilObj.map((obj, index) => (
-					<div
-						className="flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-xl  w-full hover:bg-gray-950"
-						key={index}>
-						<span className="text-white">{obj.icon}</span>
-						<p className="text-white">{obj.title}</p>
-					</div>
-				))}
-			</div>
-			<Button
-				sx={{
-					backgroundColor: "#010a13",
-					p: 1.5,
-					"&:hover": { backgroundColor: "#010a13" },
-					textTransform: "capitalize",
-					fontWeight: "bold",
-          borderRadius : '7px'
-				}}
-				className=" text-primary-100 ">
-				See more
-			</Button>
 		</div>
 	);
 };
