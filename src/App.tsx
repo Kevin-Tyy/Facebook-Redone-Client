@@ -6,7 +6,7 @@ import Register from './pages/Auth/Register'
 import { BrowserRouter , Navigate, Route, Routes } from 'react-router-dom'
 import NotFound from "./pages/NotFound/NotFound"
 import Posts from './components/Posts'
-
+import Profile from './pages/Profile'
 const App = () => {
   return (
     <React.Fragment>
@@ -16,6 +16,7 @@ const App = () => {
           <Route path='/login' element={<Login/>}/>
           <Route path='/home' element={<HomePage/>}/>
           <Route path='/posts' element={<Posts/>}/>
+          <Route path='/users/:id' element={<Profile/>}/>
           <Route path='/' element={<Navigate to="/home"/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>

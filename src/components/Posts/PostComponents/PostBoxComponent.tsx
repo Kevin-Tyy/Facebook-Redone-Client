@@ -5,15 +5,14 @@ import { MoreVert } from "@mui/icons-material";
 interface Props {
     postMedia : string;
     postText : string;
-    loading : boolean;
 	createdAt : Date;
 }
 
-const Box = ({ postMedia , postText , loading , createdAt  }: Props) => {
+const Box = ({ postMedia , postText , createdAt }: Props) => {
     const { formattedDate } = useDateFormatter(createdAt);
 
 	return (
-		<div className="bg-primary-200 rounded-lg p-10 flex flex-col gap-4">
+		<div className="bg-primary-200 rounded-lg p-10 flex flex-col gap-4 ">
 			<div className="flex justify-between"> 
 				<div className="flex gap-4 items-center">
 					<Avatar sx={{backgroundColor : 'violet'}}>J</Avatar>

@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
 import { CircularProgress } from "@mui/material";
-import PostComponent  from "./PostComponents/PostBoxComponent";
+import PostComponent from "./PostComponents/PostBoxComponent";
 type Props = {};
 interface Post {
 	postText: string;
 	postMedia: string;
+	createdAt: Date;
 }
 const Posts = ({}: Props) => {
 	const [posts, setPosts] = useState<Array<Post> | null>([]);
@@ -28,7 +29,9 @@ const Posts = ({}: Props) => {
 			{posts ? (
 				<div className="flex flex-col gap-6">
 					{posts.map((post, index) => (
-						<PostComponent key={index} {...post} loading={loading}/>
+						<div>
+							<PostComponent key={index} {...post} />
+						</div>
 					))}
 				</div>
 			) : (

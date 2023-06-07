@@ -11,11 +11,11 @@ h3{
   }
   
   ::-webkit-scrollbar-thumb {
-    background-color: rgb(39, 39, 39);
+    background-color: #010618;
     border-radius: 10px;
     height: 200px;
   }
   
   ::-webkit-scrollbar-track {
-    background-color: rgb(151, 151, 151);
+    background-color: transparent;
 }

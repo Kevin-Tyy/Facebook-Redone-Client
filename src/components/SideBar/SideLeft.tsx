@@ -24,7 +24,7 @@ const UtilObj = [
 const Sidebar = () => {
 	return (
 		<div>
-			<div className="bg-primary-200 py-4 px-2 w-[400px] flex flex-col rounded-lg gap-4 sticky top-[105px]">
+			<div className="bg-primary-200 hidden py-4 px-2 w-full md:min-w-[300px] max-w-[400px]  xl:flex flex-col rounded-lg gap-4 sticky top-[100px]">
 				<div className="flex items-center gap-3 border-b-[3px] border-primary-100 p-5">
 					<Avatar>J</Avatar>
 					<p className="text-white">John Doe</p>

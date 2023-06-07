@@ -28,7 +28,7 @@ const Story = ({ userInfo }: Props) => {
 		fetchStory(`${BaseURL}/stories`);
 	}, []);
 	return (
-		<div className="w-full flex gap-6 h-60">
+		<div className="w-full flex gap-6 h-60  overflow-x-scroll">
 			<div className="bg-primary-200 w-36  flex justify-center items-center rounded-md">
 				<div
 					onClick={handleStoryToggle}
