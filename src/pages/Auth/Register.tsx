@@ -11,9 +11,13 @@ import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/features/AuthSlice";
+import { decodeToken } from "../../utils/decodeToken";
 
 const RegisterForm: FC = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch()
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [formData, setFormData] = useState<FormData>({
@@ -55,12 +59,13 @@ const RegisterForm: FC = () => {
 				return;
 			} else {
 				toast.success(data?.msg);
-				localStorage.setItem("token", data?.token);
+				const userInfo = decodeToken(data?.token);
+				dispatch(login(userInfo))
 				navigate("/home");
 			}
 		} catch (error) {
-			set
 			console.log(error);
+			toast.error("Something went wrong, Try again later")
 		}
 	};
 

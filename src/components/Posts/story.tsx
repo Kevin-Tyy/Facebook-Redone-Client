@@ -4,15 +4,12 @@ import StoryModal from "../Modals/StoryModal";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 
-interface Props {
-	userInfo: Object;
-}
 interface Story {
 	storyMedia : string
 	storyCaption ?: string
 }
 
-const Story = ({ userInfo }: Props) => {
+const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [stories, setstories] = useState<Array<Story>>([]);
 	const handleStoryToggle = () => {
@@ -47,7 +44,7 @@ const Story = ({ userInfo }: Props) => {
 				</div>
 			)}
 			{isToggled && (
-				<StoryModal handleStoryToggle={handleStoryToggle} userInfo={userInfo} />
+				<StoryModal handleStoryToggle={handleStoryToggle} />
 			)}
 		</div>
 	);

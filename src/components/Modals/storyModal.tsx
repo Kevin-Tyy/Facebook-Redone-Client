@@ -11,9 +11,10 @@ import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { loggedInUser } from "../../redux/features/AuthSlice";
 interface Props {
 	handleStoryToggle: (value: any) => void;
-	userInfo: any;
 }
 
 const utilIcons = [
@@ -22,18 +23,19 @@ const utilIcons = [
 	<MoreHoriz fontSize="large" />,
 ];
 
-const StoryModal = ({ handleStoryToggle, userInfo }: Props) => {
+const StoryModal = ({ handleStoryToggle }: Props) => {
 	const [storyCaption, setStoryCaption] = useState<string | null>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const userId = userInfo?.userId;
+	const { user : {userInfo : { userId}}} = useSelector(loggedInUser)
+
 	const submitPostDetails = async (url: string) => {
 		try {
 			setIsLoading(true);
 			const { data } = await axios.post(url, {
 				storyCaption,
 				storyMedia,
-				userId,
+				userId
 			});
 			console.log(data);
 			if (data) {

@@ -13,10 +13,8 @@ const utilObj = [
 	{ icon: <MoreHoriz /> },
 ];
 import { useState } from "react";
-interface Props {
-	userInfo: Object;
-}
-const PostComponent = ({ userInfo }: Props) => {
+
+const PostComponent = () => {
 	const [isPostModal, setIsPostModal] = useState<boolean>(false);
 	return (
 		<div className="">
@@ -71,7 +69,7 @@ const PostComponent = ({ userInfo }: Props) => {
 					</Button>
 				</div>
 				{isPostModal && (
-					<PostModal setIsPostModal={setIsPostModal} userInfo={userInfo} />
+					<PostModal setIsPostModal={setIsPostModal}/>
 				)}
 			</div>
 		</div>

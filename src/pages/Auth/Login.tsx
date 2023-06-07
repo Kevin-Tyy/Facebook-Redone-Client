@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC } from "react";
 import {
 	Person2Outlined,
 	KeyOutlined,
@@ -12,27 +12,25 @@ import { Button, CircularProgress } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { BaseURL } from "../../utils/Link";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
-import {useSelector,useDispatch} from 'react-redux';
-import { login, logout } from '../../redux/features/AuthSlice';
-import { decodeToken } from '../../utils/decodeToken';
-
+import toast, { Toaster } from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "../../redux/features/AuthSlice";
+import { decodeToken } from "../../utils/decodeToken";
 
 interface FormData {
-	username : string,
-	password : string
+	username: string;
+	password: string;
 }
 
-
-const Login : FC  = () => {
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+const Login: FC = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-	const [isLoading , setIsLoading] = useState<boolean>(false)
-	const [formData , setFormData] = useState<FormData>({
-		username : "",
-		password : ""
-	})
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [formData, setFormData] = useState<FormData>({
+		username: "",
+		password: "",
+	});
 	if (isPasswordVisible) {
 		setTimeout(() => {
 			setIsPasswordVisible(false);
@@ -40,29 +38,33 @@ const Login : FC  = () => {
 	}
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-
-		setIsLoading(true)
-		const { data } = await axios.post(`${BaseURL}/user/login` ,{
-			...formData
-		})
-		setIsLoading(false)
-		if(!data.success){
-			toast.error(data?.msg)
+		try {
+			setIsLoading(true);
+			const { data } = await axios.post(`${BaseURL}/user/login`, {
+				...formData,
+			});
+			setIsLoading(false);
+			if (!data.success) {
+				toast.error(data?.msg);
+			} else {
+				const userInfo = decodeToken(data.token);
+				console.log(userInfo)
+				dispatch(login(userInfo));
+				toast.success(data?.msg);
+				navigate("/home");
+			}
+		} catch (error) {
+			console.log(error);
+			toast.error("Something went wrong, Try again later");
 		}
-		else{
-			const userInfo = decodeToken(data.token)
-			dispatch(login(userInfo))
-			toast.success(data?.msg)
-			navigate('/home')
-		}
-	}
-	const handleInputChange =  (event: any ) => {
-		const {name, value} = event.target;
+	};
+	const handleInputChange = (event: any) => {
+		const { name, value } = event.target;
 		setFormData((prevFormData) => ({
-			...prevFormData  , 
-			[name] : value
- 		}))
-	} 
+			...prevFormData,
+			[name]: value,
+		}));
+	};
 	return (
 		<div className="relative">
 			<div className="absolute top-5 right-5 text-white text-4xl font-mono cursor-pointer">
@@ -74,9 +76,11 @@ const Login : FC  = () => {
 			/>
 			<div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black"></div>
 			<div className="bg-gradient-to-r from-gray-900/40 via-gray-900 to-gray-950 h-screen w-full flex justify-center items-center">
-				<form onSubmit={handleSubmit} className=" flex flex-col gap-7 p-3 w-[400px]">
+				<form
+					onSubmit={handleSubmit}
+					className=" flex flex-col gap-7 p-3 w-[400px]">
 					<h1 className="text-white text-center text-4xl mb-4">Login</h1>
-					<hr className='border-neutral-500'/>
+					<hr className="border-neutral-500" />
 					<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">
 						<Person2Outlined />
 						<input
@@ -113,11 +117,13 @@ const Login : FC  = () => {
 							</button>
 						</div>
 						<div className="text-right">
-							<p className="text-gray-400 cursor-pointer hover:underline -translate-x-3">Forgot password</p>
+							<p className="text-gray-400 cursor-pointer hover:underline -translate-x-3">
+								Forgot password
+							</p>
 						</div>
 					</div>
 					<Button
-						type='submit'
+						type="submit"
 						disabled={isLoading}
 						sx={{
 							color: "white",
@@ -127,14 +133,12 @@ const Login : FC  = () => {
 							p: "12px",
 							"&:hover": { backgroundColor: "rgb(40 , 58 , 138)" },
 							"&:focus": { backgroundColor: "rgb(40 , 58 , 138" },
-						}}
-						>
-						{isLoading ? 
-							<CircularProgress size={20} sx={{ color : '#fff'}}/>
-						:
+						}}>
+						{isLoading ? (
+							<CircularProgress size={20} sx={{ color: "#fff" }} />
+						) : (
 							"Sign in"
-							
-						}
+						)}
 					</Button>
 					<button className=" flex items-center justify-center gap-2 border border-neutral-600 p-3 rounded-full hover:bg-neutral-950/20">
 						<img src={gmailImage} className="w-6" />
@@ -143,20 +147,24 @@ const Login : FC  = () => {
 					<div className="text-center">
 						<p className="text-white">
 							Don't have an account?{" "}
-							<Link to="/register"className="text-blue-500 cursor-pointer hover:underline">
-								Register 
+							<Link
+								to="/register"
+								className="text-blue-500 cursor-pointer hover:underline">
+								Register
 							</Link>
 						</p>
 					</div>
 				</form>
 			</div>
-			<Toaster toastOptions={{
-				style : {
-					textAlign : 'center',
-					padding : '10px',
-					fontWeight : 500
-				}
-			}} />
+			<Toaster
+				toastOptions={{
+					style: {
+						textAlign: "center",
+						padding: "10px",
+						fontWeight: 500,
+					},
+				}}
+			/>
 		</div>
 	);
 };

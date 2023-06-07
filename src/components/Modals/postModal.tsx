@@ -12,10 +12,11 @@ import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { loggedInUser } from "../../redux/features/AuthSlice";
 
 interface Props {
 	setIsPostModal: (value: any) => void;
-	userInfo: Object;
 }
 
 const utilIcons = [
@@ -24,18 +25,19 @@ const utilIcons = [
 	<MoreHoriz fontSize="large" />,
 ];
 
-const PostModal = ({ setIsPostModal, userInfo }: Props) => {
+const PostModal = ({ setIsPostModal }: Props) => {
 	const [postText, setPostText] = useState<string | null>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	// const userId = userInfo.userId;
+	const { user : { userInfo : { userId}}}  = useSelector(loggedInUser)
+
 	const submitPostDetails = async (url: string) => {
 		try {
 			setIsLoading(true);
 			const { data } = await axios.post(url, {
 				postText,
 				postMedia,
-				// userId
+				userId
 			});
 			console.log(data);
 			if (data) {

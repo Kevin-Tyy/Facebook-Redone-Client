@@ -2,17 +2,14 @@
 import PostComponent from '../Posts/Post'
 import StoryComponent from '../Posts/Story'
 import Posts from '../Posts'
-interface Props {
-  userInfo : Object
-}
 
 
-const Body = ({userInfo} : Props) => {
+const Body = () => {
 
   return (
     <div className='h-full w-full max-w-[700px] flex flex-col gap-6'>
-        <StoryComponent userInfo={userInfo}/>
-        <PostComponent userInfo={userInfo}/>
+        <StoryComponent />
+        <PostComponent/>
         <Posts/>
     </div>
   )
