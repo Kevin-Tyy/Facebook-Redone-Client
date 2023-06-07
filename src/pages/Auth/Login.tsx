@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import {
 	Person2Outlined,
 	KeyOutlined,
@@ -14,7 +14,8 @@ import { BaseURL } from "../../utils/Link";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import {useSelector,useDispatch} from 'react-redux';
-import { logout, user } from '../../redux/features/AuthSlice';
+import { login, logout } from '../../redux/features/AuthSlice';
+import { decodeToken } from '../../utils/decodeToken';
 
 
 interface FormData {
@@ -24,16 +25,13 @@ interface FormData {
 
 
 const Login : FC  = () => {
-	const { isLoggeIn } = useSelector(( state : object ) => state.auth)
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isLoading , setIsLoading] = useState<boolean>(false)
 	const [formData , setFormData] = useState<FormData>({
 		username : "",
 		password : ""
-	})
-	useEffect(()=> {
-		isLoading && navigate('/')
 	})
 	if (isPasswordVisible) {
 		setTimeout(() => {
@@ -52,8 +50,8 @@ const Login : FC  = () => {
 			toast.error(data?.msg)
 		}
 		else{
-		
-			localStorage.setItem('token' , data.token)
+			const userInfo = decodeToken(data.token)
+			dispatch(login(userInfo))
 			toast.success(data?.msg)
 			navigate('/home')
 		}
