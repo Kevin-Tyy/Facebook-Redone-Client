@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {
 	Person2Outlined,
 	KeyOutlined,
@@ -24,13 +24,16 @@ interface FormData {
 
 
 const Login : FC  = () => {
-// re
+	const { isLoggeIn } = useSelector(( state : object ) => state.auth)
 	const navigate = useNavigate()
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isLoading , setIsLoading] = useState<boolean>(false)
 	const [formData , setFormData] = useState<FormData>({
 		username : "",
 		password : ""
+	})
+	useEffect(()=> {
+		isLoading && navigate('/')
 	})
 	if (isPasswordVisible) {
 		setTimeout(() => {
@@ -49,6 +52,7 @@ const Login : FC  = () => {
 			toast.error(data?.msg)
 		}
 		else{
+		
 			localStorage.setItem('token' , data.token)
 			toast.success(data?.msg)
 			navigate('/home')
