@@ -28,8 +28,8 @@ const Story = ({ userInfo }: Props) => {
 		fetchStory(`${BaseURL}/stories`);
 	}, []);
 	return (
-		<div className="w-full flex gap-6">
-			<div className="bg-primary-200 w-48 h-64 flex justify-center items-center rounded-md">
+		<div className="w-full flex gap-6 h-60">
+			<div className="bg-primary-200 w-36  flex justify-center items-center rounded-md">
 				<div
 					onClick={handleStoryToggle}
 					className="bg-primary-100 p-2 rounded-md cursor-pointer">
@@ -38,10 +38,10 @@ const Story = ({ userInfo }: Props) => {
 			</div>
 		
 			{stories && (
-				<div className="h-64 flex gap-5">
+				<div className=" flex gap-5">
 					{stories.map((story) => (
 						<div className="h-full">
-							<img src={story.storyMedia}  className="h-full w-44 object-cover rounded-md"/>
+							<img src={story.storyMedia}  className="h-full w-36 object-cover rounded-md"/>
 						</div>
 					))}
 				</div>

@@ -10,7 +10,7 @@ interface Props {
 const Body = ({userInfo} : Props) => {
 
   return (
-    <div className='h-full flex flex-col gap-9'>
+    <div className='h-full flex flex-col gap-6'>
         <StoryComponent userInfo={userInfo}/>
         <PostComponent userInfo={userInfo}/>
         <Posts/>

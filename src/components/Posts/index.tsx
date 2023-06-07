@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
 import { CircularProgress } from "@mui/material";
-
+import PostComponent  from "./PostComponents/PostBoxComponent";
 type Props = {};
 interface Post {
 	postText: string;
@@ -26,12 +26,9 @@ const Posts = ({}: Props) => {
 	return (
 		<div className="h-full w-full">
 			{posts ? (
-				<div >
+				<div className="flex flex-col gap-6">
 					{posts.map((post, index) => (
-						<div key={index} className="bg-primary-200 p-10">
-							<h1 className="text-white">{post.postText}</h1>
-							<img src={post.postMedia} className="w-full h-[400px] object-cover"/>
-						</div>
+						<PostComponent key={index} {...post} loading={loading}/>
 					))}
 				</div>
 			) : (

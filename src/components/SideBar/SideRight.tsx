@@ -3,7 +3,7 @@ import image from "../../assets/bg-cover.jpg";
 const SideRight = () => {
 	return (
 		<div>
-			<div className="bg-primary-200  p-4 rounded-lg w-[500px] flex flex-col gap-4 sticky top-[105px]">
+			<div className="bg-primary-200  p-4 rounded-lg w-[400px] flex flex-col gap-4 sticky top-[105px]">
 				<div className="flex flex-col gap-3">
 					<div className="flex justify-between items-center">
 						<h1 className="text-lg text-light font-semibold">

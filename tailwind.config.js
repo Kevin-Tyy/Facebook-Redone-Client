@@ -10,7 +10,7 @@ export default {
         'light' : "#D8D8D8",  
         'primary-100': '#0C88EF',
         'primary-200': '#0D1D2E',
-        'primary-300': '#0C141C'
+        'primary-300': '#010A13'
       }
     },
   },

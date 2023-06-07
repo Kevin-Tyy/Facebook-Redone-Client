@@ -1,9 +1,7 @@
-import React from "react";
 import Logo from "../Logo";
 import { Telegram, MoreVert, Notifications, Search } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 
-type Props = {};
 
 
 const navObj = [
@@ -11,7 +9,7 @@ const navObj = [
   {icon : <Telegram sx={{ fontSize :30}} />},
   {icon : <Notifications sx={{ fontSize :30}}/>},
 ]
-const Navbar = (props: Props) => {
+const Navbar = () => {
 	return (
     <div className="sticky top-0 z-[2]">
       <div className="flex justify-between bg-primary-200 p-4 ">
