@@ -2,27 +2,27 @@ import avatar from "../../assets/avatar.webp";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
-import { useState } from 'react'
-import { FormData } from "../../types/Types";
+import { useState } from "react";
 interface Props {
 	setProfileImageUpload: (value: any) => void;
-    formData : FormData
+	setProfileImage: (value: any) => void;
 }
-const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
-    const [uploadImage , setUploadImage ] = useState<any>("")
-    const handleSubmit = (e:any) => {
-       e.preventDefault();
-       
-    }
-    const handleInputChange = (e:any) => {
-        const file = e.target.files[0]
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setUploadImage(reader.result)
-        }      
-    }
-    console.log(uploadImage)
+const ImageUpload = ({ setProfileImageUpload, setProfileImage }: Props) => {
+	const [uploadImage, setUploadImage] = useState<any>("");
+
+	const handleSubmitFile = () => {
+		setProfileImage(uploadImage);
+		setProfileImageUpload(false);
+	};
+	const handleInputChange = (e: any) => {
+		const file = e.target.files[0];
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			setUploadImage(reader.result);
+		};
+	};
+	// console.log(uploadImage);
 	return (
 		<div
 			onClick={() => setProfileImageUpload(false)}
@@ -45,7 +45,10 @@ const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
 				</div>
 				<div className="bg-gradient-to-r from-sky-400 to-violet-700 absolute -top-28 rounded-full p-1.5">
 					<div className="bg-gray-950 rounded-full p-1.5">
-						<img src={uploadImage ? uploadImage : avatar} className="rounded-full w-40 h-40 object-cover" />
+						<img
+							src={uploadImage ? uploadImage : avatar}
+							className="rounded-full w-40 h-40 object-cover"
+						/>
 					</div>
 				</div>
 				<div className="border-t border-gray-600 mt-16  pt-4 flex flex-col gap-4">
@@ -54,16 +57,22 @@ const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
 						your real photos to. You can upload the image in JPG, GIF or PNG
 						format
 					</p>
-					<form 
-                    onSubmit={handleSubmit}
-                    className="flex flex-col gap-6">
+					<div className="flex flex-col gap-6">
 						<label
 							htmlFor="upload"
 							className="border border-light flex justify-center text-white p-3 rounded-full cursor-pointer transition hover:bg-gray-800/30 active:bg-gray-900/40">
 							Choose photo
 						</label>
-						<input id="upload" type="file" className="hidden" onChange={handleInputChange} name="upload" />
+						<input
+							id="upload"
+							type="file"
+							className="hidden"
+							onChange={handleInputChange}
+							name="upload"
+						/>
 						<Button
+							onClick={handleSubmitFile}
+							type="submit"
 							sx={{
 								width: "100%",
 								p: 1.5,
@@ -75,7 +84,7 @@ const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
 							}}>
 							Upload Image
 						</Button>
-					</form>
+					</div>
 					<p
 						onClick={() => setProfileImageUpload(false)}
 						className="text-center text-light underline cursor-pointer">

@@ -20,6 +20,8 @@ const RegisterForm: FC = () => {
 	const dispatch = useDispatch()
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [profileImage , setProfileImage ] = useState<string>("")
+
 	const [formData, setFormData] = useState<FormData>({
 		firstName: "",
 		lastName: "",
@@ -40,13 +42,15 @@ const RegisterForm: FC = () => {
 	};
 
 	const handleInputChange = (event: any) => {
-		const { name, value } = event.target;
+		const { name, value} = event.target;
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			[name]: value,
+			[name]: value ,
+			profileImage : profileImage ? profileImage : "" 
 		}));
+		console.log(formData)
 	};
-
+	
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		try {
@@ -78,11 +82,11 @@ const RegisterForm: FC = () => {
 		switch (step) {
 			case 0:
 				return (
-					<StepOne formData={formData} handleInputChange={handleInputChange} />
+					<StepOne formData={formData} handleInputChange={handleInputChange}  />
 				);
 			case 1:
 				return (
-					<StepTwo formData={formData} handleInputChange={handleInputChange} />
+					<StepTwo formData={formData} handleInputChange={handleInputChange} setProfileImage={setUpload}/>
 				);
 			default:
 				return null;
