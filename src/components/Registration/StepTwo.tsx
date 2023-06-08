@@ -1,32 +1,30 @@
 import { FormData } from "../../types/Types";
-import {
-	VisibilityOutlined,
-	VisibilityOffOutlined,
-	KeyRounded,
-	CallOutlined,
-} from "@mui/icons-material";
-import { useState } from "react";
-// import ImageUpload from "../Modals/ImageUpload";
+import { VisibilityOutlined, VisibilityOffOutlined , KeyRounded , CallOutlined  } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import ImageUpload from "../Modals/ImageUpload";
 
 interface Props {
 	formData: FormData;
 	handleInputChange: (event: any) => void;
-	setUpload: (event: any) => void;
+	setProfileImage: (event: any) => void;
 }
 
-const StepTwo = ({ formData, handleInputChange, setUpload }: Props) => {
+
+const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-	// const [profileImageUpload, setProfileImageUpload] = useState<boolean>(false);
-	// const [profileImage, setProfileImage] = useState<string>("");
+	const [profileImageUpload , setProfileImageUpload] = useState<boolean>(false);
+	const [upload , setUpload ] = useState<string>("")
 
-	setTimeout(() => {
-		setIsPasswordVisible(false);
-	}, 5000);
-
+	setTimeout(()=> {
+		setIsPasswordVisible(false)
+	}, 5000)
+	useEffect(()=> {
+		setProfileImage(upload)
+	} , [upload])
 	return (
 		<div className="flex flex-col gap-7">
 			<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">
-				<CallOutlined />
+				<CallOutlined/>
 				<input
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
 					value={formData.phoneNumber}
@@ -36,9 +34,9 @@ const StepTwo = ({ formData, handleInputChange, setUpload }: Props) => {
 				/>
 			</div>
 			<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">
-				<KeyRounded />
+				<KeyRounded/>
 				<input
-					type={isPasswordVisible ? "text" : "password"}
+					type={isPasswordVisible ? 'text' : 'password'}
 					value={formData.password}
 					onChange={handleInputChange}
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
@@ -57,20 +55,12 @@ const StepTwo = ({ formData, handleInputChange, setUpload }: Props) => {
 					)}
 				</button>
 			</div>
-			{/* <div
-				// onClick={() => setProfileImageUpload(true)}
-				className="w-full text-white border border-gray-600 p-3 rounded-full flex justify-center cursor-pointer hover:bg-gray-950/30">
-				<label htmlFor="files">Upload Image</label>	
-				<input
-					id="files"
-					value={formData.profileImage}
-					type="file"
-					className="hidden"
-					onChange={handleInputChange}
-					name="profileImage"
-				/> */}
-			{/* </div> */}
-			
+			<div onClick={()=> setProfileImageUpload(true)} className="w-full text-white border border-gray-600 p-3 rounded-full flex justify-center cursor-pointer hover:bg-gray-950/30">
+				Upload Image
+			</div>
+			{ profileImageUpload && 
+				<ImageUpload setProfileImageUpload={setProfileImageUpload} setUpload={setUpload}/>
+			}
 		</div>
 	);
 };

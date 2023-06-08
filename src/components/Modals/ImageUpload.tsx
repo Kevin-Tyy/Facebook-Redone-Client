@@ -5,13 +5,13 @@ import { CloseRounded } from "@mui/icons-material";
 import { useState } from "react";
 interface Props {
 	setProfileImageUpload: (value: any) => void;
-	setProfileImage: (value: any) => void;
+	setUpload: (value: any) => void;
 }
-const ImageUpload = ({ setProfileImageUpload, setProfileImage }: Props) => {
+const ImageUpload = ({ setProfileImageUpload, setUpload }: Props) => {
 	const [uploadImage, setUploadImage] = useState<any>("");
 
 	const handleSubmitFile = () => {
-		setProfileImage(uploadImage);
+		setUpload(uploadImage);
 		setProfileImageUpload(false);
 	};
 	const handleInputChange = (e: any) => {
@@ -22,7 +22,6 @@ const ImageUpload = ({ setProfileImageUpload, setProfileImage }: Props) => {
 			setUploadImage(reader.result);
 		};
 	};
-	// console.log(uploadImage);
 	return (
 		<div
 			onClick={() => setProfileImageUpload(false)}

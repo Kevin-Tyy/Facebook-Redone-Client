@@ -45,12 +45,16 @@ const RegisterForm: FC = () => {
 		const { name, value} = event.target;
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			[name]: value ,
-			profileImage : profileImage ? profileImage : "" 
+			[name]: value,
+			profileImage : profileImage, 
 		}));
 		console.log(formData)
 	};
-	
+	useEffect(()=> {
+		console.log(formData);
+		// console.log(profileImage)
+	} , [profileImage])
+
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		try {
@@ -86,7 +90,7 @@ const RegisterForm: FC = () => {
 				);
 			case 1:
 				return (
-					<StepTwo formData={formData} handleInputChange={handleInputChange} setProfileImage={setUpload}/>
+					<StepTwo formData={formData} handleInputChange={handleInputChange} setProfileImage={setProfileImage}/>
 				);
 			default:
 				return null;
