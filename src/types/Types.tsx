@@ -4,7 +4,6 @@ export interface FormData {
     lastName: string;
     email: string;
     password: string;
-    passwordConf : string;
     phoneNumber: string;
-
+    profileImage : string
 }

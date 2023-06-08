@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import { Button } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 import { useState } from 'react'
+import { FormData } from "../../types/Types";
 interface Props {
 	setProfileImageUpload: (value: any) => void;
-    formData : object
+    formData : FormData
 }
 const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
-    const [uploadImage , setUploadImage ] = useState<string | null| ArrayBuffer>("")
+    const [uploadImage , setUploadImage ] = useState<any>("")
     const handleSubmit = (e:any) => {
        e.preventDefault();
        
@@ -21,6 +22,7 @@ const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
             setUploadImage(reader.result)
         }      
     }
+    console.log(uploadImage)
 	return (
 		<div
 			onClick={() => setProfileImageUpload(false)}
@@ -43,7 +45,7 @@ const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
 				</div>
 				<div className="bg-gradient-to-r from-sky-400 to-violet-700 absolute -top-28 rounded-full p-1.5">
 					<div className="bg-gray-950 rounded-full p-1.5">
-						<img src={avatar} className="rounded-full w-40 h-40 " />
+						<img src={uploadImage ? uploadImage : avatar} className="rounded-full w-40 h-40 object-cover" />
 					</div>
 				</div>
 				<div className="border-t border-gray-600 mt-16  pt-4 flex flex-col gap-4">
@@ -60,7 +62,7 @@ const ImageUpload = ({ setProfileImageUpload, formData }: Props) => {
 							className="border border-light flex justify-center text-white p-3 rounded-full cursor-pointer transition hover:bg-gray-800/30 active:bg-gray-900/40">
 							Choose photo
 						</label>
-						<input id="upload" type="file" className="hidden" onChange={handleInputChange}/>
+						<input id="upload" type="file" className="hidden" onChange={handleInputChange} name="upload" />
 						<Button
 							sx={{
 								width: "100%",
