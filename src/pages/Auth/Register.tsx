@@ -27,7 +27,6 @@ const RegisterForm: FC = () => {
 		email: "",
 		phoneNumber: "",
 		password: "",
-		passwordConf: "",
 	});
 	useEffect(()=> {
 		document.title= "Facebook | Register"

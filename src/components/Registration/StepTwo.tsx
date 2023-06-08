@@ -1,6 +1,7 @@
 import { FormData } from "../../types/Types";
-import { VisibilityOutlined, VisibilityOffOutlined , KeyRounded , CallOutlined , PasswordOutlined } from "@mui/icons-material";
+import { VisibilityOutlined, VisibilityOffOutlined , KeyRounded , CallOutlined  } from "@mui/icons-material";
 import { useState } from "react";
+import ImageUpload from "../Modals/ImageUpload";
 
 interface Props {
 	formData: FormData;
@@ -10,11 +11,7 @@ interface Props {
 
 const StepTwo = ({ formData, handleInputChange }: Props) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-	const [isPasswordConfVisible, setIsPasswordConfVisible] = useState<boolean>(false);
-
-	setTimeout(()=> {
-		setIsPasswordConfVisible(false)
-	}, 5000)
+	const [profileImageUpload , setProfileImageUpload] = useState<boolean>(false);
 	setTimeout(()=> {
 		setIsPasswordVisible(false)
 	}, 5000)
@@ -53,28 +50,12 @@ const StepTwo = ({ formData, handleInputChange }: Props) => {
 					)}
 				</button>
 			</div>
-			<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">
-				<PasswordOutlined/>
-				<input
-					type={isPasswordConfVisible ? 'text' : 'password'}
-					value={formData.passwordConf}
-					onChange={handleInputChange}
-					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
-					placeholder="Confirm password"
-					name="passwordConf"
-				/>
-				<button
-					onClick={(e) => {
-						e.preventDefault();
-						setIsPasswordConfVisible(!isPasswordConfVisible);
-					}}>
-					{isPasswordConfVisible ? (
-						<VisibilityOffOutlined />
-					) : (
-						<VisibilityOutlined />
-					)}
-				</button>
+			<div onClick={()=> setProfileImageUpload(true)} className="w-full text-white border border-gray-600 p-3 rounded-full flex justify-center cursor-pointer hover:bg-gray-950/30">
+				Upload Image
 			</div>
+			{ profileImageUpload && 
+				<ImageUpload setProfileImageUpload={setProfileImageUpload} formData={formData}/>
+			}
 		</div>
 	);
 };

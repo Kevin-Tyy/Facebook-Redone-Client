@@ -38,8 +38,8 @@ const Login: FC = () => {
 		}, 1500);
 	}
 	useEffect(()=> {
-		{loggedIn && navigate('/home')}
 		document.title = "Facebook | Login"
+		{loggedIn && navigate('/home')}
 	}, [])
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
