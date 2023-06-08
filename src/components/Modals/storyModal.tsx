@@ -27,7 +27,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 	const [storyCaption, setStoryCaption] = useState<string | null>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const { user : {userInfo : { userId}}} = useSelector(loggedInUser)
+	const { user :  { userId}} = useSelector(loggedInUser)
 
 	const submitPostDetails = async (url: string) => {
 		try {

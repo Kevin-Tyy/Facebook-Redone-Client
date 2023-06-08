@@ -5,6 +5,9 @@ const initialState  =  {
     loggedIn : false
 }
 
+interface state {
+    auth : object 
+}
 
 const AuthSlice = createSlice({
     name : 'Auth',
@@ -22,5 +25,5 @@ const AuthSlice = createSlice({
     }
 })
 export const { login , logout } = AuthSlice.actions;
-export const loggedInUser = (state : any) => state.auth
+export const loggedInUser = (state : state) => state.auth 
 export default AuthSlice.reducer;

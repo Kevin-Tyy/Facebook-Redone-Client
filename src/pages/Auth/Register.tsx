@@ -1,5 +1,5 @@
 // import bgImage from "../../assets/bg-cover.jpg";
-import { useState, FC } from "react";
+import { useState, FC , useEffect } from "react";
 import RegButtons from "../../components/Buttons/RegButtons";
 import { Stepper, Step, StepLabel } from "@mui/material";
 import gmailImage from "../../assets/gmail.png";
@@ -29,7 +29,9 @@ const RegisterForm: FC = () => {
 		password: "",
 		passwordConf: "",
 	});
-
+	useEffect(()=> {
+		document.title= "Facebook | Register"
+	}, [])
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	};

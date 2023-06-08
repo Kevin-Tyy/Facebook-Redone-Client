@@ -26,10 +26,11 @@ const utilIcons = [
 ];
 
 const PostModal = ({ setIsPostModal }: Props) => {
+
 	const [postText, setPostText] = useState<string | null>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const { user : { userInfo : { userId}}}  = useSelector(loggedInUser)
+	const { user : { userId}}  = useSelector(loggedInUser)
 
 	const submitPostDetails = async (url: string) => {
 		try {

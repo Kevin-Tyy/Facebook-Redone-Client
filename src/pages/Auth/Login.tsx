@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
 	Person2Outlined,
 	KeyOutlined,
@@ -14,7 +14,7 @@ import { BaseURL } from "../../utils/Link";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "../../redux/features/AuthSlice";
+import { loggedInUser, login, logout } from "../../redux/features/AuthSlice";
 import { decodeToken } from "../../utils/decodeToken";
 
 interface FormData {
@@ -25,6 +25,7 @@ interface FormData {
 const Login: FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { loggedIn } = useSelector(loggedInUser)
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [formData, setFormData] = useState<FormData>({
@@ -36,6 +37,10 @@ const Login: FC = () => {
 			setIsPasswordVisible(false);
 		}, 1500);
 	}
+	useEffect(()=> {
+		{loggedIn && navigate('/home')}
+		document.title = "Facebook | Login"
+	}, [])
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
