@@ -1,5 +1,4 @@
 import Navbar from "../../components/Nav";
-import bgImage from "../../assets/noman.jpg";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BaseURL } from "../../utils/Link";
@@ -8,10 +7,10 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Add, CameraAltRounded, Edit } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import { Tabs } from "../../utils/utilObjects";
 import PostComponent from "../../components/Posts/Post";
 import ButtonComp from "../../components/Buttons/Button";
+import Box from "../../components/Posts/PostComponents/PostBoxComponent";
 interface User {
 	username: string;
 	email: string;
@@ -65,7 +64,7 @@ const profile = () => {
 	}
 	console.log(posts);
 	return (
-		<div className="h-screen w-full bg-gray-950 ">
+		<div className="h-full w-full bg-gray-950 ">
 			<Navbar />
 			<div className="flex w-full justify-center ">
 				<div className="w-full lg:w-[80%] xl:w-[70%] flex flex-col gap-4">
@@ -127,7 +126,7 @@ const profile = () => {
 						))}
 					</div>
 					<div className="flex gap-4">
-						<div className="bg-primary-200 w-full p-5 flex">
+						<div className="bg-primary-200 w-full p-5 sticky">
 							<div>
 								<h1 className="text-2xl text-light">About</h1>
 								<div>
@@ -138,9 +137,16 @@ const profile = () => {
 						</div>
 						<div className="w-full flex flex-col gap-4">
 							<PostComponent />
-							<div className="bg-primary-200 w-full">
-								<h1>Posts</h1>
-							</div>
+							<h1 className="text-light text-3xl text-center">Posts</h1>
+							{posts && (
+								<div className="flex flex-col gap-6">
+									{posts.map((post, index) => (
+										<div key={index}>
+											<Box {...post} />
+										</div>
+									))}
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

@@ -33,7 +33,7 @@ const Sidebar = () => {
 		<div>
 			<div className="bg-primary-200 hidden py-4 px-2 w-full md:min-w-[300px] max-w-[450px]  xl:flex flex-col rounded-lg gap-4 sticky top-[100px]">
 				<Link to={`/profile/${userId}`}>
-					<div className="flex items-center gap-3   p-3 pb-4 hover:bg-gray-800/60  cursor-pointer rounded-lg">
+					<div className="flex items-center gap-3   p-3 pb-4 hover:bg-gray-700/60  cursor-pointer rounded-lg">
 						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[4px]">
 							<img
 								src={profileimage}
@@ -42,7 +42,7 @@ const Sidebar = () => {
 						</div>
 						<div>
 							<p className="text-white capitalize">{username}</p>
-							<p className="text-gray-600">{email}</p>
+							<p className="text-gray-400">{email}</p>
 						</div>
 					</div>
 				</Link>

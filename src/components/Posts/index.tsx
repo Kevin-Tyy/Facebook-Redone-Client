@@ -30,7 +30,7 @@ const Posts = ({}: Props) => {
 				<div className="flex flex-col gap-6">
 					{posts.map((post, index) => (
 						<div key={index}>
-							<PostComponent key={index} {...post} />
+							<PostComponent {...post} />
 						</div>
 					))}
 				</div>
