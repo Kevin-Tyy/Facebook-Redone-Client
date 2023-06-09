@@ -13,7 +13,6 @@ import { Avatar, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
-
 const UtilObj = [
 	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home" },
 	{ icon: <PeopleRounded sx={{ fontSize: 25 }} />, title: "Friends" },

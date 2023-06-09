@@ -26,11 +26,14 @@ const utilIcons = [
 ];
 
 const PostModal = ({ setIsPostModal }: Props) => {
-
 	const [postText, setPostText] = useState<string | null>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const { user : { userId}}  = useSelector(loggedInUser)
+	const {
+		user: {
+			userInfo: { userId, username, profileimage },
+		},
+	} = useSelector(loggedInUser);
 
 	const submitPostDetails = async (url: string) => {
 		try {
@@ -38,7 +41,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 			const { data } = await axios.post(url, {
 				postText,
 				postMedia,
-				userId
+				userId,
 			});
 			console.log(data);
 			if (data) {
@@ -76,7 +79,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				initial="hidden"
 				whileInView="visible"
 				viewport={{ once: true, amount: 0.1 }}
-				transition={{ duration: 0.2 , delay : 0.2 }}
+				transition={{ duration: 0.2, delay: 0.2 }}
 				variants={{
 					hidden: { opacity: 0, y: -30 },
 					visible: { opacity: 1, y: 0 },
@@ -96,10 +99,17 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				</div>
 				<div className="p-2">
 					<div className="flex items-center gap-2">
-						<Avatar>J</Avatar>
-						<div className="flex flex-col items-center">
-							<p className="text-light font-semibold">John Doe</p>
-							<div className="text-light bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1">
+						<div className="bg-primary-100 p-1 rounded-full">
+							<div className="bg-primary-200 p-1 rounded-full">
+								<img
+									src={profileimage}
+									className="w-12 h-12  rounded-full"
+								/>
+							</div>
+						</div>
+						<div className="flex flex-col items-start">
+							<p className="text-light font-semibold capitalize">{username}</p>
+							<div className="text-light bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
 								<PeopleAltRounded sx={{ fontSize: 15 }} />
 								Friends
 							</div>
