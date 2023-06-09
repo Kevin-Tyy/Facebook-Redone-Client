@@ -29,7 +29,6 @@ const RegisterForm: FC = () => {
 		email: "",
 		phoneNumber: "",
 		password: "",
-		profileImage : ""
 	});
 	useEffect(()=> {
 		document.title= "Facebook | Register"
@@ -46,14 +45,9 @@ const RegisterForm: FC = () => {
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			[name]: value,
-			profileImage : profileImage, 
 		}));
-		console.log(formData)
 	};
-	useEffect(()=> {
-		console.log(formData);
-		// console.log(profileImage)
-	} , [profileImage])
+
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
@@ -62,6 +56,7 @@ const RegisterForm: FC = () => {
 			setIsLoading(true);
 			const { data } = await axios.post(`${BaseURL}/user/register`, {
 				...formData,
+				profileimage : profileImage
 			});
 			console.log(data);
 			setIsLoading(false);
