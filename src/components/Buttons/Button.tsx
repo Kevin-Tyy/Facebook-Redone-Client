@@ -11,7 +11,7 @@ const ButtonComp = ({children , color }: Props) => {
 			sx={{
 				color: "white",
 				backgroundColor: `${color}`,
-				"&:hover": { backgroundColor: "#0C88EF" },
+				"&:hover": { backgroundColor: `${color}` },
 				textTransform: "capitalize",
 				px: 2,
 				py: 1,

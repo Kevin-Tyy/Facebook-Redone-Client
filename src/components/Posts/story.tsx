@@ -39,8 +39,8 @@ const Story = () => {
 		
 			{stories && (
 				<div className=" flex gap-5">
-					{stories.map((story) => (
-						<div className="h-full overflow-hidden rounded-md">
+					{stories.map((story,index) => (
+						<div key={index} className="h-full overflow-hidden rounded-md">
 							<img src={story.storyMedia}  className="h-full w-[125px] object-coer  transition duration-300 hover:scale-105"/>
 						</div>
 					))}

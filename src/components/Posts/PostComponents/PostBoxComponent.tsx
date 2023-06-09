@@ -13,7 +13,7 @@ const Box = ({ postMedia , postText , createdAt }: Props) => {
 
 	return (
 		<div className="bg-primary-200 rounded-lg py-3 px-6 flex flex-col gap-4 ">
-			<div className="flex justify-between"> 
+			<div className="flex py-3 justify-between border-b border-gray-600"> 
 				<div className="flex gap-4 items-center">
 					<Avatar sx={{backgroundColor : 'violet'}}>J</Avatar>
 					<div className="flex flex-col">
@@ -28,7 +28,7 @@ const Box = ({ postMedia , postText , createdAt }: Props) => {
 			<div className="flex flex-col gap-2">
 				<h1 className="text-white">{postText}</h1>
 				<div className="flex flex-col gap-2">
-					<img src={postMedia} className="w-full h-[400px] object-cover rounded-xl" />
+					<img src={postMedia} className="w-full max-h-[500px] object-cover rounded-xl" />
 					<CommentComponent/>	
 
 				</div>

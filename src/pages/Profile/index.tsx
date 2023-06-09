@@ -11,17 +11,18 @@ import { Tabs } from "../../utils/utilObjects";
 import PostComponent from "../../components/Posts/Post";
 import ButtonComp from "../../components/Buttons/Button";
 import Box from "../../components/Posts/PostComponents/PostBoxComponent";
+import { Userdata } from "../../types/Types";
 interface User {
 	username: string;
 	email: string;
 	profileimage: string;
-	friendlist: Array;
+	friendlist: Array<object>;
 }
 
 interface Posts {}
 const profile = () => {
 	const { id } = useParams();
-	const [userData, setUserData] = useState<User | null>(null);
+	const [userData, setUserData] = useState<Userdata | null>(null);
 	const [posts, setPosts] = useState<Posts | null>(null);
 	const [activeTab, setActiveTab] = useState("posts");
 	const {
@@ -66,8 +67,9 @@ const profile = () => {
 	return (
 		<div className="h-full w-full bg-gray-950 ">
 			<Navbar />
+			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
-				<div className="w-full lg:w-[80%] xl:w-[70%] flex flex-col gap-4">
+				<div className="w-full  xl:w-[60%] flex flex-col gap-4">
 					<div>
 						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[35vh] p-20 justify-center z-[2]">
 							<div className="flex flex-col items-center absolute -bottom-44 justify-center">
@@ -113,7 +115,7 @@ const profile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md">
+					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md sticky top-[75px] z-10 shadow-2xl">
 						{Tabs.map((tab, index) => (
 							<div
 								key={index}
@@ -126,21 +128,23 @@ const profile = () => {
 						))}
 					</div>
 					<div className="flex gap-4">
-						<div className="bg-primary-200 w-full p-5 sticky">
+						<div className="bg-primary-200 h-[500px] w-full p-5 sticky top-36 rounded-lg">
 							<div>
 								<h1 className="text-2xl text-light">About</h1>
-								<div>
-									<h1>Bio</h1>
-									<p>{userData?.bio ? userData?.bio : "No bio added"}</p>
-								</div>
+								
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
 							<PostComponent />
-							<h1 className="text-light text-3xl text-center">Posts</h1>
+							<h1 className="text-light text-3xl text-center">
+								{userData?.userId == userId
+									? "Your"
+									: `${userData?.username}'s`}{" "}
+								Posts
+							</h1>
 							{posts && (
-								<div className="flex flex-col gap-6">
-									{posts.map((post, index) => (
+								<div className="flex flex-col gap-6 ">
+									{posts.map((post: object, index: number) => (
 										<div key={index}>
 											<Box {...post} />
 										</div>
