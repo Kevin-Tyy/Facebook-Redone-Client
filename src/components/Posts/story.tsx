@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import StoryModal from "../Modals/StoryModal";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
+import { useSelector } from "react-redux";
+import { loggedInUser } from "../../redux/features/AuthSlice";
 
 interface Story {
 	storyMedia : string
@@ -24,9 +26,10 @@ const Story = () => {
 	useEffect(() => {
 		fetchStory(`${BaseURL}/stories`);
 	}, []);
+	const {  } = useSelector(loggedInUser)
 	return (
-		<div className="w-full flex gap-6 h-60  overflow-x-scroll">
-			<div className="bg-primary-200 w-36  flex justify-center items-center rounded-md">
+		<div className="w-full flex gap-6 h-52  overflow-x-scroll">
+			<div className="bg-primary-200 w-[125px]  flex justify-center items-center rounded-md">
 				<div
 					onClick={handleStoryToggle}
 					className="bg-primary-100 p-2 rounded-md cursor-pointer">
@@ -37,8 +40,8 @@ const Story = () => {
 			{stories && (
 				<div className=" flex gap-5">
 					{stories.map((story) => (
-						<div className="h-full">
-							<img src={story.storyMedia}  className="h-full w-36 object-cover rounded-md"/>
+						<div className="h-full overflow-hidden rounded-md">
+							<img src={story.storyMedia}  className="h-full w-[125px] object-coer  transition duration-300 hover:scale-105"/>
 						</div>
 					))}
 				</div>

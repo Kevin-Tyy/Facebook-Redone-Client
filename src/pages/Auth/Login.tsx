@@ -56,7 +56,10 @@ const Login: FC = () => {
 				console.log(userInfo)
 				dispatch(login(userInfo));
 				toast.success(data?.msg);
-				navigate("/home");
+				setTimeout(()=> {
+					navigate("/home");
+
+				}, 1500)
 			}
 		} catch (error) {
 			console.log(error);

@@ -5,5 +5,5 @@ export interface FormData {
     email: string;
     password: string;
     phoneNumber: string;
-    profileImage : string
 }
+

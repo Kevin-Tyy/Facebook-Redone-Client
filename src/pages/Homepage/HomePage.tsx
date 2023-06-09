@@ -9,7 +9,7 @@ import Body from  '../../components/Body'
 // import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
-  
+  document.title = 'Facebook | Home'
   return (
     <div className="bg-gray-950 h-auto w-full ">
       <Navbar/>      

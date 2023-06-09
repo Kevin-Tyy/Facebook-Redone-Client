@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import bgImage from "../../assets/bg-cover.jpg";
 
 const NotFound = () => {
+	document.title = "Page Not Found";
 	return (
 		<div>
 			<img
@@ -11,7 +12,7 @@ const NotFound = () => {
 			<div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black"></div>
 
 			<div className="bg-gradient-to-r from-gray-900/40 via-gray-900 to-gray-950 h-screen w-full flex justify-center items-center pb-52">
-				<div className="flex flex-col justify-center items-center">
+				<div className="flex flex-col justify-center items-center gap-4">
 					<h1 className="text-white text-2xl">
 						Oops ! The page you are looking for is not available
 					</h1>

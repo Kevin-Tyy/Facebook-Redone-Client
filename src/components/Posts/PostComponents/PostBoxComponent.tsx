@@ -12,7 +12,7 @@ const Box = ({ postMedia , postText , createdAt }: Props) => {
     const { formattedDate } = useDateFormatter(createdAt);
 
 	return (
-		<div className="bg-primary-200 rounded-lg p-10 flex flex-col gap-4 ">
+		<div className="bg-primary-200 rounded-lg py-3 px-6 flex flex-col gap-4 ">
 			<div className="flex justify-between"> 
 				<div className="flex gap-4 items-center">
 					<Avatar sx={{backgroundColor : 'violet'}}>J</Avatar>
@@ -27,8 +27,8 @@ const Box = ({ postMedia , postText , createdAt }: Props) => {
 			</div>
 			<div className="flex flex-col gap-2">
 				<h1 className="text-white">{postText}</h1>
-				<div>
-					<img src={postMedia} className="w-full h-[400px] object-cover rounded-t-xl" />
+				<div className="flex flex-col gap-2">
+					<img src={postMedia} className="w-full h-[400px] object-cover rounded-xl" />
 					<CommentComponent/>	
 
 				</div>

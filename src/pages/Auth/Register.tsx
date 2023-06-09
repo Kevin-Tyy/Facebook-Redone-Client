@@ -67,7 +67,10 @@ const RegisterForm: FC = () => {
 				toast.success(data?.msg);
 				const userInfo = decodeToken(data?.token);
 				dispatch(login(userInfo))
-				navigate("/home");
+				setTimeout(()=> {
+					navigate("/home");
+					
+				}, 1500)
 			}
 		} catch (error) {
 			console.log(error);
