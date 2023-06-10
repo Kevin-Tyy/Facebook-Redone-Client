@@ -18,7 +18,7 @@ const Navbar = () => {
 	} = useSelector(loggedInUser);
 	return (
 		<div className="sticky top-0 z-[5]">
-			<div className="flex justify-between bg-primary-200 p-4 ">
+			<div className="flex justify-between bg-primary-200 p-4 border-b border-gray-800">
 				<Logo />
 				<div className="bg-gray-950 flex items-center gap-3 p-1 rounded-full w-[500px] pl-4">
 					<Search sx={{ color: "#fff" }} />

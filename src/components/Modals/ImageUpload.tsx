@@ -60,7 +60,7 @@ const ImageUpload = ({ setProfileImageUpload, setUpload }: Props) => {
 						<label
 							htmlFor="upload"
 							className="border border-light flex justify-center text-white p-3 rounded-full cursor-pointer transition hover:bg-gray-800/30 active:bg-gray-900/40">
-							Choose photo
+							{uploadImage ? "Change photo" : "Upload photo" }
 						</label>
 						<input
 							id="upload"

@@ -27,7 +27,11 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 	const [storyCaption, setStoryCaption] = useState<string | null>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const { user :  { userId}} = useSelector(loggedInUser)
+	const {
+		user: {
+			userInfo: { userId, profileimage, username },
+		},
+	} = useSelector(loggedInUser);
 
 	const submitPostDetails = async (url: string) => {
 		try {
@@ -35,7 +39,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 			const { data } = await axios.post(url, {
 				storyCaption,
 				storyMedia,
-				userId
+				userId,
 			});
 			console.log(data);
 			if (data) {
@@ -73,7 +77,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 				initial="hidden"
 				whileInView="visible"
 				viewport={{ once: false, amount: 0.1 }}
-				transition={{ duration: 0.15 , delay : 0.2 }}
+				transition={{ duration: 0.15, delay: 0.2 }}
 				variants={{
 					hidden: { opacity: 0, y: -30 },
 					visible: { opacity: 1, y: 0 },
@@ -93,10 +97,14 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 				</div>
 				<div className="p-2">
 					<div className="flex items-center gap-2">
-						<Avatar>J</Avatar>
-						<div className="flex flex-col items-center">
-							<p className="text-light font-semibold">John Doe</p>
-							<div className="text-light bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1">
+						<div className="bg-primary-100 p-1 rounded-full">
+							<div className="bg-primary-200 p-1 rounded-full">
+								<img src={profileimage} className="w-12 h-12  rounded-full" />
+							</div>
+						</div>
+						<div className="flex flex-col items-start">
+							<p className="text-light font-semibold capitalize">{username}</p>
+							<div className="text-light bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
 								<PeopleAltRounded sx={{ fontSize: 15 }} />
 								Friends
 							</div>
@@ -106,7 +114,11 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 						<label
 							htmlFor="imagepost"
 							className="flex flex-col items-center justify-center h-96 border border-dashed rounded-md cursor-pointer border-gray-700 my-3">
-							{storyMedia && <p className="text-light">Change image</p>}
+							{storyMedia && (
+								<p className="text-light bg-primary-100 py-2 px-3 rounded-full">
+									Change image
+								</p>
+							)}
 							{storyMedia ? (
 								<img
 									src={storyMedia}

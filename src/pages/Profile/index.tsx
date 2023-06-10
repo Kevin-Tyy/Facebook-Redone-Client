@@ -12,6 +12,8 @@ import PostComponent from "../../components/Posts/Post";
 import ButtonComp from "../../components/Buttons/Button";
 import Box from "../../components/Posts/PostComponents/PostBoxComponent";
 import { Userdata } from "../../types/Types";
+import ProfileDetail from "../../components/Detail/profileDetail";
+import StoryModal from "../../components/Modals/StoryModal";
 interface User {
 	username: string;
 	email: string;
@@ -22,6 +24,10 @@ interface User {
 interface Posts {}
 const profile = () => {
 	const { id } = useParams();
+	const [isToggled, setIsToggled] = useState(false);
+	const handleStoryToggle = () => {
+		setIsToggled(!isToggled);
+	};
 	const [userData, setUserData] = useState<Userdata | null>(null);
 	const [posts, setPosts] = useState<Posts | null>(null);
 	const [activeTab, setActiveTab] = useState("posts");
@@ -69,10 +75,10 @@ const profile = () => {
 			<Navbar />
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
-				<div className="w-full  xl:w-[60%] flex flex-col gap-4">
+				<div className="w-full px-6 md:px-16 2xl:px-0 2xl:w-[60%] flex flex-col gap-4">
 					<div>
-						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[35vh] p-20 justify-center z-[2]">
-							<div className="flex flex-col items-center absolute -bottom-44 justify-center">
+						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[30vh] p-20 justify-center z-[2]">
+							<div className="flex flex-col items-center absolute -bottom-48 justify-center">
 								<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
 									<div className="bg-black rounded-full p-[5px]">
 										<img
@@ -101,12 +107,14 @@ const profile = () => {
 							</div>
 						</div>
 						<div className="flex justify-center">
-							<div className="bg-primary-200 h-[220px] md:h-[200px] w-full relative z-[1] rounded-b-lg">
+							<div className="bg-primary-200 h-[260px] md:h-[220px] w-full relative z-[1] rounded-b-lg">
 								<div className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2">
-									<ButtonComp color={"#0C88EF"}>
-										<Add />
-										Add to story
-									</ButtonComp>
+									<div onClick={handleStoryToggle}>
+										<ButtonComp color={"#0C88EF"}>
+											<Add />
+											Add to story
+										</ButtonComp>
+									</div>
 									<ButtonComp color={"#010A13"}>
 										<Edit />
 										Edit profile
@@ -115,7 +123,7 @@ const profile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md sticky top-[75px] z-10 shadow-2xl">
+					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md sticky top-[83px] z-10 shadow-2xl border border-gray-700">
 						{Tabs.map((tab, index) => (
 							<div
 								key={index}
@@ -127,11 +135,11 @@ const profile = () => {
 							</div>
 						))}
 					</div>
-					<div className="flex gap-4">
-						<div className="bg-primary-200 h-[500px] w-full p-5 sticky top-36 rounded-lg">
+					<div className="flex flex-col lg:flex-row gap-5">
+						<div className="bg-primary-200 h-[500px] w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700">
 							<div>
 								<h1 className="text-2xl text-light">About</h1>
-								
+								<ProfileDetail userId={userData?.userId} userData={userData} />
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
@@ -156,6 +164,7 @@ const profile = () => {
 				</div>
 			</div>
 			<Toaster />
+			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}{" "}
 		</div>
 	);
 };
