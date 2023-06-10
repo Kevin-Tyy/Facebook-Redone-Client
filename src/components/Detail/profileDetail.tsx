@@ -8,7 +8,7 @@ interface Props {
 
 const ProfileDetail = ({ userId , userData}: Props) => {
 	return (
-		<div>
+		<div className="flex flex-col gap-3">
 			<div >
 				<h1 className="text-light text-xl">Bio</h1>
 				<p className="text-light">

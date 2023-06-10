@@ -9,17 +9,17 @@ h3 {
 	color: #03182c;
 }
 ::-webkit-scrollbar {
-	width: 7px;
+	width: 10px;
 	height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #010618;
+	background-color: #393f52;
 	border-radius: 10px;
 	height: 200px;
 }
 
 
 ::-webkit-scrollbar-track {
-	background-color: transparent;
+	background-color: rgb(3 7 18);
 }

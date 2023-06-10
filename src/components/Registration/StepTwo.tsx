@@ -56,7 +56,7 @@ const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 				</button>
 			</div>
 			<div onClick={()=> setProfileImageUpload(true)} className="w-full text-white border border-gray-600 p-3 rounded-full flex justify-center cursor-pointer hover:bg-gray-950/30">
-				Upload Image
+				{profileImageUpload ? "Change image" : "Upload image"}
 			</div>
 			{ profileImageUpload && 
 				<ImageUpload setProfileImageUpload={setProfileImageUpload} setUpload={setUpload}/>

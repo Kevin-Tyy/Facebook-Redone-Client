@@ -128,8 +128,8 @@ const profile = () => {
 							<div
 								key={index}
 								onClick={() => setActiveTab(tab)}
-								className={`px-6 py-3 rounded-md transition duration-300 capitalize cursor-pointer hover:bg-gray-700/50 text-white ${
-									activeTab == tab && "bg-gray-700"
+								className={`px-5 py-2 rounded-md transition duration-150 capitalize cursor-pointer hover:bg-gray-700/50 hover:outline outline-1 hover:outline-gray-600 text-white ${
+									activeTab == tab && "bg-gray-700 outline outline-1 outline-light"
 								}`}>
 								{tab}
 							</div>

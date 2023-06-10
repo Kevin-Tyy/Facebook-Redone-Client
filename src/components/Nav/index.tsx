@@ -40,7 +40,7 @@ const Navbar = () => {
 						<img
 							src={profileimage}
 							alt="profile"
-							className="w-full h-full  rounded-full"
+							className="w-full h-full  rounded-full object-cover"
 						/>
 					</div>
 				</div>
