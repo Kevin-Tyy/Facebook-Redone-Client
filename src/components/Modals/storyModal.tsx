@@ -6,7 +6,7 @@ import {
 	GifBoxRounded,
 	MoreHoriz,
 } from "@mui/icons-material";
-import { Avatar, Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";

@@ -6,19 +6,14 @@ import { BaseURL } from "../../utils/Link";
 // import { useSelector } from "react-redux";
 // import { loggedInUser } from "../../redux/features/AuthSlice";
 import StoryPreview from "./Preview/storyPreview";
-import { Creator } from "../../types/Types";
+import { StoryType } from "../../types/Types";
 
-interface Story {
-	storyMedia: string;
-	storyCaption?: string;
-	creator: Creator;
-	createdAt: Date;
-}
 
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [isInView, setIsInView] = useState(false);
-	const [stories, setstories] = useState<Array<Story>>([]);
+	const [storyInView , setStoryInView] = useState<StoryType | null>(null);
+	const [stories, setstories] = useState<StoryType[]>([]);
 	const handleStoryToggle = () => {
 		setIsToggled(!isToggled);
 	};
@@ -33,7 +28,7 @@ const Story = () => {
 	}, []);
 	// const {} = useSelector(loggedInUser);
 	const handleStoryView = () => {
-		setIsInView(!isInView)
+		setIsInView(!isInView);
 	};
 	return (
 		<div className="w-full flex gap-6 h-60  overflow-x-scroll overflow-y-hidden pb-5">
@@ -51,7 +46,10 @@ const Story = () => {
 						<div
 							key={index}
 							className="h-full w-[130px] rounded-full relative"
-							onClick={handleStoryView}>
+							onClick={() => {
+								handleStoryView()
+								setStoryInView(story)	
+							}}>
 							<div className="z-[3] absolute flex justify-start items-center w-full gap-2 top-2 left-2">
 								<div className=" bg-primary-100 rounded-full p-[3px] top-2 left-2">
 									<img
@@ -72,7 +70,7 @@ const Story = () => {
 							<div className="w-full h-full bg-gradient-to-b from-black/80 cursor-pointer to-black/40 z-[2] absolute top-0 right-0 left-0 bottom-0 rounded-lg"></div>
 						</div>
 					))}
-					{isInView && <StoryPreview handleView={handleStoryView}/>}
+					{isInView && <StoryPreview handleView={handleStoryView} storyInView={storyInView} stories={stories}/>}
 				</div>
 			)}
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}

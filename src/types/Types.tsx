@@ -35,5 +35,11 @@ export interface UserInfo {
     profileimage : string;
     friendList : Array<object>
     username : string;
-    
+
+}
+export interface StoryType {
+	storyMedia: string;
+	storyCaption?: string;
+	creator: Creator;
+	createdAt: Date;
 }
