@@ -15,7 +15,9 @@ const ButtonComp = ({children , color }: Props) => {
 				textTransform: "capitalize",
 				px: 2,
 				py: 1,
+				borderRadius : '5px',
 				display: "flex",
+				whiteSpace: "nowrap",
 				gap: "5px",
 			}}
 			className="flex items-center justify-center">

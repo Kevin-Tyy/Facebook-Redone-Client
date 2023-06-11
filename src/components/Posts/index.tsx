@@ -19,10 +19,10 @@ const Posts = ({}: Props) => {
 		setPosts(posts);
 		setLoading(false);
 	};
-	console.log(posts);
+	// console.log(posts);
 
 	useEffect(() => {
-		fetchPosts(`${BaseURL}/post/`);
+		fetchPosts(`${BaseURL}/post`);
 	}, [BaseURL]);
 	return (
 		<div className="h-full w-full">

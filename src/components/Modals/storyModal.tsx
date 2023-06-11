@@ -114,11 +114,6 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 						<label
 							htmlFor="imagepost"
 							className="flex flex-col items-center justify-center h-96 border border-dashed rounded-md cursor-pointer border-gray-700 my-3">
-							{storyMedia && (
-								<p className="text-light bg-primary-100 py-2 px-3 rounded-full">
-									Change image
-								</p>
-							)}
 							{storyMedia ? (
 								<img
 									src={storyMedia}
@@ -126,6 +121,11 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 								/>
 							) : (
 								<p className="text-light text-lg">Click or drag and drop </p>
+							)}
+							{storyMedia && (
+								<p className="text-light bg-primary-100 py-1 px-2 rounded-full">
+									Change image
+								</p>
 							)}
 						</label>
 						<input

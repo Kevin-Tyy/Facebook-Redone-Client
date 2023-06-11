@@ -122,7 +122,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 							className={`w-full resize-none outline-none  bg-transparent text-2xl text-light p-2 ${
 								postMedia ? "h-20" : "h-40"
 							}`}
-							placeholder="What's on your mind, John?"></textarea>
+							placeholder={`What's on your mind, ${username}?`}></textarea>
 						{postMedia && (
 							<img
 								src={postMedia}

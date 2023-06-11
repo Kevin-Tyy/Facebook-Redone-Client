@@ -14,6 +14,7 @@ import Box from "../../components/Posts/PostComponents/PostBoxComponent";
 import { Userdata } from "../../types/Types";
 import ProfileDetail from "../../components/Detail/profileDetail";
 import StoryModal from "../../components/Modals/StoryModal";
+import placeholderImage from "../../assets/avatar.webp";
 interface User {
 	username: string;
 	email: string;
@@ -75,14 +76,18 @@ const profile = () => {
 			<Navbar />
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
-				<div className="w-full px-6 md:px-16 2xl:px-0 2xl:w-[60%] flex flex-col gap-4">
+				<div className="w-full px-3 md:px-16 2xl:px-0 2xl:w-[60%] flex flex-col gap-4">
 					<div>
 						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[30vh] p-20 justify-center z-[2]">
 							<div className="flex flex-col items-center absolute -bottom-48 justify-center">
 								<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
 									<div className="bg-black rounded-full p-[5px]">
 										<img
-											src={userData?.profileimage}
+											src={
+												userData?.profileimage
+													? userData?.profileimage
+													: placeholderImage
+											}
 											className="w-44 h-44 rounded-full object-cover"
 										/>
 									</div>
@@ -101,7 +106,10 @@ const profile = () => {
 									<p className="text-light/30">{userData?.email}</p>
 									<div className="text-light/30 font-black flex gap-7">
 										<p>{userData && userData?.friendList.length} Friends</p>
-										<p>{posts && posts.length} Posts</p>
+										<p>
+											{posts && posts.length} Post
+											{posts ? posts.length != 1 && "s" : null}
+										</p>
 									</div>
 								</div>
 							</div>
@@ -123,28 +131,29 @@ const profile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md sticky top-[83px] z-10 shadow-2xl border border-gray-700">
+					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md sticky top-[73px] z-10 shadow-2xl border border-gray-700/60">
 						{Tabs.map((tab, index) => (
 							<div
 								key={index}
 								onClick={() => setActiveTab(tab)}
 								className={`px-5 py-2 rounded-md transition duration-150 capitalize cursor-pointer hover:bg-gray-700/50 hover:outline outline-1 hover:outline-gray-600 text-white ${
-									activeTab == tab && "bg-gray-700 outline outline-1 outline-light"
+									activeTab == tab &&
+									"bg-gray-700 outline outline-1 outline-gray-400"
 								}`}>
 								{tab}
 							</div>
 						))}
 					</div>
 					<div className="flex flex-col lg:flex-row gap-5">
-						<div className="bg-primary-200 h-[500px] w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700">
+						<div className="bg-primary-200 h-[500px] w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
 							<div>
 								<h1 className="text-2xl text-light">About</h1>
 								<ProfileDetail userId={userData?.userId} userData={userData} />
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
-							<PostComponent />
-							<h1 className="text-light text-3xl text-center">
+							{userData?.userId == userId && <PostComponent />}
+							<h1 className="text-light text-3xl text-center capitalize">
 								{userData?.userId == userId
 									? "Your"
 									: `${userData?.username}'s`}{" "}
@@ -154,7 +163,7 @@ const profile = () => {
 								<div className="flex flex-col gap-6 ">
 									{posts.map((post: object, index: number) => (
 										<div key={index}>
-											<Box {...post} />
+											<Box {...post}/>
 										</div>
 									))}
 								</div>
