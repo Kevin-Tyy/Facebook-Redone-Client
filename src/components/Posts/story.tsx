@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import StoryModal from "../Modals/StoryModal";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import { useSelector } from "react-redux";
-import { loggedInUser } from "../../redux/features/AuthSlice";
+// import { useSelector } from "react-redux";
+// import { loggedInUser } from "../../redux/features/AuthSlice";
+import StoryPreview from "./Preview/storyPreview";
 import { Creator } from "../../types/Types";
 
 interface Story {
@@ -14,9 +15,9 @@ interface Story {
 	createdAt: Date;
 }
 
-
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
+	const [isInView, setIsInView] = useState(false);
 	const [stories, setstories] = useState<Array<Story>>([]);
 	const handleStoryToggle = () => {
 		setIsToggled(!isToggled);
@@ -32,10 +33,10 @@ const Story = () => {
 	}, []);
 	// const {} = useSelector(loggedInUser);
 	const handleStoryView = () => {
-
-	}
+		setIsInView(!isInView)
+	};
 	return (
-		<div className="w-full flex gap-6 h-60  overflow-x-scroll overflow-y-hidden p-4">
+		<div className="w-full flex gap-6 h-60  overflow-x-scroll overflow-y-hidden pb-5">
 			<div className="bg-primary-200 min-w-[130px] flex justify-center items-center rounded-2xl">
 				<div
 					onClick={handleStoryToggle}
@@ -47,7 +48,10 @@ const Story = () => {
 			{stories && (
 				<div className=" flex gap-5">
 					{stories.map((story, index) => (
-						<div key={index} className="h-full w-[130px] rounded-full relative" onClick={handleStoryView}>
+						<div
+							key={index}
+							className="h-full w-[130px] rounded-full relative"
+							onClick={handleStoryView}>
 							<div className="z-[3] absolute flex justify-start items-center w-full gap-2 top-2 left-2">
 								<div className=" bg-primary-100 rounded-full p-[3px] top-2 left-2">
 									<img
@@ -59,16 +63,16 @@ const Story = () => {
 									<p className=" text-light capitalize whitespace-nowrap ">
 										{story.creator?.username.split(" ")[0]}
 									</p>
-								
 								</div>
 							</div>
 							<img
 								src={story.storyMedia}
-								className="h-full w-[130px] object-cover rounded-2xl transition duration-100 hover:scale-110"
+								className="h-full w-[130px] object-cover rounded-xl transition duration-100 hover:scale-110"
 							/>
-							<div className="w-full h-full bg-gradient-to-b from-black/80 cursor-pointer to-black/40 z-[2] absolute top-0 right-0 left-0 bottom-0 rounded-xl"></div>
+							<div className="w-full h-full bg-gradient-to-b from-black/80 cursor-pointer to-black/40 z-[2] absolute top-0 right-0 left-0 bottom-0 rounded-lg"></div>
 						</div>
 					))}
+					{isInView && <StoryPreview handleView={handleStoryView}/>}
 				</div>
 			)}
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}

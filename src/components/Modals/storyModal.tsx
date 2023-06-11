@@ -13,6 +13,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
+import { UserInfo } from "../../types/Types";
 interface Props {
 	handleStoryToggle: (value: any) => void;
 }
@@ -31,7 +32,11 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 		user: {
 			userInfo: { userId, profileimage, username },
 		},
-	} = useSelector(loggedInUser);
+	} = useSelector(loggedInUser) as {
+		user : {
+			userInfo : UserInfo
+		}
+	};
 
 	const submitPostDetails = async (url: string) => {
 		try {

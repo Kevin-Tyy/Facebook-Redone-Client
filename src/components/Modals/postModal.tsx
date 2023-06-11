@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
+import { UserInfo } from "../../types/Types";
 
 interface Props {
 	setIsPostModal: (value: any) => void;
@@ -33,7 +34,11 @@ const PostModal = ({ setIsPostModal }: Props) => {
 		user: {
 			userInfo: { userId, username, profileimage },
 		},
-	} = useSelector(loggedInUser);
+	} = useSelector(loggedInUser) as {
+		user : {
+			userInfo : UserInfo
+		}
+	};
 
 	const submitPostDetails = async (url: string) => {
 		try {
