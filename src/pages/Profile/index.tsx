@@ -11,7 +11,7 @@ import { Tabs } from "../../utils/utilObjects";
 import PostComponent from "../../components/Posts/Post";
 import ButtonComp from "../../components/Buttons/Button";
 import Box from "../../components/Posts/PostComponents/PostBoxComponent";
-import { Userdata } from "../../types/Types";
+import { UserInfo, Userdata } from "../../types/Types";
 import ProfileDetail from "../../components/Detail/profileDetail";
 import StoryModal from "../../components/Modals/StoryModal";
 import placeholderImage from "../../assets/avatar.webp";
@@ -36,7 +36,11 @@ const profile = () => {
 		user: {
 			userInfo: { userId },
 		},
-	} = useSelector(loggedInUser);
+	} = useSelector(loggedInUser) as {
+		user: {
+			userInfo: UserInfo;
+		};
+	};
 	const fetchProfile = async (url: string) => {
 		try {
 			const { data } = await axios.get(url);
@@ -163,7 +167,7 @@ const profile = () => {
 								<div className="flex flex-col gap-6 ">
 									{posts.map((post: object, index: number) => (
 										<div key={index}>
-											<Box {...post}/>
+											<Box {...post} />
 										</div>
 									))}
 								</div>

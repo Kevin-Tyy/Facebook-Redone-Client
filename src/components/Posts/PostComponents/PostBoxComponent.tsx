@@ -1,4 +1,3 @@
-import { Avatar } from "@mui/material";
 import CommentComponent from "./CommentComponent";
 import useDateFormatter from "../../../hooks/useDate";
 import { MoreVert } from "@mui/icons-material";
@@ -7,32 +6,49 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import placeholderImage from "../../../assets/avatar.webp";
 import { Link } from "react-router-dom";
+import { Creator, UserInfo } from "../../../types/Types";
 interface Props {
-	postId : string;
+	postId: string;
 	postMedia: string;
 	postText: string;
 	createdAt: Date;
-	creator: object;
+	creator: Creator;
 	likes: Array<Likes>;
+	comments: Array<Comment>;
 }
 interface Likes {
-	userId : string;
+	userId: string;
 }
+interface Comment {}
 
-const Box = ({ postId, postMedia, creator, postText, createdAt, likes , comments }: Props) => {
+const Box = ({
+	postId,
+	postMedia,
+	creator,
+	postText,
+	createdAt,
+	likes,
+	comments,
+}: Props) => {
 	const { formattedDate } = useDateFormatter(createdAt);
 	const {
 		user: {
 			userInfo: { userId },
 		},
-	} = useSelector(loggedInUser);
-	const [likedByLoggedInUser , setLikedByLoggedInUser] = useState(likes.some(like => like?.userId === userId))
-	
+	} = useSelector(loggedInUser) as {
+		user: {
+			userInfo: UserInfo;
+		};
+	};
+	const [likedByLoggedInUser, setLikedByLoggedInUser] = useState(
+		likes.some((like) => like?.userId === userId)
+	);
+
 	// const likedByLoggedInUser = ;
 	// console.log();
 
 	return (
-		<div className="bg-primary-200 rounded-lg py-3 px-6 flex flex-col gap-4 border border-gray-800">
+		<div className="bg-primary-200 rounded-2xl py-3 px-6 flex flex-col gap-4 border border-gray-800">
 			<div className="flex py-3 justify-between border-b border-gray-600">
 				<Link to={`/profile/${creator?.userId}`}>
 					<div className="flex gap-3 items-center">
@@ -64,10 +80,20 @@ const Box = ({ postId, postMedia, creator, postText, createdAt, likes , comments
 						className="w-full max-h-[500px] object-cover rounded-xl"
 					/>
 					<div className="flex justify-between text-light px-4 ">
-						<span className="hover:underline cursor-pointer">{likes && likes.length} Like{likes.length !== 1 && 's'}</span>
-						<span className="hover:underline cursor-pointer">{comments && comments.length} comment{comments.length !== 1 && 's'}</span>
+						<span className="hover:underline cursor-pointer">
+							{likes && likes.length} Like{likes.length !== 1 && "s"}
+						</span>
+						<span className="hover:underline cursor-pointer">
+							{comments && comments.length} comment
+							{comments.length !== 1 && "s"}
+						</span>
 					</div>
-					<CommentComponent userId={userId } postId={postId} likedByLoggedInUser={likedByLoggedInUser} setLikedByLoggedInUser={setLikedByLoggedInUser}/>
+					<CommentComponent
+						userId={userId}
+						postId={postId}
+						likedByLoggedInUser={likedByLoggedInUser}
+						setLikedByLoggedInUser={setLikedByLoggedInUser}
+					/>
 				</div>
 			</div>
 		</div>

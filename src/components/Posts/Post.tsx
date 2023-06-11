@@ -4,7 +4,7 @@ import {
 	MoreHoriz,
 	VideocamRounded,
 } from "@mui/icons-material";
-import { Avatar, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import PostModal from "../Modals/PostModal";
 const utilObj = [
 	{ icon: <VideocamRounded />, title: "Live Video" },
@@ -16,13 +16,18 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import ButtonComp from "../Buttons/Button";
+import { UserInfo } from "../../types/Types";
 const PostComponent = () => {
 	const [isPostModal, setIsPostModal] = useState<boolean>(false);
 	const {
 		user: {
 			userInfo: { profileimage, username },
 		},
-	} = useSelector(loggedInUser);
+	} = useSelector(loggedInUser) as {
+		user : {
+			userInfo : UserInfo
+		}
+	};
 	return (
 		<div className="">
 			<div className="flex flex-col bg-primary-200 rounded-lg p-6 gap-6">

@@ -6,7 +6,6 @@ import {
 } from "@mui/icons-material";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
-import { useState } from 'react'
 interface Props {
 	userId: string;
 	postId: string;

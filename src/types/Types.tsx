@@ -23,3 +23,17 @@ export interface Userdata {
     work : string;//
     friendList : Array<object>;//
 }
+export interface Creator {
+	profileimage : string;
+	username : string;
+    userId : string;
+    
+}
+export interface UserInfo {
+    userId : string;
+    email : string;
+    profileimage : string;
+    friendList : Array<object>
+    username : string;
+    
+}

@@ -5,12 +5,15 @@ import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
+import { Creator } from "../../types/Types";
 
 interface Story {
 	storyMedia: string;
 	storyCaption?: string;
-	creator: object;
+	creator: Creator;
+	createdAt: Date;
 }
+
 
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
@@ -27,38 +30,43 @@ const Story = () => {
 	useEffect(() => {
 		fetchStory(`${BaseURL}/stories`);
 	}, []);
-	const {} = useSelector(loggedInUser);
+	// const {} = useSelector(loggedInUser);
+	const handleStoryView = () => {
+
+	}
 	return (
-		<div className="w-full flex gap-6 h-52  overflow-x-scroll">
-			<div className="bg-primary-200 w-[125px]  flex justify-center items-center rounded-md">
+		<div className="w-full flex gap-6 h-60  overflow-x-scroll overflow-y-hidden p-4">
+			<div className="bg-primary-200 min-w-[130px] flex justify-center items-center rounded-2xl">
 				<div
 					onClick={handleStoryToggle}
-					className="bg-primary-100 p-2 rounded-md cursor-pointer">
+					className="bg-primary-100 p-2 rounded-full cursor-pointer">
 					<Add fontSize="medium" />
 				</div>
 			</div>
 
 			{stories && (
-				<div className=" flex gap-5 overflow-scroll">
+				<div className=" flex gap-5">
 					{stories.map((story, index) => (
-						<div
-							key={index}
-							className="h-full overflow-scroll rounded-md relative">
-							<div className="z-[20] absolute flex justify-start items-center w-full">
+						<div key={index} className="h-full w-[130px] rounded-full relative" onClick={handleStoryView}>
+							<div className="z-[3] absolute flex justify-start items-center w-full gap-2 top-2 left-2">
 								<div className=" bg-primary-100 rounded-full p-[3px] top-2 left-2">
 									<img
 										src={story.creator?.profileimage}
-										className="w-10 h-10 rounded-full  "
+										className="min-w-[35px] max-w-[35px] h-[35px] rounded-full  "
 									/>
 								</div>
-								<p className=" text-light font-bold capitalize whitespace-nowrap">
-									{story.creator.username}
-								</p>
+								<div>
+									<p className=" text-light capitalize whitespace-nowrap ">
+										{story.creator?.username.split(" ")[0]}
+									</p>
+								
+								</div>
 							</div>
 							<img
 								src={story.storyMedia}
-								className="h-full w-[125px] object-cover  transition duration-500 hover:scale-105"
+								className="h-full w-[130px] object-cover rounded-2xl transition duration-100 hover:scale-110"
 							/>
+							<div className="w-full h-full bg-gradient-to-b from-black/80 cursor-pointer to-black/40 z-[2] absolute top-0 right-0 left-0 bottom-0 rounded-xl"></div>
 						</div>
 					))}
 				</div>
