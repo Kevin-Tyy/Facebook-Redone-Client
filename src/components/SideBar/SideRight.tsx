@@ -1,6 +1,20 @@
 import { Avatar, Button } from "@mui/material";
 import image from "../../assets/bg-cover.jpg";
+import { useEffect, useState } from "react";
+import { BaseURL } from "../../utils/Link";
+import axios from "axios";
+import { Userdata } from "../../types/Types";
+import { Link } from "react-router-dom";
 const SideRight = () => {
+	const [users, setUsers] = useState<Array<Userdata>>([]);
+	const fetchPeople = async () => {
+		const { data } = await axios.get(`${BaseURL}/user/`);
+		setUsers(data);
+		console.log(data);
+	};
+	useEffect(() => {
+		fetchPeople();
+	});
 	return (
 		<div>
 			<div className="bg-primary-200 hidden p-4 rounded-lg w-full md:min-w-[300px] max-w-[400px] xl:flex flex-col gap-4 sticky top-[100px]">
@@ -63,42 +77,19 @@ const SideRight = () => {
 				</div>
 				<div className="flex flex-col gap-3">
 					<h1 className="text-lg text-light font-semibold">Active</h1>
-					<div className="flex gap-2 items-center">
-						<Avatar src={image} className="cursor-pointer"></Avatar>
-						<p className="text-light cursor-pointer">Musk E.</p>
+					<div className="flex flex-col gap-3">
+						{users.map((user) => (
+							<Link to={`/profile/${user?.userId}`}>
+								<div className="flex gap-2 items-center">
+									<div className="bg-primary-100 p-1 rounded-full">
+										<img src={user?.profileimage} className="h-12 w-12 rounded-full object-cover" />
+									</div>
+									<p className="text-light cursor-pointer capitalize">{user?.username}</p>
+								</div>
+							</Link>
+						))}
 					</div>
-					<div className="flex gap-2 items-center">
-						<Avatar
-							className="cursor-pointer"
-							sx={{ backgroundColor: "#6cc46c" }}>
-							R
-						</Avatar>
-						<p className="text-light cursor-pointer">John R.</p>
-					</div>
-					<div className="flex gap-2 items-center">
-						<Avatar
-							className="cursor-pointer"
-							sx={{ backgroundColor: "#6cb0c4" }}>
-							V
-						</Avatar>
-						<p className="text-light cursor-pointer">Vini Jr.</p>
-					</div>
-					<div className="flex gap-2 items-center">
-						<Avatar
-							className="cursor-pointer"
-							sx={{ backgroundColor: "#c46c6c" }}>
-							T
-						</Avatar>
-						<p className="text-light cursor-pointer">Tyrion T.</p>
-					</div>
-					<div className="flex gap-2 items-center">
-						<Avatar
-							className="cursor-pointer"
-							sx={{ backgroundColor: "#a14dda" }}>
-							J
-						</Avatar>
-						<p className="text-light cursor-pointer">Joe Smith</p>
-					</div>
+				
 				</div>
 				<Button
 					sx={{

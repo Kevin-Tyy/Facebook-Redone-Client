@@ -44,3 +44,8 @@ export interface StoryType {
 	createdAt: Date;
     storyId : string;
 }
+
+export interface Comment {
+    textContent: string;
+    user : UserInfo
+}

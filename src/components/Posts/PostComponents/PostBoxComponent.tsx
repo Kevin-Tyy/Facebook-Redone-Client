@@ -7,6 +7,7 @@ import { loggedInUser } from "../../../redux/features/AuthSlice";
 import placeholderImage from "../../../assets/avatar.webp";
 import { Link } from "react-router-dom";
 import { Creator, UserInfo } from "../../../types/Types";
+import PostPreview from "../Preview/PostPreview";
 interface Props {
 	postId: string;
 	postMedia: string;
@@ -19,7 +20,6 @@ interface Props {
 interface Likes {
 	userId: string;
 }
-interface Comment {}
 
 const Box = ({
 	postId,
@@ -31,6 +31,7 @@ const Box = ({
 	comments,
 }: Props) => {
 	const formattedDate = useDateFormatter(createdAt);
+	const [isPostInView, setPostInView] = useState(false);
 	const {
 		user: {
 			userInfo: { userId },
@@ -43,11 +44,14 @@ const Box = ({
 	const [likedByLoggedInUser, setLikedByLoggedInUser] = useState(
 		likes.some((like) => like?.userId === userId)
 	);
-	const [likecount , setlikecount] = useState(likes.length)
+	const [likecount, setlikecount] = useState(likes.length);
+	const [commentcount, setcommentcount] = useState(comments.length)
 
 	// const likedByLoggedInUser = ;
 	// console.log();
-
+	const viewPost = () => {
+		setPostInView(!isPostInView);
+	};
 	return (
 		<div className="bg-primary-200 rounded-2xl py-3 px-6 flex flex-col gap-4 border border-gray-800">
 			<div className="flex py-3 justify-between border-b border-gray-600">
@@ -76,17 +80,20 @@ const Box = ({
 			<div className="flex flex-col gap-2">
 				<h1 className="text-white">{postText}</h1>
 				<div className="flex flex-col gap-2">
-					<img
-						src={postMedia}
-						className="w-full max-h-[500px] object-cover rounded-xl"
-					/>
+					<div className="relative cursor-pointer" onClick={viewPost}>
+						<img
+							src={postMedia}
+							className="w-full max-h-[500px] object-cover rounded-xl "
+						/>
+						<div className="bg-black/30 absolute h-full w-full top-0 right-0 bottom-0 left-0 opacity-0 transition active:opacity-75"></div>
+					</div>
 					<div className="flex justify-between text-light px-4 ">
 						<span className="hover:underline cursor-pointer">
 							{likes && likecount} Like{likes.length !== 1 && "s"}
 						</span>
 						<span className="hover:underline cursor-pointer">
-							{comments && comments.length} comment
-							{comments.length !== 1 && "s"}
+							{comments && commentcount} comment
+							{commentcount !== 1 && "s"}
 						</span>
 					</div>
 					<CommentComponent
@@ -99,6 +106,24 @@ const Box = ({
 					/>
 				</div>
 			</div>
+			{isPostInView && (
+				<PostPreview
+					postMedia={postMedia}
+					postText={postText}
+					viewPost={viewPost}
+					creator={creator}
+					createdAt={createdAt}
+					setlikecount={setlikecount}
+					likecount={likecount}
+					commentcount={commentcount}
+					setcommentcount={setcommentcount}
+					userId={userId}
+					postId={postId}
+					likedByLoggedInUser={likedByLoggedInUser}
+					setLikedByLoggedInUser={setLikedByLoggedInUser}
+					
+				/>
+			)}
 		</div>
 	);
 };

@@ -16,7 +16,6 @@ interface Props {
 	likecount : number
 }
 const CommentComponent = ({ likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser , setLikecount , likecount}: Props) => {
-	// const [isPostLiked, setIsPostLiked] = useState(false)
 
 	const styleClass = `flex items-center justify-center w-full gap-2 text-light hover:bg-gray-700/30 py-3 transition duration-300 rounded-md hover:text-primary-100 cursor-pointer`;
 	const handleLike = async () => {
