@@ -1,8 +1,8 @@
 import Logo from "../Logo";
 import { Telegram, MoreVert, Notifications, Search } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
+import { UserInfo } from "../../types/Types";
 
 const navObj = [
 	{ icon: <MoreVert sx={{ fontSize: 20 }} /> },
@@ -15,7 +15,11 @@ const Navbar = () => {
 		user: {
 			userInfo: { profileimage },
 		},
-	} = useSelector(loggedInUser);
+	} = useSelector(loggedInUser) as {
+		user : {
+			userInfo : UserInfo
+		}
+	};
 	return (
 		<div className="sticky top-0 z-[5]">
 			<div className="flex justify-between bg-primary-200 p-4 border-b border-gray-800">

@@ -15,12 +15,7 @@ import { UserInfo, Userdata } from "../../types/Types";
 import ProfileDetail from "../../components/Detail/profileDetail";
 import StoryModal from "../../components/Modals/StoryModal";
 import placeholderImage from "../../assets/avatar.webp";
-interface User {
-	username: string;
-	email: string;
-	profileimage: string;
-	friendlist: Array<object>;
-}
+import DetailModal from "../../components/Detail/UpdateModal";
 
 interface Posts {}
 const profile = () => {
@@ -32,6 +27,7 @@ const profile = () => {
 	const [userData, setUserData] = useState<Userdata | null>(null);
 	const [posts, setPosts] = useState<Posts | null>(null);
 	const [activeTab, setActiveTab] = useState("posts");
+	const [isOpen, setIsOpen] = useState(false);
 	const {
 		user: {
 			userInfo: { userId },
@@ -154,7 +150,7 @@ const profile = () => {
 						<div className="bg-primary-200 h-[500px] w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
 							<div>
 								<h1 className="text-2xl text-light">About</h1>
-								<ProfileDetail userId={userData?.userId} userData={userData} />
+								<ProfileDetail userId={userData?.userId} userData={userData} isOpen={isOpen} setIsOpen={setIsOpen}/>
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
@@ -165,7 +161,7 @@ const profile = () => {
 									: `${userData?.username}'s`}{" "}
 								Posts
 							</h1>
-							{posts && (
+							{posts && posts.length ? (
 								<div className="flex flex-col gap-6 ">
 									{posts.map((post: object, index: number) => (
 										<div key={index}>
@@ -173,11 +169,24 @@ const profile = () => {
 										</div>
 									))}
 								</div>
+							) : (
+								<p className="text-center text-light text-xl mt-4">
+									😞
+									{userData?.userId == userId ? (
+										"You haven't"
+									) : (
+										<span className="capitalize">
+											{userData?.username} hasn't
+										</span>
+									)}{" "}
+									posted anything yet
+								</p>
 							)}
 						</div>
 					</div>
 				</div>
 			</div>
+			{isOpen && <DetailModal setIsOpen={setIsOpen}/>}
 			<Toaster />
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}{" "}
 		</div>

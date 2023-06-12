@@ -35,6 +35,8 @@ export interface UserInfo {
     profileimage : string;
     friendList : Array<object>
     username : string;
+    firstname : string
+    lastname : string
 
 }
 export interface StoryType {
