@@ -3,7 +3,7 @@
 @import "tailwindcss/base";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 *{
-  font-family: 'Roboto' Arial, Helvetica, sans-serif;
+  font-family: 'Roboto' , sans-serif;
 }
 h3 {
 	color: #03182c;

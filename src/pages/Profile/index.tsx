@@ -120,18 +120,20 @@ const profile = () => {
 						</div>
 						<div className="flex justify-center">
 							<div className="bg-primary-200 h-[260px] md:h-[220px] w-full relative z-[1] rounded-b-lg">
-								<div className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2">
-									<div onClick={handleStoryToggle}>
-										<ButtonComp color={"#0C88EF"}>
-											<Add />
-											Add to story
+								{userData?.userId == userId && (
+									<div className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2">
+										<div onClick={handleStoryToggle}>
+											<ButtonComp color={"#0C88EF"}>
+												<Add />
+												Add to story
+											</ButtonComp>
+										</div>
+										<ButtonComp color={"#010A13"}>
+											<Edit />
+											Edit profile
 										</ButtonComp>
 									</div>
-									<ButtonComp color={"#010A13"}>
-										<Edit />
-										Edit profile
-									</ButtonComp>
-								</div>
+								)}
 							</div>
 						</div>
 					</div>

@@ -30,7 +30,7 @@ const Box = ({
 	likes,
 	comments,
 }: Props) => {
-	const { formattedDate } = useDateFormatter(createdAt);
+	const formattedDate = useDateFormatter(createdAt);
 	const {
 		user: {
 			userInfo: { userId },
@@ -43,6 +43,7 @@ const Box = ({
 	const [likedByLoggedInUser, setLikedByLoggedInUser] = useState(
 		likes.some((like) => like?.userId === userId)
 	);
+	const [likecount , setlikecount] = useState(likes.length)
 
 	// const likedByLoggedInUser = ;
 	// console.log();
@@ -81,7 +82,7 @@ const Box = ({
 					/>
 					<div className="flex justify-between text-light px-4 ">
 						<span className="hover:underline cursor-pointer">
-							{likes && likes.length} Like{likes.length !== 1 && "s"}
+							{likes && likecount} Like{likes.length !== 1 && "s"}
 						</span>
 						<span className="hover:underline cursor-pointer">
 							{comments && comments.length} comment
@@ -93,6 +94,8 @@ const Box = ({
 						postId={postId}
 						likedByLoggedInUser={likedByLoggedInUser}
 						setLikedByLoggedInUser={setLikedByLoggedInUser}
+						setLikecount={setlikecount}
+						likecount={likecount}
 					/>
 				</div>
 			</div>

@@ -9,6 +9,6 @@ export const options = {
 };
 const useDateFormatter = (date: Date) => {
     const formattedDate = new Date(date).toLocaleString('en-US', options);
-    return { formattedDate };
+    return  formattedDate ;
 };
 export default useDateFormatter;

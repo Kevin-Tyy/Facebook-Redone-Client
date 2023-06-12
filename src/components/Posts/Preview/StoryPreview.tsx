@@ -1,4 +1,4 @@
-import { CloseRounded, MoreHoriz } from "@mui/icons-material";
+import { Add, CloseRounded, MoreHoriz } from "@mui/icons-material";
 import { StoryType } from "../../../types/Types";
 import useDateFormatter from "../../../hooks/useDate";
 import { Link } from "react-router-dom";
@@ -8,12 +8,28 @@ interface Props {
 	handleView: (value: any) => void;
 	storyInView: StoryType;
 	stories: Array<StoryType>;
+	setStoryInView: (value: any) => void;
+	handleStoryToggle: (value: any) => void;
 }
 
-const StoryPreview = ({ handleView, storyInView, stories }: Props) => {
+const StoryPreview = ({
+	handleView,
+	storyInView,
+	setStoryInView,
+	stories,
+	handleStoryToggle,
+}: Props) => {
 	console.log(storyInView);
 	// console.log(stories)
-	const { formattedDate } = useDateFormatter(storyInView?.createdAt);
+	const formattedDate = useDateFormatter(storyInView?.createdAt);
+	const renderDate = (rawDate: Date) => {
+		const formattedDate = useDateFormatter(rawDate);
+		return formattedDate;
+	};
+	const handleStoryButtonClick = () => {
+		handleView(false);
+		handleStoryToggle(true);
+	};
 	return (
 		<div
 			className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-gray-950/60 backdrop-blur-lg z-[10] flex justify-center"
@@ -48,23 +64,54 @@ const StoryPreview = ({ handleView, storyInView, stories }: Props) => {
 					</div>
 					<img src={storyInView?.storyMedia} className="w-full" />
 				</div>
-				<div className="absolute h-screen w-[300px] top-0 left-0 bg-gray-950/60 p-2">
+				<div className="absolute h-screen w-[350px] top-0 left-0 bg-gray-950/60 p-4 flex flex-col gap-4">
 					<Logo />
-					<div>
-            <div>
-              <p>Your story</p>
-            </div>
+					<div className="border-t border-gray-600 pt-2">
+						<p className="text-2xl text-light">Your story</p>
+						<div
+							className="p-2 cursor-pointer active:bg-gray-600/10 transition rounded-lg"
+							onClick={handleStoryButtonClick}>
+							<div className="flex gap-2 w-full py-3 items-center">
+								<div className="bg-gray-800 p-2 rounded-full">
+									<Add sx={{ fontSize: 40 }} className="text-white" />
+								</div>
+								<div className="text-light">
+									<p>Create a story</p>
+									<p className="whitespace-nowrap text-sm text-gray-600">
+										Share a photo or write something
+									</p>
+								</div>
+							</div>
+						</div>
 						{stories && (
-							<div>
-								{stories.map((story, index) => (
-									<div
-										key={index}
-										className="h-full w-[130px] rounded-full relative">
-										<div>
-											<img src={story.storyMedia} />
+							<div className="p-2">
+								<p className="text-2xl text-light">All stories</p>
+								<div className="flex flex-col gap-3 mt-4 cursor-pointer">
+									{stories.map((story, index) => (
+										<div
+											onClick={() => setStoryInView(story)}
+											key={index}
+											className={`h-full w-full rounded-lg relative bg-gray-900 p-2 flex items-center gap-2 ${
+												storyInView?.storyId == story.storyId &&
+												"border border-gray-700"
+											}`}>
+											<div className="bg-primary-100 rounded-full p-0.5">
+												<img
+													src={story.storyMedia}
+													className="w-14 h-14 rounded-full object-cover"
+												/>
+											</div>
+											<div>
+												<p className="text-light text-lg capitalize">
+													{story?.creator?.username}
+												</p>
+												<p className="text-xs text-gray-500">
+													{renderDate(story?.createdAt)}
+												</p>
+											</div>
 										</div>
-									</div>
-								))}
+									))}
+								</div>
 							</div>
 						)}
 					</div>

@@ -22,11 +22,9 @@ const Story = () => {
 		const { stories } = dataObj.data;
 		setstories(stories);
 	};
-	console.log(stories);
 	useEffect(() => {
 		fetchStory(`${BaseURL}/stories`);
 	}, []);
-	// const {} = useSelector(loggedInUser);
 	const handleStoryView = () => {
 		setIsInView(!isInView);
 	};
@@ -67,10 +65,10 @@ const Story = () => {
 								src={story.storyMedia}
 								className="h-full w-[130px] object-cover rounded-xl transition duration-100 hover:scale-110"
 							/>
-							<div className="w-full h-full bg-gradient-to-b from-black/80 cursor-pointer to-black/40 z-[2] absolute top-0 right-0 left-0 bottom-0 rounded-lg"></div>
+							<div className="w-full h-full bg-gradient-to-b from-black/70 cursor-pointer to-black/40 z-[2] absolute top-0 right-0 left-0 bottom-0 rounded-lg"></div>
 						</div>
 					))}
-					{isInView && <StoryPreview handleView={handleStoryView} storyInView={storyInView} stories={stories}/>}
+					{isInView && <StoryPreview handleView={handleStoryView} setStoryInView={setStoryInView} storyInView={storyInView} stories={stories} handleStoryToggle={handleStoryToggle}/>}
 				</div>
 			)}
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}

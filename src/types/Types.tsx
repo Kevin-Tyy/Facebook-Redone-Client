@@ -42,4 +42,5 @@ export interface StoryType {
 	storyCaption?: string;
 	creator: Creator;
 	createdAt: Date;
+    storyId : string;
 }

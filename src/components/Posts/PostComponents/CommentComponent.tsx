@@ -6,24 +6,29 @@ import {
 } from "@mui/icons-material";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
+import { Toaster, toast } from "react-hot-toast";
 interface Props {
 	userId: string;
 	postId: string;
 	likedByLoggedInUser : boolean;
 	setLikedByLoggedInUser: (value: any) => void 
+	setLikecount : (value : any) => void
+	likecount : number
 }
-const CommentComponent = ({ likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser}: Props) => {
+const CommentComponent = ({ likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser , setLikecount , likecount}: Props) => {
 	// const [isPostLiked, setIsPostLiked] = useState(false)
 
 	const styleClass = `flex items-center justify-center w-full gap-2 text-light hover:bg-gray-700/30 py-3 transition duration-300 rounded-md hover:text-primary-100 cursor-pointer`;
 	const handleLike = async () => {
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
+			setLikecount(likecount-1);
 			const { data } = await axios.delete(`${BaseURL}/post/react/like` , { data : { userId , postId}});
-			console.log(data);
+			toast.success(data.msg)
 		} else {
+			setLikecount(likecount+1);
 			const { data } = await axios.post(`${BaseURL}/post/react/like` , {userId , postId});
-			console.log(data);
+			toast.success(data.msg)
 		}
 	};
 
@@ -43,6 +48,7 @@ const CommentComponent = ({ likedByLoggedInUser, userId, postId ,setLikedByLogge
 				<ReplyOutlined />
 				<span className="text-white">Share</span>
 			</div>
+			<Toaster/>
 		</div>
 	);
 };
