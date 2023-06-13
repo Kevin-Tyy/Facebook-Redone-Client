@@ -9,6 +9,7 @@ import {
 	EmailOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
+  CastForEducation,
 } from "@mui/icons-material";
 
 interface Props {
@@ -24,6 +25,13 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 			userInfo: UserInfo;
 		};
 	};
+  const handleChange = () => {
+    
+  } 
+  const handleSubmit = (e : any) => {
+    e.prevenDefault()
+    
+  }
 	return (
 		<div
 			onClick={() => setIsOpen(false)}
@@ -39,7 +47,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 					className="absolute top-4 right-4 bg-gray-700 text-white rounded-full p-1.5 cursor-pointer hover:bg-gray-800 active:bg-gray-600">
 					<CloseRounded sx={{ fontSize: 25 }} />
 				</div>
-				<form>
+				<form onSubmit={handleSubmit}>
 					<div className=" flex flex-col items-center gap-2 justify-center">
 						<div className="bg-gradient-to-r from-sky-500 to-violet-800 p-1.5 rounded-full relative">
 							<div className="bg-primary-200 p-1 rounded-full">
@@ -111,7 +119,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 								<LocationOnOutlined className="text-light" />
 								<input
 									type="text"
-									placeholder={`Update your location`}
+									placeholder={`Update your location (optional)`}
 									className="w-full bg-transparent text-white outline-none"
 								/>
 							</div>
@@ -119,18 +127,19 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 								<WorkOutlineOutlined className="text-light" />
 								<input
 									type="text"
-									placeholder={`Update your email ${email}`}
+									placeholder={`Update your work (optional)`}
 									className="w-full bg-transparent text-white outline-none"
 								/>
 							</div>
 							<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-md focus-within:outline-white/70">
-								<EmailOutlined className="text-light" />
+								<CastForEducation className="text-light" />
 								<input
 									type="text"
-									placeholder={`Update your email ${email}`}
+									placeholder={`Update your education profile (optional)`}
 									className="w-full bg-transparent text-white outline-none"
 								/>
 							</div>
+            <button className="bg-gradient-to-r from-sky-500 to-violet-800 text-white p-3 rounded-lg" >Save New Info</button>
 						</div>
 					</div>
 				</form>
