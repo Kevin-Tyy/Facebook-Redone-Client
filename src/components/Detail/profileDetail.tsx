@@ -13,9 +13,10 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 	};
 	return (
 		<div className="flex flex-col gap-6">
-			<div>
-				<h1 className="text-light text-xl">Bio</h1>
-				<p className="text-light">
+			<div className="flex flex-col gap-2">
+				<h1 className="text-light text-xl">Bio✍️</h1>
+				<p className="text-gray-400">
+					
 					{userData?.bio ? userData?.bio : "No bio added"}
 				</p>
 				{userData?.userId == userId && (
@@ -26,9 +27,9 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 					</div>
 				)}
 			</div>
-			<div>
-				<h1 className="text-light text-xl">Education</h1>
-				<p className="text-light">
+			<div className="flex flex-col gap-2">
+				<h1 className="text-light text-xl">Education👨‍🎓</h1>
+				<p className="text-gray-400">
 					{userData?.education
 						? `Went to ${userData?.education}`
 						: "No Education added"}
@@ -41,9 +42,9 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 					</div>
 				)}
 			</div>
-			<div>
-				<h1 className="text-light text-xl">Work</h1>
-				<p className="text-light">
+			<div className="flex flex-col gap-2">
+				<h1 className="text-light text-xl">Work👜</h1>
+				<p className="text-gray-400">
 					{userData?.work ? `Works at ${userData?.work}` : "No Work added"}
 				</p>
 				{userData?.userId == userId && (
@@ -54,9 +55,9 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 					</div>
 				)}
 			</div>
-			<div>
-				<h1 className="text-light text-xl">Location</h1>
-				<p className="text-light">
+			<div className="flex flex-col gap-2">
+				<h1 className="text-light text-xl">Location🏠</h1>
+				<p className="text-gray-400">
 					{userData?.location
 						? `Lives ${userData?.location}`
 						: "No location added"}

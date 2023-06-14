@@ -14,7 +14,7 @@ const SideRight = () => {
 	};
 	useEffect(() => {
 		fetchPeople();
-	});
+	} , []);
 	return (
 		<div>
 			<div className="bg-primary-200 hidden p-4 rounded-lg w-full md:min-w-[300px] max-w-[400px] xl:flex flex-col gap-4 sticky top-[100px]">

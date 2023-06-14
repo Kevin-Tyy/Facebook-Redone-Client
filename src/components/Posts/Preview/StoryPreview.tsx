@@ -20,7 +20,7 @@ const StoryPreview = ({
 	handleStoryToggle,
 }: Props) => {
 	console.log(storyInView);
-	// console.log(stories)
+	console.log(storyInView?.storyCaption);
 	const formattedDate = useDateFormatter(storyInView?.createdAt);
 	const renderDate = (rawDate: Date) => {
 		const formattedDate = useDateFormatter(rawDate);
@@ -63,6 +63,7 @@ const StoryPreview = ({
 						</div>
 					</div>
 					<img src={storyInView?.storyMedia} className="w-full" />
+					<p className="text-white absolute bottom-10">{storyInView?.storyCaption}</p>
 				</div>
 				<div className="absolute h-screen w-[350px] top-0 left-0 bg-gray-950/60 p-4 flex flex-col gap-4">
 					<Logo />

@@ -144,6 +144,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 						<div className="w-full border border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
 							<input
 								onChange={(e) => setStoryCaption(e.target.value)}
+								type="text"
 								placeholder="Add a caption"
 								className="text-light bg-transparent outline-none w-full"
 							/>
@@ -169,13 +170,13 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 							sx={{
 								backgroundImage:
 									"linear-gradient(to right , #04477e , #791fe0  )",
-								p: 1.5,
+								p: 2,
 								color: "#d5d5d5",
 								textTransform: "capitalize",
 							}}
 							className="text-white rounded-md transtition duration-75">
 							{isLoading ? (
-								<CircularProgress size={24} sx={{ color: "#f5f5f5" }} />
+								<CircularProgress size={20} sx={{ color: "#f5f5f5" }} />
 							) : (
 								"Post story"
 							)}

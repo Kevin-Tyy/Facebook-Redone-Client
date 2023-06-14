@@ -21,6 +21,7 @@ const Story = () => {
 		const dataObj = await axios.get(url);
 		const { stories } = dataObj.data;
 		setstories(stories);
+		console.log(stories);
 	};
 	useEffect(() => {
 		fetchStory(`${BaseURL}/stories`);

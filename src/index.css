@@ -7,6 +7,7 @@
 }
 h3 {
 	color: #03182c;
+	background: linear-gradient(to right, #0a5796 , #8c00ff);
 }
 ::-webkit-scrollbar {
 	width: 10px;
