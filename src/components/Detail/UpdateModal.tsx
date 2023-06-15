@@ -8,8 +8,8 @@ import {
 	BookOutlined,
 	LocationOnOutlined,
 	WorkOutlineOutlined,
-	CastForEducation,
 	EmojiEmotionsOutlined,
+	SchoolOutlined,
 } from "@mui/icons-material";
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
@@ -299,7 +299,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 										}}
 										className="flex items-center gap-2">
 										<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
-											<CastForEducation className="text-light" />
+											<SchoolOutlined className="text-light" />
 											<input
 												onChange={(e) => seteducation(e.target.value)}
 												type="text"
