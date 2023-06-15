@@ -13,6 +13,7 @@ import ButtonComp from "../../components/Buttons/Button";
 import Box from "../../components/Posts/PostComponents/PostBoxComponent";
 import { UserInfo, Userdata } from "../../types/Types";
 import ProfileDetail from "../../components/Detail/profileDetail";
+import ImageUpdate from "../../components/Detail/imageUpdate";
 import StoryModal from "../../components/Modals/StoryModal";
 import placeholderImage from "../../assets/avatar.webp";
 import DetailModal from "../../components/Detail/UpdateModal";
@@ -28,6 +29,9 @@ const profile = () => {
 	const [posts, setPosts] = useState<Posts | null>(null);
 	const [activeTab, setActiveTab] = useState("posts");
 	const [isOpen, setIsOpen] = useState(false);
+	const [imageUpdate , setImageUpdate ] = useState(false)
+
+
 	const {
 		user: {
 			userInfo: { userId },
@@ -91,10 +95,14 @@ const profile = () => {
 											className="w-44 h-44 rounded-full object-cover"
 										/>
 									</div>
-									<CameraAltRounded
-										sx={{ fontSize: 50 }}
-										className="absolute right-0 top-36 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
-									/>
+									{userData?.userId == userId &&
+										<CameraAltRounded
+											onClick={() => setImageUpdate(true)}
+											sx={{ fontSize: 50 }}
+											className="absolute right-0 top-36 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
+										/>
+									
+									}
 								</div>
 								<div className="flex flex-col  justify-center items-center gap-1">
 									<p className="capitalize text-4xl text-light">
@@ -187,8 +195,10 @@ const profile = () => {
 				</div>
 			</div>
 			{isOpen && <DetailModal setIsOpen={setIsOpen}/>}
+			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}
 			<Toaster />
-			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}{" "}
+			{imageUpdate && <ImageUpdate  setImageUpdate={setImageUpdate}/>}
+
 		</div>
 	);
 };

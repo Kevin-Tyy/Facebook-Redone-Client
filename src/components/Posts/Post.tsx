@@ -32,7 +32,7 @@ const PostComponent = () => {
 		<div className="">
 			<div className="flex flex-col bg-primary-200 rounded-2xl p-6 gap-6">
 				<div className="flex items-center gap-6">
-					<div className="bg-primary-100 p-1 rounded-full">
+					<div className="bg-primary-100 p-0.5 rounded-full">
 						<img src={profileimage} className="w-14 h-12  rounded-full" />
 					</div>
 					<p className="bg-gray-800/50 text-light hover:bg-gray-800 rounded-full transition duration-300 cursor-pointer  w-full p-4" onClick={()=> setIsPostModal(true)}>

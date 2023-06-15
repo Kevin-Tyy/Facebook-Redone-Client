@@ -51,3 +51,6 @@ export interface Comment {
     textContent: string;
     user : UserInfo
 }
+export interface Emoji {
+    emoji : string
+}

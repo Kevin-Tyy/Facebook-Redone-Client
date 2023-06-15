@@ -53,7 +53,6 @@ const Login: FC = () => {
 				toast.error(data?.msg);
 			} else {
 				const userInfo = decodeToken(data.token);
-				console.log(userInfo)
 				dispatch(login(userInfo));
 				toast.success(data?.msg);
 				setTimeout(()=> {

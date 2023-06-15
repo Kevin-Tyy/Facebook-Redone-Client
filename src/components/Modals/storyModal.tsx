@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
 	CloseRounded,
 	PeopleAltRounded,
@@ -13,7 +13,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { UserInfo } from "../../types/Types";
+import { Emoji, UserInfo } from "../../types/Types";
+import EmojiPicker from "emoji-picker-react";
 interface Props {
 	handleStoryToggle: (value: any) => void;
 }
@@ -23,21 +24,39 @@ const utilIcons = [
 	<GifBoxRounded fontSize="large" />,
 	<MoreHoriz fontSize="large" />,
 ];
-
 const StoryModal = ({ handleStoryToggle }: Props) => {
 	const [storyCaption, setStoryCaption] = useState<string | null>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [showPicker, setShowPicker] = useState<boolean>(false);
+
 	const {
 		user: {
 			userInfo: { userId, profileimage, username },
 		},
 	} = useSelector(loggedInUser) as {
-		user : {
-			userInfo : UserInfo
+		user: {
+			userInfo: UserInfo;
+		};
+	};
+	const pickerRef = useRef(null);
+
+	const handleClickOutside = (event: any) => {
+		if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+			setShowPicker(false);
 		}
 	};
 
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+
+	const onEmojiClick = (emojiObject: Emoji) => {
+		setStoryCaption((prevInput) => prevInput + emojiObject.emoji);
+	};
 	const submitPostDetails = async (url: string) => {
 		try {
 			setIsLoading(true);
@@ -65,6 +84,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 		e.preventDefault();
 		submitPostDetails(`${BaseURL}/stories`);
 	};
+
 	const handleFileInput = (e: any) => {
 		const file = e.target.files[0];
 		const reader = new FileReader();
@@ -74,6 +94,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 			setStoryMedia(result);
 		};
 	};
+
 	return (
 		<div
 			className="backdrop-blur-sm bg-gray-950/50 h-screen w-full fixed top-0 right-0 bottom-0 left-0 z-[10] flex justify-center items-center "
@@ -145,14 +166,16 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 							<input
 								onChange={(e) => setStoryCaption(e.target.value)}
 								type="text"
+								value={storyCaption}
 								placeholder="Add a caption"
 								className="text-light bg-transparent outline-none w-full"
 							/>
 							<div className="flex gap-3">
 								{utilIcons.map((icon, index) => (
 									<span
+										onClick={() => setShowPicker(true)}
 										key={index}
-										className={`${
+										className={`cursor-pointer ${
 											index == 0
 												? "text-yellow-400"
 												: index == 1
@@ -183,8 +206,22 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 						</Button>
 					</form>
 				</div>
+				{showPicker && (
+					<motion.div
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: false, amount: 0.1 }}
+						variants={{
+							hidden: { opacity: 0, y: -10 },
+							visible: { opacity: 1, y: 0 },
+						}}
+						ref={pickerRef}
+						className="absolute -bottom-20 -right-20">
+						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
+					</motion.div>
+				)}
+				<Toaster />
 			</motion.div>
-			<Toaster />
 		</div>
 	);
 };

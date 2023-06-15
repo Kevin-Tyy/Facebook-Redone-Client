@@ -19,8 +19,6 @@ const StoryPreview = ({
 	stories,
 	handleStoryToggle,
 }: Props) => {
-	console.log(storyInView);
-	console.log(storyInView?.storyCaption);
 	const formattedDate = useDateFormatter(storyInView?.createdAt);
 	const renderDate = (rawDate: Date) => {
 		const formattedDate = useDateFormatter(rawDate);
@@ -98,7 +96,7 @@ const StoryPreview = ({
 											}`}>
 											<div className="bg-primary-100 rounded-full p-0.5">
 												<img
-													src={story.storyMedia}
+													src={story?.creator?.profileimage}
 													className="w-14 h-14 rounded-full object-cover"
 												/>
 											</div>

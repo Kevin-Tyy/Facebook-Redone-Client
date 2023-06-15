@@ -11,22 +11,25 @@ interface state {
 interface Auth {
     user : object;
     loggedin : boolean
-}
-const AuthSlice = createSlice({
-    name : 'Auth',
+}const AuthSlice = createSlice({
+    name: 'Auth',
     initialState,
-    reducers : {
-        login : (state , {payload}) => {
-            state.user = payload
-            state.loggedIn = true
-            
+    reducers: {
+        login: (state, { payload }) => {
+            state.user = payload;
+            state.loggedIn = true;
         },
-        logout : (state) => {
+        logout: (state) => {
             state.user = null;
             state.loggedIn = false;
+        },
+        updateImage: (state, { payload }) => {
+            state.user.userInfo.profileimage = payload
+            state.loggedIn = true;
         }
     }
-})
-export const { login , logout } = AuthSlice.actions;
+});
+
+export const { login , logout , updateImage } = AuthSlice.actions;
 export const loggedInUser = (state : state) => state.auth
 export default AuthSlice.reducer;

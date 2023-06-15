@@ -82,7 +82,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 	return (
 		<div
 			onClick={() => setIsOpen(false)}
-			className="h-screen w-full fixed top-0 bottom-0 right-0 left-0 bg-gray-900/50 backdrop-blur-sm  z-[20] flex justify-center items-center">
+			className="h-screen w-full fixed top-0 bottom-0 right-0 left-0 bg-gray-900/50 backdrop-blur-sm z-[20] flex justify-center items-center">
 			<div
 				onClick={(e) => e.stopPropagation()}
 				className="relative bg-primary-200 w-[550px] max-h-[1000px] overflow-y-scroll rounded-xl border border-gray-700 ">
@@ -272,7 +272,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 								</motion.div>
 							)}
 							<Button
-								type="submit"
+								type={'submit'}
 								disabled={loading}
 								sx={{
 									color: "white",
