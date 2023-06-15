@@ -11,11 +11,11 @@ const ButtonComp = ({children , color }: Props) => {
 			sx={{
 				color: "white",
 				backgroundColor: `${color}`,
-				"&:hover": { backgroundColor: `${color}` },
+				"&:hover": { backgroundColor: `${color}9d` },
 				textTransform: "capitalize",
-				px: 2,
-				py: 1,
-				borderRadius : '5px',
+				p: '12px',
+			
+				borderRadius : '7px',
 				display: "flex",
 				whiteSpace: "nowrap",
 				gap: "5px",

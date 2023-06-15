@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
 	CloseRounded,
 	PeopleAltRounded,
@@ -15,7 +15,8 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
-
+import EmojiPicker from "emoji-picker-react";
+import { Emoji } from "../../types/Types";
 interface Props {
 	setIsPostModal: (value: any) => void;
 }
@@ -30,14 +31,16 @@ const PostModal = ({ setIsPostModal }: Props) => {
 	const [postText, setPostText] = useState<string | null>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [showPicker, setShowPicker] = useState<boolean>(false);
+	const pickerRef = useRef(null);
 	const {
 		user: {
 			userInfo: { userId, username, profileimage },
 		},
 	} = useSelector(loggedInUser) as {
-		user : {
-			userInfo : UserInfo
-		}
+		user: {
+			userInfo: UserInfo;
+		};
 	};
 
 	const submitPostDetails = async (url: string) => {
@@ -76,6 +79,21 @@ const PostModal = ({ setIsPostModal }: Props) => {
 			setPostMedia(result);
 		};
 	};
+	const handleClickOutside = (event: any) => {
+		if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+			setShowPicker(false);
+		}
+	};
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+	const onEmojiClick = (emojiObject: Emoji) => {
+		setPostText((prevInput) => prevInput + emojiObject.emoji);
+	};
+
 	return (
 		<div
 			className="backdrop-blur-sm bg-gray-950/50 h-screen w-full fixed top-0 right-0 bottom-0 left-0 z-[10] flex justify-center items-center "
@@ -106,10 +124,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 					<div className="flex items-center gap-2">
 						<div className="bg-primary-100 p-1 rounded-full">
 							<div className="bg-primary-200 p-1 rounded-full">
-								<img
-									src={profileimage}
-									className="w-12 h-12  rounded-full"
-								/>
+								<img src={profileimage} className="w-12 h-12  rounded-full" />
 							</div>
 						</div>
 						<div className="flex flex-col items-start">
@@ -124,6 +139,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 						<textarea
 							rows={7}
 							onChange={(e) => setPostText(e.target.value)}
+							value={postText}
 							className={`w-full resize-none outline-none  bg-transparent text-2xl text-light p-2 ${
 								postMedia ? "h-20" : "h-40"
 							}`}
@@ -153,8 +169,9 @@ const PostModal = ({ setIsPostModal }: Props) => {
 
 								{utilIcons.map((icon, index) => (
 									<span
+										onClick={() => setShowPicker(true)}
 										key={index}
-										className={`${
+										className={` cursor-pointer ${
 											index == 0
 												? "text-yellow-400"
 												: index == 1
@@ -185,6 +202,11 @@ const PostModal = ({ setIsPostModal }: Props) => {
 						</Button>
 					</form>
 				</div>
+				{showPicker && (
+					<div ref={pickerRef} className="absolute -bottom-40 -right-40">
+						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
+					</div>
+				)}
 			</motion.div>
 			<Toaster />
 		</div>

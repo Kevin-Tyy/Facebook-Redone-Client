@@ -207,18 +207,11 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 					</form>
 				</div>
 				{showPicker && (
-					<motion.div
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: false, amount: 0.1 }}
-						variants={{
-							hidden: { opacity: 0, y: -10 },
-							visible: { opacity: 1, y: 0 },
-						}}
+					<div
 						ref={pickerRef}
 						className="absolute -bottom-20 -right-20">
 						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
-					</motion.div>
+					</div>
 				)}
 				<Toaster />
 			</motion.div>

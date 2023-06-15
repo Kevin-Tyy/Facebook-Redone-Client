@@ -72,7 +72,7 @@ const PostPreview = ({
 		const { data } = await axios.get(`${BaseURL}/post/react/comment/${postId}`);
 		if (data.success) {
 			setcomments(data.data);
-      setcommentcount(data.data.length)
+			setcommentcount(data.data.length);
 		}
 		setCommentText("");
 	};
@@ -86,32 +86,34 @@ const PostPreview = ({
 			onClick={viewPost}>
 			<div onClick={(e) => e.stopPropagation()}>
 				<div className="relative bg-primary-200 max-w-[630px] flex flex-col gap-4 rounded-lg max-h-[1000px] border border-gray-700  overflow-y-scroll">
-					<div
-						onClick={viewPost}
-						className="absolute top-4 right-4 bg-gray-700 text-white rounded-full p-1.5 cursor-pointer hover:bg-gray-800 active:bg-gray-600">
-						<CloseRounded sx={{ fontSize: 25 }} />
-					</div>
-					<p className="text-light text-2xl capitalize text-center p-6 border-b border-gray-600">
-						{creator?.username}'s post
-					</p>
-					<Link to={`/profile/${creator?.userId}`}>
-						<div className="flex gap-3 px-5 items-center">
-							<div className="bg-primary-100 p-0.5 rounded-full">
-								<img
-									src={
-										creator?.profileimage
-											? creator?.profileimage
-											: placeholderImage
-									}
-									className="w-12 h-12  rounded-full"
-								/>
-							</div>
-							<div className="flex flex-col">
-								<p className="text-light capitalize">{creator?.username}</p>
-								<p className="text-xs text-light/60">{formattedDate}</p>
-							</div>
+					<div className="sticky top-0 bg-primary-200">
+						<div
+							onClick={viewPost}
+							className="absolute  top-4 right-4 bg-gray-700 text-white rounded-full p-1.5 cursor-pointer hover:bg-gray-800 active:bg-gray-600">
+							<CloseRounded sx={{ fontSize: 25 }} />
 						</div>
-					</Link>
+						<p className="text-light text-2xl capitalize text-center p-6 border-b border-gray-600">
+							{creator?.username}'s post
+						</p>
+						<Link to={`/profile/${creator?.userId}`}>
+							<div className="flex gap-3 px-5 py-2 items-center">
+								<div className="bg-primary-100 p-0.5 rounded-full">
+									<img
+										src={
+											creator?.profileimage
+												? creator?.profileimage
+												: placeholderImage
+										}
+										className="w-12 h-12  rounded-full"
+									/>
+								</div>
+								<div className="flex flex-col">
+									<p className="text-light capitalize">{creator?.username}</p>
+									<p className="text-xs text-light/60">{formattedDate}</p>
+								</div>
+							</div>
+						</Link>
+					</div>
 					<div className="flex flex-col">
 						<div>
 							<p className="text-white px-5">{postText}</p>
@@ -146,20 +148,20 @@ const PostPreview = ({
 									<div className="p-2 flex flex-col gap-2">
 										{comments.map((comment) => (
 											<div className="flex gap-2 items-center">
-                        <Link to={`/profile/${userId}`}>
-                          <div className="bg-primary-100 p-1 rounded-full">
-                            <img
-                              src={comment?.user?.profileimage}
-                              className="w-12 h-[45px] object-cover rounded-full"
-                            />
-                          </div>
-                        </Link>
+												<Link to={`/profile/${userId}`}>
+													<div className="bg-primary-100 p-1 rounded-full">
+														<img
+															src={comment?.user?.profileimage}
+															className="w-12 h-[45px] object-cover rounded-full"
+														/>
+													</div>
+												</Link>
 												<div className="w-full bg-gray-800 my-1 px-3 py-1 rounded-lg hover:bg-gray-700/70 transition">
-                          <Link to={`/profile/${comment?.user?.userId}`}>
-                            <h1 className="text-lg font-semibold text-white capitalize">
-                              {comment?.user?.username}
-                            </h1>
-                          </Link>
+													<Link to={`/profile/${comment?.user?.userId}`}>
+														<h1 className="text-lg font-semibold text-white capitalize">
+															{comment?.user?.username}
+														</h1>
+													</Link>
 													<p className="text-light">{comment.textContent}</p>
 												</div>
 											</div>
@@ -180,8 +182,9 @@ const PostPreview = ({
 								/>
 							</div>
 							<form
+
 								onSubmit={handleSubmit}
-								className="bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
+								className="bottom-0 bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
 								<textarea
 									value={commentText}
 									onChange={(e) => setCommentText(e.target.value)}

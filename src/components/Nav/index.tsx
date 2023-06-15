@@ -36,7 +36,7 @@ const Navbar = () => {
 					{navObj.map((nav, index) => (
 						<div
 							key={index}
-							className="bg-gray-950 w-10 h-10 flex items-center justify-center rounded-full text-primary-100 cursor-pointer hover:bg-gray-900 transition duration-300 border border-gray-700 active:bg-gray-800">
+							className="bg-gray-950 w-10 h-10 flex items-center justify-center rounded-full text-primary-100 cursor-pointer hover:bg-gray-900 transition duration-300 border border-gray-700 active:bg-gray-800 hover:rotate-180">
 							{nav.icon}
 						</div>
 					))}

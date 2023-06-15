@@ -78,13 +78,16 @@ const SideRight = () => {
 				<div className="flex flex-col gap-3">
 					<h1 className="text-lg text-light font-semibold">Active</h1>
 					<div className="flex flex-col gap-3">
-						{users.map((user) => (
-							<Link to={`/profile/${user?.userId}`}>
+						{users.map((user, index) => (
+							<Link to={`/profile/${user?.userId}`} key={index}>
 								<div className="flex gap-2 items-center">
 									<div className="bg-primary-100 p-1 rounded-full">
 										<img src={user?.profileimage} className="h-12 w-12 rounded-full object-cover" />
 									</div>
-									<p className="text-light cursor-pointer capitalize">{user?.username}</p>
+									<div>
+										<p className="text-light cursor-pointer capitalize">{user?.username}</p>
+										<p className="text-xs text-gray-500">{user?.email}</p>
+									</div>
 								</div>
 							</Link>
 						))}
