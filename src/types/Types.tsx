@@ -37,7 +37,10 @@ export interface UserInfo {
     username : string;
     firstname : string
     lastname : string
-
+    bio : string
+    location : string
+    work : string
+    education : string
 }
 export interface StoryType {
 	storyMedia: string;

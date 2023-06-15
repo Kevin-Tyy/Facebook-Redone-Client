@@ -11,6 +11,7 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 	const viewUpdateModal = () => {
 		setIsOpen(!isOpen);
 	};
+	
 	return (
 		<div className="flex flex-col gap-6">
 			<div className="flex flex-col gap-2">
@@ -30,21 +31,21 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 				<h1 className="text-light text-xl">Education👨‍🎓</h1>
 				<p className="text-gray-400">
 					{userData?.education
-						? `Went to ${userData?.education}`
+						? <p>Went to <span className="underline">{userData?.education}</span></p>
 						: "No Education added"}
 				</p>
 			</div>
 			<div className="flex flex-col gap-2">
 				<h1 className="text-light text-xl">Work👜</h1>
 				<p className="text-gray-400">
-					{userData?.work ? `Works at ${userData?.work}` : "No Work added"}
+					{userData?.work ? <span>Works at <span className="underline">{userData?.work}</span></span> : "No Work added"}
 				</p>
 			</div>
 			<div className="flex flex-col gap-2">
 				<h1 className="text-light text-xl">Location🏠</h1>
 				<p className="text-gray-400">
 					{userData?.location
-						? `Lives ${userData?.location}`
+						? <p>Edit details <span className="underline">{userData?.location}</span></p>
 						: "No location added"}
 				</p>
 			</div>

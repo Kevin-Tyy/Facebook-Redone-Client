@@ -23,25 +23,25 @@ interface Props {
 	setIsOpen: (value: any) => void;
 }
 const UpdateModal = ({ setIsOpen }: Props) => {
-	const [loading, setLoading] = useState(false);
-	const [newlocation, setlocation] = useState("");
-	const [newwork, setwork] = useState("");
-	const [newbio, setbio] = useState("");
-	const [neweducation, seteducation] = useState("");
-	const [newprofileimage, setprofileimage] = useState<any>("");
-	const [bioinput, setbioinput] = useState(false);
-	const [workinput, setworkinput] = useState(false);
-	const [locationinput, setlocationinput] = useState(false);
-	const [educationinput, seteducationinput] = useState(false);
 	const {
 		user: {
-			userInfo: { profileimage, userId },
+			userInfo: { profileimage, userId , bio , work , location , education },
 		},
 	} = useSelector(loggedInUser) as {
 		user: {
 			userInfo: UserInfo;
 		};
 	};
+	const [loading, setLoading] = useState(false);
+	const [newlocation, setlocation] = useState(location);
+	const [newwork, setwork] = useState(work);
+	const [newbio, setbio] = useState(bio);
+	const [neweducation, seteducation] = useState(education);
+	const [newprofileimage, setprofileimage] = useState<any>(profileimage);
+	const [bioinput, setbioinput] = useState(false);
+	const [workinput, setworkinput] = useState(false);
+	const [locationinput, setlocationinput] = useState(false);
+	const [educationinput, seteducationinput] = useState(false);
 	// const handleChange = () => {};
 
 	const submitInfo = async () => {
@@ -181,7 +181,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 											visible: { opacity: 1, y: 0 },
 										}}
 										className="flex items-center gap-2">
-										<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
+										<div className="relative flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
 											<BookOutlined className="text-white" />
 
 											<textarea
@@ -190,7 +190,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												className="w-full  outline-none bg-transparent text-white resize-none h-[100px]"
 												placeholder="Update your bio (optional)"></textarea>
 											<div
-												className="cursor-pointer text-white"
+												className="cursor-pointer text-white absolute bottom-1 right-1 hover:bg-gray-600/40 rounded-full p-1"
 												onClick={() => setShowPicker(true)}>
 												<EmojiEmotionsOutlined />
 											</div>
@@ -230,6 +230,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												onChange={(e) => setlocation(e.target.value)}
 												placeholder={`Update your location (optional)`}
 												className="w-full bg-transparent text-white outline-none"
+												value={location}
 											/>
 										</div>
 										<span
@@ -266,6 +267,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												onChange={(e) => setwork(e.target.value)}
 												placeholder={`Update your work (optional)`}
 												className="w-full bg-transparent text-white outline-none"
+												value={work}
 											/>
 										</div>
 										<span
@@ -303,6 +305,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												type="text"
 												placeholder={`Update your education profile (optional)`}
 												className="w-full bg-transparent text-white outline-none"
+												value={education}
 											/>
 										</div>
 										<span

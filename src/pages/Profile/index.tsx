@@ -158,7 +158,7 @@ const profile = () => {
 						<div className="bg-primary-200 w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
 							<div >
 								<h1 className="text-2xl text-light text-center">About <span className="capitalize text-primary-100">{userData?.username}</span></h1>
-								<ProfileDetail userId={userData?.userId} userData={userData} isOpen={isOpen} setIsOpen={setIsOpen}/>
+								<ProfileDetail userId={userId} userData={userData} isOpen={isOpen} setIsOpen={setIsOpen}/>
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
