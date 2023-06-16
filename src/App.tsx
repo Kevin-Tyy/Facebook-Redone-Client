@@ -9,8 +9,8 @@ import Posts from './components/Posts'
 import Profile from './pages/Profile'
 import { useSelector } from 'react-redux'
 import { loggedInUser } from './redux/features/AuthSlice'
-import Emoji from './components/Emoji'
 import { Toaster } from 'react-hot-toast'
+import Skeleton from './components/Loaders/Skeleton'
 interface User {
   loggedIn ?: boolean
 }
@@ -27,7 +27,7 @@ const App = () => {
           <Route path='/posts' element={user?.loggedIn ? <Posts/> : <Navigate to="/login"/> }/>
           <Route path='/profile/:id' element={user?.loggedIn ? <Profile/> : <Navigate to="/login"/>}/>
           <Route path='/' element={user?.loggedIn ? <Navigate to="/home"/> : <Navigate to="/login"/>}/>
-          <Route path='/emoji' element={<Emoji/>}/>
+          <Route path='/loader' element={<Skeleton/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
         <Toaster/>

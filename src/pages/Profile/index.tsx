@@ -6,7 +6,12 @@ import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { Add, CameraAltRounded, Edit } from "@mui/icons-material";
+import {
+	Add,
+	CameraAltRounded,
+	Edit,
+	PersonAddAlt1Outlined,
+} from "@mui/icons-material";
 import { Tabs } from "../../utils/utilObjects";
 import PostComponent from "../../components/Posts/Post";
 import ButtonComp from "../../components/Buttons/Button";
@@ -33,6 +38,8 @@ const profile = () => {
 	const [imageUpdate, setImageUpdate] = useState(false);
 	const [viewImage, setViewImage] = useState(false);
 	const [previewimage, setPreviewImage] = useState<string | null>(null);
+	const [friendCount, setFriendCount] = useState(userData?.friendList.length);
+	const [isFriend, setIsFriend] = useState(false);
 	const {
 		user: {
 			userInfo: { userId },
@@ -46,6 +53,8 @@ const profile = () => {
 		try {
 			const { data } = await axios.get(url);
 			setUserData(data);
+			setFriendCount(data?.friendList.length);
+			console.log(data);
 		} catch (error) {
 			console.error(error);
 			toast.error("Something went wrong , Try again later.");
@@ -81,6 +90,19 @@ const profile = () => {
 		document.title = "Facebook";
 	}
 	console.log(posts);
+	const submitFriendRequest = async () => {
+		const { data } = await axios.post(`${BaseURL}/user/${userId}/friends`, {
+			friendId: userData?.userId,
+		});
+		if (data?.success) {
+			toast.success(data?.msg);
+		} else {
+			toast.error(data?.msg);
+		}
+	};
+	if (userData?.friendList.some((user) => user == userId)) {
+		setIsFriend(true);
+	}
 	return (
 		<div className="h-full w-full bg-gray-950 ">
 			<Navbar />
@@ -122,7 +144,10 @@ const profile = () => {
 									</p>
 									<p className="text-light/30">{userData?.email}</p>
 									<div className="text-light/30 font-black flex gap-7">
-										<p>{userData && userData?.friendList.length} Friends</p>
+										<p>
+											{userData && friendCount} Friend
+											{friendCount !== "1" && "s"}
+										</p>
 										<p>
 											{posts && posts.length} Post
 											{posts ? posts.length != 1 && "s" : null}
@@ -133,7 +158,7 @@ const profile = () => {
 						</div>
 						<div className="flex justify-center">
 							<div className="bg-primary-200 h-[260px] md:h-[220px] w-full relative z-[1] rounded-b-lg">
-								{userData?.userId == userId && (
+								{userData?.userId == userId ? (
 									<div className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2">
 										<div onClick={handleStoryToggle}>
 											<ButtonComp color={"#0C88EF"}>
@@ -146,8 +171,25 @@ const profile = () => {
 												<Edit />
 												Edit profile
 											</ButtonComp>
-
 										</div>
+									</div>
+								) : isFriend ? (
+									<div
+										className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2"
+										onClick={submitFriendRequest}>
+										<ButtonComp color="#0C88EF">
+											<PersonAddAlt1Outlined />
+											Remove friend
+										</ButtonComp>
+									</div>
+								) : (
+									<div
+										className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2"
+										onClick={submitFriendRequest}>
+										<ButtonComp color="#0C88EF">
+											<PersonAddAlt1Outlined />
+											Add friend
+										</ButtonComp>
 									</div>
 								)}
 							</div>

@@ -71,7 +71,7 @@ const Navbar = () => {
 		dispatch(logout());
 	};
 	const handleClick = (index: number) => {
-		if (index === 2) {
+		if (index === 3) {
 			handleLogout();
 		}
 	};
