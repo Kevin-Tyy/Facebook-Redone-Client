@@ -56,6 +56,7 @@ const ProfileDetail = ({ isOpen, userId, userData, setIsOpen }: Props) => {
 					</ButtonComp>
 				</div>
 			)}
+			<hr className="border-1 border-gray-700 mt-4"/>
 			<p className="text-center px-3 py-1 text-gray-400">
 				Your friends will be able to recognize you easily if you add more
 				details about yourself

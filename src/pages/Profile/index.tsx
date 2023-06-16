@@ -17,6 +17,7 @@ import ImageUpdate from "../../components/Detail/imageUpdate";
 import StoryModal from "../../components/Modals/StoryModal";
 import placeholderImage from "../../assets/avatar.webp";
 import DetailModal from "../../components/Detail/UpdateModal";
+import ProfileImage from "../../components/Posts/Preview/ProfileImage";
 
 interface Posts {}
 const profile = () => {
@@ -30,8 +31,8 @@ const profile = () => {
 	const [activeTab, setActiveTab] = useState("posts");
 	const [isOpen, setIsOpen] = useState(false);
 	const [imageUpdate , setImageUpdate ] = useState(false)
-
-
+	const [viewImage , setViewImage] = useState(false)
+	const [previewimage , setPreviewImage] = useState<string | null>(null)
 	const {
 		user: {
 			userInfo: { userId },
@@ -87,12 +88,13 @@ const profile = () => {
 								<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
 									<div className="bg-black rounded-full p-[5px]">
 										<img
+											onClick={() => {setPreviewImage(userData?.profileimage as string); setViewImage(true)}}
 											src={
 												userData?.profileimage
 													? userData?.profileimage
 													: placeholderImage
 											}
-											className="w-44 h-44 rounded-full object-cover"
+											className="w-44 h-44 rounded-full object-cover cursor-pointer"
 										/>
 									</div>
 									{userData?.userId == userId &&
@@ -158,6 +160,7 @@ const profile = () => {
 						<div className="bg-primary-200 w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
 							<div >
 								<h1 className="text-2xl text-light text-center">About <span className="capitalize text-primary-100">{userData?.username}</span></h1>
+								<hr className="border-1 border-gray-700 my-6"/>
 								<ProfileDetail userId={userId} userData={userData} isOpen={isOpen} setIsOpen={setIsOpen}/>
 							</div>
 						</div>
@@ -198,7 +201,7 @@ const profile = () => {
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}
 			<Toaster />
 			{imageUpdate && <ImageUpdate  setImageUpdate={setImageUpdate}/>}
-
+			{viewImage && <ProfileImage profileimage={previewimage} username={userData?.username as string} setViewImage={setViewImage}/>}
 		</div>
 	);
 };

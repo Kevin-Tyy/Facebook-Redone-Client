@@ -107,6 +107,7 @@ const Box = ({
 							setLikedByLoggedInUser={setLikedByLoggedInUser}
 							setLikecount={setlikecount}
 							likecount={likecount}
+							viewPost={viewPost}
 						/>
 					</div>
 				</div>

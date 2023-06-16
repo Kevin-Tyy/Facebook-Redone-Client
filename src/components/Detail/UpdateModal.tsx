@@ -230,7 +230,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												onChange={(e) => setlocation(e.target.value)}
 												placeholder={`Update your location (optional)`}
 												className="w-full bg-transparent text-white outline-none"
-												value={location}
+												value={newlocation}
 											/>
 										</div>
 										<span
@@ -267,7 +267,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												onChange={(e) => setwork(e.target.value)}
 												placeholder={`Update your work (optional)`}
 												className="w-full bg-transparent text-white outline-none"
-												value={work}
+												value={newwork}
 											/>
 										</div>
 										<span
@@ -305,7 +305,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 												type="text"
 												placeholder={`Update your education profile (optional)`}
 												className="w-full bg-transparent text-white outline-none"
-												value={education}
+												value={neweducation}
 											/>
 										</div>
 										<span

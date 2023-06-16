@@ -1,4 +1,4 @@
-import { Comment, Creator, UserInfo } from "../../../types/Types";
+import { Comment, Creator, Emoji, UserInfo } from "../../../types/Types";
 import {
 	CloseRounded,
 	EmojiEmotionsOutlined,
@@ -12,10 +12,12 @@ import useDateFormatter from "../../../hooks/useDate";
 import CommentComponent from "../PostComponents/CommentComponent";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { Toaster, toast } from "react-hot-toast";
+import EmojiPicker from "emoji-picker-react";
+import { motion } from "framer-motion";
 interface Props {
 	postMedia: string;
 	postText: string;
@@ -48,6 +50,23 @@ const PostPreview = ({
 	const formattedDate = useDateFormatter(createdAt);
 	const [commentText, setCommentText] = useState<string>("");
 	const [comments, setcomments] = useState<Comment[]>([]);
+	const [showPicker, setShowPicker] = useState<boolean>(false);
+	const pickerRef = useRef(null);
+	const handleEmojiClick = (emojiObj: Emoji) => {
+		setCommentText((prev) => prev + emojiObj.emoji);
+	};
+	const handleClickOutside = (e: any) => {
+		if (pickerRef?.current && !pickerRef?.current.contains(e.target)) {
+			setShowPicker(false);
+		}
+	};
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.addEventListener("mousedown ", handleClickOutside);
+		};
+	}, []);
+
 	const {
 		user: {
 			userInfo: { profileimage, userId },
@@ -84,8 +103,17 @@ const PostPreview = ({
 		<div
 			className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-gray-950/50 backdrop-blur-md z-[10] flex justify-center items-center"
 			onClick={viewPost}>
-			<div onClick={(e) => e.stopPropagation()}>
-				<div className="relative bg-primary-200 max-w-[630px] flex flex-col gap-4 rounded-lg max-h-[1000px] border border-gray-700  overflow-y-scroll">
+			<motion.div
+				onClick={(e) => e.stopPropagation()}
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, amount: 0.1 }}
+				transition={{ duration: 0.2 }}
+				variants={{
+					hidden: { opacity: 0, y: -30 },
+					visible: { opacity: 1, y: 0 },
+				}}>
+				<div className="relative bg-primary-200 max-w-[630px] flex flex-col gap-4  max-h-[1000px] border border-gray-700  overflow-y-scroll">
 					<div className="sticky top-0 bg-primary-200">
 						<div
 							onClick={viewPost}
@@ -182,7 +210,6 @@ const PostPreview = ({
 								/>
 							</div>
 							<form
-
 								onSubmit={handleSubmit}
 								className="bottom-0 bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
 								<textarea
@@ -191,7 +218,9 @@ const PostPreview = ({
 									className="w-full resize-none bg-transparent outline-none text-white p-1"
 									placeholder="Write a comment"></textarea>
 								<div className="text-light flex justify-between items-center">
-									<div className="flex gap-1">
+									<div
+										className="flex gap-1"
+										onClick={() => setShowPicker(true)}>
 										<EmojiEmotionsOutlined sx={{ fontSize: 20 }} />
 										<ImageOutlined sx={{ fontSize: 20 }} />
 										<GifBoxOutlined sx={{ fontSize: 20 }} />
@@ -204,7 +233,15 @@ const PostPreview = ({
 						</div>
 					</div>
 				</div>
-			</div>
+			</motion.div>
+			{showPicker && (
+				<div
+					onClick={(e) => e.stopPropagation()}
+					className="absolute"
+					ref={pickerRef}>
+					<EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
+				</div>
+			)}
 			<Toaster />
 		</div>
 	);
