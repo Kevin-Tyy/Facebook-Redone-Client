@@ -120,7 +120,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 					visible: { opacity: 1, y: 0 },
 				}}
 				onClick={(e) => e.stopPropagation()}>
-				<div className="relative bg-primary-200 w-[550px] max-h-[1000px] overflow-y-scroll rounded-xl border border-gray-700 ">
+				<div className="relative bg-primary-200 w-[450px] md:w-[550px] max-h-[1000px]  rounded-xl border border-gray-700 ">
 					<div className="p-3 h-[70px] flex items-center justify-center border-b border-gray-700">
 						<h1 className="text-center text-light text-2xl">Edit Profile</h1>
 					</div>
@@ -347,7 +347,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 					</form>
 				</div>
 				{showPicker && (
-					<div ref={pickerRef} className="absolute -bottom-20 -right-40">
+					<div ref={pickerRef} className="absolute -bottom-20 md:-right-40">
 						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
 					</div>
 				)}

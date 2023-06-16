@@ -68,7 +68,7 @@ const Box = ({
 											? creator?.profileimage
 											: placeholderImage
 									}
-									className="w-12 h-12  rounded-full"
+									className="w-12 h-12  rounded-full object-cover"
 								/>
 							</div>
 							<div className="flex flex-col">
@@ -93,7 +93,7 @@ const Box = ({
 						</div>
 						<div className="flex justify-between text-light px-4 ">
 							<span className="hover:underline cursor-pointer">
-								{likes && likecount} Like{likes.length !== 1 && "s"}
+								{likes && likecount} Like{likecount !== 1 ? "s" : ""}
 							</span>
 							<span className="hover:underline cursor-pointer">
 								{comments && commentcount} comment

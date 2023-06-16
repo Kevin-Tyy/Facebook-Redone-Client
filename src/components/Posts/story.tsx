@@ -53,7 +53,7 @@ const Story = () => {
 								<div className=" bg-primary-100 rounded-full p-[3px] top-2 left-2">
 									<img
 										src={story.creator?.profileimage}
-										className="min-w-[35px] max-w-[35px] h-[35px] rounded-full  "
+										className="min-w-[35px] max-w-[35px] h-[35px] rounded-full object-cover "
 									/>
 								</div>
 								<div>

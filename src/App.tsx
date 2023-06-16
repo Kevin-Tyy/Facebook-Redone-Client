@@ -10,11 +10,12 @@ import Profile from './pages/Profile'
 import { useSelector } from 'react-redux'
 import { loggedInUser } from './redux/features/AuthSlice'
 import Emoji from './components/Emoji'
-interface user {
+import { Toaster } from 'react-hot-toast'
+interface User {
   loggedIn ?: boolean
 }
 const App = () => {
-  const user :user = useSelector(loggedInUser)
+  const user = useSelector(loggedInUser) as User
 
   return (
     <React.Fragment>
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/emoji' element={<Emoji/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
+        <Toaster/>
       </BrowserRouter>
     </React.Fragment>
   )

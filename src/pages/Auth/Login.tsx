@@ -25,7 +25,7 @@ interface FormData {
 const Login: FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { loggedIn } = useSelector(loggedInUser)
+	const { loggedIn } = useSelector(loggedInUser);
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [formData, setFormData] = useState<FormData>({
@@ -37,10 +37,12 @@ const Login: FC = () => {
 			setIsPasswordVisible(false);
 		}, 1500);
 	}
-	useEffect(()=> {
-		document.title = "Facebook | Login"
-		{loggedIn && navigate('/home')}
-	}, [])
+	useEffect(() => {
+		document.title = "Facebook | Login";
+		{
+			loggedIn && navigate("/home");
+		}
+	}, []);
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
@@ -55,10 +57,8 @@ const Login: FC = () => {
 				const userInfo = decodeToken(data.token);
 				dispatch(login(userInfo));
 				toast.success(data?.msg);
-				setTimeout(()=> {
-					navigate("/home");
 
-				}, 1500)
+				navigate("/home");
 			}
 		} catch (error) {
 			console.log(error);

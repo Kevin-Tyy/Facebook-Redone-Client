@@ -13,8 +13,8 @@ const ButtonComp = ({children , color }: Props) => {
 				backgroundColor: `${color}`,
 				"&:hover": { backgroundColor: `${color}9d` },
 				textTransform: "capitalize",
-				p: '12px',
-			
+				p: '8px',
+				
 				borderRadius : '7px',
 				display: "flex",
 				whiteSpace: "nowrap",

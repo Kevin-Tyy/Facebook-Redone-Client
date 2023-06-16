@@ -17,7 +17,7 @@ const SideRight = () => {
 	} , []);
 	return (
 		<div>
-			<div className="bg-primary-200 hidden p-4 rounded-lg w-full md:min-w-[300px] max-w-[400px] xl:flex flex-col gap-4 sticky top-[100px]">
+			<div className="bg-primary-200 hidden p-4 rounded-lg w-[350px] xl:flex flex-col gap-4 sticky top-[100px]">
 				<div className="flex flex-col gap-3">
 					<div className="flex justify-between items-center">
 						<h1 className="text-lg text-light font-semibold">

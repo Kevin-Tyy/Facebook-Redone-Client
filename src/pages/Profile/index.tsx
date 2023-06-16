@@ -30,9 +30,9 @@ const profile = () => {
 	const [posts, setPosts] = useState<Posts | null>(null);
 	const [activeTab, setActiveTab] = useState("posts");
 	const [isOpen, setIsOpen] = useState(false);
-	const [imageUpdate , setImageUpdate ] = useState(false)
-	const [viewImage , setViewImage] = useState(false)
-	const [previewimage , setPreviewImage] = useState<string | null>(null)
+	const [imageUpdate, setImageUpdate] = useState(false);
+	const [viewImage, setViewImage] = useState(false);
+	const [previewimage, setPreviewImage] = useState<string | null>(null);
 	const {
 		user: {
 			userInfo: { userId },
@@ -70,7 +70,12 @@ const profile = () => {
 		if (userData?.userId == userId) {
 			document.title = "Your profile";
 		} else {
-			document.title = `Profile - ${userData?.username}`;
+			document.title = `Profile - ${
+				userData?.username
+					? userData.username.charAt(0).toUpperCase() +
+					  userData.username.slice(1)
+					: ""
+			}`;
 		}
 	} else {
 		document.title = "Facebook";
@@ -88,7 +93,10 @@ const profile = () => {
 								<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
 									<div className="bg-black rounded-full p-[5px]">
 										<img
-											onClick={() => {setPreviewImage(userData?.profileimage as string); setViewImage(true)}}
+											onClick={() => {
+												setPreviewImage(userData?.profileimage as string);
+												setViewImage(true);
+											}}
 											src={
 												userData?.profileimage
 													? userData?.profileimage
@@ -97,14 +105,13 @@ const profile = () => {
 											className="w-44 h-44 rounded-full object-cover cursor-pointer"
 										/>
 									</div>
-									{userData?.userId == userId &&
+									{userData?.userId == userId && (
 										<CameraAltRounded
 											onClick={() => setImageUpdate(true)}
 											sx={{ fontSize: 50 }}
 											className="absolute right-0 top-36 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
 										/>
-									
-									}
+									)}
 								</div>
 								<div className="flex flex-col  justify-center items-center gap-1">
 									<p className="capitalize text-4xl text-light">
@@ -134,10 +141,13 @@ const profile = () => {
 												Add to story
 											</ButtonComp>
 										</div>
-										<ButtonComp color={"#010A13"}>
-											<Edit />
-											Edit profile
-										</ButtonComp>
+										<div onClick={() => setIsOpen(true)}>
+											<ButtonComp color={"#010A13"}>
+												<Edit />
+												Edit profile
+											</ButtonComp>
+
+										</div>
 									</div>
 								)}
 							</div>
@@ -158,20 +168,32 @@ const profile = () => {
 					</div>
 					<div className="flex flex-col items-start lg:flex-row gap-5">
 						<div className="bg-primary-200 w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
-							<div >
-								<h1 className="text-2xl text-light text-center">About <span className="capitalize text-primary-100">{userData?.username}</span></h1>
-								<hr className="border-1 border-gray-700 my-6"/>
-								<ProfileDetail userId={userId} userData={userData} isOpen={isOpen} setIsOpen={setIsOpen}/>
+							<div>
+								<h1 className="text-2xl text-light text-center">
+									About{" "}
+									<span className="capitalize text-primary-100">
+										{userData?.userId == userId ? "You" : userData?.username}
+									</span>
+								</h1>
+								<hr className="border-1 border-gray-700 my-6" />
+								<ProfileDetail
+									userId={userId}
+									userData={userData}
+									isOpen={isOpen}
+									setIsOpen={setIsOpen}
+								/>
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
 							{userData?.userId == userId && <PostComponent />}
-							<h1 className="text-light text-3xl text-center capitalize">
-								{userData?.userId == userId
-									? "Your"
-									: `${userData?.username}'s`}{" "}
-								Posts
-							</h1>
+							<div className="bg-primary-200 p-2 rounded-md border border-gray-800">
+								<h1 className="text-light text-3xl text-center capitalize">
+									{userData?.userId == userId
+										? "Your"
+										: `${userData?.username}'s`}{" "}
+									Posts
+								</h1>
+							</div>
 							{posts && posts.length ? (
 								<div className="flex flex-col gap-6 ">
 									{posts.map((post: object, index: number) => (
@@ -197,11 +219,17 @@ const profile = () => {
 					</div>
 				</div>
 			</div>
-			{isOpen && <DetailModal setIsOpen={setIsOpen}/>}
+			{isOpen && <DetailModal setIsOpen={setIsOpen} />}
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}
 			<Toaster />
-			{imageUpdate && <ImageUpdate  setImageUpdate={setImageUpdate}/>}
-			{viewImage && <ProfileImage profileimage={previewimage} username={userData?.username as string} setViewImage={setViewImage}/>}
+			{imageUpdate && <ImageUpdate setImageUpdate={setImageUpdate} />}
+			{viewImage && (
+				<ProfileImage
+					profileimage={previewimage as string}
+					username={userData?.username as string}
+					setViewImage={setViewImage}
+				/>
+			)}
 		</div>
 	);
 };

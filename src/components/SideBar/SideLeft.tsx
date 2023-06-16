@@ -13,6 +13,7 @@ import { Avatar, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
+import { UserInfo } from "../../types/Types";
 const UtilObj = [
 	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home" },
 	{ icon: <PeopleRounded sx={{ fontSize: 25 }} />, title: "Friends" },
@@ -28,21 +29,25 @@ const Sidebar = () => {
 		user: {
 			userInfo: { profileimage, username, email, userId },
 		},
-	} = useSelector(loggedInUser);
+	} = useSelector(loggedInUser) as {
+		user : {
+			userInfo : UserInfo
+		}
+	};
 	return (
 		<div>
-			<div className="bg-primary-200 hidden py-4 px-2 w-full md:min-w-[300px] max-w-[450px]  xl:flex flex-col rounded-lg gap-4 sticky top-[100px]">
+			<div className="bg-primary-200 hidden py-4 px-2  w-[350px]  xl:flex flex-col rounded-lg gap-4 sticky top-[100px]">
 				<Link to={`/profile/${userId}`}>
 					<div className="flex items-center gap-3   p-3 pb-4 hover:bg-gray-800/50  cursor-pointer rounded-lg">
 						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
 							<div className="bg-primary-200 p-[4px] rounded-full">
-								<img src={profileimage} className="rounded-full w-12 h-12" />
+								<img src={profileimage} className="rounded-full w-12 h-12 object-cover" />
 							</div>
 						</div>
 						<div>
 							<p className="text-white capitalize">{username}</p>
 							<p className="text-gray-400">{email}</p>
-						</div>
+						</div>	
 					</div>
 				</Link>
 				<div className="border-b-[3px] border-primary-100"></div>
