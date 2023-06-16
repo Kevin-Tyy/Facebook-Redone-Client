@@ -1,13 +1,23 @@
 import CommentComponent from "./CommentComponent";
 import useDateFormatter from "../../../hooks/useDate";
-import { MoreVert } from "@mui/icons-material";
-import { useState } from "react";
+import {
+	CommentOutlined,
+	DeleteOutlineOutlined,
+	MoreVert,
+	NotificationsOffOutlined,
+	RemoveRedEyeOutlined,
+} from "@mui/icons-material";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import placeholderImage from "../../../assets/avatar.webp";
 import { Link } from "react-router-dom";
 import { Creator, UserInfo } from "../../../types/Types";
 import PostPreview from "../Preview/PostPreview";
+import { motion } from "framer-motion";
+import axios from "axios";
+import { BaseURL } from "../../../utils/Link";
+import { toast } from "react-hot-toast";
 interface Props {
 	postId: string;
 	postMedia: string;
@@ -32,6 +42,8 @@ const Box = ({
 }: Props) => {
 	const formattedDate = useDateFormatter(createdAt);
 	const [isPostInView, setPostInView] = useState(false);
+	const [showToggle, setShowToggle] = useState(false);
+	const toggleRef = useRef(null);
 	const {
 		user: {
 			userInfo: { userId },
@@ -49,11 +61,30 @@ const Box = ({
 
 	// const likedByLoggedInUser = ;
 	// console.log();
+	const handleOutsideClick = (e: any) => {
+		if (toggleRef.current && !toggleRef.current.contains(e.target)) {
+			setShowToggle(false);
+		}
+	};
 	const viewPost = () => {
 		setPostInView(!isPostInView);
 	};
+	useEffect(() => {
+		return () => {
+			document.addEventListener("mousedown", handleOutsideClick);
+		};
+	}, []);
+	const handleDeleteRequest = async () => {
+		const { data } = await axios.delete(`${BaseURL}/post/${postId}`)
+		if(data?.success){
+			toast.success(data.msg)
+		}
+		else{
+			toast.error(data.msg)
+		}
+	}
 	return (
-		<div className="bg-primary-200 rounded-2xl py-3 px-6  border border-gray-800">
+		<div className="relative bg-primary-200 rounded-2xl py-3 px-6  border border-gray-800">
 			{creator?.userId == userId && (
 				<p className="text-xs -my-1 text-gray-400">You posted</p>
 			)}
@@ -61,7 +92,7 @@ const Box = ({
 				<div className="flex py-3 justify-between border-b border-gray-600">
 					<Link to={`/profile/${creator?.userId}`}>
 						<div className="flex gap-3 items-center">
-							<div className="bg-primary-100 p-0.5 rounded-full">
+							<div className="bg-primary-100 p-[3px] rounded-full">
 								<img
 									src={
 										creator?.profileimage
@@ -77,7 +108,9 @@ const Box = ({
 							</div>
 						</div>
 					</Link>
-					<div className="text-primary-100 hover:bg-gray-950/80 rounded-full w-14 flex justify-center items-center cursor-pointer transition duration-300 active:bg-gray-950/50 p-2 ">
+					<div
+						onClick={() => setShowToggle(true)}
+						className="text-primary-100 hover:bg-gray-950/80 rounded-full w-14 flex justify-center items-center cursor-pointer transition duration-300 active:bg-gray-950/50 p-2 ">
 						<MoreVert />
 					</div>
 				</div>
@@ -108,6 +141,8 @@ const Box = ({
 							setLikecount={setlikecount}
 							likecount={likecount}
 							viewPost={viewPost}
+							setPostInView={setPostInView}
+
 						/>
 					</div>
 				</div>
@@ -128,6 +163,42 @@ const Box = ({
 					likedByLoggedInUser={likedByLoggedInUser}
 					setLikedByLoggedInUser={setLikedByLoggedInUser}
 				/>
+			)}
+			{showToggle && (
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					viewport={{ once: false, amount: 0.1 }}
+					transition={{ duration: 0.15, delay: 0.2 }}
+					variants={{
+						hidden: { opacity: 0, y: -30 },
+						visible: { opacity: 1, y: 0 },
+					}}
+					ref={toggleRef}
+					className="absolute top-24 right-6 bg-primary-200 border rounded-xl border-gray-700 p-2">
+					<ul className="text-light flex flex-col ">
+						{creator?.userId == userId && (
+							<li onClick={handleDeleteRequest} className="p-4 pr-10 border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+								<DeleteOutlineOutlined />
+								Delete Post
+							</li>
+						)}
+						<li
+							onClick={() => setPostInView(true)}
+							className="p-4 pr-10 flex items-start border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+							<RemoveRedEyeOutlined />
+							View Post
+						</li>
+						<li className="p-4 pr-10 flex items-start border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+							<NotificationsOffOutlined /> Mute Notification for this post
+						</li>
+						<li
+							onClick={() => setPostInView(true)}
+							className="p-4 pr-10 flex items-start gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+							<CommentOutlined /> Comment about this post
+						</li>
+					</ul>
+				</motion.div>
 			)}
 		</div>
 	);

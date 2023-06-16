@@ -10,13 +10,14 @@ import { Toaster, toast } from "react-hot-toast";
 interface Props {
 	userId: string;
 	postId: string;
+	setPostInView : any | {( value : any ) : void} ;
 	likedByLoggedInUser : boolean;
 	setLikedByLoggedInUser: (value: any) => void 
 	setLikecount : (value : any) => void
 	likecount : number
-	viewPost : (value : any) => void
+	viewPost : (value : any) => void 
 }
-const CommentComponent = ({ likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser , setLikecount , likecount , viewPost}: Props) => {
+const CommentComponent = ({ setPostInView , likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser , setLikecount , likecount , viewPost}: Props) => {
 
 	const styleClass = `flex items-center justify-center w-full gap-2 text-light hover:bg-gray-700/30 py-3 transition duration-300 rounded-md hover:text-primary-100 cursor-pointer`;
 	const handleLike = async () => {
@@ -39,7 +40,7 @@ const CommentComponent = ({ likedByLoggedInUser, userId, postId ,setLikedByLogge
 				<span>{likedByLoggedInUser ? "Unlike" : "Like"}</span>
 			</div>
 			<div className="w-[1px] bg-light h-[30px]"></div>
-			<div className={`${styleClass}`} onClick={viewPost}>
+			<div className={`${styleClass}`} onClick={() => setPostInView(true)}>
 				<CommentOutlined />
 				<span className="text-white">Comment</span>
 			</div>

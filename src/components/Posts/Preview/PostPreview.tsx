@@ -145,7 +145,10 @@ const PostPreview = ({
 					<div className="flex flex-col">
 						<div>
 							<p className="text-white px-5">{postText}</p>
-							<img src={postMedia} className="w-full max-h-[600px] object-cover" />
+							<img
+								src={postMedia}
+								className="w-full max-h-[600px] object-cover"
+							/>
 							<div className="flex  justify-between px-4 py-2">
 								<p className="text-light hover:underline cursor-pointer">
 									{likecount} Like
@@ -170,6 +173,7 @@ const PostPreview = ({
 									setLikecount={setlikecount}
 									likecount={likecount}
 									viewPost={viewPost}
+									setPostInView={null}
 								/>
 							</div>
 							<div>
@@ -197,7 +201,7 @@ const PostPreview = ({
 										))}
 									</div>
 								) : (
-									<p className="text-center text-xl text-light">
+									<p className="text-center text-xl text-light py-6 mx-2 border border-gray-800">
 										No comments yet
 									</p>
 								)}

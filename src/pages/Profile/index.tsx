@@ -54,7 +54,6 @@ const profile = () => {
 			const { data } = await axios.get(url);
 			setUserData(data);
 			setFriendCount(data?.friendList.length);
-			console.log(data);
 		} catch (error) {
 			console.error(error);
 			toast.error("Something went wrong , Try again later.");
@@ -89,7 +88,7 @@ const profile = () => {
 	} else {
 		document.title = "Facebook";
 	}
-	console.log(posts);
+	console.log(userData?.friendList)
 	const submitFriendRequest = async () => {
 		const { data } = await axios.post(`${BaseURL}/user/${userId}/friends`, {
 			friendId: userData?.userId,
@@ -100,9 +99,11 @@ const profile = () => {
 			toast.error(data?.msg);
 		}
 	};
-	if (userData?.friendList.some((user) => user == userId)) {
+	if (userData?.friendList.some((user) => user === userId)) {
+		console.log('Matching user found in friendList');
 		setIsFriend(true);
-	}
+	  }
+	  
 	return (
 		<div className="h-full w-full bg-gray-950 ">
 			<Navbar />
@@ -146,7 +147,7 @@ const profile = () => {
 									<div className="text-light/30 font-black flex gap-7">
 										<p>
 											{userData && friendCount} Friend
-											{friendCount !== "1" && "s"}
+											{friendCount !== 1 && "s"}
 										</p>
 										<p>
 											{posts && posts.length} Post

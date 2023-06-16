@@ -20,8 +20,8 @@ const RegisterForm: FC = () => {
 	const dispatch = useDispatch()
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [profileImage , setProfileImage ] = useState<string>("")
-
+	const [profileImage , setProfileImage ] = useState<string | null>(null)
+	console.log(profileImage)
 	const [formData, setFormData] = useState<FormData>({
 		firstName: "",
 		lastName: "",
