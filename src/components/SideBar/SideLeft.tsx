@@ -15,13 +15,37 @@ import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import { UserInfo } from "../../types/Types";
 const UtilObj = [
-	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home" },
-	{ icon: <PeopleRounded sx={{ fontSize: 25 }} />, title: "Friends" },
-	{ icon: <GroupRounded sx={{ fontSize: 25 }} />, title: "Groups" },
-	{ icon: <LiveTvRounded sx={{ fontSize: 25 }} />, title: "Watch" },
-	{ icon: <FlagRounded sx={{ fontSize: 25 }} />, title: "Pages" },
-	{ icon: <Shop2Rounded sx={{ fontSize: 25 }} />, title: "Market" },
-	{ icon: <SportsEsportsRounded sx={{ fontSize: 25 }} />, title: "Gaming" },
+	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home", link: "/home" },
+	{
+		icon: <PeopleRounded sx={{ fontSize: 25 }} />,
+		title: "Friends",
+		link: "/friends",
+	},
+	{
+		icon: <GroupRounded sx={{ fontSize: 25 }} />,
+		title: "Groups",
+		link: "/friends",
+	},
+	{
+		icon: <LiveTvRounded sx={{ fontSize: 25 }} />,
+		title: "Watch",
+		link: "/home",
+	},
+	{
+		icon: <FlagRounded sx={{ fontSize: 25 }} />,
+		title: "Pages",
+		link: "/home",
+	},
+	{
+		icon: <Shop2Rounded sx={{ fontSize: 25 }} />,
+		title: "Market",
+		link: "/home",
+	},
+	{
+		icon: <SportsEsportsRounded sx={{ fontSize: 25 }} />,
+		title: "Gaming",
+		link: "/home",
+	},
 ];
 
 const Sidebar = () => {
@@ -30,9 +54,9 @@ const Sidebar = () => {
 			userInfo: { profileimage, username, email, userId },
 		},
 	} = useSelector(loggedInUser) as {
-		user : {
-			userInfo : UserInfo
-		}
+		user: {
+			userInfo: UserInfo;
+		};
 	};
 	return (
 		<div>
@@ -41,24 +65,29 @@ const Sidebar = () => {
 					<div className="flex items-center gap-3   p-3 pb-4 hover:bg-gray-800/50  cursor-pointer rounded-lg">
 						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
 							<div className="bg-primary-200 p-[4px] rounded-full">
-								<img src={profileimage} className="rounded-full w-12 h-12 object-cover" />
+								<img
+									src={profileimage}
+									className="rounded-full w-12 h-12 object-cover"
+								/>
 							</div>
 						</div>
 						<div>
 							<p className="text-white capitalize">{username}</p>
 							<p className="text-gray-400">{email}</p>
-						</div>	
+						</div>
 					</div>
 				</Link>
 				<div className="border-b-[3px] border-primary-100"></div>
 				<div className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
-						<div
-							className="flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50"
-							key={index}>
-							<span className="text-white">{obj.icon}</span>
-							<p className="text-white">{obj.title}</p>
-						</div>
+						<Link to={obj?.link}>
+							<div
+								className="flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50"
+								key={index}>
+								<span className="text-white">{obj.icon}</span>
+								<p className="text-white">{obj.title}</p>
+							</div>
+						</Link>
 					))}
 				</div>
 				<Button

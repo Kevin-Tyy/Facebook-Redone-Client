@@ -10,7 +10,7 @@ import Profile from "./pages/Profile";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "./redux/features/AuthSlice";
 import { Toaster } from "react-hot-toast";
-import Skeleton from "./components/Loaders/Skeleton/Post";
+import FriendPage from "./pages/Friends";
 import Chat from "./pages/Chat/Chat";
 interface User {
 	loggedIn?: boolean;
@@ -37,6 +37,15 @@ const App = () => {
 						element={user?.loggedIn ? <Profile /> : <Navigate to="/login" />}
 					/>
 					<Route
+						path="/friends"
+						element={user?.loggedIn ? <FriendPage /> : <Navigate to="/login" />}
+					/>
+					<Route
+						path="/chat"
+						element={user?.loggedIn ? <Chat /> : <Navigate to="/login" />}
+					/>
+
+					<Route
 						path="/"
 						element={
 							user?.loggedIn ? (
@@ -46,10 +55,9 @@ const App = () => {
 							)
 						}
 					/>
-					<Route path="/chat" element={<Chat />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
-				<Toaster containerStyle={{ textAlign : 'center'}}/>
+				<Toaster containerStyle={{ textAlign: "center" }} />
 			</BrowserRouter>
 		</React.Fragment>
 	);
