@@ -28,11 +28,11 @@ const utilIcons = [
 ];
 
 const PostModal = ({ setIsPostModal }: Props) => {
-	const [postText, setPostText] = useState<string | null>("");
+	const [postText, setPostText] = useState<string>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [showPicker, setShowPicker] = useState<boolean>(false);
-	const pickerRef = useRef(null);
+	const pickerRef = useRef<HTMLDivElement | null>(null);
 	const {
 		user: {
 			userInfo: { userId, username, profileimage },
@@ -204,7 +204,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				</div>
 				{showPicker && (
 					<div ref={pickerRef} className="absolute -bottom-40 -right-40">
-						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
+						<EmojiPicker onEmojiClick={onEmojiClick} theme='dark' />
 					</div>
 				)}
 			</motion.div>

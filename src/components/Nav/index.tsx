@@ -25,7 +25,7 @@ const navObj = [
 
 const Navbar = () => {
 	const [showToggle, setShowToggle] = useState(false);
-	const toggleRef = useRef(null);
+	const toggleRef = useRef<HTMLDivElement | null>(null);
 	const dispatch = useDispatch();
 	const [isNotication, setNotification] = useState(false);
 	const {

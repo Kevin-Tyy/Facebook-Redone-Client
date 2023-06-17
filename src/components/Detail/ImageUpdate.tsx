@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { CloseRounded } from "@mui/icons-material";
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { loggedInUser, login, update, updateImage } from "../../redux/features/AuthSlice";
+import { loggedInUser, updateImage } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";

@@ -6,7 +6,7 @@ import Logo from "../../Logo";
 
 interface Props {
 	handleView: (value: any) => void;
-	storyInView: StoryType;
+	storyInView: StoryType | null;
 	stories: Array<StoryType>;
 	setStoryInView: (value: any) => void;
 	handleStoryToggle: (value: any) => void;

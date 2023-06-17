@@ -90,7 +90,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 		};
 	};
 	const [showPicker, setShowPicker] = useState(false);
-	const pickerRef = useRef(null);
+	const pickerRef = useRef<HTMLDivElement | null>(null);
 	const onEmojiClick = (emojiObj: Emoji) => {
 		setbio((prev) => prev + emojiObj.emoji);
 	};

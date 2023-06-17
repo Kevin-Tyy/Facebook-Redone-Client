@@ -25,7 +25,7 @@ const utilIcons = [
 	<MoreHoriz fontSize="large" />,
 ];
 const StoryModal = ({ handleStoryToggle }: Props) => {
-	const [storyCaption, setStoryCaption] = useState<string | null>("");
+	const [storyCaption, setStoryCaption] = useState<string>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [showPicker, setShowPicker] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 			userInfo: UserInfo;
 		};
 	};
-	const pickerRef = useRef(null);
+	const pickerRef = useRef<HTMLDivElement | null>(null);
 
 	const handleClickOutside = (event: any) => {
 		if (pickerRef.current && !pickerRef.current.contains(event.target)) {
