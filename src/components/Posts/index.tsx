@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
-import { CircularProgress } from "@mui/material";
 import PostComponent from "./PostComponents/PostBoxComponent";
+import PostSkeleton from "../Loaders/Skeleton/Post";
 type Props = {};
 interface Post {
 	postText: string;
@@ -10,7 +10,7 @@ interface Post {
 	createdAt: Date;
 }
 const Posts = ({}: Props) => {
-	const [posts, setPosts] = useState<Array<Post> | null>([]);
+	const [posts, setPosts] = useState<Array<Post>>([]);
 	const [loading, setLoading] = useState<boolean>(false);
 	const fetchPosts = async (url: string) => {
 		setLoading(true);
@@ -26,18 +26,19 @@ const Posts = ({}: Props) => {
 	}, [BaseURL]);
 	return (
 		<div className="h-full w-full">
-			{posts ? (
-				<div className="flex flex-col gap-6">
-					{posts.map((post, index) => (
-						<div key={index}>
-							<PostComponent {...post} />
-						</div>
-					))}
+			{loading ? (
+				<div>
+					<PostSkeleton/>
 				</div>
 			) : (
-				<div className="h-full w-full flex justify-center items-center text-white">
-					<CircularProgress color="inherit" />
-					<p>Loading...</p>
+				<div>
+					<div className="flex flex-col gap-6">
+						{posts.map((post, index) => (
+							<div key={index}>
+								<PostComponent {...post} />
+							</div>
+						))}
+					</div>
 				</div>
 			)}
 		</div>

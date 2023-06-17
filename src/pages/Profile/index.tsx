@@ -78,7 +78,7 @@ const profile = () => {
 		if (userData?.userId == userId) {
 			document.title = "Your profile";
 		} else {
-			document.title = `Profile - ${
+			document.title = `Profile | ${
 				userData?.username
 					? userData.username.charAt(0).toUpperCase() +
 					  userData.username.slice(1)

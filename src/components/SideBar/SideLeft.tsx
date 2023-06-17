@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 // import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 
-import { Avatar, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
