@@ -3,6 +3,7 @@ import { StoryType } from "../../../types/Types";
 import useDateFormatter from "../../../hooks/useDate";
 import { Link } from "react-router-dom";
 import Logo from "../../Logo";
+import { motion } from "framer-motion";
 
 interface Props {
 	handleView: (value: any) => void;
@@ -38,7 +39,16 @@ const StoryPreview = ({
 					className="absolute top-3 right-3 bg-gray-700 text-white rounded-full p-2 cursor-pointer hover:bg-gray-800 active:bg-gray-600">
 					<CloseRounded sx={{ fontSize: 30 }} />
 				</div>
-				<div className="relative max-w-[600px] bg-black h-full flex justify-center items-center">
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					viewport={{ once: true, amount: 0.1 }}
+					transition={{ duration: 0.2 }}
+					variants={{
+						hidden: { opacity: 0, y: -30 },
+						visible: { opacity: 1, y: 0 },
+					}}
+					className="relative max-w-[600px] bg-black h-full flex justify-center items-center">
 					<div className="absolute top-0 left-0 flex w-full px-4 pt-2 items-center justify-between">
 						<Link to={`/profile/${storyInView?.creator?.userId}`}>
 							<div className="flex items-center gap-2">
@@ -61,9 +71,20 @@ const StoryPreview = ({
 						</div>
 					</div>
 					<img src={storyInView?.storyMedia} className="w-full" />
-					<p className="text-white absolute bottom-10">{storyInView?.storyCaption}</p>
-				</div>
-				<div className="absolute h-screen w-[350px] top-0 left-0 bg-gray-950/60 p-4 flex flex-col gap-4">
+					<p className="text-white absolute bottom-10">
+						{storyInView?.storyCaption}
+					</p>
+				</motion.div>
+				<motion.div
+					initial="hidden"
+					whileInView="visible"
+					viewport={{ once: true, amount: 0.1 }}
+					transition={{ duration: 0.2 , delay : 0.4}}
+					variants={{
+						hidden: { opacity: 0, y: -30 },
+						visible: { opacity: 1, y: 0 },
+					}}
+					className="absolute h-screen w-[350px] top-0 left-0 bg-gray-950/60 p-4 flex flex-col gap-4">
 					<Logo />
 					<div className="border-t border-gray-600 pt-2">
 						<p className="text-2xl text-light">Your story</p>
@@ -114,7 +135,7 @@ const StoryPreview = ({
 							</div>
 						)}
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);

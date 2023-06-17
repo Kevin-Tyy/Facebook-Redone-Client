@@ -7,7 +7,7 @@ import Posts from '../Posts'
 const Body = () => {
 
   return (
-    <div className='h-full w-full max-w-[700px] flex flex-col gap-6'>
+    <div className='h-full w-full min-h-[100vh] max-w-[700px] flex flex-col gap-6'>
         <StoryComponent />
         <PostComponent/>
         <Posts/>
