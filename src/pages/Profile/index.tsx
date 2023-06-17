@@ -17,14 +17,15 @@ import PostComponent from "../../components/Posts/Post";
 import ButtonComp from "../../components/Buttons/Button";
 import Box from "../../components/Posts/PostComponents/PostBoxComponent";
 import { UserInfo, Userdata } from "../../types/Types";
-import ProfileDetail from "../../components/Detail/profileDetail";
-import ImageUpdate from "../../components/Detail/imageUpdate";
+import ProfileDetail from "../../components/Detail/ProfileDetail";
+import ImageUpdate from "../../components/Detail/ImageUpdate";
 import StoryModal from "../../components/Modals/StoryModal";
 import placeholderImage from "../../assets/avatar.webp";
 import DetailModal from "../../components/Detail/UpdateModal";
 import ProfileImage from "../../components/Posts/Preview/ProfileImage";
-
-interface Posts {}
+import PostSkeleton from "../../components/Loaders/Skeleton/Post";
+import Skeleton from "react-loading-skeleton";
+import { Posts } from "../../types/Types";
 const profile = () => {
 	const { id } = useParams();
 	const [isToggled, setIsToggled] = useState(false);
@@ -32,7 +33,7 @@ const profile = () => {
 		setIsToggled(!isToggled);
 	};
 	const [userData, setUserData] = useState<Userdata | null>(null);
-	const [posts, setPosts] = useState<Posts | null>(null);
+	const [posts, setPosts] = useState<Posts[] | null>(null);
 	const [activeTab, setActiveTab] = useState("posts");
 	const [isOpen, setIsOpen] = useState(false);
 	const [imageUpdate, setImageUpdate] = useState(false);
@@ -40,6 +41,7 @@ const profile = () => {
 	const [previewimage, setPreviewImage] = useState<string | null>(null);
 	const [friendCount, setFriendCount] = useState(userData?.friendList.length);
 	const [isFriend, setIsFriend] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const {
 		user: {
 			userInfo: { userId },
@@ -60,6 +62,7 @@ const profile = () => {
 		}
 	};
 	const fetchUserPosts = async (url: string) => {
+		setLoading(true);
 		try {
 			const {
 				data: { data },
@@ -69,6 +72,7 @@ const profile = () => {
 			console.log(error);
 			toast.error("Something went wrong , Try again later.");
 		}
+		setLoading(false);
 	};
 	useEffect(() => {
 		fetchProfile(`${BaseURL}/user/${id}`);
@@ -88,7 +92,7 @@ const profile = () => {
 	} else {
 		document.title = "Facebook";
 	}
-	console.log(userData?.friendList)
+	console.log(userData?.friendList);
 	const submitFriendRequest = async () => {
 		const { data } = await axios.post(`${BaseURL}/user/${userId}/friends`, {
 			friendId: userData?.userId,
@@ -99,11 +103,10 @@ const profile = () => {
 			toast.error(data?.msg);
 		}
 	};
-	if (userData?.friendList.some((user) => user === userId)) {
-		console.log('Matching user found in friendList');
+	if (userData?.friendList.some((user: any) => user.userId === userId)) {
 		setIsFriend(true);
-	  }
-	  
+	}
+
 	return (
 		<div className="h-full w-full bg-gray-950 ">
 			<Navbar />
@@ -113,48 +116,63 @@ const profile = () => {
 					<div>
 						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[30vh] p-20 justify-center z-[2]">
 							<div className="flex flex-col items-center absolute -bottom-48 justify-center">
-								<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
-									<div className="bg-black rounded-full p-[5px]">
-										<img
-											onClick={() => {
-												setPreviewImage(userData?.profileimage as string);
-												setViewImage(true);
-											}}
-											src={
-												userData?.profileimage
-													? userData?.profileimage
-													: placeholderImage
-											}
-											className="w-44 h-44 rounded-full object-cover cursor-pointer"
-										/>
+								{loading ? (
+									<Skeleton circle width={210} height={210} />
+								) : (
+									<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
+										<div className="bg-black rounded-full p-[5px]">
+											<img
+												onClick={() => {
+													setPreviewImage(userData?.profileimage as string);
+													setViewImage(true);
+												}}
+												src={
+													userData?.profileimage
+														? userData?.profileimage
+														: placeholderImage
+												}
+												className="w-44 h-44 rounded-full object-cover cursor-pointer"
+											/>
+										</div>
+										{userData?.userId == userId && (
+											<CameraAltRounded
+												onClick={() => setImageUpdate(true)}
+												sx={{ fontSize: 50 }}
+												className="absolute right-0 top-36 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
+											/>
+										)}
 									</div>
-									{userData?.userId == userId && (
-										<CameraAltRounded
-											onClick={() => setImageUpdate(true)}
-											sx={{ fontSize: 50 }}
-											className="absolute right-0 top-36 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
-										/>
-									)}
-								</div>
-								<div className="flex flex-col  justify-center items-center gap-1">
-									<p className="capitalize text-4xl text-light">
-										{userData?.username}
-									</p>
-									<p className="text-light">
-										{userData?.firstname} {userData?.lastname}
-									</p>
-									<p className="text-light/30">{userData?.email}</p>
-									<div className="text-light/30 font-black flex gap-7">
-										<p>
-											{userData && friendCount} Friend
-											{friendCount !== 1 && "s"}
-										</p>
-										<p>
-											{posts && posts.length} Post
-											{posts ? posts.length != 1 && "s" : null}
-										</p>
+								)}
+								{loading ? (
+									<div className="flex flex-col  justify-center items-center gap-1 mt-1">
+										<Skeleton width={200} />
+										<Skeleton width={160} />
+										<div className="flex gap-2">
+											<Skeleton width={100} />
+											<Skeleton width={100} />
+										</div>
 									</div>
-								</div>
+								) : (
+									<div className="flex flex-col  justify-center items-center gap-1">
+										<p className="capitalize text-4xl text-light">
+											{userData?.username}
+										</p>
+										<p className="text-light">
+											{userData?.firstname} {userData?.lastname}
+										</p>
+										<p className="text-light/30">{userData?.email}</p>
+										<div className="text-light/30 font-black flex gap-7">
+											<p>
+												{userData && friendCount} Friend
+												{friendCount !== 1 && "s"}
+											</p>
+											<p>
+												{posts && posts.length} Post
+												{posts && posts.length !== 1 && "s"}
+											</p>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 						<div className="flex justify-center">
@@ -212,51 +230,64 @@ const profile = () => {
 					<div className="flex flex-col items-start lg:flex-row gap-5">
 						<div className="bg-primary-200 w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
 							<div>
-								<h1 className="text-2xl text-light text-center">
-									About{" "}
-									<span className="capitalize text-primary-100">
-										{userData?.userId == userId ? "You" : userData?.username}
-									</span>
-								</h1>
+								{loading ? (
+									<Skeleton height={40} />
+								) : (
+									<h1 className="text-2xl text-light text-center">
+										About{" "}
+										<span className="capitalize text-primary-100">
+											{userData?.userId == userId ? "You" : userData?.username}
+										</span>
+									</h1>
+								)}
 								<hr className="border-1 border-gray-700 my-6" />
 								<ProfileDetail
 									userId={userId}
 									userData={userData}
 									isOpen={isOpen}
 									setIsOpen={setIsOpen}
+									loading={loading}
 								/>
 							</div>
 						</div>
 						<div className="w-full flex flex-col gap-4">
 							{userData?.userId == userId && <PostComponent />}
-							<div className="bg-primary-200 p-2 rounded-md border border-gray-800">
-								<h1 className="text-light text-3xl text-center capitalize">
-									{userData?.userId == userId
-										? "Your"
-										: `${userData?.username}'s`}{" "}
-									Posts
-								</h1>
-							</div>
-							{posts && posts.length ? (
-								<div className="flex flex-col gap-6 ">
-									{posts.map((post: object, index: number) => (
-										<div key={index}>
-											<Box {...post} />
-										</div>
-									))}
+							{userData?.username && (
+								<div className="bg-primary-200 p-2 rounded-md border border-gray-800">
+									<h1 className="text-light text-3xl text-center capitalize">
+										{userData?.userId == userId
+											? "Your"
+											: `${userData?.username}'s`}{" "}
+										Posts
+									</h1>
 								</div>
+							)}
+							{loading ? (
+								<PostSkeleton />
 							) : (
-								<p className="text-center text-light text-xl mt-4">
-									😞
-									{userData?.userId == userId ? (
-										"You haven't"
+								<div>
+									{posts && posts.length ? (
+										<div className="flex flex-col gap-6 ">
+											{posts.map((post: object, index: number) => (
+												<div key={index}>
+													<Box {...post as Posts }  />
+												</div>
+											))}
+										</div>
 									) : (
-										<span className="capitalize">
-											{userData?.username} hasn't
-										</span>
-									)}{" "}
-									posted anything yet
-								</p>
+										<p className="text-center text-light text-xl mt-4">
+											😞
+											{userData?.userId == userId ? (
+												"You haven't"
+											) : (
+												<span className="capitalize">
+													{userData?.username} hasn't
+												</span>
+											)}{" "}
+											posted anything yet
+										</p>
+									)}
+								</div>
 							)}
 						</div>
 					</div>

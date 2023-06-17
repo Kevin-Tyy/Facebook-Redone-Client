@@ -57,3 +57,15 @@ export interface Comment {
 export interface Emoji {
     emoji : string
 }
+export interface Likes {
+	userId: string;
+}
+export interface Posts {
+	postId : string,
+	postMedia : string,
+	creator :   Creator,
+	postText : string,
+	createdAt : Date,
+	likes : Array<Likes>,
+	comments : Array<Comment>,
+}

@@ -7,6 +7,7 @@ import { UserInfo, Userdata } from "../../types/Types";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
+import PeopleLoader from "../Loaders/Skeleton/People";
 const SideRight = () => {
 	const {
 		user: {
@@ -38,26 +39,30 @@ const SideRight = () => {
 				</div>
 				<div className="flex flex-col gap-3">
 					<h1 className="text-lg text-light font-semibold">Active</h1>
-					<div className="flex flex-col gap-4">
-						{allUsers.map((user, index) => (
-							<Link to={`/profile/${user?.userId}`} key={index}>
-								<div className="flex gap-2 items-center">
-									<div className="bg-primary-100 p-1 rounded-full">
-										<img
-											src={user?.profileimage}
-											className="h-12 w-12 rounded-full object-cover"
-										/>
+					{users.length !== 0 ? (
+						<div className="flex flex-col gap-4">
+							{allUsers.map((user, index) => (
+								<Link to={`/profile/${user?.userId}`} key={index}>
+									<div className="flex gap-2 items-center">
+										<div className="bg-primary-100 p-1 rounded-full">
+											<img
+												src={user?.profileimage}
+												className="h-12 w-12 rounded-full object-cover"
+											/>
+										</div>
+										<div>
+											<p className="text-light cursor-pointer capitalize">
+												{user?.username}
+											</p>
+											<p className="text-xs text-gray-500">{user?.email}</p>
+										</div>
 									</div>
-									<div>
-										<p className="text-light cursor-pointer capitalize">
-											{user?.username}
-										</p>
-										<p className="text-xs text-gray-500">{user?.email}</p>
-									</div>
-								</div>
-							</Link>
-						))}
-					</div>
+								</Link>
+							))}
+						</div>
+					) : (
+						<PeopleLoader />
+					)}
 				</div>
 				<Button
 					sx={{

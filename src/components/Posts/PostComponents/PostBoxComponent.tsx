@@ -12,24 +12,13 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import placeholderImage from "../../../assets/avatar.webp";
 import { Link } from "react-router-dom";
-import { Creator, UserInfo } from "../../../types/Types";
+import { UserInfo } from "../../../types/Types";
 import PostPreview from "../Preview/PostPreview";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
-interface Props {
-	postId: string;
-	postMedia: string;
-	postText: string;
-	createdAt: Date;
-	creator: Creator;
-	likes: Array<Likes>;
-	comments: Array<Comment>;
-}
-interface Likes {
-	userId: string;
-}
+import { Posts } from "../../../types/Types";
 
 const Box = ({
 	postId,
@@ -39,11 +28,11 @@ const Box = ({
 	createdAt,
 	likes,
 	comments,
-}: Props) => {
+}: Posts) => {
 	const formattedDate = useDateFormatter(createdAt);
 	const [isPostInView, setPostInView] = useState(false);
 	const [showToggle, setShowToggle] = useState(false);
-	const toggleRef = useRef(null);
+	const toggleRef = useRef<HTMLDivElement | null>(null);
 	const {
 		user: {
 			userInfo: { userId },
@@ -75,14 +64,13 @@ const Box = ({
 		};
 	}, []);
 	const handleDeleteRequest = async () => {
-		const { data } = await axios.delete(`${BaseURL}/post/${postId}`)
-		if(data?.success){
-			toast.success(data.msg)
+		const { data } = await axios.delete(`${BaseURL}/post/${postId}`);
+		if (data?.success) {
+			toast.success(data.msg);
+		} else {
+			toast.error(data.msg);
 		}
-		else{
-			toast.error(data.msg)
-		}
-	}
+	};
 	return (
 		<div className="relative bg-primary-200 rounded-2xl py-3 px-6  border border-gray-800">
 			{creator?.userId == userId && (
@@ -142,7 +130,6 @@ const Box = ({
 							likecount={likecount}
 							viewPost={viewPost}
 							setPostInView={setPostInView}
-
 						/>
 					</div>
 				</div>
@@ -178,7 +165,9 @@ const Box = ({
 					className="absolute top-24 right-6 bg-primary-200 border rounded-xl border-gray-700 p-2">
 					<ul className="text-light flex flex-col ">
 						{creator?.userId == userId && (
-							<li onClick={handleDeleteRequest} className="p-4 pr-10 border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+							<li
+								onClick={handleDeleteRequest}
+								className="p-4 pr-10 border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
 								<DeleteOutlineOutlined />
 								Delete Post
 							</li>
