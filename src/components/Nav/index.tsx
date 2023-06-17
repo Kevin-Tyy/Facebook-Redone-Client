@@ -132,7 +132,7 @@ const Navbar = () => {
 					initial="hidden"
 					whileInView="visible"
 					viewport={{ once: false, amount: 0.1 }}
-					transition={{ duration: 0.15, delay: 0.2 }}
+					transition={{ duration: 0.15 }}
 					variants={{
 						hidden: { opacity: 0, y: -30 },
 						visible: { opacity: 1, y: 0 },
@@ -140,7 +140,7 @@ const Navbar = () => {
 					className="absolute right-0 bg-primary-200 m-2 border border-gray-700 rounded-md"
 					ref={toggleRef}>
 					<Link to={`/profile/${userId}`}>
-						<div className="flex items-center gap-3   p-3 pb-4 hover:bg-gray-800/50 m-1 cursor-pointer rounded-lg">
+						<div className="flex items-center gap-3  p-3 pb-4 hover:bg-gray-800/50 m-1 cursor-pointer rounded-lg">
 							<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
 								<div className="bg-primary-200 p-[4px] rounded-full">
 									<img
@@ -158,7 +158,7 @@ const Navbar = () => {
 					<ul>
 						{toggleObj.map((obj, index) => (
 							<div
-								className="p-4 hover:bg-primary-300/40 border-b border-gray-700 m-1 cursor-pointer transition"
+								className="py-4 px-8 hover:bg-primary-300/40 border-b border-gray-700 rounded-md m-1 cursor-pointer transition"
 								key={index}
 								onClick={() => handleClick(index)}>
 								<Link to={obj?.link as string}>

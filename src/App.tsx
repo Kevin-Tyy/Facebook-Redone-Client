@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "./redux/features/AuthSlice";
 import { Toaster } from "react-hot-toast";
 import Skeleton from "./components/Loaders/Skeleton/Post";
+import Chat from "./pages/Chat/Chat";
 interface User {
 	loggedIn?: boolean;
 }
@@ -45,10 +46,10 @@ const App = () => {
 							)
 						}
 					/>
-					<Route path="/loader" element={<Skeleton />} />
+					<Route path="/chat" element={<Chat />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
-				<Toaster />
+				<Toaster containerStyle={{ textAlign : 'center'}}/>
 			</BrowserRouter>
 		</React.Fragment>
 	);
