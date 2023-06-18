@@ -50,7 +50,7 @@ const ProfileDetail = ({
 			) : (
 				<div className="flex flex-col gap-2">
 					<h1 className="text-light text-xl">Education👨‍🎓</h1>
-					<p className="text-gray-400">
+					<div className="text-gray-400">
 						{userData?.education ? (
 							<p>
 								Went to <span className="underline">{userData?.education}</span>
@@ -58,7 +58,7 @@ const ProfileDetail = ({
 						) : (
 							"No Education added"
 						)}
-					</p>
+					</div>
 				</div>
 			)}
 			{loading ? (
