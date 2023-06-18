@@ -77,7 +77,9 @@ const profile = () => {
 	useEffect(() => {
 		fetchProfile(`${BaseURL}/user/${id}`);
 		fetchUserPosts(`${BaseURL}/post/${id}`);
+	
 	}, []);
+	console.log(userData?.friendList)
 	if (userData) {
 		if (userData?.userId == userId) {
 			document.title = "Your profile";
@@ -103,9 +105,7 @@ const profile = () => {
 			toast.error(data?.msg);
 		}
 	};
-	if (userData?.friendList.some((user: any) => user.userId === userId)) {
-		setIsFriend(true);
-	}
+
 
 	return (
 		<div className="h-full w-full bg-gray-950 ">
@@ -295,7 +295,6 @@ const profile = () => {
 			</div>
 			{isOpen && <DetailModal setIsOpen={setIsOpen} />}
 			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}
-			<Toaster />
 			{imageUpdate && <ImageUpdate setImageUpdate={setImageUpdate} />}
 			{viewImage && (
 				<ProfileImage
