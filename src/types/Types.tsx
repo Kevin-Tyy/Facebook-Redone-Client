@@ -21,7 +21,7 @@ export interface Userdata {
     education : string;//
     bio : string;//
     work : string;//
-    friendList : Array<object>;//
+    friendList : Array<Userdata>;//
 }
 export interface Creator {
 	profileimage : string;
@@ -33,7 +33,7 @@ export interface UserInfo {
     userId : string;
     email : string;
     profileimage : string;
-    friendList : Array<object>
+    friendList : Array<Userdata>
     username : string;
     firstname : string
     lastname : string

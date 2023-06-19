@@ -11,6 +11,7 @@ import {
 
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useState} from 'react'
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import { UserInfo } from "../../types/Types";
@@ -49,6 +50,7 @@ const UtilObj = [
 ];
 
 const Sidebar = () => {
+	const [activeTab, setActiveTab] = useState('Home')
 	const {
 		user: {
 			userInfo: { profileimage, username, email, userId },
@@ -81,8 +83,9 @@ const Sidebar = () => {
 				<div className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
 						<Link to={obj?.link}>
-							<div
-								className="flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50"
+							<div	
+								onClick={() => setActiveTab(obj.title)}
+								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50 ${activeTab === obj.title && 'bg-gray-800 '}`}
 								key={index}>
 								<span className="text-white">{obj.icon}</span>
 								<p className="text-white">{obj.title}</p>

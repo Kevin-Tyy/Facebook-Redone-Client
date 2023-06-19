@@ -2,7 +2,7 @@ import Navbar from "../../components/Nav";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BaseURL } from "../../utils/Link";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
@@ -56,6 +56,14 @@ const profile = () => {
 			const { data } = await axios.get(url);
 			setUserData(data);
 			setFriendCount(data?.friendList.length);
+			const friends = data?.friendList;
+			if (friends) {
+				const hasFriend = friends.some(
+					(friend: Userdata) => friend.userId === userId
+				);
+				setIsFriend(hasFriend);
+				console.log(hasFriend);
+			}
 		} catch (error) {
 			console.error(error);
 			toast.error("Something went wrong , Try again later.");
@@ -77,8 +85,8 @@ const profile = () => {
 	useEffect(() => {
 		fetchProfile(`${BaseURL}/user/${id}`);
 		fetchUserPosts(`${BaseURL}/post/${id}`);
-	
 	}, []);
+
 	if (userData) {
 		if (userData?.userId == userId) {
 			document.title = "Your profile";
@@ -94,16 +102,32 @@ const profile = () => {
 		document.title = "Facebook";
 	}
 	const submitFriendRequest = async () => {
-		const { data } = await axios.post(`${BaseURL}/user/${userId}/friends`, {
-			friendId: userData?.userId,
-		});
-		if (data?.success) {
-			toast.success(data?.msg);
+		if (isFriend) {
+			const { data } = await axios.delete(`${BaseURL}/user/${userId}/friends`, {
+				data: {
+					friendId: userData?.userId,
+				},
+			});
+			if (data?.success) {
+				toast.success(data?.msg);
+				setIsFriend(false)
+				setFriendCount(friendCount as number - 1)
+			} else {
+				toast.error(data?.msg);
+			}
 		} else {
-			toast.error(data?.msg);
+			const { data } = await axios.post(`${BaseURL}/user/${userId}/friends`, {
+				friendId: userData?.userId,
+			});
+			if (data?.success) {
+				toast.success(data?.msg);
+				setIsFriend(true)
+				setFriendCount(friendCount as number + 1)
+			} else {
+				toast.error(data?.msg);
+			}
 		}
 	};
-
 
 	return (
 		<div className="h-full w-full bg-gray-950 ">
@@ -268,7 +292,7 @@ const profile = () => {
 										<div className="flex flex-col gap-6 ">
 											{posts.map((post: object, index: number) => (
 												<div key={index}>
-													<Box {...post as Posts }  />
+													<Box {...(post as Posts)} />
 												</div>
 											))}
 										</div>
@@ -299,6 +323,7 @@ const profile = () => {
 					profileimage={previewimage as string}
 					username={userData?.username as string}
 					setViewImage={setViewImage}
+					email={userData?.email as string}
 				/>
 			)}
 		</div>

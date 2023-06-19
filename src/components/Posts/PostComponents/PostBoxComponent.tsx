@@ -19,7 +19,6 @@ import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Posts } from "../../../types/Types";
-
 const Box = ({
 	postId,
 	postMedia,
@@ -72,7 +71,16 @@ const Box = ({
 		}
 	};
 	return (
-		<div className="relative bg-primary-200 rounded-2xl py-3 px-6  border border-gray-800">
+		<motion.div
+			initial="hidden"
+			whileInView="visible"
+			viewport={{ once: false, amount: 0.1 }}
+			transition={{ duration: 0.15, delay: 0.2 }}
+			variants={{
+				hidden: { opacity: 0, y: -30 },
+				visible: { opacity: 1, y: 0 },
+			}}
+			className="relative bg-primary-200 rounded-2xl py-3 px-6  border border-gray-800">
 			{creator?.userId == userId && (
 				<p className="text-xs -my-1 text-gray-400">You posted</p>
 			)}
@@ -189,7 +197,7 @@ const Box = ({
 					</ul>
 				</motion.div>
 			)}
-		</div>
+		</motion.div>
 	);
 };
 
