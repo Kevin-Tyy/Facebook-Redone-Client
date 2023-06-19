@@ -12,6 +12,7 @@ import { loggedInUser } from "./redux/features/AuthSlice";
 import { Toaster } from "react-hot-toast";
 import FriendPage from "./pages/Friends";
 import Chat from "./pages/Chat/Chat";
+import BottomNav from "./components/shared/Nav";
 interface User {
 	loggedIn?: boolean;
 }
@@ -21,6 +22,7 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<BrowserRouter>
+			<BottomNav/>
 				<Routes>
 					<Route path="/register" element={<Register />} />
 					<Route path="/login" element={<Login />} />

@@ -75,7 +75,7 @@ const Box = ({
 			initial="hidden"
 			whileInView="visible"
 			viewport={{ once: false, amount: 0.1 }}
-			transition={{ duration: 0.15, delay: 0.2 }}
+			transition={{ duration: 0.2}}
 			variants={{
 				hidden: { opacity: 0, y: -30 },
 				visible: { opacity: 1, y: 0 },

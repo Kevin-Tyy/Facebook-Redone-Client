@@ -27,7 +27,7 @@ const Navbar = () => {
 	const [showToggle, setShowToggle] = useState(false);
 	const toggleRef = useRef<HTMLDivElement | null>(null);
 	const dispatch = useDispatch();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const [isNotication, setNotification] = useState(false);
 	const {
 		user: {
@@ -80,8 +80,8 @@ const Navbar = () => {
 		if (index === 0) {
 			setShowToggle(true);
 		}
-		if(index === 1){
-			navigate('/chat')
+		if (index === 1) {
+			navigate("/chat");
 		}
 		if (index === 2) {
 			setNotification(!isNotication);
