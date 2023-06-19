@@ -12,12 +12,13 @@ import useDateFormatter from "../../../hooks/useDate";
 import CommentComponent from "../PostComponents/CommentComponent";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { Toaster, toast } from "react-hot-toast";
 import EmojiPicker from "emoji-picker-react";
 import { motion } from "framer-motion";
+import Spinner from "../../Loaders/Spinner/Spinner";
 interface Props {
 	postMedia: string;
 	postText: string;
@@ -49,7 +50,7 @@ const PostPreview = ({
 }: Props) => {
 	const formattedDate = useDateFormatter(createdAt);
 	const [commentText, setCommentText] = useState<string>("");
-	const [comments, setcomments] = useState<Comment[]>([]);
+	const [comments, setcomments] = useState<Comment[] | null>(null);
 	const [showPicker, setShowPicker] = useState<boolean>(false);
 	const pickerRef = useRef<HTMLDivElement | null>(null);
 	const handleEmojiClick = (emojiObj: Emoji) => {
@@ -177,37 +178,49 @@ const PostPreview = ({
 								/>
 							</div>
 							<div>
-								{comments && comments.length > 0 ? (
-									<div className="p-2 flex flex-col gap-2">
-										{comments.map((comment) => (
-											<div className="flex gap-2 items-center">
-												<Link to={`/profile/${userId}`}>
-													<div className="bg-primary-100 p-1 rounded-full">
-														<img
-															src={comment?.user?.profileimage}
-															className="w-12 h-[45px] object-cover rounded-full"
-														/>
-													</div>
-												</Link>
-												<div className="w-full bg-gray-800 my-1 px-3 py-1 rounded-lg hover:bg-gray-700/70 transition">
-													<Link to={`/profile/${comment?.user?.userId}`}>
-														{comment?.user?.userId == userId && (
-															<p className="text-xs text-gray-500">You commented</p>
-														)}
+								{comments ? (
+									<Fragment>
+										{comments.length > 0 ? (
+											<div className="p-2 flex flex-col gap-2">
+												{comments.map((comment) => (
+													<div className="flex gap-2 items-center">
+														<Link to={`/profile/${userId}`}>
+															<div className="bg-primary-100 p-1 rounded-full">
+																<img
+																	src={comment?.user?.profileimage}
+																	className="w-12 h-[45px] object-cover rounded-full"
+																/>
+															</div>
+														</Link>
+														<div className="w-full bg-gray-800 my-1 px-3 py-1 rounded-lg hover:bg-gray-700/70 transition">
+															<Link to={`/profile/${comment?.user?.userId}`}>
+																{comment?.user?.userId == userId && (
+																	<p className="text-xs text-gray-500">
+																		You commented
+																	</p>
+																)}
 
-														<h1 className="text-lg font-semibold text-white capitalize">
-															{comment?.user?.username}
-														</h1>
-													</Link>
-													<p className="text-light">{comment.textContent}</p>
-												</div>
+																<h1 className="text-lg font-semibold text-white capitalize">
+																	{comment?.user?.username}
+																</h1>
+															</Link>
+															<p className="text-light">
+																{comment.textContent}
+															</p>
+														</div>
+													</div>
+												))}
 											</div>
-										))}
-									</div>
+										) : (
+											<p className="text-center text-xl text-light py-6 mx-2 border border-gray-800">
+												No comments yet
+											</p>
+										)}
+									</Fragment>
 								) : (
-									<p className="text-center text-xl text-light py-6 mx-2 border border-gray-800">
-										No comments yet
-									</p>
+									<div className="border border-gray-800 m-2">
+										<Spinner />
+									</div>
 								)}
 							</div>
 						</div>
