@@ -7,7 +7,7 @@ const PostLoader = () => {
 		<div className="flex flex-col  gap-2">
 			{loaderArray.map((_, index) => (
 				<div
-					className="bg-[#1a1b2b] p-4 rounded-lg flex flex-col gap-4"
+					className="bg-[#1a1b2b9d] p-4 rounded-lg flex flex-col gap-4"
 					key={index}>
 					<div className="flex gap-2">
 						<Skeleton width={50} height={50} circle />

@@ -9,13 +9,14 @@ import ButtonComp from "../../components/Buttons/Button";
 import Sidebar from "../../components/SideBar/SideLeft";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import FriendLoader from '../../components/Loaders/Skeleton/FriendPageLoader'
 const index = () => {
 	const {
 		user: {
 			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
-	const [users, setUsers] = useState<Userdata[]>([]);
+	const [users, setUsers] = useState<Userdata[] | null>(null);
 	const populateFriends = async () => {
 		const { data } = await axios.get(`${BaseURL}/user/${userId}/friends`);
 		setUsers(data.data);
@@ -40,10 +41,10 @@ const index = () => {
 		<div className="min-h-screen bg-gray-950">
 			<Navbar />
 			<div className="p-10 flex justify-center">
-				<div className="w-3/5 flex gap-6">
+				<div className="w-full 2xl:w-3/5 flex gap-6">
 					<Sidebar />
 					<div className="flex flex-col gap-4 w-full">
-						{users && (
+						{users ? (
 							<div>
 								{users.length > 0 ? (
 									<div>
@@ -82,7 +83,10 @@ const index = () => {
 									</div>
 								)}
 							</div>
-						)}
+						)
+					:
+					<FriendLoader/>
+					}
 					</div>
 				</div>
 			</div>

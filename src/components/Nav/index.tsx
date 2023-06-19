@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
@@ -27,6 +27,7 @@ const Navbar = () => {
 	const [showToggle, setShowToggle] = useState(false);
 	const toggleRef = useRef<HTMLDivElement | null>(null);
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
 	const [isNotication, setNotification] = useState(false);
 	const {
 		user: {
@@ -46,7 +47,7 @@ const Navbar = () => {
 		{
 			icon: <PeopleAltRounded />,
 			title: "Your friends",
-			link: `/profile/${userId}`,
+			link: `/friends`,
 		},
 		{
 			icon: <Settings />,
@@ -78,6 +79,9 @@ const Navbar = () => {
 	const handleNavButtons = (index: number) => {
 		if (index === 0) {
 			setShowToggle(true);
+		}
+		if(index === 1){
+			navigate('/chat')
 		}
 		if (index === 2) {
 			setNotification(!isNotication);

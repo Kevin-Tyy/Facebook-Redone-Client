@@ -6,7 +6,7 @@ const Story = () => {
 		<div className="flex gap-6 h-60  overflow-x-scroll overflow-y-hidden pb-5">
 			{loaderArray.map((_, index) => (
 				<div
-					className="card-skeleton bg-[#1a1b2b] rounded-lg p-2 shadow-md w-[350px] h-[230px] flex flex-col gap-1"
+					className="card-skeleton bg-[#1a1b2b9d] rounded-lg p-2 shadow-md w-[350px] h-[230px] flex flex-col gap-1"
 					key={index}>
 					<div className="flex items-center">
 						<Skeleton
