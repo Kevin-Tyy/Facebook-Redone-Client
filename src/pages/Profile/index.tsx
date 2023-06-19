@@ -79,7 +79,6 @@ const profile = () => {
 		fetchUserPosts(`${BaseURL}/post/${id}`);
 	
 	}, []);
-	console.log(userData?.friendList)
 	if (userData) {
 		if (userData?.userId == userId) {
 			document.title = "Your profile";
@@ -94,7 +93,6 @@ const profile = () => {
 	} else {
 		document.title = "Facebook";
 	}
-	console.log(userData?.friendList);
 	const submitFriendRequest = async () => {
 		const { data } = await axios.post(`${BaseURL}/user/${userId}/friends`, {
 			friendId: userData?.userId,
