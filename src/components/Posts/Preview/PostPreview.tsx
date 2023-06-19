@@ -51,7 +51,7 @@ const PostPreview = ({
 	const [commentText, setCommentText] = useState<string>("");
 	const [comments, setcomments] = useState<Comment[]>([]);
 	const [showPicker, setShowPicker] = useState<boolean>(false);
-	const pickerRef = useRef(null);
+	const pickerRef = useRef<HTMLDivElement | null>(null);
 	const handleEmojiClick = (emojiObj: Emoji) => {
 		setCommentText((prev) => prev + emojiObj.emoji);
 	};
@@ -191,6 +191,10 @@ const PostPreview = ({
 												</Link>
 												<div className="w-full bg-gray-800 my-1 px-3 py-1 rounded-lg hover:bg-gray-700/70 transition">
 													<Link to={`/profile/${comment?.user?.userId}`}>
+														{comment?.user?.userId == userId && (
+															<p className="text-xs text-gray-500">You commented</p>
+														)}
+
 														<h1 className="text-lg font-semibold text-white capitalize">
 															{comment?.user?.username}
 														</h1>

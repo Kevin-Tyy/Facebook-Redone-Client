@@ -79,8 +79,8 @@ const index = () => {
 					<Sidebar />
 					<div className="flex flex-col gap-10 w-full">
 						{users ? (
-							<div className="flex flex-col gap-4 bg-gray-900 p-4 rounded-xl">
-								<h1 className="text-light text-2xl text-center">
+							<div className="flex flex-col gap-4 bg-gray-900 p-4 rounded-xl  border border-gray-800">
+								<h1 className="text-light text-2xl text-center ">
 									Your friends{" "}
 									<span className="text-primary-100">({users?.length})</span>
 								</h1>
@@ -129,7 +129,7 @@ const index = () => {
 										))}
 									</div>
 								) : (
-									<div className="text-base text-center text-light/60">
+									<div className="text-base text-center text-light/60 pb-6">
 										😞 You have no friends!
 									</div>
 								)}
@@ -138,8 +138,8 @@ const index = () => {
 							<FriendLoader />
 						)}
 						{allUsers && (
-							<div className="flex flex-col gap-6 bg-gray-900 p-4 rounded-xl">
-								<h1 className="text-light text-2xl text-center">Suggestions</h1>
+							<div className="flex flex-col gap-6 bg-gray-900 p-4 rounded-xl border border-gray-800">
+								<h1 className="text-light text-2xl text-center ">Suggestions</h1>
 
 								{allUsers.length > 0 ? (
 									<div className="flex flex-col gap-4">
@@ -186,7 +186,7 @@ const index = () => {
 										))}
 									</div>
 								) : (
-									<div className="text-base text-center text-light/60">
+									<div className="text-base text-center text-light/60 pb-6">
 										😞 No suggestions available!
 									</div>
 								)}

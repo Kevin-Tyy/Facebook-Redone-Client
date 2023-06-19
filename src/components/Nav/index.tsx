@@ -161,17 +161,17 @@ const Navbar = () => {
 					</Link>
 					<ul>
 						{toggleObj.map((obj, index) => (
-							<div
-								className="py-4 px-8 hover:bg-primary-300/40 border-b border-gray-700 rounded-md m-1 cursor-pointer transition"
-								key={index}
-								onClick={() => handleClick(index)}>
-								<Link to={obj?.link as string}>
+							<Link to={obj?.link as string}>
+								<div
+									className="py-4 px-8 hover:bg-primary-300/40 border-b border-gray-700 rounded-md m-1 cursor-pointer transition"
+									key={index}
+									onClick={() => handleClick(index)}>
 									<li className="flex text-white gap-3">
 										<span>{obj.icon}</span>
 										<span>{obj.title}</span>
 									</li>
-								</Link>
-							</div>
+								</div>
+							</Link>
 						))}
 					</ul>
 				</motion.div>
