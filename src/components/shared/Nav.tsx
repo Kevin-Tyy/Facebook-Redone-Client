@@ -50,7 +50,7 @@ const BottomNav = () => {
 		<div className="xl:hidden fixed bottom-0 w-full p-2 z-[999]">
 			<div className=" bg-gray-950 w-full z-[999] text-light flex gap-1 p-2 rounded-md border border-gray-700 shadow-2xl shadow-primary-100">
 				{UtilObj.map((obj) => (
-					<Link to={obj.link} className={`w-full cursor-pointer hover:bg-gray-800 p-2  rounded-md flex justify-center ${activeTab === obj.title && 'bg-gray-800 '}`}>
+					<Link to={obj.link} onClick={()=>setActiveTab(obj.title)} className={`w-full cursor-pointer hover:bg-gray-800 p-2  rounded-md flex justify-center ${activeTab === obj.title && 'bg-gray-800 '}`}>
 						<Tooltip title={obj.title}>
 							<div >
 								{obj.icon}

@@ -22,7 +22,7 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<BrowserRouter>
-			<BottomNav/>
+				<BottomNav />
 				<Routes>
 					<Route path="/register" element={<Register />} />
 					<Route path="/login" element={<Login />} />
