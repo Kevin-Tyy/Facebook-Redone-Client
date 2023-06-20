@@ -30,7 +30,7 @@ const PostComponent = () => {
 	};
 	return (
 		<div className="">
-			<div className="flex flex-col bg-primary-200 rounded-2xl p-6 gap-6">
+			<div className="flex flex-col bg-primary-200 rounded-2xl p-4 md:p-6 gap-6">
 				<div className="flex items-center gap-6">
 					<div className="bg-primary-100 p-[3px] rounded-full">
 						<img src={profileimage} className="w-14 h-12  rounded-full object-cover" />
@@ -40,9 +40,9 @@ const PostComponent = () => {
 					</p>
 				</div>
 				<div className="flex gap-4 justify-between flex-wrap">
-					<div className="flex gap-4 flex-wrap">
+					<div className="flex gap-2 md:gap-4 flex-wrap">
 						{utilObj.map((obj, index) => (
-							<div key={index} onClick={()=> setIsPostModal(true)}>
+							<div key={index} onClick={()=> setIsPostModal(true)} className={`${index == 3 && 'hidden sm:block'} ${index == 3 && 'hidden md:block'} `}>
 								<ButtonComp color="#010A13" >
 									<span
 										className={`text-${

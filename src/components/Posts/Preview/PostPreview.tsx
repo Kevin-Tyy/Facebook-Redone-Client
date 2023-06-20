@@ -114,7 +114,7 @@ const PostPreview = ({
 					hidden: { opacity: 0, y: -30 },
 					visible: { opacity: 1, y: 0 },
 				}}>
-				<div className="relative bg-primary-200 min-w-[600px] max-w-[630px] flex flex-col gap-4  max-h-[1000px] border border-gray-700  overflow-y-scroll">
+				<div className="relative bg-primary-200 rounded-xl w-full max-w-[630px] flex flex-col gap-4  max-h-[95vh] border border-gray-700  overflow-y-scroll">
 					<div className="sticky top-0 bg-primary-200">
 						<div
 							onClick={viewPost}
@@ -148,7 +148,7 @@ const PostPreview = ({
 							<p className="text-white px-5">{postText}</p>
 							<img
 								src={postMedia}
-								className="w-full max-h-[600px] object-cover"
+								className=" w-[600px] max-h-[600px] object-cover"
 							/>
 							<div className="flex  justify-between px-4 py-2">
 								<p className="text-light hover:underline cursor-pointer">

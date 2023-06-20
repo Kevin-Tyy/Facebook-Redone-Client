@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <div className="bg-gray-950 h-auto w-full ">
       <Navbar/>      
-      <div className="h-full flex justify-center gap-6 p-1 md:p-6">
+      <div className="h-full flex justify-center gap-6 p-2 pt-6 md:p-6">
         <LeftSidebar/>
         <Body/>
         <RightSidebar/>

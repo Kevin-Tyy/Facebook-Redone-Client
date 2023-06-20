@@ -20,7 +20,7 @@ const StoryPreview = ({
 	stories,
 	handleStoryToggle,
 }: Props) => {
-	const formattedDate = useDateFormatter(storyInView?.createdAt);
+	const formattedDate = useDateFormatter(storyInView?.createdAt as Date);
 	const renderDate = (rawDate: Date) => {
 		const formattedDate = useDateFormatter(rawDate);
 		return formattedDate;
@@ -36,7 +36,7 @@ const StoryPreview = ({
 			<div onClick={(e) => e.stopPropagation()} className="">
 				<div
 					onClick={handleView}
-					className="absolute top-3 right-3 bg-gray-700 text-white rounded-full p-2 cursor-pointer hover:bg-gray-800 active:bg-gray-600">
+					className="absolute top-3 right-3 bg-gray-700 text-white rounded-full p-2 cursor-pointer hover:bg-gray-800 active:bg-gray-600 z-10">
 					<CloseRounded sx={{ fontSize: 30 }} />
 				</div>
 				<motion.div
@@ -48,7 +48,7 @@ const StoryPreview = ({
 						hidden: { opacity: 0, y: -30 },
 						visible: { opacity: 1, y: 0 },
 					}}
-					className="relative max-w-[600px] bg-black h-full flex justify-center items-center">
+					className="relative max-w-[600px] bg-black/80 h-full flex justify-center items-center ml-24">
 					<div className="absolute top-0 left-0 flex w-full px-4 pt-2 items-center justify-between">
 						<Link to={`/profile/${storyInView?.creator?.userId}`}>
 							<div className="flex items-center gap-2">
@@ -79,33 +79,39 @@ const StoryPreview = ({
 					initial="hidden"
 					whileInView="visible"
 					viewport={{ once: true, amount: 0.1 }}
-					transition={{ duration: 0.2 , delay : 0.4}}
+					transition={{ duration: 0.2, delay: 0.4 }}
 					variants={{
 						hidden: { opacity: 0, y: -30 },
 						visible: { opacity: 1, y: 0 },
 					}}
-					className="absolute h-screen w-[350px] top-0 left-0 bg-gray-950/60 p-4 flex flex-col gap-4">
-					<Logo />
+					className="absolute h-screen top-0 left-0 bg-gray-950/60 p-2 md:p-4 flex flex-col  gap-4">
+					<div className="xl:block hidden">
+						<Logo />
+					</div>
 					<div className="border-t border-gray-600 pt-2">
-						<p className="text-2xl text-light">Your story</p>
-						<div
-							className="p-2 cursor-pointer active:bg-gray-600/10 transition rounded-lg"
-							onClick={handleStoryButtonClick}>
-							<div className="flex gap-2 w-full py-3 items-center">
-								<div className="bg-gray-800 p-2 rounded-full">
-									<Add sx={{ fontSize: 40 }} className="text-white" />
-								</div>
-								<div className="text-light">
-									<p>Create a story</p>
-									<p className="whitespace-nowrap text-sm text-gray-600">
-										Share a photo or write something
-									</p>
+						<div className="p-2">
+							<p className="text-2xl text-light xl:block hidden">Your story</p>
+							<div
+								className="p-2 cursor-pointer active:bg-gray-600/10 transition rounded-lg"
+								onClick={handleStoryButtonClick}>
+								<div className="flex gap-2 w-full  md:py-3 items-center">
+									<div className="bg-gray-800 p-1 md:p-2 rounded-full">
+										<Add sx={{ fontSize: 40 }} className="text-white" />
+									</div>
+									<div className="text-light  xl:block hidden">
+										<p>Create a story</p>
+										<p className="whitespace-nowrap text-sm text-gray-600">
+											Share a photo or write something
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
 						{stories && (
 							<div className="p-2">
-								<p className="text-2xl text-light">All stories</p>
+								<p className="text-2xl text-light  xl:block hidden">
+									All stories
+								</p>
 								<div className="flex flex-col gap-3 mt-4 cursor-pointer">
 									{stories.map((story, index) => (
 										<div
@@ -118,10 +124,10 @@ const StoryPreview = ({
 											<div className="bg-primary-100 rounded-full p-0.5">
 												<img
 													src={story?.creator?.profileimage}
-													className="w-14 h-14 rounded-full object-cover"
+													className="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover"
 												/>
 											</div>
-											<div>
+											<div className="xl:block hidden">
 												<p className="text-light text-lg capitalize">
 													{story?.creator?.username}
 												</p>
