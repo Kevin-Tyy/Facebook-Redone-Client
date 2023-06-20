@@ -130,7 +130,7 @@ const profile = () => {
 	};
 
 	return (
-		<div className="h-full w-full bg-gray-950 ">
+		<div className="h-full w-full pb-20 bg-gray-950 ">
 			<Navbar />
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
@@ -236,7 +236,7 @@ const profile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-primary-200 flex gap-2 p-2 justify-center rounded-md sticky top-[73px] z-10 shadow-2xl border border-gray-700/60">
+					<div className="bg-primary-200 flex flex-wrap gap-2  p-2 justify-center rounded-md sticky top-[73px] z-10 shadow-2xl border border-gray-700/60">
 						{Tabs.map((tab, index) => (
 							<div
 								key={index}

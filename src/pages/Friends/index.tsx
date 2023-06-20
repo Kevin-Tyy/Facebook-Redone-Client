@@ -72,12 +72,12 @@ const index = () => {
 		));
 
 	return (
-		<div className="min-h-screen bg-gray-950">
+		<div className="min-h-screen bg-gray-950 pb-20">
 			<Navbar />
-			<div className="p-10 flex justify-center">
-				<div className="w-full 2xl:w-3/5 flex gap-6">
+			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
+				<div className="w-full 2xl:w-3/5 flex justify-center gap-6">
 					<Sidebar />
-					<div className="flex flex-col gap-10 w-full">
+					<div className="flex flex-col gap-10 w-full max-w-[800px] 2xl:max-w-none">
 						{users ? (
 							<div className="flex flex-col gap-4 bg-gray-900 p-4 rounded-xl  border border-gray-800">
 								<h1 className="text-light text-2xl text-center ">
@@ -88,7 +88,7 @@ const index = () => {
 									<div className="flex flex-col gap-6">
 										{users.map((user) => (
 											<div className="bg-primary-200 p-4 rounded-lg border border-gray-800">
-												<div className="flex items-center gap-4">
+												<div className="flex flex-col sm:flex-row items-center gap-4">
 													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
 														<div className="bg-primary-200 rounded-full p-1">
 															<img
@@ -105,7 +105,7 @@ const index = () => {
 															<p className="text-light">{user.email}</p>
 														</Link>
 														<p className="text-gray-500">{user.bio}</p>
-														<div className="flex w-full gap-3">
+														<div className="flex flex-col md:flex-row w-full gap-3">
 															<div
 																onClick={() => removeFriend(user?.userId)}
 																className="w-full max-w-[300px]">
@@ -118,7 +118,7 @@ const index = () => {
 															<Link
 																to={`/profile/${user?.userId}`}
 																className="w-full">
-																<button className="text-light border border-gray-700 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
+																<button className="text-light border p-2 border-gray-700 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
 																	View profile
 																</button>
 															</Link>
@@ -139,13 +139,15 @@ const index = () => {
 						)}
 						{allUsers && (
 							<div className="flex flex-col gap-6 bg-gray-900 p-4 rounded-xl border border-gray-800">
-								<h1 className="text-light text-2xl text-center ">Suggestions</h1>
+								<h1 className="text-light text-2xl text-center ">
+									Suggestions
+								</h1>
 
 								{allUsers.length > 0 ? (
 									<div className="flex flex-col gap-4">
 										{allUsers.map((user) => (
 											<div className="bg-primary-200 p-4 rounded-lg border border-gray-800">
-												<div className="flex items-center gap-4">
+												<div className="flex flex-col sm:flex-row items-center gap-4">
 													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
 														<div className="bg-primary-200 rounded-full p-1">
 															<img
@@ -162,7 +164,7 @@ const index = () => {
 															<p className="text-light">{user.email}</p>
 														</Link>
 														<p className="text-gray-500">{user.bio}</p>
-														<div className="flex w-full gap-3">
+														<div className="flex flex-col md:flex-row w-full gap-3">
 															<div
 																onClick={() => addFriend(user?.userId)}
 																className="w-full max-w-[300px]">
@@ -175,7 +177,7 @@ const index = () => {
 															<Link
 																to={`/profile/${user?.userId}`}
 																className="w-full">
-																<button className="text-light border border-gray-700 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
+																<button className="text-light border border-gray-700 p-2 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
 																	View profile
 																</button>
 															</Link>

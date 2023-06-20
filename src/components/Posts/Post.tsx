@@ -39,8 +39,8 @@ const PostComponent = () => {
 						What's on your mind, <span className="capitalize">{username}</span>?
 					</p>
 				</div>
-				<div className="flex gap-4 justify-between">
-					<div className="flex gap-4">
+				<div className="flex gap-4 justify-between flex-wrap">
+					<div className="flex gap-4 flex-wrap">
 						{utilObj.map((obj, index) => (
 							<div key={index} onClick={()=> setIsPostModal(true)}>
 								<ButtonComp color="#010A13" >

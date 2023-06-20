@@ -61,8 +61,8 @@ const Sidebar = () => {
 		};
 	};
 	return (
-		<div>
-			<div className="bg-primary-200 hidden py-4 px-2  w-[350px]  xl:flex flex-col rounded-lg gap-4 sticky top-[100px]">
+		<div className="hidden xl:block">
+			<div className="bg-primary-200  py-4 px-2  w-[350px]  flex flex-col rounded-lg gap-4 sticky top-[100px]">
 				<p className="absolute top-1 left-4 text-sm text-gray-500">
 					Logged in as {username}
 				</p>
