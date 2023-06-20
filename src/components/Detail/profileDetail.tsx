@@ -90,10 +90,10 @@ const ProfileDetail = ({
 					<h1 className="text-light text-xl">Location🏠</h1>
 					<p className="text-gray-400">
 						{userData?.location ? (
-							<p>
+							<span>
 								Edit details{" "}
 								<span className="underline">{userData?.location}</span>
-							</p>
+							</span>
 						) : (
 							"No location added"
 						)}

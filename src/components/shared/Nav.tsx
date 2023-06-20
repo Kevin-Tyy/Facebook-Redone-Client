@@ -49,8 +49,8 @@ const BottomNav = () => {
 	return (
 		<div className="xl:hidden fixed bottom-0 w-full flex justify-center p-1 z-[10]">
 			<div className=" bg-gray-950 w-full z-[999] text-light flex gap-1 p-2 rounded-md border border-gray-700 shadow-2xl shadow-primary-100 max-w-[700px]">
-				{UtilObj.map((obj) => (
-					<Tooltip title={obj.title}>
+				{UtilObj.map((obj , index) => (
+					<Tooltip title={obj.title} key={index}>
 						<Link
 							to={obj.link}
 							onClick={() => setActiveTab(obj.title)}

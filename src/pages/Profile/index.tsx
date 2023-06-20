@@ -13,19 +13,19 @@ import {
 	PersonAddAlt1Outlined,
 } from "@mui/icons-material";
 import { Tabs } from "../../utils/utilObjects";
-import PostComponent from "../../components/Posts/Post";
-import ButtonComp from "../../components/Buttons/Button";
-import Box from "../../components/Posts/PostComponents/PostBoxComponent";
 import { UserInfo, Userdata } from "../../types/Types";
-import ProfileDetail from "../../components/Detail/ProfileDetail";
 import ImageUpdate from "../../components/Detail/ImageUpdate";
 import StoryModal from "../../components/Modals/StoryModal";
 import placeholderImage from "../../assets/avatar.webp";
 import DetailModal from "../../components/Detail/UpdateModal";
 import ProfileImage from "../../components/Posts/Preview/ProfileImage";
-import PostSkeleton from "../../components/Loaders/Skeleton/Post";
 import Skeleton from "react-loading-skeleton";
 import { Posts } from "../../types/Types";
+import PostLayout from "./layout/Posts";
+import ButtonComp from "../../components/Buttons/Button";
+import FriendLayout from "./layout/FriendLayout";
+import GroupLayout from "./layout/GroupLayout";
+import PhotosLayout from "./layout/PhotosLayout";
 const profile = () => {
 	const { id } = useParams();
 	const [isToggled, setIsToggled] = useState(false);
@@ -62,7 +62,6 @@ const profile = () => {
 					(friend: Userdata) => friend.userId === userId
 				);
 				setIsFriend(hasFriend);
-				console.log(hasFriend);
 			}
 		} catch (error) {
 			console.error(error);
@@ -110,8 +109,8 @@ const profile = () => {
 			});
 			if (data?.success) {
 				toast.success(data?.msg);
-				setIsFriend(false)
-				setFriendCount(friendCount as number - 1)
+				setIsFriend(false);
+				setFriendCount((friendCount as number) - 1);
 			} else {
 				toast.error(data?.msg);
 			}
@@ -121,16 +120,53 @@ const profile = () => {
 			});
 			if (data?.success) {
 				toast.success(data?.msg);
-				setIsFriend(true)
-				setFriendCount(friendCount as number + 1)
+				setIsFriend(true);
+				setFriendCount((friendCount as number) + 1);
 			} else {
 				toast.error(data?.msg);
 			}
 		}
 	};
 
+	const renderContent = () => {
+		switch (activeTab) {
+			case "posts":
+				return (
+					<PostLayout
+						loading={loading}
+						userData={userData}
+						userId={userId}
+						isOpen={isOpen}
+						setIsOpen={setIsOpen}
+						posts={posts}
+					/>
+				);
+
+			case "friends":
+				return (
+					<FriendLayout
+						friends={userData?.friendList as Userdata[]}
+						userData={userData as Userdata}
+						/>
+				);
+			case "groups":
+				return <GroupLayout userData={userData as Userdata} />;
+
+			default:
+				return (
+					<PostLayout
+						loading={loading}
+						userData={userData}
+						userId={userId}
+						isOpen={isOpen}
+						setIsOpen={setIsOpen}
+						posts={posts}
+					/>
+				);
+		}
+	};
 	return (
-		<div className="h-full w-full pb-20 bg-gray-950 ">
+		<div className="min-h-screen w-full pb-20 bg-gray-950 ">
 			<Navbar />
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
@@ -249,70 +285,7 @@ const profile = () => {
 							</div>
 						))}
 					</div>
-					<div className="flex flex-col items-start lg:flex-row gap-5">
-						<div className="bg-primary-200 w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
-							<div>
-								{loading ? (
-									<Skeleton height={40} />
-								) : (
-									<h1 className="text-2xl text-light text-center">
-										About{" "}
-										<span className="capitalize text-primary-100">
-											{userData?.userId == userId ? "You" : userData?.username}
-										</span>
-									</h1>
-								)}
-								<hr className="border-1 border-gray-700 my-6" />
-								<ProfileDetail
-									userId={userId}
-									userData={userData}
-									isOpen={isOpen}
-									setIsOpen={setIsOpen}
-									loading={loading}
-								/>
-							</div>
-						</div>
-						<div className="w-full flex flex-col gap-4">
-							{userData?.userId == userId && <PostComponent />}
-							{userData?.username && (
-								<div className="bg-primary-200 p-2 rounded-md border border-gray-800">
-									<h1 className="text-light text-3xl text-center capitalize">
-										{userData?.userId == userId
-											? "Your"
-											: `${userData?.username}'s`}{" "}
-										Posts
-									</h1>
-								</div>
-							)}
-							{loading ? (
-								<PostSkeleton />
-							) : (
-								<div>
-									{posts && posts.length ? (
-										<div className="flex flex-col gap-6 ">
-											{posts.map((post: object, index: number) => (
-												<div key={index}>
-													<Box {...(post as Posts)} />
-												</div>
-											))}
-										</div>
-									) : (
-										<p className="text-center text-light text-xl mt-4">
-											😞
-											{userData?.userId == userId ? (
-												"You haven't"
-											) : (
-												<span className="capitalize">
-													{userData?.username} hasn't
-												</span>
-											)}{" "}
-											posted anything yet
-										</p>
-									)}
-								</div>
-							)}
-						</div>
-					</div>
+					<div>{renderContent()}</div>
 				</div>
 			</div>
 			{isOpen && <DetailModal setIsOpen={setIsOpen} />}

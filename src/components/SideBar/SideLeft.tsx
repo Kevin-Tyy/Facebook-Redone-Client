@@ -85,13 +85,13 @@ const Sidebar = () => {
 				<div className="border-b-[3px] border-primary-100"></div>
 				<div className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
-						<Link to={obj?.link}>
+						<Link to={obj?.link} key={index}>
 							<div
 								onClick={() => setActiveTab(obj.title)}
 								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50 ${
 									activeTab === obj.title && "bg-gray-800 "
 								}`}
-								key={index}>
+								>
 								<span className="text-white">{obj.icon}</span>
 								<p className="text-white">{obj.title}</p>
 							</div>
