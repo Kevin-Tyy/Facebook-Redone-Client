@@ -80,7 +80,7 @@ const Box = ({
 				hidden: { opacity: 0, y: -30 },
 				visible: { opacity: 1, y: 0 },
 			}}
-			className="relative bg-primary-200 rounded-2xl py-3 px-6  border border-gray-800">
+			className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
 			{creator?.userId == userId && (
 				<p className="text-xs -my-1 text-gray-400">You posted</p>
 			)}

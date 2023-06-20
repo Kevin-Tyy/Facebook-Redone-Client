@@ -13,6 +13,7 @@ import {
 	Search,
 	VideoCallRounded,
 } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 const Chat = () => {
 	const [users, setUsers] = useState<Userdata[]>([]);
 	document.title = "Facebook | Chats";
@@ -35,10 +36,10 @@ const Chat = () => {
 		<div className="min-h-screen bg-gray-950">
 			<Navbar />
 			<div className="flex justify-center p-4 h-full">
-				<div className="w-4/5 flex gap-8 h-[90vh]">
-					<div className="flex flex-col gap-8 sticky top-0 bg-gray-900/40 p-6 rounded-lg border border-gray-800">
+				<div className="w-full xl:w-4/5 flex gap-2 md:gap-8 h-[90vh]">
+					<div className="flex flex-col gap-8 sticky top-0 w-[70px] md:w-[110px] xl:w-auto bg-gray-900/40 p-2 md:p-6 rounded-lg border border-gray-800">
 						<div className="flex flex-col gap-6">
-							<div className="flex justify-between gap-44">
+							<div className="justify-between gap-44 hidden xl:flex">
 								<h1 className="text-2xl text-light">Chats</h1>
 								<div className="flex gap-2">
 									<div className="p-1.5 text-light bg-gray-800/50 rounded-full cursor-pointer active:bg-gray-800/20 transition hover:bg-gray-800/80">
@@ -52,7 +53,7 @@ const Chat = () => {
 									</div>
 								</div>
 							</div>
-							<div className="bg-gray-900/80 py-2.5 px-3 flex items-center gap-3 rounded-full focus-within:outline outline-1 outline-gray-700">
+							<div className="bg-gray-900/80 w-[50px] xl:w-auto py-2.5 px-3 flex items-center gap-3 rounded-full focus-within:outline outline-1 outline-gray-700">
 								<Search className="text-white" />
 								<input
 									type="text"
@@ -62,24 +63,26 @@ const Chat = () => {
 							</div>
 						</div>
 						{users.length !== 0 ? (
-							<div className="flex flex-col gap-6 pb-6">
+							<div className="flex flex-col gap-6 pb-6 items-center xl:items-start">
 								{allUsers.map((user, index) => (
-									<Link to={`/profile/${user?.userId}`} key={index}>
-										<div className="flex gap-2 items-center">
-											<div className="bg-primary-100 p-1 rounded-full">
-												<img
-													src={user?.profileimage}
-													className="h-12 w-12 rounded-full object-cover"
-												/>
+									<Tooltip title={user?.username} placement="right" key={index}>
+										<Link to={`/profile/${user?.userId}`} >
+											<div className="flex gap-2 items-center">
+												<div className="bg-primary-100 p-1 rounded-full">
+													<img
+														src={user?.profileimage}
+														className="h-8 w-8 md:h-12 md:w-12 rounded-full object-cover"
+													/>
+												</div>
+												<div className="hidden xl:block">
+													<p className="text-light cursor-pointer capitalize">
+														{user?.username}
+													</p>
+													<p className="text-xs text-gray-500">{user?.email}</p>
+												</div>
 											</div>
-											<div>
-												<p className="text-light cursor-pointer capitalize">
-													{user?.username}
-												</p>
-												<p className="text-xs text-gray-500">{user?.email}</p>
-											</div>
-										</div>
-									</Link>
+										</Link>
+									</Tooltip>
 								))}
 							</div>
 						) : (
@@ -87,8 +90,10 @@ const Chat = () => {
 						)}
 					</div>
 					<div className="flex-grow bg-gray-900/40 rounded-lg border border-gray-800 flex justify-center items-center">
-            <h1 className="text-3xl bg-gradient-to-r from-sky-600 to-violet-900 text-transparent bg-clip-text font-black">Select a friend to chat</h1>
-          </div>
+						<h1 className="text-3xl bg-gradient-to-r from-sky-600 to-violet-900 text-transparent bg-clip-text font-black p-10">
+							Select a friend to chat
+						</h1>
+					</div>
 				</div>
 			</div>
 		</div>

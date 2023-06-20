@@ -25,8 +25,8 @@ const SideRight = () => {
 		fetchPeople();
 	}, []);
 	return (
-		<div>
-			<div className="bg-primary-200 hidden p-4 rounded-lg w-[350px] xl:flex flex-col gap-4 sticky top-[100px]">
+		<div className="hidden xl:flex">
+			<div className="bg-primary-200 p-4 rounded-lg w-[350px] flex flex-col gap-4 sticky top-[100px]">
 				<div className="flex flex-col gap-2">
 					<h1 className="text-lg text-light font-semibold">Birthdays</h1>
 					<div className="flex gap-2 items-center">
