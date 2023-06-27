@@ -51,7 +51,6 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				postMedia,
 				userId,
 			});
-			console.log(data);
 			if (data) {
 				setIsLoading(false);
 				if (data.success) {
@@ -62,7 +61,6 @@ const PostModal = ({ setIsPostModal }: Props) => {
 			}
 		} catch (error) {
 			setIsLoading(false);
-			console.log(error);
 			toast.error("Something went wrong, try again later");
 		}
 	};

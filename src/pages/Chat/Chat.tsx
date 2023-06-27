@@ -25,7 +25,6 @@ const Chat = () => {
 	const fetchUsers = async () => {
 		const { data } = await axios.get(`${BaseURL}/user/`);
 		setUsers(data);
-		console.log(data);
 	};
 	useEffect(() => {
 		fetchUsers();

@@ -19,7 +19,6 @@ const Posts = ({}: Props) => {
 		setPosts(posts);
 		setLoading(false);
 	};
-	console.log(posts);
 
 	useEffect(() => {
 		fetchPosts(`${BaseURL}/post`);

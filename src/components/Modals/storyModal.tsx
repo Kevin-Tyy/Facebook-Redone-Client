@@ -65,7 +65,6 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 				storyMedia,
 				userId,
 			});
-			console.log(data);
 			if (data) {
 				setIsLoading(false);
 				if (data.success) {
@@ -76,7 +75,6 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 			}
 		} catch (error) {
 			setIsLoading(false);
-			console.log(error);
 			toast.error("Something went wrong, try again later");
 		}
 	};

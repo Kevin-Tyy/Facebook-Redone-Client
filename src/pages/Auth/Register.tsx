@@ -21,7 +21,6 @@ const RegisterForm: FC = () => {
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [profileImage , setProfileImage ] = useState<string | null>(null)
-	console.log(profileImage)
 	const [formData, setFormData] = useState<FormData>({
 		firstName: "",
 		lastName: "",
@@ -52,13 +51,11 @@ const RegisterForm: FC = () => {
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
 		try {
-			console.log(formData)
 			setIsLoading(true);
 			const { data } = await axios.post(`${BaseURL}/user/register`, {
 				...formData,
 				profileimage : profileImage
 			});
-			console.log(data);
 			setIsLoading(false);
 			if (!data?.success) {
 				toast.error(data?.msg);
@@ -73,7 +70,6 @@ const RegisterForm: FC = () => {
 				}, 1500)
 			}
 		} catch (error) {
-			console.log(error);
 			toast.error("Something went wrong, Try again later")
 		}
 	};

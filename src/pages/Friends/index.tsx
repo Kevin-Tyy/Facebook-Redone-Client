@@ -54,7 +54,6 @@ const index = () => {
 		const { data } = await axios.get(`${BaseURL}/user/`);
 		setAllUsers(data);
 	};
-	console.log(users);
 	useEffect(() => {
 		populateFriends();
 		fetchUsers();

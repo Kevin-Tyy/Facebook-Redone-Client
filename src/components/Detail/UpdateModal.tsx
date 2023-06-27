@@ -25,7 +25,7 @@ interface Props {
 const UpdateModal = ({ setIsOpen }: Props) => {
 	const {
 		user: {
-			userInfo: { profileimage, userId , bio , work , location , education },
+			userInfo: { profileimage, userId, bio, work, location, education },
 		},
 	} = useSelector(loggedInUser) as {
 		user: {
@@ -55,14 +55,6 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 			work: newwork,
 		});
 
-		console.log({
-			userId: userId,
-			profileimage: newprofileimage,
-			bio: newbio,
-			education: neweducation,
-			location: newlocation,
-			work: newwork,
-		});
 		if (loading) {
 			toast.loading("Loading...");
 		}

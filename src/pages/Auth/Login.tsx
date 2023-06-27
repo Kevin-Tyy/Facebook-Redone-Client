@@ -14,7 +14,7 @@ import { BaseURL } from "../../utils/Link";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
-import { loggedInUser, login, logout } from "../../redux/features/AuthSlice";
+import { loggedInUser, login } from "../../redux/features/AuthSlice";
 import { decodeToken } from "../../utils/decodeToken";
 
 interface FormData {
@@ -61,7 +61,6 @@ const Login: FC = () => {
 				navigate("/home");
 			}
 		} catch (error) {
-			console.log(error);
 			toast.error("Something went wrong, Try again later");
 		}
 	};

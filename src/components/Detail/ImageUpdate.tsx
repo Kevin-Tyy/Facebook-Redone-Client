@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { CloseRounded } from "@mui/icons-material";
-import { useState } from "react"
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, updateImage } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
@@ -13,38 +13,42 @@ interface Props {
 }
 
 const ImageUpdate = ({ setImageUpdate }: Props) => {
-    const dispatch = useDispatch()
-    const [uploadImage, setUploadImage ] = useState<any>("")
-    const [loading , setLoading] = useState(false)
-    const serverSubmit = async () => {
-        setLoading(true)
-        const { data } = await axios.put(`${BaseURL}/user/accounts/edit` , {userId : userId , profileimage : uploadImage})
-        if(data){
-            setLoading(false)
-        }
-        if(data?.success){
-            toast.success(data?.msg)
-            console.log(data)
-            dispatch(updateImage(data?.userInfo?.profileimage))
-
-        }else{
-            toast.error(data?.msg)
-        }
-        console.log(data)
-    }
-    const handleSubmitFile = (e: any) => {
-        e.preventDefault()
-        serverSubmit()
-    }
-    const handleInputChange = (e: any) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setUploadImage(reader.result);
-        };
-    };
-    const { user : { userInfo : { profileimage , userId }}} = useSelector(loggedInUser) as { user : { userInfo : UserInfo}}
+	const dispatch = useDispatch();
+	const [uploadImage, setUploadImage] = useState<any>("");
+	const [loading, setLoading] = useState(false);
+	const serverSubmit = async () => {
+		setLoading(true);
+		const { data } = await axios.put(`${BaseURL}/user/accounts/edit`, {
+			userId: userId,
+			profileimage: uploadImage,
+		});
+		if (data) {
+			setLoading(false);
+		}
+		if (data?.success) {
+			toast.success(data?.msg);
+			dispatch(updateImage(data?.userInfo?.profileimage));
+		} else {
+			toast.error(data?.msg);
+		}
+	};
+	const handleSubmitFile = (e: any) => {
+		e.preventDefault();
+		serverSubmit();
+	};
+	const handleInputChange = (e: any) => {
+		const file = e.target.files[0];
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			setUploadImage(reader.result);
+		};
+	};
+	const {
+		user: {
+			userInfo: { profileimage, userId },
+		},
+	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 	return (
 		<div
 			className="h-screen w-full fixed top-0 bottom-0 right-0 left-0 bg-gray-900/50 backdrop-blur-sm z-[20] flex justify-center items-center"
@@ -105,7 +109,11 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 									color: "white",
 									textTransform: "capitalize",
 								}}>
-								{loading ? <CircularProgress size={20} sx={{color : "#fff"}}/> : "Upload Image"}
+								{loading ? (
+									<CircularProgress size={20} sx={{ color: "#fff" }} />
+								) : (
+									"Upload Image"
+								)}
 							</Button>
 						</div>
 					</form>
@@ -116,7 +124,7 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 					</p>
 				</div>
 			</motion.div>
-            <Toaster/>
+			<Toaster />
 		</div>
 	);
 };

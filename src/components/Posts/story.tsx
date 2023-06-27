@@ -8,7 +8,7 @@ import { BaseURL } from "../../utils/Link";
 import StoryPreview from "./Preview/StoryPreview";
 
 import { StoryType } from "../../types/Types";
-import StorySkeleton from "../Loaders/Skeleton/story";
+import StorySkeleton from "../Loaders/Skeleton/Story";
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [isInView, setIsInView] = useState(false);
@@ -24,7 +24,6 @@ const Story = () => {
 		const { stories } = dataObj.data;
 		setstories(stories);
 		setLoading(false);
-		console.log(stories);
 	};
 	useEffect(() => {
 		fetchStory(`${BaseURL}/stories`);

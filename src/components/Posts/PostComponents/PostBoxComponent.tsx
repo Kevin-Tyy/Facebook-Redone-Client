@@ -47,8 +47,6 @@ const Box = ({
 	const [likecount, setlikecount] = useState(likes.length);
 	const [commentcount, setcommentcount] = useState(comments.length);
 
-	// const likedByLoggedInUser = ;
-	// console.log();
 	const handleOutsideClick = (e: any) => {
 		if (toggleRef.current && !toggleRef.current.contains(e.target)) {
 			setShowToggle(false);
