@@ -28,6 +28,7 @@ interface Auth {
             state.loggedIn = true;
         }
     }
+    
 });
 
 export const { login , logout , updateImage } = AuthSlice.actions;
