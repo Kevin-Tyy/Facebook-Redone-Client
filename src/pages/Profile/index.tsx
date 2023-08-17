@@ -1,4 +1,3 @@
-import Navbar from "../../components/Nav";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BaseURL } from "../../utils/Link";
@@ -25,7 +24,6 @@ import PostLayout from "./layout/Posts";
 import ButtonComp from "../../components/Buttons/Button";
 import FriendLayout from "./layout/FriendLayout";
 import GroupLayout from "./layout/GroupLayout";
-import PhotosLayout from "./layout/PhotosLayout";
 const profile = () => {
 	const { id } = useParams();
 	const [isToggled, setIsToggled] = useState(false);
@@ -147,7 +145,7 @@ const profile = () => {
 					<FriendLayout
 						friends={userData?.friendList as Userdata[]}
 						userData={userData as Userdata}
-						/>
+					/>
 				);
 			case "groups":
 				return <GroupLayout userData={userData as Userdata} />;
@@ -167,7 +165,6 @@ const profile = () => {
 	};
 	return (
 		<div className="min-h-screen w-full pb-20 bg-gray-950 ">
-			<Navbar />
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
 				<div className="w-full px-3 md:px-16 2xl:px-0 2xl:w-[60%] flex flex-col gap-4">

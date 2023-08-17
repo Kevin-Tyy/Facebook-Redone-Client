@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Navbar from "../../components/Nav";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { useEffect, useState } from "react";
 import { UserInfo, Userdata } from "../../types/Types";
@@ -72,11 +71,10 @@ const index = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-950 pb-20">
-			<Navbar />
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<div className="w-full 2xl:w-3/5 flex justify-center gap-6">
 					<Sidebar />
-					<div className="flex flex-col gap-10 w-full max-w-[800px] 2xl:max-w-none">
+					<div className="flex flex-col gap-10 mt-8 w-full max-w-[800px] 2xl:max-w-none">
 						{users ? (
 							<div className="flex flex-col gap-4 bg-gray-900 p-4 rounded-xl  border border-gray-800">
 								<h1 className="text-light text-2xl text-center ">

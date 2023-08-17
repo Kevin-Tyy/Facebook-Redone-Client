@@ -18,7 +18,6 @@ const SideRight = () => {
 	const fetchPeople = async () => {
 		const { data } = await axios.get(`${BaseURL}/user/`);
 		setUsers(data);
-		console.log(data);
 	};
 	const allUsers = users.filter((user) => user.userId !== userId);
 	useEffect(() => {

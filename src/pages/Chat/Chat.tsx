@@ -1,4 +1,3 @@
-import Navbar from "../../components/Nav";
 import { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
 import axios from "axios";
@@ -33,7 +32,6 @@ const Chat = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-950">
-			<Navbar />
 			<div className="flex justify-center p-4 h-full">
 				<div className="w-full xl:w-4/5 flex gap-2 md:gap-8 h-[90vh]">
 					<div className="flex flex-col gap-8 sticky top-0 w-[70px] md:w-[110px] xl:w-auto bg-gray-900/40 p-2 md:p-6 rounded-lg border border-gray-800">
