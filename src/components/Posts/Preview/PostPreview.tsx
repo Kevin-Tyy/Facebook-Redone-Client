@@ -200,7 +200,7 @@ const PostPreview = ({
 																	</p>
 																)}
 
-																<h1 className="text-lg font-semibold text-white capitalize">
+																<h1 className="text-lg font-semibold text-start text-white capitalize">
 																	{comment?.user?.username}
 																</h1>
 															</Link>
@@ -224,35 +224,30 @@ const PostPreview = ({
 								)}
 							</div>
 						</div>
-						<div className="flex gap-2 items-start p-3 ">
-							<div className="bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
-								<img
-									src={profileimage}
-									className="h-full  w-full rounded-full"
-								/>
-							</div>
-							<form
-								onSubmit={handleSubmit}
-								className="bottom-0 bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
-								<textarea
-									value={commentText}
-									onChange={(e) => setCommentText(e.target.value)}
-									className="w-full resize-none bg-transparent outline-none text-white p-1"
-									placeholder="Write a comment"></textarea>
-								<div className="text-light flex justify-between items-center">
-									<div
-										className="flex gap-1"
-										onClick={() => setShowPicker(true)}>
-										<EmojiEmotionsOutlined sx={{ fontSize: 20 }} />
-										<ImageOutlined sx={{ fontSize: 20 }} />
-										<GifBoxOutlined sx={{ fontSize: 20 }} />
-									</div>
-									<button className="hover:bg-gray-700/60 p-1 transiton rounded-full ">
-										<SendRounded sx={{ fontSize: 25 }} />
-									</button>
-								</div>
-							</form>
+					</div>
+					<div className="flex gap-2 items-start p-3 bg-primary-200 border-t border-gray-700 sticky bottom-0">
+						<div className="bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
+							<img src={profileimage} className="h-full  w-full rounded-full" />
 						</div>
+						<form
+							onSubmit={handleSubmit}
+							className="bottom-0 bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
+							<textarea
+								value={commentText}
+								onChange={(e) => setCommentText(e.target.value)}
+								className="w-full resize-none bg-transparent outline-none text-white p-1"
+								placeholder="Write a comment"></textarea>
+							<div className="text-light flex justify-between items-center">
+								<div className="flex gap-1" onClick={() => setShowPicker(true)}>
+									<EmojiEmotionsOutlined sx={{ fontSize: 20 }} />
+									<ImageOutlined sx={{ fontSize: 20 }} />
+									<GifBoxOutlined sx={{ fontSize: 20 }} />
+								</div>
+								<button className="hover:bg-gray-700/60 p-1 transiton rounded-full ">
+									<SendRounded sx={{ fontSize: 25 }} />
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</motion.div>

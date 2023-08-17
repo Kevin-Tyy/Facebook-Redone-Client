@@ -9,7 +9,7 @@ interface state {
 }
 
 interface Auth {
-    user : object;
+    user : any;
     loggedIn : boolean
 }const AuthSlice = createSlice({
     name: 'Auth',

@@ -62,10 +62,7 @@ const Sidebar = () => {
 	};
 	return (
 		<div className="hidden xl:block">
-			<div className="bg-primary-200  py-4 px-2  w-[350px]  flex flex-col rounded-lg gap-4 sticky top-[100px]">
-				<p className="absolute top-1 left-4 text-sm text-gray-500">
-					Logged in as {username}
-				</p>
+			<div className="bg-primary-200  py-3 px-2  w-[350px]  flex flex-col rounded-lg gap-4 sticky top-[100px]">
 				<Link to={`/profile/${userId}`}>
 					<div className="flex items-center gap-3 p-3 pb-4 hover:bg-gray-800/50  cursor-pointer rounded-lg">
 						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">

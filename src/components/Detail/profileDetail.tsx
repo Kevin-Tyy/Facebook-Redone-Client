@@ -91,7 +91,7 @@ const ProfileDetail = ({
 					<p className="text-gray-400">
 						{userData?.location ? (
 							<span>
-								Edit details{" "}
+								From {" "}
 								<span className="underline">{userData?.location}</span>
 							</span>
 						) : (

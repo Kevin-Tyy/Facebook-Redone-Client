@@ -202,7 +202,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				</div>
 				{showPicker && (
 					<div ref={pickerRef} className="absolute -bottom-40 -right-40">
-						<EmojiPicker onEmojiClick={onEmojiClick} theme='dark' />
+						<EmojiPicker onEmojiClick={onEmojiClick} theme='Dark' />
 					</div>
 				)}
 			</motion.div>
