@@ -11,7 +11,6 @@ import { loggedInUser } from "./redux/features/AuthSlice";
 import { Toaster } from "react-hot-toast";
 import FriendPage from "./pages/Friends";
 // import Chat from "./pages/Chat/Chat";
-import BottomNav from "./components/shared/Nav";
 import Homelayout from "./layout/Homelayout";
 import Loading from "./components/Loaders/fallback";
 
@@ -30,34 +29,19 @@ const App: FC = () => {
 	return (
 		<React.Fragment>
 			<BrowserRouter>
-				<BottomNav />
-				<Suspense fallback={<Loading/>}>
+				<Suspense fallback={<Loading />}>
 					<Routes>
 						<Route path="/register" element={<Register />} />
 						<Route path="/login" element={<Login />} />
-						<Route path="/" element={<Homelayout />}>
-							<Route
-								index
-								element={
-									user?.loggedIn ? <HomePage /> : <Navigate to="/login" />
-								}
-							/>
-							<Route
-								path="/profile/:id"
-								element={
-									user?.loggedIn ? <Profile /> : <Navigate to="/login" />
-								}
-							/>
-							<Route
-								path="/friends"
-								element={
-									user?.loggedIn ? <FriendPage /> : <Navigate to="/login" />
-								}
-							/>
-							<Route
-								path="/chat"
-								element={user?.loggedIn ? <Chat /> : <Navigate to="/login" />}
-							/>
+						<Route
+							path="/"
+							element={
+								user?.loggedIn ? <Homelayout /> : <Navigate to="/login" />
+							}>
+							<Route index element={<HomePage />} />
+							<Route path="/profile/:id" element={<Profile />} />
+							<Route path="/friends" element={<FriendPage />} />
+							<Route path="/chat" element={<Chat />} />
 
 							<Route
 								path="/home"

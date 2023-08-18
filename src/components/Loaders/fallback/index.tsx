@@ -4,8 +4,8 @@ import { CircularProgress } from "@mui/material";
 
 const Loading: React.FC = () => {
 	return (
-		<div className="loading-container">
-			<CircularProgress color="inherit" />
+		<div className="h-screen w-full bg-gray-950 flex items-center justify-center">
+			<CircularProgress color="secondary" size={30}/>
 		</div>
 	);
 };

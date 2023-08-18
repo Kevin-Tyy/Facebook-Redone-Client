@@ -69,9 +69,10 @@ const RegisterForm: FC = () => {
 					
 				}, 1500)
 			}
-		} catch (error) {
+		}catch(error) {
 			toast.error("Something went wrong, Try again later")
 		}
+		setIsLoading(false)
 	};
 
 	const steps = ["Personal Information", "Account Information"];

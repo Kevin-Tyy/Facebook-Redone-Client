@@ -1,5 +1,5 @@
 import { FormData } from "../../types/Types";
-import { VisibilityOutlined, VisibilityOffOutlined , KeyRounded , CallOutlined  } from "@mui/icons-material";
+import { VisibilityOutlined, VisibilityOffOutlined , KeyRounded , CallOutlined, Check  } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import ImageUpload from "../Modals/ImageUpload";
 
@@ -15,9 +15,7 @@ const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 	const [profileImageUpload , setProfileImageUpload] = useState<boolean>(false);
 	const [upload , setUpload ] = useState<string>("")
 
-	setTimeout(()=> {
-		setIsPasswordVisible(false)
-	}, 5000)
+
 	useEffect(()=> {
 		setProfileImage(upload)
 	} , [upload])
@@ -56,10 +54,11 @@ const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 				</button>
 			</div>
 			<div onClick={()=> setProfileImageUpload(true)} className="w-full text-white border border-gray-600 p-3 rounded-full flex justify-center cursor-pointer hover:bg-gray-950/30">
-				{profileImageUpload ? "Change image" : "Upload image"}
+				{upload && <Check htmlColor="#00ff00"/>}
+				{upload ? "Change image" : "Upload image"}
 			</div>
 			{ profileImageUpload && 
-				<ImageUpload setProfileImageUpload={setProfileImageUpload} setUpload={setUpload}/>
+				<ImageUpload setProfileImageUpload={setProfileImageUpload} setUpload={setUpload} upload={upload}/>
 			}
 		</div>
 	);

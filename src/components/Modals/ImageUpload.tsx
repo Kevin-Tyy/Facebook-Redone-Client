@@ -6,8 +6,9 @@ import { useState } from "react";
 interface Props {
 	setProfileImageUpload: (value: any) => void;
 	setUpload: (value: any) => void;
+	upload : string
 }
-const ImageUpload = ({ setProfileImageUpload, setUpload }: Props) => {
+const ImageUpload = ({ setProfileImageUpload, setUpload , upload}: Props) => {
 	const [uploadImage, setUploadImage] = useState<any>("");
 
 	const handleSubmitFile = () => {
@@ -45,7 +46,7 @@ const ImageUpload = ({ setProfileImageUpload, setUpload }: Props) => {
 				<div className="bg-gradient-to-r from-sky-400 to-violet-700 absolute -top-28 rounded-full p-1.5">
 					<div className="bg-gray-950 rounded-full p-1.5">
 						<img
-							src={uploadImage ? uploadImage : avatar}
+							src={uploadImage || upload || avatar}
 							className="rounded-full w-40 h-40 object-cover"
 						/>
 					</div>
@@ -66,6 +67,7 @@ const ImageUpload = ({ setProfileImageUpload, setUpload }: Props) => {
 							id="upload"
 							type="file"
 							className="hidden"
+							accept="image/*"
 							onChange={handleInputChange}
 							name="upload"
 						/>

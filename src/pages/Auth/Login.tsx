@@ -1,11 +1,10 @@
 import { FC, useEffect } from "react";
 import {
-	Person2Outlined,
+	PersonOutlined,
 	KeyOutlined,
 	VisibilityOffOutlined,
 	VisibilityOutlined,
 } from "@mui/icons-material";
-import bgCover from "../../assets/bg-cover.jpg";
 import gmailImage from "../../assets/gmail.png";
 import { useState } from "react";
 import { Button, CircularProgress } from "@mui/material";
@@ -32,11 +31,6 @@ const Login: FC = () => {
 		username: "",
 		password: "",
 	});
-	if (isPasswordVisible) {
-		setTimeout(() => {
-			setIsPasswordVisible(false);
-		}, 1500);
-	}
 	useEffect(() => {
 		document.title = "Facebook | Login";
 		{
@@ -63,6 +57,7 @@ const Login: FC = () => {
 		} catch (error) {
 			toast.error("Something went wrong, Try again later");
 		}
+		setIsLoading(false)
 	};
 	const handleInputChange = (event: any) => {
 		const { name, value } = event.target;
@@ -73,22 +68,16 @@ const Login: FC = () => {
 	};
 	return (
 		<div className="relative">
-			<div className="absolute top-5 right-5 text-white text-4xl font-mono cursor-pointer">
-				Logo
-			</div>
-			<img
-				src={bgCover}
-				className="fixed z-[-2] h-screen w-full top-0 left-0 right-0 bottom-0 object-cover"
-			/>
-			<div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black"></div>
-			<div className="bg-gradient-to-r from-gray-900/40 via-gray-900 to-gray-950 h-screen w-full flex justify-center items-center">
+			
+			{/* <div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black"></div> */}
+			<div className="bg-gradient-to-br from-gray-800 bg-gray-950  h-screen w-full flex justify-center items-center">
 				<form
 					onSubmit={handleSubmit}
 					className=" flex flex-col gap-7 p-3 w-[400px]">
 					<h1 className="text-white text-center text-4xl mb-4">Login</h1>
 					<hr className="border-neutral-500" />
 					<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">
-						<Person2Outlined />
+						<PersonOutlined />
 						<input
 							type="text"
 							className="bg-transparent outline-none w-full placeholder:text-neutral-400"
