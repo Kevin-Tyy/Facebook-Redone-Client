@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CloseRounded } from "@mui/icons-material";
+import { CameraAltRounded, CloseRounded } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, updateImage } from "../../redux/features/AuthSlice";
@@ -18,18 +18,23 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 	const [loading, setLoading] = useState(false);
 	const serverSubmit = async () => {
 		setLoading(true);
-		const { data } = await axios.put(`${BaseURL}/user/accounts/edit`, {
-			userId: userId,
-			profileimage: uploadImage,
-		});
+		const { data } = await axios.patch(
+			`${BaseURL}/user/accounts/edit/profileimage`,
+			{
+				userId: userId,
+				profileimage: uploadImage,
+			}
+		);
 		if (data) {
 			setLoading(false);
 		}
 		if (data?.success) {
 			toast.success(data?.msg);
 			dispatch(updateImage(data?.userInfo?.profileimage));
+			setLoading(false);
 		} else {
 			toast.error(data?.msg);
+			setLoading(false);
 		}
 	};
 	const handleSubmitFile = (e: any) => {
@@ -63,7 +68,7 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 					visible: { opacity: 1, y: 0 },
 				}}
 				onClick={(e) => e.stopPropagation()}
-				className="relative bg-gray-950 w-[500px] rounded-xl flex flex-col items-center  p-8">
+				className="relative bg-primary-200 ring-1 ring-gray-700 w-[500px] rounded-xl flex flex-col items-center  p-8">
 				<div
 					onClick={() => setImageUpdate(false)}
 					className="absolute text-light top-2 right-2 p-2 hover:bg-gray-800 transition duration-100 rounded-3xl cursor-pointer active:bg-gray-900">
@@ -76,9 +81,22 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 							className="rounded-full w-40 h-40 object-cover"
 						/>
 					</div>
+					<label htmlFor="upload">
+						<CameraAltRounded
+							sx={{ fontSize: 50 }}
+							className="absolute right-0 top-32 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
+						/>
+					</label>
 				</div>
 				<div className="border-t border-gray-600 mt-16  pt-4 flex flex-col gap-4">
-					<p className="text-light text-center">
+					<p className="text-light text-lg font-thin text-center">
+						Click{" "}
+						<label htmlFor="upload" className="cursor-pointer font-black">
+							here
+						</label>{" "}
+						to update your profile image{" "}
+					</p>
+					<p className="text-light text-center text-sm">
 						It will be easier for your friends to recognise you if you upload
 						your real photos to. You can upload the image in JPG, GIF or PNG
 						format

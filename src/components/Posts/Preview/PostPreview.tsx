@@ -1,105 +1,59 @@
-import { Comment, Creator, Emoji, UserInfo } from "../../../types/Types";
-import {
-	CloseRounded,
-	EmojiEmotionsOutlined,
-	GifBoxOutlined,
-	ImageOutlined,
-	SendRounded,
-} from "@mui/icons-material";
+import { Comment, Posts, UserInfo } from "../../../types/Types";
+
 import { Link } from "react-router-dom";
 import placeholderImage from "../../../assets/avatar.webp";
 import useDateFormatter from "../../../hooks/useDate";
-import CommentComponent from "../PostComponents/CommentComponent";
+import CommentComponent from "../PostComponents/ReactionPallete";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
-import { useState, useEffect, useRef, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
-import { Toaster, toast } from "react-hot-toast";
-import EmojiPicker from "emoji-picker-react";
 import { motion } from "framer-motion";
 import Spinner from "../../Loaders/Spinner/Spinner";
+import CommentBox from "./components/CommentBox";
+import CommentForm from "./components/CommentForm";
+import { CloseRounded } from "@mui/icons-material";
 interface Props {
-	postMedia: string;
-	postText: string;
 	viewPost: (value: any) => void;
-	creator: Creator;
-	createdAt: Date;
 	setlikecount: (value: number) => void;
 	likecount: number;
-	userId: string;
-	postId: string;
+	post: Posts;
 	likedByLoggedInUser: boolean;
 	setLikedByLoggedInUser: (value: any) => void;
 	commentcount: number;
-	setcommentcount: (value: any) => void;
+	setcommentcount: (value: any) => any;
 }
 const PostPreview = ({
-	postMedia,
-	postText,
+	post,
 	viewPost,
-	creator,
-	createdAt,
 	setlikecount,
 	likecount,
-	postId,
 	likedByLoggedInUser,
 	setLikedByLoggedInUser,
 	commentcount,
 	setcommentcount,
 }: Props) => {
+	const { postId, postMedia, creator, postText, createdAt } = post;
 	const formattedDate = useDateFormatter(createdAt);
-	const [commentText, setCommentText] = useState<string>("");
 	const [comments, setcomments] = useState<Comment[] | null>(null);
-	const [showPicker, setShowPicker] = useState<boolean>(false);
-	const pickerRef = useRef<HTMLDivElement | null>(null);
-	const handleEmojiClick = (emojiObj: Emoji) => {
-		setCommentText((prev) => prev + emojiObj.emoji);
-	};
-	const handleClickOutside = (e: any) => {
-		if (pickerRef?.current && !pickerRef?.current.contains(e.target)) {
-			setShowPicker(false);
-		}
-	};
-	useEffect(() => {
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.addEventListener("mousedown ", handleClickOutside);
-		};
-	}, []);
 
 	const {
 		user: {
-			userInfo: { profileimage, userId },
+			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 
-	const handleSubmit = async (e: any) => {
-		e.preventDefault();
-		const { data } = await axios.post(`${BaseURL}/post/react/comment`, {
-			postId: postId,
-			userId: userId,
-			content: commentText,
-		});
-		if (data.success) {
-			toast.success(data.msg);
-			setcommentcount(commentcount + 1);
-		} else {
-			toast.error(data.msg);
-		}
-	};
 	const populateComments = async () => {
 		const { data } = await axios.get(`${BaseURL}/post/react/comment/${postId}`);
 		if (data.success) {
-			setcomments(data.data);
-			setcommentcount(data.data.length);
+			setcomments(data?.data);
+			setcommentcount(data?.data.length);
 		}
-		setCommentText("");
 	};
 	useEffect(() => {
 		populateComments();
 	}, [commentcount]);
-	console.log(comments);
 	return (
 		<div
 			className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-gray-950/50 backdrop-blur-md z-[10] flex justify-center items-center"
@@ -173,7 +127,6 @@ const PostPreview = ({
 									setLikedByLoggedInUser={setLikedByLoggedInUser}
 									setLikecount={setlikecount}
 									likecount={likecount}
-									viewPost={viewPost}
 									setPostInView={null}
 								/>
 							</div>
@@ -182,33 +135,12 @@ const PostPreview = ({
 									<Fragment>
 										{comments.length > 0 ? (
 											<div className="p-2 flex flex-col gap-2">
-												{comments.map((comment) => (
-													<div className="flex gap-2 items-center">
-														<Link to={`/profile/${userId}`}>
-															<div className="bg-primary-100 p-1 rounded-full">
-																<img
-																	src={comment?.user?.profileimage}
-																	className="w-12 h-[45px] object-cover rounded-full"
-																/>
-															</div>
-														</Link>
-														<div className="w-full bg-gray-800 my-1 px-3 py-1 rounded-lg hover:bg-gray-700/70 transition">
-															<Link to={`/profile/${comment?.user?.userId}`}>
-																{comment?.user?.userId == userId && (
-																	<p className="text-xs text-gray-500">
-																		You commented
-																	</p>
-																)}
-
-																<h1 className="text-lg font-semibold text-start text-white capitalize">
-																	{comment?.user?.username}
-																</h1>
-															</Link>
-															<p className="text-light">
-																{comment.textContent}
-															</p>
-														</div>
-													</div>
+												{comments.map((comment, index) => (
+													<CommentBox
+														comment={comment}
+														userId={userId}
+														key={index}
+													/>
 												))}
 											</div>
 										) : (
@@ -225,41 +157,14 @@ const PostPreview = ({
 							</div>
 						</div>
 					</div>
-					<div className="flex gap-2 items-start p-3 bg-primary-200 border-t border-gray-700 sticky bottom-0">
-						<div className="bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
-							<img src={profileimage} className="h-full  w-full rounded-full" />
-						</div>
-						<form
-							onSubmit={handleSubmit}
-							className="bottom-0 bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
-							<textarea
-								value={commentText}
-								onChange={(e) => setCommentText(e.target.value)}
-								className="w-full resize-none bg-transparent outline-none text-white p-1"
-								placeholder="Write a comment"></textarea>
-							<div className="text-light flex justify-between items-center">
-								<div className="flex gap-1" onClick={() => setShowPicker(true)}>
-									<EmojiEmotionsOutlined sx={{ fontSize: 20 }} />
-									<ImageOutlined sx={{ fontSize: 20 }} />
-									<GifBoxOutlined sx={{ fontSize: 20 }} />
-								</div>
-								<button className="hover:bg-gray-700/60 p-1 transiton rounded-full ">
-									<SendRounded sx={{ fontSize: 25 }} />
-								</button>
-							</div>
-						</form>
-					</div>
+					<CommentForm
+						commentcount={commentcount}
+						setcommentcount={setcommentcount}
+						post={post}
+					/>
 				</div>
 			</motion.div>
-			{showPicker && (
-				<div
-					onClick={(e) => e.stopPropagation()}
-					className="absolute"
-					ref={pickerRef}>
-					<EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
-				</div>
-			)}
-			<Toaster />
+		
 		</div>
 	);
 };

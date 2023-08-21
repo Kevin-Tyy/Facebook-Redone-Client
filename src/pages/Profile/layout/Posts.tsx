@@ -56,9 +56,9 @@ const PostLayout = ({ loading , userData , userId , isOpen , setIsOpen , posts }
 						<div>
 							{posts && posts.length ? (
 								<div className="flex flex-col gap-6 ">
-									{posts.map((post: object, index: number) => (
+									{posts.map((post, index) => (
 										<div key={index}>
-											<Box {...(post as Posts)} />
+											<Box post={post}/>
 										</div>
 									))}
 								</div>

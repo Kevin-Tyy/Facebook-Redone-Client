@@ -160,7 +160,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 								<input
 									id="imagepost"
 									type="file"
-									accept="image/png, image/jpeg"
+									accept="image/*"
 									className="hidden"
 									onChange={handleFileInput}
 								/>

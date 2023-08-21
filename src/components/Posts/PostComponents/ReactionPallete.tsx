@@ -15,9 +15,8 @@ interface Props {
 	setLikedByLoggedInUser: (value: any) => void 
 	setLikecount : (value : any) => void
 	likecount : number
-	viewPost : (value : any) => void 
 }
-const CommentComponent = ({ setPostInView , likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser , setLikecount , likecount , viewPost}: Props) => {
+const ReactionPallete = ({ setPostInView , likedByLoggedInUser, userId, postId ,setLikedByLoggedInUser , setLikecount , likecount}: Props) => {
 
 	const styleClass = `flex items-center justify-center w-full gap-2 text-light hover:bg-gray-700/30 py-3 transition duration-300 rounded-md hover:text-primary-100 cursor-pointer`;
 	const handleLike = async () => {
@@ -40,7 +39,7 @@ const CommentComponent = ({ setPostInView , likedByLoggedInUser, userId, postId 
 				<span>{likedByLoggedInUser ? "Unlike" : "Like"}</span>
 			</div>
 			<div className="w-[1px] bg-light h-[30px]"></div>
-			<div className={`${styleClass}`} onClick={() => setPostInView(true)}>
+			<div className={`${styleClass}`} onClick={() => setPostInView && setPostInView(true)}>
 				<CommentOutlined />
 				<span className="text-white">Comment</span>
 			</div>
@@ -54,4 +53,4 @@ const CommentComponent = ({ setPostInView , likedByLoggedInUser, userId, postId 
 	);
 };
 
-export default CommentComponent;
+export default ReactionPallete;

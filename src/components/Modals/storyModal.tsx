@@ -155,7 +155,7 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 						<input
 							id="imagepost"
 							type="file"
-							accept="*"
+							accept="image/*"
 							className="hidden"
 							onChange={handleFileInput}
 						/>

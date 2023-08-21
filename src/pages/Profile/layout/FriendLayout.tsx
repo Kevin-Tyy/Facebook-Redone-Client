@@ -1,4 +1,4 @@
-import { Userdata } from "../../../types/Types";
+import { UserInfo, Userdata } from "../../../types/Types";
 import FriendLoader from "../../../components/Loaders/Skeleton/FriendPageLoader";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
@@ -10,11 +10,11 @@ interface Props {
 const FriendLayout = ({ friends, userData }: Props) => {
 	const {
 		user: {
-			userInfo: { friendList, userId },
+			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: Userdata } };
-	console.log(friendList);
-	const refreshPage = () => {
+
+	const refreshPage = (user: UserInfo) => {
 		document.location = `/profile/${user?.userId}`;
 	};
 
@@ -29,12 +29,14 @@ const FriendLayout = ({ friends, userData }: Props) => {
 					</h1>
 					{friends.length > 0 ? (
 						<div className="flex flex-col gap-6">
-							{friends.map((user) => (
-								<div className="bg-primary-200 p-4 rounded-lg border border-gray-800">
+							{friends.map((user, index) => (
+								<div
+									className="bg-primary-200 p-4 rounded-lg border border-gray-800"
+									key={index}>
 									<div className="flex flex-col sm:flex-row items-center gap-4">
 										<div
 											className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1"
-											onClick={refreshPage}>
+											onClick={() => refreshPage(user)}>
 											<div className="bg-primary-200 rounded-full p-1">
 												<img
 													src={user.profileimage}
@@ -43,7 +45,7 @@ const FriendLayout = ({ friends, userData }: Props) => {
 											</div>
 										</div>
 										<div className="flex flex-col gap-1 w-full">
-											<div onClick={refreshPage}>
+											<div onClick={() => refreshPage(user)}>
 												<p className="text-xl text-white capitalize">
 													{user.username}
 												</p>
@@ -51,7 +53,9 @@ const FriendLayout = ({ friends, userData }: Props) => {
 											</div>
 											<p className="text-gray-500">{user.bio}</p>
 											<div className="flex flex-col md:flex-row w-full gap-3">
-												<div onClick={refreshPage} className="w-full">
+												<div
+													onClick={() => refreshPage(user)}
+													className="w-full">
 													<button className="text-light border p-2 border-gray-700 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
 														View profile
 													</button>

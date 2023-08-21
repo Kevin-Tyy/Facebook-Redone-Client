@@ -274,11 +274,15 @@ const profile = () => {
 							<div
 								key={index}
 								onClick={() => setActiveTab(tab)}
-								className={`px-5 py-2 rounded-md transition duration-150 capitalize cursor-pointer hover:bg-gray-700/50 hover:outline outline-1 hover:outline-gray-600 text-white ${
+								className={`px-5 py-2 rounded-md relative transition duration-150 capitalize cursor-pointer hover:bg-gray-700/50 hover:outline outline-1 hover:outline-gray-600 text-white ${
 									activeTab == tab &&
 									"bg-gray-700 outline outline-1 outline-gray-400"
 								}`}>
-								{tab}
+								<div>
+									{index === 0 && <p className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-red-700 text-white rounded-full text-sm">{posts?.length}</p>}
+									{index === 2 && <p className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-red-700 text-white rounded-full text-sm">{userData?.friendList.length}</p>}
+									{tab}
+								</div>
 							</div>
 						))}
 					</div>

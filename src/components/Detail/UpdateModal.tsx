@@ -3,8 +3,6 @@ import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Emoji, UserInfo } from "../../types/Types";
 import {
 	CloseRounded,
-	CameraAltRounded,
-	// PersonOutlined,
 	BookOutlined,
 	LocationOnOutlined,
 	WorkOutlineOutlined,
@@ -17,7 +15,7 @@ import { BaseURL } from "../../utils/Link";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Toaster, toast } from "react-hot-toast";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 
 interface Props {
 	setIsOpen: (value: any) => void;
@@ -25,7 +23,7 @@ interface Props {
 const UpdateModal = ({ setIsOpen }: Props) => {
 	const {
 		user: {
-			userInfo: { profileimage, userId, bio, work, location, education },
+			userInfo: { userId, bio, work, location, education },
 		},
 	} = useSelector(loggedInUser) as {
 		user: {
@@ -33,26 +31,29 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 		};
 	};
 	const [loading, setLoading] = useState(false);
-	const [newlocation, setlocation] = useState(location);
-	const [newwork, setwork] = useState(work);
 	const [newbio, setbio] = useState(bio);
-	const [neweducation, seteducation] = useState(education);
-	const [newprofileimage, setprofileimage] = useState<any>(profileimage);
 	const [bioinput, setbioinput] = useState(false);
 	const [workinput, setworkinput] = useState(false);
 	const [locationinput, setlocationinput] = useState(false);
 	const [educationinput, seteducationinput] = useState(false);
-	// const handleChange = () => {};
-
+	const [newInfo, setNewInfo] = useState({
+		work: work,
+		bio: bio,
+		education: education,
+		location: location,
+	});
+	const handleChange = (e: any) => {
+		setNewInfo((prevData) => ({
+			...prevData,
+			[e.target.name]: e.target.value,
+		}));
+	};
 	const submitInfo = async () => {
 		setLoading(true);
-		const { data } = await axios.put(`${BaseURL}/user/accounts/edit`, {
-			userId: userId,
-			profileimage: newprofileimage,
+		const { data } = await axios.patch(`${BaseURL}/user/accounts/edit`, {
+			...newInfo,
 			bio: newbio,
-			education: neweducation,
-			location: newlocation,
-			work: newwork,
+			userId: userId,
 		});
 
 		if (loading) {
@@ -73,14 +74,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 		e.preventDefault();
 		submitInfo();
 	};
-	const handleimage = (e: any) => {
-		const file = e.target.files[0];
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setprofileimage(reader?.result);
-		};
-	};
+
 	const [showPicker, setShowPicker] = useState(false);
 	const pickerRef = useRef<HTMLDivElement | null>(null);
 	const onEmojiClick = (emojiObj: Emoji) => {
@@ -122,35 +116,6 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 						<CloseRounded sx={{ fontSize: 25 }} />
 					</div>
 					<form onSubmit={handleSubmit}>
-						<div className=" flex flex-col items-center gap-2 justify-center">
-							<div className="bg-gradient-to-r from-sky-500 to-violet-800 p-1.5 rounded-full relative">
-								<div className="bg-primary-200 p-1 rounded-full">
-									<img
-										src={newprofileimage ? newprofileimage : profileimage}
-										className="w-[160px] h-[160px] rounded-full object-cover"
-									/>
-								</div>
-								<label htmlFor="file">
-									<CameraAltRounded
-										sx={{ fontSize: 50 }}
-										className="absolute right-0 top-32 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
-									/>
-								</label>
-								<input
-									type="file"
-									id="file"
-									className="hidden"
-									onChange={handleimage}
-								/>
-							</div>
-							<p className="text-light text-lg font-thin">
-								Click{" "}
-								<label htmlFor="file" className="cursor-pointer font-black">
-									here
-								</label>{" "}
-								to update your profile image{" "}
-							</p>
-						</div>
 						<div className="p-5">
 							<div className="flex flex-col gap-4">
 								<div className="flex gap-3"></div>
@@ -189,7 +154,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 										</div>
 										<span
 											onClick={() => setbioinput(false)}
-											className="bg-gray-700/50 p-2 text-white rounded-lg cursor-pointer">
+											className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
 											Cancel
 										</span>
 									</motion.div>
@@ -198,7 +163,12 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 								<div className="flex items-center justify-between">
 									<label className="text-light">Location</label>
 									<span
-										onClick={() => setlocationinput(!locationinput)}
+										onClick={() => {
+											setlocationinput(!locationinput);
+											!newbio && setbioinput(false);
+											!work && setworkinput(false);
+											!education && seteducationinput(false);
+										}}
 										className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
 										{locationinput ? "Discard" : "Edit"}
 									</span>
@@ -219,15 +189,16 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 											<LocationOnOutlined className="text-light" />
 											<input
 												type="text"
-												onChange={(e) => setlocation(e.target.value)}
+												name="location"
+												onChange={handleChange}
 												placeholder={`Update your location (optional)`}
 												className="w-full bg-transparent text-white outline-none"
-												value={newlocation}
+												value={location}
 											/>
 										</div>
 										<span
 											onClick={() => setlocationinput(false)}
-											className="bg-gray-700/50 p-2 text-white rounded-lg cursor-pointer">
+											className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
 											Cancel
 										</span>
 									</motion.div>
@@ -236,7 +207,12 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 								<div className="flex items-center justify-between">
 									<label className="text-light">Work</label>
 									<span
-										onClick={() => setworkinput(!workinput)}
+										onClick={() => {
+											setworkinput(!workinput);
+											!newbio && setbioinput(false);
+											!education && seteducationinput(false);
+											!location && setlocationinput(false);
+										}}
 										className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
 										{workinput ? "Discard" : "Edit"}
 									</span>
@@ -256,15 +232,16 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 											<WorkOutlineOutlined className="text-light" />
 											<input
 												type="text"
-												onChange={(e) => setwork(e.target.value)}
+												name="work"
+												onChange={handleChange}
 												placeholder={`Update your work (optional)`}
 												className="w-full bg-transparent text-white outline-none"
-												value={newwork}
+												value={work}
 											/>
 										</div>
 										<span
 											onClick={() => setworkinput(false)}
-											className="bg-gray-700/50 p-2 text-white rounded-lg cursor-pointer">
+											className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
 											Cancel
 										</span>
 									</motion.div>
@@ -274,7 +251,11 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 								<div className="flex items-center justify-between">
 									<label className="text-light">Education</label>
 									<span
-										onClick={() => seteducationinput(!educationinput)}
+										onClick={() =>{ seteducationinput(!educationinput)
+											!newbio && setbioinput(false)
+											!work && setworkinput(false)
+											!location && setlocationinput(false)
+										}}
 										className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
 										{educationinput ? "Discard" : "Edit"}
 									</span>
@@ -293,16 +274,17 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 										<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
 											<SchoolOutlined className="text-light" />
 											<input
-												onChange={(e) => seteducation(e.target.value)}
+												onChange={handleChange}
 												type="text"
+												name="education"
 												placeholder={`Update your education profile (optional)`}
 												className="w-full bg-transparent text-white outline-none"
-												value={neweducation}
+												value={education}
 											/>
 										</div>
 										<span
 											onClick={() => seteducationinput(false)}
-											className="bg-gray-700/50 p-2 text-white rounded-lg cursor-pointer">
+											className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
 											Cancel
 										</span>
 									</motion.div>
@@ -340,7 +322,7 @@ const UpdateModal = ({ setIsOpen }: Props) => {
 				</div>
 				{showPicker && (
 					<div ref={pickerRef} className="absolute -bottom-20 md:-right-40">
-						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
+						<EmojiPicker onEmojiClick={onEmojiClick} theme={Theme.DARK} />
 					</div>
 				)}
 			</motion.div>

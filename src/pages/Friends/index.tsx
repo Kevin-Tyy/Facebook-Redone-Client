@@ -83,8 +83,8 @@ const index = () => {
 								</h1>
 								{users.length > 0 ? (
 									<div className="flex flex-col gap-6">
-										{users.map((user) => (
-											<div className="bg-primary-200 p-4 rounded-lg border border-gray-800">
+										{users.map((user, index) => (
+											<div className="bg-primary-200 p-4 rounded-lg border border-gray-800" key={index}>
 												<div className="flex flex-col sm:flex-row items-center gap-4">
 													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
 														<div className="bg-primary-200 rounded-full p-1">

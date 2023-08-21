@@ -3,14 +3,10 @@ import { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
 import PostComponent from "./PostComponents/PostBoxComponent";
 import PostSkeleton from "../Loaders/Skeleton/Post";
-type Props = {};
-interface Post {
-	postText: string;
-	postMedia: string;
-	createdAt: Date;
-}
-const Posts = ({}: Props) => {
-	const [posts, setPosts] = useState<Array<Post>>([]);
+import { Posts as PostType } from "../../types/Types";
+
+const Posts = () => {
+	const [posts, setPosts] = useState<Array<PostType>>([]);
 	const [loading, setLoading] = useState<boolean>(false);
 	const fetchPosts = async (url: string) => {
 		setLoading(true);
@@ -34,7 +30,7 @@ const Posts = ({}: Props) => {
 					<div className="flex flex-col gap-6">
 						{posts.map((post, index) => (
 							<div key={index}>
-								<PostComponent {...post} />
+								<PostComponent post={post} />
 							</div>
 						))}
 					</div>
