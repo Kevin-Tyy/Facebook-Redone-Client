@@ -5,6 +5,7 @@
 * {
 	font-family: "Roboto", Arial, Helvetica, sans-serif;
 	box-sizing: border-box;
+  font-size: 14px;
 }
 ::-webkit-scrollbar {
   width: 0px;

@@ -75,8 +75,8 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 			<motion.div
 				initial="hidden"
 				whileInView="visible"
-				viewport={{ once: false, amount: 0.3 }}
-				transition={{ duration: 0.3 }}
+				viewport={{ once: false, amount: 0.1 }}
+				transition={{ duration: 0.4 }}
 				variants={{
 					hidden: { opacity: 0, x: -10 },
 				visible: { opacity: 1, x: 0 },
