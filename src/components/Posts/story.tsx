@@ -34,7 +34,7 @@ const Story = () => {
 	return (
 		<div className="w-full ">
 			{loading ? (
-				<div className="flex gap-6 h-60  overflow-x-scroll overflow-y-hidden pb-5">
+				<div className="flex gap-6 h-  overflow-x-scroll overflow-y-hidden pb-5">
 					<StorySkeleton/>
 				</div>
 			) : (

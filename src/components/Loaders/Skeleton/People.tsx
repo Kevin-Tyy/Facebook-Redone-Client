@@ -1,17 +1,17 @@
-import Skeleton from 'react-loading-skeleton'
+import Skeleton from "react-loading-skeleton";
 const People = () => {
 	const peoplecount = 5;
 	const peopleArray = Array(peoplecount).fill(null);
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className="flex flex-col gap-2">
 			{peopleArray.map((_, index) => (
 				<div className="flex gap-2 p-2" key={index}>
-                    <Skeleton circle width={40} height={40}/>
-                    <div className='w-full'>
-                        <Skeleton/>
-                        <Skeleton width={150}/>
-                    </div>   
-                </div>
+					<Skeleton circle width={40} height={40} />
+					<div className="w-full">
+						<Skeleton borderRadius={10}/>
+						<Skeleton width={150} borderRadius={10}/>
+					</div>
+				</div>
 			))}
 		</div>
 	);
