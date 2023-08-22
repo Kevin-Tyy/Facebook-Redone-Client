@@ -42,6 +42,7 @@ const App: FC = () => {
 							<Route path="/profile/:id" element={<Profile />} />
 							<Route path="/friends" element={<FriendPage />} />
 							<Route path="/chat" element={<Chat />} />
+							<Route path="/groups" element={<h1 className="h-screen w-full bg-gray-950 text-white grid place-content-center">Hello world</h1>} />
 
 							<Route
 								path="/home"

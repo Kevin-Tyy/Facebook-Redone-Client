@@ -26,3 +26,6 @@
 	color: rgb(255, 255, 255);
 	background-color: rgb(135, 79, 224);
 }
+.active .bottomBorder {
+  @apply w-3/5
+}

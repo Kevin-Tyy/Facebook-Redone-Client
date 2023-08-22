@@ -25,22 +25,22 @@ const UtilObj = [
 	{
 		icon: <LiveTvRounded sx={{ fontSize: 25 }} />,
 		title: "Watch",
-		link: "/home",
+		link: "/",
 	},
 	{
 		icon: <FlagRounded sx={{ fontSize: 25 }} />,
 		title: "Pages",
-		link: "/home",
+		link: "/",
 	},
 	{
 		icon: <Shop2Rounded sx={{ fontSize: 25 }} />,
 		title: "Market",
-		link: "/home",
+		link: "/",
 	},
 	{
 		icon: <SportsEsportsRounded sx={{ fontSize: 25 }} />,
 		title: "Gaming",
-		link: "/home",
+		link: "/",
 	},
 ];
 const BottomNav = () => {

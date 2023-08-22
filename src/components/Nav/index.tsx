@@ -1,34 +1,30 @@
 import Logo from "../Logo";
 import {
-	Telegram,
-	MoreVert,
-	Notifications,
 	Search,
 	PersonRounded,
 	PeopleAltRounded,
 	LogoutRounded,
 	Settings,
+	ArrowDownward,
+	ArrowDropDown,
+	NotificationAddSharp,
 } from "@mui/icons-material";
+
 import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
+import placeholderImage from "../../assets/avatar.webp";
 import { UserInfo } from "../../types/Types";
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { toast } from "react-hot-toast";
-const navObj = [
-	{ icon: <MoreVert sx={{ fontSize: 20 }} /> },
-	{ icon: <Telegram sx={{ fontSize: 20 }} /> },
-	{ icon: <Notifications sx={{ fontSize: 20 }} /> },
-];
+import { Tooltip } from "@mui/material";
+import { navObj as navLinkIcons } from "../../utils/utilObjects";
 
 const Navbar = () => {
 	const [showToggle, setShowToggle] = useState(false);
 	const toggleRef = useRef<HTMLDivElement | null>(null);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const [isNotication, setNotification] = useState(false);
 	const {
 		user: {
 			userInfo: { profileimage, userId, username, email },
@@ -76,106 +72,93 @@ const Navbar = () => {
 			handleLogout();
 		}
 	};
-	const handleNavButtons = (index: number) => {
-		if (index === 0) {
-			setShowToggle(true);
-		}
-		if (index === 1) {
-			navigate("/chat");
-		}
-		if (index === 2) {
-			setNotification(!isNotication);
-			if (!isNotication) {
-				toast.success(
-					"You will be receiving notifications when your friends make posts"
-				);
-			}
-		}
-	};
+
 	return (
 		<div className="sticky top-0 z-[5]">
-			<div className="flex gap-4 justify-between bg-primary-200 p-4 border-b border-gray-800">
-				<div className="hidden md:block">
+			<div className="flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
+				<div className="w-full hidden md:flex gap-4 items-center p-3">
 					<Logo />
-				</div>
-				<div className="bg-gray-950 flex items-center gap-3 p-1 rounded-full w-[500px] pl-4">
-					<Search sx={{ color: "#fff" }} />
-					<input
-						type="text"
-						className="w-full bg-transparent outline-none text-white"
-						placeholder="Search facebook"
-					/>
-				</div>
-				<div className="flex gap-2 md:gap-4 items-center">
-					{navObj.map((nav, index) => (
-						<div
-							key={index}
-							onClick={() => handleNavButtons(index)}
-							className={`bg-gray-950 w-10 h-10 flex items-center justify-center rounded-full text-primary-100 
-								cursor-pointer hover:bg-gray-900 transition duration-300 border border-gray-700 active:bg-gray-800 hover:rotate-[360deg] ${
-									index == 2 &&
-									isNotication &&
-									"bg-primary-100/20 active:scale-125 hover:bg-primary-100/20 "
-								}`}>
-							{nav.icon}
-						</div>
-					))}
-					<div
-						onClick={() => setShowToggle(true)}
-						className="bg-gradient-to-r h-10 w-10 from-sky-500 to-violet-800 rounded-full cursor-pointer p-[3px]">
-						<img
-							src={profileimage}
-							alt="profile"
-							className="w-full h-full  rounded-full object-cover"
+					<div className="bg-gray-950 flex items-center gap-3 p-2.5 rounded-full w-[300px] pl-4">
+						<Search sx={{ color: "#fff" }} />
+						<input
+							type="text"
+							className="w-full bg-transparent outline-none text-white"
+							placeholder="Search facebook"
 						/>
 					</div>
 				</div>
-			</div>
-			{showToggle && (
-				<motion.div
-					initial="hidden"
-					whileInView="visible"
-					viewport={{ once: false, amount: 0.1 }}
-					transition={{ duration: 0.15 }}
-					variants={{
-						hidden: { opacity: 0, y: -30 },
-						visible: { opacity: 1, y: 0 },
-					}}
-					className="absolute right-0 bg-primary-200 m-2 border border-gray-700 rounded-md"
-					ref={toggleRef}>
-					<Link to={`/profile/${userId}`}>
-						<div className="flex items-center gap-3  p-3 pb-4 hover:bg-gray-800/50 m-1 cursor-pointer rounded-lg">
-							<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
-								<div className="bg-primary-200 p-[4px] rounded-full">
-									<img
-										src={profileimage}
-										className="rounded-full w-12 h-12 object-cover"
-									/>
+				<div className="w-full flex gap-2 self-end justify-center">
+					{navLinkIcons.map((item, index) => (
+						<Tooltip title={item.title} key={index}>
+							<NavLink
+								to={item.link}
+								className={` w-full cursor-pointer transition hover:text-blue-600 max-w-[100px]`}>
+								<div className="w-full group flex flex-col items-center justify-center text-white">
+									<div className="p-3">
+										{<item.icon sx={{ fontSize: 25 }} />}
+									</div>
+									<div className="bottomBorder h-1.5 rounded-t-md bg-blue-600 w-0 group-hover:w-3/5 transition-all duration-500"></div>
 								</div>
-							</div>
-							<div>
-								<p className="text-white capitalize">{username}</p>
-								<p className="text-gray-400">{email}</p>
+							</NavLink>
+						</Tooltip>
+					))}
+				</div>
+				<div className="w-full justify-end flex gap-6 md:gap-4 items-center">
+					<NotificationAddSharp
+						sx={{ color: "white", fontSize: 25, cursor: "pointer" }}
+					/>
+					<div className="bg-gray-800 rounded-full py-1.5 px-2 cursor-pointer hover:bg-gray-700 transition group">
+						<div className="flex items-center gap-2">
+							<img
+								src={profileimage || placeholderImage}
+								alt="profile"
+								className="w-10 h-10  rounded-full object-cover"
+							/>
+							<div className="flex items-center">
+								<p className="capitalize text-white font-bold">{username}</p>
+								<div className="group-hover:rotate-180 transition-all duration-500">
+									<ArrowDropDown sx={{ fontSize: 30, color: "white" }} />
+								</div>
 							</div>
 						</div>
-					</Link>
-					<ul>
-						{toggleObj.map((obj, index) => (
-							<Link to={obj?.link as string}>
-								<div
-									className="py-4 px-8 hover:bg-primary-300/40 border-b border-gray-700 rounded-md m-1 cursor-pointer transition"
-									key={index}
-									onClick={() => handleClick(index)}>
-									<li className="flex text-white gap-3">
-										<span>{obj.icon}</span>
-										<span>{obj.title}</span>
-									</li>
+						<div
+							className="absolute  -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-500 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-md"
+							ref={toggleRef}>
+							<Link to={`/profile/${userId}`}>
+								<div className="flex items-center gap-3  p-3 pb-4 hover:bg-gray-800/50 m-1 cursor-pointer rounded-lg">
+									<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
+										<div className="bg-primary-200 p-[4px] rounded-full">
+											<img
+												src={profileimage || placeholderImage}
+												className="rounded-full w-12 h-12 object-cover"
+											/>
+										</div>
+									</div>
+									<div>
+										<p className="text-white capitalize">{username}</p>
+										<p className="text-gray-400">{email}</p>
+									</div>
 								</div>
 							</Link>
-						))}
-					</ul>
-				</motion.div>
-			)}
+							<ul>
+								{toggleObj.map((obj, index) => (
+									<Link to={obj?.link as string} key={index}>
+										<div
+											className="py-4 px-8 hover:bg-primary-300/40 border-b border-gray-700 rounded-md m-1 cursor-pointer transition"
+											key={index}
+											onClick={() => handleClick(index)}>
+											<li className="flex text-white gap-3">
+												<span>{obj.icon}</span>
+												<span>{obj.title}</span>
+											</li>
+										</div>
+									</Link>
+								))}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

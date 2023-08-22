@@ -2,6 +2,7 @@ import { UserInfo, Userdata } from "../../../types/Types";
 import FriendLoader from "../../../components/Loaders/Skeleton/FriendPageLoader";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
+import { Link } from "react-router-dom";
 
 interface Props {
 	friends: Userdata[];
@@ -12,11 +13,7 @@ const FriendLayout = ({ friends, userData }: Props) => {
 		user: {
 			userInfo: { userId },
 		},
-	} = useSelector(loggedInUser) as { user: { userInfo: Userdata } };
-
-	const refreshPage = (user: UserInfo) => {
-		document.location = `/profile/${user?.userId}`;
-	};
+	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 
 	return (
 		<div>
@@ -34,32 +31,33 @@ const FriendLayout = ({ friends, userData }: Props) => {
 									className="bg-primary-200 p-4 rounded-lg border border-gray-800"
 									key={index}>
 									<div className="flex flex-col sm:flex-row items-center gap-4">
-										<div
-											className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1"
-											onClick={() => refreshPage(user)}>
+										<Link
+											to={`/profile/${user?.userId}`}
+											className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
+											{" "}
 											<div className="bg-primary-200 rounded-full p-1">
 												<img
 													src={user.profileimage}
 													className="w-32 h-32 min-h-[130px] min-w-[130px] object-cover rounded-full"
 												/>
 											</div>
-										</div>
+										</Link>
 										<div className="flex flex-col gap-1 w-full">
-											<div onClick={() => refreshPage(user)}>
+											<Link to={`/profile/${user?.userId}`}>
 												<p className="text-xl text-white capitalize">
 													{user.username}
 												</p>
 												<p className="text-light">{user.email}</p>
-											</div>
+											</Link>
 											<p className="text-gray-500">{user.bio}</p>
 											<div className="flex flex-col md:flex-row w-full gap-3">
-												<div
-													onClick={() => refreshPage(user)}
+												<Link
+													to={`/profile/${user?.userId}`}
 													className="w-full">
 													<button className="text-light border p-2 border-gray-700 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
 														View profile
 													</button>
-												</div>
+												</Link>
 											</div>
 										</div>
 									</div>

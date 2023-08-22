@@ -82,7 +82,7 @@ const profile = () => {
 	useEffect(() => {
 		fetchProfile(`${BaseURL}/user/${id}`);
 		fetchUserPosts(`${BaseURL}/post/${id}`);
-	}, []);
+	}, [id]);
 
 	if (userData) {
 		if (userData?.userId == userId) {
@@ -280,7 +280,7 @@ const profile = () => {
 								}`}>
 								<div>
 									{index === 0 && <p className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-red-700 text-white rounded-full text-sm">{posts?.length}</p>}
-									{index === 2 && <p className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-red-700 text-white rounded-full text-sm">{userData?.friendList.length}</p>}
+									{index === 2 && <p className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center bg-red-700 text-white rounded-full text-sm">{friendCount}</p>}
 									{tab}
 								</div>
 							</div>
