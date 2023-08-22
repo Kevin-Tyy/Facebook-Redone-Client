@@ -1,8 +1,6 @@
-// import bgImage from "../../assets/bg-cover.jpg";
 import { useState, FC, useEffect } from "react";
 import RegButtons from "../../components/Buttons/RegButtons";
 import { Stepper, Step, StepLabel } from "@mui/material";
-import gmailImage from "../../assets/gmail.png";
 import StepOne from "../../components/Registration/StepOne";
 import StepTwo from "../../components/Registration/StepTwo";
 import { Link } from "react-router-dom";
@@ -26,7 +24,6 @@ const RegisterForm: FC = () => {
 		lastName: "",
 		username: "",
 		email: "",
-		phoneNumber: "",
 		password: "",
 	});
 	useEffect(() => {

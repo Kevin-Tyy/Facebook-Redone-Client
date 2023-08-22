@@ -47,10 +47,9 @@ const Login: FC = () => {
 			if (!data.success) {
 				toast.error(data?.msg);
 			} else {
-				const userInfo = decodeToken(data.token);
+				const userInfo = decodeToken(data?.token);				
 				dispatch(login(userInfo));
 				toast.success(data?.msg);
-
 				navigate("/home");
 			}
 		} catch (error) {

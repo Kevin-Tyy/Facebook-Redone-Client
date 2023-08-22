@@ -31,7 +31,7 @@ const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 					value={formData.username}
 					onChange={handleInputChange}
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
-					placeholder="Username"
+					placeholder="Username*"
 					name="username"
 				/>
 			</div>
@@ -42,7 +42,7 @@ const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 					value={formData.password}
 					onChange={handleInputChange}
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
-					placeholder="Password"
+					placeholder="Password*"
 					name="password"
 				/>
 				<button

@@ -14,7 +14,7 @@ const StepOne = ({ formData, handleInputChange }: Props) => {
 					value={formData.firstName}
 					onChange={handleInputChange}
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
-					placeholder="First name"
+					placeholder="First name*"
 					name="firstName"
 				/>
 			</div>
@@ -24,7 +24,7 @@ const StepOne = ({ formData, handleInputChange }: Props) => {
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
 					value={formData.lastName}
 					onChange={handleInputChange}
-					placeholder="Last name"
+					placeholder="Last name*"
 					name="lastName"
 				/>
 			</div>
@@ -35,7 +35,7 @@ const StepOne = ({ formData, handleInputChange }: Props) => {
 					className="bg-transparent outline-none w-full placeholder:text-neutral-400"
 					value={formData.email}
 					onChange={handleInputChange}
-					placeholder="Email"
+					placeholder="Email*"
 					name="email"
 				/>
 			</div>
