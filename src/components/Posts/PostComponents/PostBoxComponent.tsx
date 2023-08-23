@@ -86,7 +86,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 					<p className="text-xs -my-1 text-gray-400">You posted</p>
 				)}
 				<div className="flex flex-col gap-4">
-					<div className="flex py-3 justify-between border-b border-gray-600">
+					<div className="flex py-3 justify-between ">
 						<Link to={`/profile/${creator?.userId}`}>
 							<div className="flex gap-3 items-center">
 								<div className="bg-primary-100 p-[3px] rounded-full">
@@ -108,7 +108,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 						<div
 							onClick={() => setShowToggle(true)}
 							className="text-primary-100 hover:bg-gray-950/80 rounded-full w-14 flex justify-center items-center cursor-pointer transition duration-300 active:bg-gray-950/50 p-2 ">
-							<MoreVert />
+							<MoreVert fontSize="large"/>
 						</div>
 					</div>
 					<div className="flex flex-col gap-2">

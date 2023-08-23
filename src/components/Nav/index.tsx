@@ -5,25 +5,21 @@ import {
 	PeopleAltRounded,
 	LogoutRounded,
 	Settings,
-	ArrowDownward,
 	ArrowDropDown,
 	NotificationAddSharp,
+	WbSunnyOutlined,
 } from "@mui/icons-material";
 
 import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import placeholderImage from "../../assets/avatar.webp";
 import { UserInfo } from "../../types/Types";
-import { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
 import { Tooltip } from "@mui/material";
 import { navObj as navLinkIcons } from "../../utils/utilObjects";
 
 const Navbar = () => {
-	const [showToggle, setShowToggle] = useState(false);
-	const toggleRef = useRef<HTMLDivElement | null>(null);
 	const dispatch = useDispatch();
 	const {
 		user: {
@@ -50,26 +46,16 @@ const Navbar = () => {
 			title: "Settings and Privacy",
 			Link: `/profile/${userId}`,
 		},
+		{
+			icon: <WbSunnyOutlined />,
+			title: "Change Modes",
+			link: "#",
+		},
 		{ icon: <LogoutRounded />, title: "Logout" },
 	];
-	const handleOutsideClick = (e: any) => {
-		if (toggleRef.current && !toggleRef.current.contains(e.target)) {
-			setShowToggle(false);
-			handleLogout;
-		}
-	};
-	useEffect(() => {
-		document.addEventListener("mousedown", handleOutsideClick);
-		return () => {
-			document.addEventListener("mousedown", handleOutsideClick);
-		};
-	}, []);
-	const handleLogout = () => {
-		dispatch(logout());
-	};
 	const handleClick = (index: number) => {
 		if (index === 3) {
-			handleLogout();
+			dispatch(logout());
 		}
 	};
 
@@ -78,7 +64,7 @@ const Navbar = () => {
 			<div className="flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
 				<div className="w-full hidden md:flex gap-4 items-center p-3">
 					<Logo />
-					<div className="bg-gray-950 flex items-center gap-3 p-2.5 rounded-full w-[300px] pl-4">
+					<div className="bg-primary-100/60 flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
 						<Search sx={{ color: "#fff" }} />
 						<input
 							type="text"
@@ -103,11 +89,11 @@ const Navbar = () => {
 						</Tooltip>
 					))}
 				</div>
-				<div className="w-full justify-end flex gap-6 md:gap-4 items-center">
+				<div className="w-full justify-end flex gap-10 items-center">
 					<NotificationAddSharp
 						sx={{ color: "white", fontSize: 25, cursor: "pointer" }}
 					/>
-					<div className="bg-gray-800 rounded-full py-1.5 px-2 cursor-pointer hover:bg-gray-700 transition group">
+					<div className="bg-primary-100/60 rounded-full py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">
 							<img
 								src={profileimage || placeholderImage}
@@ -121,30 +107,24 @@ const Navbar = () => {
 								</div>
 							</div>
 						</div>
-						<div
-							className="absolute  -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-500 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-md"
-							ref={toggleRef}>
+						<div className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-500 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-3xl w-full max-w-xs">
 							<Link to={`/profile/${userId}`}>
-								<div className="flex items-center gap-3  p-3 pb-4 hover:bg-gray-800/50 m-1 cursor-pointer rounded-lg">
-									<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
-										<div className="bg-primary-200 p-[4px] rounded-full">
-											<img
-												src={profileimage || placeholderImage}
-												className="rounded-full w-12 h-12 object-cover"
-											/>
-										</div>
-									</div>
+								<div className="flex items-center gap-3  p-4  m-1 cursor-pointer rounded-lg">
+									<img
+										src={profileimage || placeholderImage}
+										className="rounded-full w-12 h-12 object-cover"
+									/>
 									<div>
 										<p className="text-white capitalize">{username}</p>
 										<p className="text-gray-400">{email}</p>
 									</div>
 								</div>
 							</Link>
-							<ul>
+							<ul className="flex flex-col space-y-1">
 								{toggleObj.map((obj, index) => (
 									<Link to={obj?.link as string} key={index}>
 										<div
-											className="py-4 px-8 hover:bg-primary-300/40 border-b border-gray-700 rounded-md m-1 cursor-pointer transition"
+											className="py-3 px-5 hover:bg-primary-100/40 rounded-md m-1 cursor-pointer"
 											key={index}
 											onClick={() => handleClick(index)}>
 											<li className="flex text-white gap-3">
