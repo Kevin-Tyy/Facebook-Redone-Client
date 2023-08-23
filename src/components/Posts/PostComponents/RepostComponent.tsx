@@ -74,7 +74,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 
 	return (
 		<>
-			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
+			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl p-3  border border-gray-800">
 				{creator?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You reposted</p>
 				)}
@@ -140,7 +140,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 									className="relative cursor-pointer group"
 									onClick={viewPost}>
 									<img
-										src={post.postMedia && "/code.jpg"}
+										src={post.postMedia && post.postMedia}
 										className="w-full max-h-[500px] object-cover rounded-xl "
 									/>
 									<div className="bg-white absolute inset-0  h-full w-full opacity-0 group-hover:opacity-[0.02] transition group-active:opacity-5"></div>

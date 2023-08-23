@@ -54,7 +54,7 @@ const Navbar = () => {
 		{ icon: <LogoutRounded />, title: "Logout" },
 	];
 	const handleClick = (index: number) => {
-		if (index === 3) {
+		if (index === 4) {
 			dispatch(logout());
 		}
 	};

@@ -109,7 +109,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 						<div className="flex flex-col gap-2">
 							<div className="relative cursor-pointer group" onClick={viewPost}>
 								<img
-									src={post.postMedia && "/code.jpg"}
+									src={post.postMedia && post.postMedia}
 									className="w-full max-h-[500px] object-cover rounded-xl "
 								/>
 								<div className="bg-white absolute inset-0  h-full w-full opacity-0 group-hover:opacity-[0.02] transition group-active:opacity-5"></div>
