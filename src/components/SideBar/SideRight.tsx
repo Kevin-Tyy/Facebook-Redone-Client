@@ -60,7 +60,7 @@ const SideRight = () => {
 		));
 
 	return (
-		<div className="hidden xl:flex h-fit flex-col sticky top-[100px] w-full 2xl:min-w-[400px] max-w-[400px]">
+		<div className="hidden xl:flex h-fit flex-col sticky top-[90px] w-full 2xl:min-w-[400px] max-w-[400px]">
 			<div className="bg-primary-200 p-5 flex rounded-lg w-full flex-col gap-4 ">
 				<div className="flex justify-between items-center text-white ">
 					<h1 className="text-xl">Trends for you</h1>

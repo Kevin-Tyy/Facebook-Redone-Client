@@ -60,17 +60,15 @@ const Sidebar = () => {
 		};
 	};
 	return (
-		<div className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[100px]  w-[400px] ">
-			<div className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
+		<div className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[90px]  w-[370px]">
+			<div className="bg-primary-200 p-8 rounded-md">
 				<Link to={`/profile/${userId}`}>
-					<div className="flex items-center gap-3 p-3 pb-4 hover:bg-gray-800/50  cursor-pointer rounded-lg">
-						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
-							<div className="bg-primary-200 p-[4px] rounded-full">
-								<img
-									src={profileimage}
-									className="rounded-full w-12 h-12 object-cover"
-								/>
-							</div>
+					<div className="flex items-center gap-3 rounded-lg">
+						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[2px] ">
+							<img
+								src={profileimage}
+								className="rounded-full w-12 h-12 object-cover"
+							/>
 						</div>
 						<div>
 							<p className="text-white capitalize">{username}</p>
@@ -78,14 +76,15 @@ const Sidebar = () => {
 						</div>
 					</div>
 				</Link>
-				<div className="border-b-[3px] border-primary-100"></div>
+			</div>
+			<div className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
 				<div className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
 						<Link to={obj?.link} key={index}>
 							<div
 								onClick={() => setActiveTab(obj.title)}
-								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50 ${
-									activeTab === obj.title && "bg-gray-800 "
+								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${
+									activeTab === obj.title && "bg-primary-100/50"
 								}`}>
 								<span className="text-white">{obj.icon}</span>
 								<p className="text-white">{obj.title}</p>
