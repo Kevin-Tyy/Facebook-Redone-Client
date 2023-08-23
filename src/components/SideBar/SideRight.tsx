@@ -46,7 +46,7 @@ const SideRight = () => {
 	useEffect(() => {
 		fetchPeople();
 		fetchUserFriends();
-	}, [addFriend]);
+	}, []);
 
 	allUsers &&
 		(allUsers = (allUsers as Userdata[]).filter(
@@ -97,7 +97,7 @@ const SideRight = () => {
 						<div className="text-lg text-gray-400">No suggestions available</div>
 					) : (
 						<div className="flex flex-col gap-7">
-							{allUsers.map((user, index) => (
+							{allUsers.slice(0, 5).map((user, index) => (
 								<div
 									className="flex gap-2 justify-between items-center"
 									key={index}>

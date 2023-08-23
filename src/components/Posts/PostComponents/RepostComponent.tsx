@@ -21,12 +21,13 @@ import { toast } from "react-hot-toast";
 import { Posts } from "../../../types/Types";
 import RepostModal from "../../Modals/RepostModal";
 
-interface PostBoxProps {
+interface RepostBoxProps {
 	post: Posts;
 }
 
-const PostBox: React.FC<PostBoxProps> = ({ post }) => {
-	const { postId, creator, postText, createdAt, likes, comments } = post;
+const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
+	const { postId, creator, postText, createdAt, likes, comments, repostedBy } =
+		post;
 	const formattedDate = useDateFormatter(createdAt);
 	const [isPostInView, setPostInView] = useState(false);
 	const [showToggle, setShowToggle] = useState(false);
@@ -73,62 +74,92 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 
 	return (
 		<>
-			<motion.div
-				className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
+			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
 				{creator?.userId == userId && (
-					<p className="text-xs -my-1 text-gray-400">You posted</p>
+					<p className="text-xs -my-1 text-gray-400">You reposted</p>
 				)}
-				<div className="flex flex-col gap-4">
+				<div>
 					<div className="flex justify-between items-start">
-						<Link to={`/profile/${creator?.userId}`}>
+						<Link to={`/profile/${repostedBy?.userId}`}>
 							<div className="flex gap-3 items-center py-3 ">
 								<div className="bg-primary-100 p-[3px] rounded-full">
 									<img
 										src={
-											creator?.profileimage
-												? creator?.profileimage
+											repostedBy?.profileimage
+												? repostedBy?.profileimage
 												: placeholderImage
 										}
 										className="w-12 h-12  rounded-full object-cover"
 									/>
 								</div>
 								<div className="flex flex-col">
-									<p className="text-light capitalize">{creator?.username}</p>
-									<p className="text-xs text-light/60">{formattedDate}</p>
+									<p className="text-light capitalize">
+										{repostedBy?.username}
+									</p>
+									<p className="text-sm text-gray-500">
+										<span className="text-sm capitalize">{repostedBy?.username} </span>
+										reposted this.
+									</p>
 								</div>
 							</div>
 						</Link>
 						<div
 							onClick={() => setShowToggle(true)}
-							className="text-white self-start  rounded-full p-1 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-primary-100/60 ">
+							className="text-white self-start  rounded-full p-1 m-2 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-primary-100/60 ">
 							<MoreHoriz sx={{ fontSize: 30 }} />
 						</div>
 					</div>
-					<div className="flex flex-col gap-2">
-						<h1 className="text-white">{postText}</h1>
+				</div>
+				<div className="flex gap-8 px-4">
+					<div className="w-1 flex-1 rounded-full mx-2 bg-gray-700 text-transparent">h</div>
+					<div className="flex self-end w-full flex-col">
+						<div className="flex justify-between items-start">
+							<Link to={`/profile/${creator?.userId}`}>
+								<div className="flex gap-3 items-center pb-3 ">
+									<div className="bg-primary-100 p-[3px] rounded-full">
+										<img
+											src={
+												creator?.profileimage
+													? creator?.profileimage
+													: placeholderImage
+											}
+											className="w-12 h-12  rounded-full object-cover"
+										/>
+									</div>
+									<div className="flex flex-col">
+										<p className="text-light capitalize">{creator?.username}</p>
+										<p className="text-xs text-light/60">{formattedDate}</p>
+									</div>
+								</div>
+							</Link>
+						</div>
 						<div className="flex flex-col gap-2">
-							<div className="relative cursor-pointer group" onClick={viewPost}>
-								<img
-									src={post.postMedia && "/code.jpg"}
-									className="w-full max-h-[500px] object-cover rounded-xl "
-								/>
-								<div className="bg-white absolute inset-0  h-full w-full opacity-0 group-hover:opacity-[0.02] transition group-active:opacity-5"></div>
+							<h1 className="text-white">{postText}</h1>
+							<div className="flex flex-col gap-2">
+								<div
+									className="relative cursor-pointer group"
+									onClick={viewPost}>
+									<img
+										src={post.postMedia && "/code.jpg"}
+										className="w-full max-h-[500px] object-cover rounded-xl "
+									/>
+									<div className="bg-white absolute inset-0  h-full w-full opacity-0 group-hover:opacity-[0.02] transition group-active:opacity-5"></div>
+								</div>
 							</div>
-
-							<ReactionPallete
-								userId={userId}
-								postId={postId}
-								likedByLoggedInUser={likedByLoggedInUser}
-								setLikedByLoggedInUser={setLikedByLoggedInUser}
-								setLikecount={setlikecount}
-								likecount={likecount}
-								setPostInView={setPostInView}
-								commentCount={commentcount}
-								setRepostModal={() => setRepostModal(true)}
-							/>
 						</div>
 					</div>
 				</div>
+				<ReactionPallete
+					userId={userId}
+					postId={postId}
+					likedByLoggedInUser={likedByLoggedInUser}
+					setLikedByLoggedInUser={setLikedByLoggedInUser}
+					setLikecount={setlikecount}
+					likecount={likecount}
+					setPostInView={setPostInView}
+					commentCount={commentcount}
+					setRepostModal={() => setRepostModal(true)}
+				/>
 
 				{showToggle && (
 					<motion.div
@@ -181,11 +212,11 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 					setLikedByLoggedInUser={setLikedByLoggedInUser}
 				/>
 			)}
-			{repostModal && 
-				<RepostModal post={post} onClose={() => setRepostModal(false)}/>
-			}
+			{repostModal && (
+				<RepostModal post={post} onClose={() => setRepostModal(false)} />
+			)}
 		</>
 	);
 };
 
-export default PostBox;
+export default RepostBox;

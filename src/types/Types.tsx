@@ -21,12 +21,7 @@ export interface Userdata {
     work : string;//
     friendList : Array<Userdata>;//
 }
-export interface Creator {
-	profileimage : string;
-	username : string;
-    userId : string;
-    
-}
+
 export interface UserInfo {
     userId : string;
     email : string;
@@ -43,7 +38,7 @@ export interface UserInfo {
 export interface StoryType {
 	storyMedia: string;
 	storyCaption?: string;
-	creator: Creator;
+	creator: Userdata;
 	createdAt: Date;
     storyId : string;
 }
@@ -59,11 +54,13 @@ export interface Likes {
 	userId: string;
 }
 export interface Posts {
-	postId : string,
-	postMedia : string,
-	creator :   Creator,
-	postText : string,
-	createdAt : Date,
-	likes : Array<Likes>,
-	comments : Array<Comment>,
+	postId : string;
+	postMedia : string;
+	creator :   Userdata;
+	postText : string;
+    isReposted : boolean;
+	createdAt : Date;
+	likes : Array<Likes>;
+	comments : Array<Comment>;
+    repostedBy : Userdata
 }

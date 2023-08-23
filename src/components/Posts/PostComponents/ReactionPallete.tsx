@@ -20,6 +20,7 @@ interface Props {
 	setLikecount: (value: any) => void;
 	likecount: number;
 	commentCount: number;
+	setRepostModal : (value: any) => void;
 }
 const ReactionPallete = ({
 	setPostInView,
@@ -30,9 +31,11 @@ const ReactionPallete = ({
 	setLikecount,
 	commentCount,
 	likecount,
+	setRepostModal
 }: Props) => {
 	const styleClass = `flex items-center justify-center cursor-pointer gap-2 font-bold`;
 	const handleLike = async () => {
+		console.log(postId)
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
 			setLikecount(likecount - 1);
@@ -49,7 +52,6 @@ const ReactionPallete = ({
 			toast.success(data.msg);
 		}
 	};
-
 	return (
 		<div className="flex justify-center">
 			<div className="flex w-4/5 justify-between items-center gap-2 p-1 rounded-lg ">
@@ -87,6 +89,7 @@ const ReactionPallete = ({
 				</Tooltip>
 				<Tooltip title="Repost this">
 					<div
+						onClick={setRepostModal}
 						className={`${styleClass} transition-all duration-500 text-gray-500 hover:bg-orange-800/20 p-3 rounded-full hover:text-orange-700`}>
 						<BiRepost size={25} />
 					</div>

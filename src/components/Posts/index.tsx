@@ -4,6 +4,7 @@ import { BaseURL } from "../../utils/Link";
 import PostComponent from "./PostComponents/PostBoxComponent";
 import PostSkeleton from "../Loaders/Skeleton/Post";
 import { Posts as PostType } from "../../types/Types";
+import RepostBox from "./PostComponents/RepostComponent";
 
 const Posts = () => {
 	const [posts, setPosts] = useState<Array<PostType>>([]);
@@ -23,14 +24,18 @@ const Posts = () => {
 		<div className="h-full w-full">
 			{loading ? (
 				<div>
-					<PostSkeleton/>
+					<PostSkeleton />
 				</div>
 			) : (
 				<div>
 					<div className="flex flex-col gap-6">
 						{posts.map((post, index) => (
 							<div key={index}>
-								<PostComponent post={post} />
+								{post.isReposted ? (
+									<RepostBox post={post}/>
+								) : (
+									<PostComponent post={post} />
+								)}
 							</div>
 						))}
 					</div>

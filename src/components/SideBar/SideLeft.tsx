@@ -1,9 +1,7 @@
 import {
-	FlagRounded,
 	GroupRounded,
 	HomeRounded,
 	PeopleRounded,
-	Shop2Rounded,
 	SportsEsportsRounded,
 	LiveTvRounded,
 } from "@mui/icons-material";
@@ -14,8 +12,9 @@ import { useState } from "react";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import { UserInfo } from "../../types/Types";
+import { NavLink } from "react-router-dom";
 const UtilObj = [
-	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home", link: "/home" },
+	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home", link: "/" },
 	{
 		icon: <PeopleRounded sx={{ fontSize: 25 }} />,
 		title: "Friends",
@@ -29,22 +28,12 @@ const UtilObj = [
 	{
 		icon: <LiveTvRounded sx={{ fontSize: 25 }} />,
 		title: "Watch",
-		link: "/home",
-	},
-	{
-		icon: <FlagRounded sx={{ fontSize: 25 }} />,
-		title: "Pages",
-		link: "/home",
-	},
-	{
-		icon: <Shop2Rounded sx={{ fontSize: 25 }} />,
-		title: "Market",
-		link: "/home",
+		link: "/",
 	},
 	{
 		icon: <SportsEsportsRounded sx={{ fontSize: 25 }} />,
 		title: "Gaming",
-		link: "/home",
+		link: "/",
 	},
 ];
 
@@ -80,7 +69,7 @@ const Sidebar = () => {
 			<div className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
 				<div className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
-						<Link to={obj?.link} key={index}>
+						<NavLink to={obj?.link} key={index}>
 							<div
 								onClick={() => setActiveTab(obj.title)}
 								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${
@@ -89,19 +78,20 @@ const Sidebar = () => {
 								<span className="text-white">{obj.icon}</span>
 								<p className="text-white">{obj.title}</p>
 							</div>
-						</Link>
+						</NavLink>
 					))}
 				</div>
 				<Button
 					sx={{
-						backgroundColor: "#010a13",
-						p: 1.5,
-						"&:hover": { backgroundColor: "#010a13" },
+						color: "white",
+						backgroundColor: "#0C88EF",
 						textTransform: "capitalize",
-						fontWeight: "bold",
-						borderRadius: "7px",
-					}}
-					className=" text-primary-100 ">
+						borderRadius: "40px",
+						m: "10px",
+						px: "25px",
+						py: "12px",
+						"&:hover": { backgroundColor: "#3293e3" },
+					}}>
 					See more
 				</Button>
 			</div>

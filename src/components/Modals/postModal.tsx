@@ -11,14 +11,14 @@ import { Image } from "@mui/icons-material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";
-import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
 import EmojiPicker, { Theme } from "emoji-picker-react";
 import { Emoji } from "../../types/Types";
+import Modal from ".";
 interface Props {
-	setIsPostModal: (value: any) => void;
+	onClose: (value: any) => void;
 }
 
 const utilIcons = [
@@ -27,7 +27,7 @@ const utilIcons = [
 	<MoreHoriz fontSize="large" />,
 ];
 
-const PostModal = ({ setIsPostModal }: Props) => {
+const PostModal = ({ onClose }: Props) => {
 	const [postText, setPostText] = useState<string>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -93,27 +93,15 @@ const PostModal = ({ setIsPostModal }: Props) => {
 	};
 
 	return (
-		<div
-			className="backdrop-blur-sm bg-gray-950/50 h-screen w-full fixed top-0 right-0 bottom-0 left-0 z-[10] flex justify-center items-center "
-			onClick={() => setIsPostModal(false)}>
-			<motion.div
-				initial="hidden"
-				whileInView="visible"
-				viewport={{ once: true, amount: 0.1 }}
-				transition={{ duration: 0.2, delay: 0.2 }}
-				variants={{
-					hidden: { opacity: 0, y: -30 },
-					visible: { opacity: 1, y: 0 },
-				}}
-				onClick={(e) => e.stopPropagation()}
-				className="relative bg-primary-200 w-full ring-1 ring-inset ring-gray-700/50 max-w-[550px] p-3 rounded-lg ">
+		<Modal onClose={onClose}>
+			<div>
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
 						Create a post
 					</h1>
 
 					<div
-						onClick={() => setIsPostModal(false)}
+						onClick={() => onClose}
 						className="hover:bg-gray-700 rounded-full p-1.5 absolute top-5 right-3 cursor-pointer ">
 						<CloseRounded sx={{ color: "#fff" }} />
 					</div>
@@ -203,9 +191,10 @@ const PostModal = ({ setIsPostModal }: Props) => {
 						<EmojiPicker onEmojiClick={onEmojiClick} theme={Theme.DARK} />
 					</div>
 				)}
-			</motion.div>
-			<Toaster />
-		</div>
+
+				<Toaster />
+			</div>
+		</Modal>
 	);
 };
 
