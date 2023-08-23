@@ -107,7 +107,7 @@ const Navbar = () => {
 								</div>
 							</div>
 						</div>
-						<div className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-500 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-3xl w-full max-w-xs">
+						<div className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-300 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-3xl w-full max-w-xs">
 							<Link to={`/profile/${userId}`}>
 								<div className="flex items-center gap-3  p-4  m-1 cursor-pointer rounded-lg">
 									<img

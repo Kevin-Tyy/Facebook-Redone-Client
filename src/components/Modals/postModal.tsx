@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import { Emoji } from "../../types/Types";
 interface Props {
 	setIsPostModal: (value: any) => void;
@@ -106,7 +106,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 					visible: { opacity: 1, y: 0 },
 				}}
 				onClick={(e) => e.stopPropagation()}
-				className="relative bg-primary-200 w-full  max-w-[550px] p-3 rounded-lg ">
+				className="relative bg-primary-200 w-full ring-1 ring-inset ring-gray-700/50 max-w-[550px] p-3 rounded-lg ">
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
 						Create a post
@@ -120,10 +120,8 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				</div>
 				<div className="p-2">
 					<div className="flex items-center gap-2">
-						<div className="bg-primary-100 p-1 rounded-full">
-							<div className="bg-primary-200 p-1 rounded-full">
-								<img src={profileimage} className="w-12 h-12  rounded-full" />
-							</div>
+						<div className="bg-blue-base p-1 rounded-full">
+							<img src={profileimage} className="w-12 h-12  rounded-full" />
 						</div>
 						<div className="flex flex-col items-start">
 							<p className="text-light font-semibold capitalize">{username}</p>
@@ -202,7 +200,7 @@ const PostModal = ({ setIsPostModal }: Props) => {
 				</div>
 				{showPicker && (
 					<div ref={pickerRef} className="absolute -bottom-40 -right-40">
-						<EmojiPicker onEmojiClick={onEmojiClick} theme='Dark' />
+						<EmojiPicker onEmojiClick={onEmojiClick} theme={Theme.DARK} />
 					</div>
 				)}
 			</motion.div>

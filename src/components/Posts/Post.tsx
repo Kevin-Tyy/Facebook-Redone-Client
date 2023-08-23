@@ -37,7 +37,7 @@ const PostComponent = () => {
 						/>
 					</div>
 					<p
-						className="bg-gray-800/50 text-light hover:bg-gray-800 rounded-full transition duration-300 cursor-pointer  w-full p-4"
+						className="bg-primary-100/30 text-light hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
 						onClick={() => setIsPostModal(true)}>
 						What's on your mind, <span className="capitalize">{username}</span>?
 					</p>
@@ -51,7 +51,7 @@ const PostComponent = () => {
 								className={`${index == 3 && "hidden sm:block"} ${
 									index == 3 && "hidden md:block"
 								} `}>
-								<ButtonComp color="#010A13">
+								<ButtonComp color="#0E0f17">
 									<span
 										className={`text-${
 											index == 0
@@ -75,6 +75,8 @@ const PostComponent = () => {
 							color: "white",
 							backgroundColor: "#0C88EF",
 							textTransform: "capitalize",
+							borderRadius: "40px",
+							px : '30px',
 							"&:hover": { backgroundColor: "#0C88EF" },
 						}}
 						onClick={() => setIsPostModal(true)}>

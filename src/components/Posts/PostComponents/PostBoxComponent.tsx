@@ -19,7 +19,6 @@ import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Posts } from "../../../types/Types";
-import Demo from "/code.jpeg";
 
 interface PostBoxProps {
 	post: Posts;
@@ -79,16 +78,16 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 				transition={{ duration: 0.4 }}
 				variants={{
 					hidden: { opacity: 0, x: -10 },
-				visible: { opacity: 1, x: 0 },
+					visible: { opacity: 1, x: 0 },
 				}}
 				className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
 				{creator?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You posted</p>
 				)}
 				<div className="flex flex-col gap-4">
-					<div className="flex py-3 justify-between ">
+					<div className="flex justify-between items-start">
 						<Link to={`/profile/${creator?.userId}`}>
-							<div className="flex gap-3 items-center">
+							<div className="flex gap-3 items-center py-3 ">
 								<div className="bg-primary-100 p-[3px] rounded-full">
 									<img
 										src={
@@ -107,29 +106,21 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 						</Link>
 						<div
 							onClick={() => setShowToggle(true)}
-							className="text-primary-100 hover:bg-gray-950/80 rounded-full w-14 flex justify-center items-center cursor-pointer transition duration-300 active:bg-gray-950/50 p-2 ">
-							<MoreVert fontSize="large"/>
+							className="text-white self-start  rounded-full p-1 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-primary-100/60 ">
+							<MoreVert sx={{ fontSize: 30 }} />
 						</div>
 					</div>
 					<div className="flex flex-col gap-2">
 						<h1 className="text-white">{postText}</h1>
 						<div className="flex flex-col gap-2">
-							<div className="relative cursor-pointer" onClick={viewPost}>
+							<div className="relative cursor-pointer group" onClick={viewPost}>
 								<img
-									src={Demo}
+									src={post.postMedia && "/code.jpg"}
 									className="w-full max-h-[500px] object-cover rounded-xl "
 								/>
-								<div className="bg-black/30 absolute h-full w-full top-0 right-0 bottom-0 left-0 opacity-0 transition active:opacity-75"></div>
+								<div className="bg-white absolute inset-0  h-full w-full opacity-0 group-hover:opacity-[0.02] transition group-active:opacity-5"></div>
 							</div>
-							<div className="flex justify-between text-light px-4 ">
-								<span className="hover:underline cursor-pointer">
-									{likes && likecount} Like{likecount !== 1 ? "s" : ""}
-								</span>
-								<span className="hover:underline cursor-pointer">
-									{comments && commentcount} comment
-									{commentcount !== 1 && "s"}
-								</span>
-							</div>
+
 							<ReactionPallete
 								userId={userId}
 								postId={postId}
@@ -138,6 +129,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 								setLikecount={setlikecount}
 								likecount={likecount}
 								setPostInView={setPostInView}
+								commentCount={commentcount}
 							/>
 						</div>
 					</div>
@@ -154,7 +146,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 							visible: { opacity: 1, y: 0 },
 						}}
 						ref={toggleRef}
-						className="absolute top-24 right-6 bg-primary-200 border rounded-xl border-gray-700 p-2">
+						className="absolute top-24 right-6 bg-primary-200 border rounded-xl border-gray-700 p-2 z-50">
 						<ul className="text-light flex flex-col ">
 							{creator?.userId == userId && (
 								<li

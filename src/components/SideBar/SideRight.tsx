@@ -1,81 +1,28 @@
-import { Avatar, Button } from "@mui/material";
-import image from "../../assets/bg-cover.jpg";
-import { useEffect, useState } from "react";
-import { BaseURL } from "../../utils/Link";
-import axios from "axios";
-import { UserInfo, Userdata } from "../../types/Types";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { loggedInUser } from "../../redux/features/AuthSlice";
-import PeopleLoader from "../Loaders/Skeleton/People";
+import { LuSettings2 } from "react-icons/lu";
+import { trendDummyData } from "../../utils/utilObjects";
 const SideRight = () => {
-	const {
-		user: {
-			userInfo: { userId },
-		},
-	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
-	const [users, setUsers] = useState<Array<Userdata>>([]);
-	const fetchPeople = async () => {
-		const { data } = await axios.get(`${BaseURL}/user/`);
-		setUsers(data);
-	};
-	const allUsers = users.filter((user) => user.userId !== userId);
-	useEffect(() => {
-		fetchPeople();
-	}, []);
 	return (
-		<div className="hidden xl:block">
-			<div className="bg-primary-200 p-4 rounded-lg w-[350px] flex flex-col gap-4 sticky top-[100px]">
-				<div className="flex flex-col gap-2">
-					<h1 className="text-lg text-light font-semibold">Birthdays</h1>
-					<div className="flex gap-2 items-center">
-						<Avatar src={image} className="cursor-pointer"></Avatar>
-						<div className="text-light text-sm">
-							<span className="font-semibold cursor-pointer">Musk </span>and 7
-							others have birthdays today
-						</div>
-					</div>
-				</div>
-				<div className="flex flex-col gap-3">
-					<h1 className="text-lg text-light font-semibold">Active</h1>
-					{users.length !== 0 ? (
-						<div className="flex flex-col gap-4">
-							{allUsers.map((user, index) => (
-								<Link to={`/profile/${user?.userId}`} key={index}>
-									<div className="flex gap-2 items-center">
-										<div className="bg-primary-100 p-1 rounded-full">
-											<img
-												src={user?.profileimage}
-												className="h-12 w-12 rounded-full object-cover"
-											/>
-										</div>
-										<div>
-											<p className="text-light cursor-pointer capitalize">
-												{user?.username}
-											</p>
-											<p className="text-xs text-gray-500">{user?.email}</p>
-										</div>
-									</div>
-								</Link>
-							))}
-						</div>
-					) : (
-						<PeopleLoader />
-					)}
-				</div>
-				<Button
-					sx={{
-						backgroundColor: "#010a13",
-						p: 1.5,
-						"&:hover": { backgroundColor: "#010a13" },
-						textTransform: "capitalize",
-						fontWeight: "bold",
-						borderRadius: "7px",
-					}}
-					className=" text-primary-100 ">
-					See more
-				</Button>
+		<div className="bg-primary-200 p-7 h-fit hidden xl:flex rounded-lg w-full 2xl:min-w-[400px] max-w-[400px] flex-col gap-4 sticky top-[100px]">
+			<div className="flex justify-between text-white ">
+				<h1 className="text-xl">Trends for you</h1>
+				<LuSettings2 size={20} />
 			</div>
+			<div className="flex flex-col space-y-5">
+				{trendDummyData.map((item, index) => (
+					<div
+						key={index}
+						className="flex justify-between gap-12 items-end border-b-2 border-gray-700/70 p-2 font-">
+						<div className="space-y-1">
+							<h1 className="text-white">{item.title}</h1>
+							<p className="text-gray-500 font-semibold text-[13px]">{item.subtitle}</p>
+						</div>
+						<p className="text-gray-500 font-semibold text-[13px]">{item.statistics}</p>
+					</div>
+				))}
+			</div>
+			<p className="text-blue-base hover:underline font-semibold my-4">
+				Show more
+			</p>
 		</div>
 	);
 };

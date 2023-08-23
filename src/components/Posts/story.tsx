@@ -35,15 +35,20 @@ const Story = () => {
 		<div className="w-full ">
 			{loading ? (
 				<div className="flex gap-6 h-  overflow-x-scroll overflow-y-hidden pb-5">
-					<StorySkeleton/>
+					<StorySkeleton />
 				</div>
 			) : (
 				<div className=" flex gap-6 h-60  overflow-x-scroll overflow-y-hidden pb-5">
-					<div className="bg-primary-200 min-w-[130px] flex justify-center items-center rounded-2xl">
+					<div className="min-w-[130px] overflow-hidden  relative rounded-2xl">
+						<img src="/code.jpg" className="object-cover"/>
+						<div className="bg-primary-200 absolute bottom-0 w-full h-20"></div>
 						<div
-							onClick={handleStoryToggle}
-							className="bg-primary-100 p-2 rounded-full cursor-pointer">
-							<Add fontSize="medium" />
+							className="flex flex-col justify-center items-center absolute bottom-7 left-7 cursor-pointer"
+							onClick={handleStoryToggle}>
+							<div className="bg-blue-base text-white p-2 m-2 rounded-full r">
+								<Add fontSize="medium" />
+							</div>
+							<p className="text-white">Add to story</p>
 						</div>
 					</div>
 					{stories && (

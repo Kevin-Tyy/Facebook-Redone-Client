@@ -7,8 +7,7 @@ import {
 	SportsEsportsRounded,
 	LiveTvRounded,
 } from "@mui/icons-material";
-// import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-
+import Policy from "../shared/Policy";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -61,8 +60,8 @@ const Sidebar = () => {
 		};
 	};
 	return (
-		<div className="hidden xl:block">
-			<div className="bg-primary-200  py-3 px-2  w-[350px]  flex flex-col rounded-lg gap-4 sticky top-[100px]">
+		<div className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[100px]  w-[400px] ">
+			<div className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
 				<Link to={`/profile/${userId}`}>
 					<div className="flex items-center gap-3 p-3 pb-4 hover:bg-gray-800/50  cursor-pointer rounded-lg">
 						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[3px]">
@@ -87,8 +86,7 @@ const Sidebar = () => {
 								onClick={() => setActiveTab(obj.title)}
 								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-gray-800/50 ${
 									activeTab === obj.title && "bg-gray-800 "
-								}`}
-								>
+								}`}>
 								<span className="text-white">{obj.icon}</span>
 								<p className="text-white">{obj.title}</p>
 							</div>
@@ -108,6 +106,7 @@ const Sidebar = () => {
 					See more
 				</Button>
 			</div>
+			<Policy />
 		</div>
 	);
 };
