@@ -18,7 +18,8 @@ import EmojiPicker, { Theme } from "emoji-picker-react";
 import { Emoji } from "../../types/Types";
 import Modal from ".";
 interface Props {
-	onClose: (value: any) => void;
+	onClose: () => void;
+	isOpen : boolean;
 }
 
 const utilIcons = [
@@ -27,7 +28,7 @@ const utilIcons = [
 	<MoreHoriz fontSize="large" />,
 ];
 
-const PostModal = ({ onClose }: Props) => {
+const PostModal = ({ onClose, isOpen }: Props) => {
 	const [postText, setPostText] = useState<string>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -93,8 +94,8 @@ const PostModal = ({ onClose }: Props) => {
 	};
 
 	return (
-		<Modal onClose={onClose}>
-			<div>
+		<Modal onClose={onClose} isOpen={isOpen}>
+			<div className="relative bg-primary-200 w-full ring-1 ring-inset ring-gray-700/50 sm:min-w-[530px] max-w-[550px] p-3 rounded-lg">
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
 						Create a post

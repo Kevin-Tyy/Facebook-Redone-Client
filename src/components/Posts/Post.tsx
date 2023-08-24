@@ -84,7 +84,7 @@ const PostComponent = () => {
 						Post
 					</Button>
 				</div>
-				{isPostModal && <PostModal onClose={() => setIsPostModal(false)} />}
+				<PostModal onClose={() => setIsPostModal(false)} isOpen={isPostModal}/>
 			</div>
 		</div>
 	);

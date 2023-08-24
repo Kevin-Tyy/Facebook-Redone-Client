@@ -36,7 +36,6 @@ const ReactionPallete = ({
 }: Props) => {
 	const styleClass = `flex items-center justify-center cursor-pointer gap-[1px] font-bold`;
 	const handleLike = async () => {
-		console.log(postId);
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
 			setLikecount(likecount - 1);

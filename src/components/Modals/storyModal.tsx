@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import {
-	CloseRounded,
 	PeopleAltRounded,
 	EmojiEmotionsOutlined,
 	GifBoxRounded,
@@ -9,14 +8,15 @@ import {
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import toast, { Toaster } from "react-hot-toast";
-import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Emoji, UserInfo } from "../../types/Types";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
+import Modal from ".";
 interface Props {
-	handleStoryToggle: (value: any) => void;
+	onClose: () => void;
+	isOpen: boolean;
 }
 
 const utilIcons = [
@@ -24,7 +24,7 @@ const utilIcons = [
 	<GifBoxRounded fontSize="large" />,
 	<MoreHoriz fontSize="large" />,
 ];
-const StoryModal = ({ handleStoryToggle }: Props) => {
+const StoryModal = ({ onClose, isOpen }: Props) => {
 	const [storyCaption, setStoryCaption] = useState<string>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -94,30 +94,12 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 	};
 
 	return (
-		<div
-			className="backdrop-blur-sm bg-gray-950/50 h-screen w-full fixed top-0 right-0 bottom-0 left-0 z-[10] flex justify-center items-center "
-			onClick={() => handleStoryToggle(false)}>
-			<motion.div
-				initial="hidden"
-				whileInView="visible"
-				viewport={{ once: false, amount: 0.1 }}
-				transition={{ duration: 0.15, delay: 0.2 }}
-				variants={{
-					hidden: { opacity: 0, y: -30 },
-					visible: { opacity: 1, y: 0 },
-				}}
-				onClick={(e) => e.stopPropagation()}
-				className="relative bg-primary-200 w-full  max-w-[550px] p-3 rounded-lg ">
+		<Modal onClose={onClose} isOpen={isOpen}>
+			<div className="relative bg-primary-200 w-full ring-1 ring-inset ring-gray-700/50 sm:min-w-[520px]  max-w-[550px] p-3 rounded-lg">
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
 						Add to your story
 					</h1>
-
-					<div
-						onClick={() => handleStoryToggle(false)}
-						className="hover:bg-gray-700 rounded-full p-1.5 absolute top-5 right-3 cursor-pointer ">
-						<CloseRounded sx={{ color: "#fff" }} />
-					</div>
 				</div>
 				<div className="p-2">
 					<div className="flex items-center gap-2">
@@ -204,16 +186,13 @@ const StoryModal = ({ handleStoryToggle }: Props) => {
 						</Button>
 					</form>
 				</div>
-				{showPicker && (
-					<div
-						ref={pickerRef}
-						className="absolute -bottom-20 -right-20">
-						<EmojiPicker onEmojiClick={onEmojiClick} theme="dark" />
-					</div>
-				)}
-				<Toaster />
-			</motion.div>
-		</div>
+			</div>
+			{showPicker && (
+				<div ref={pickerRef} className="absolute -bottom-20 -right-20">
+					<EmojiPicker onEmojiClick={onEmojiClick} theme={Theme.AUTO} />
+				</div>
+			)}
+		</Modal>
 	);
 };
 

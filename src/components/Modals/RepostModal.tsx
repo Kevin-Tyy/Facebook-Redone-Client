@@ -1,18 +1,18 @@
 import React from "react";
 import { Posts, UserInfo } from "../../types/Types";
 import Modal from ".";
-import { LoaderIcon, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { CloseRounded } from "@mui/icons-material";
 import { Button } from "@mui/material";
 interface RepostModalProps {
 	post: Posts;
-	onClose: (value: any) => void;
+	onClose: () => void;
+	isOpen: boolean;
 }
-const RepostModal: React.FC<RepostModalProps> = ({ post, onClose }) => {
+const RepostModal: React.FC<RepostModalProps> = ({ post, onClose , isOpen}) => {
 	const {
 		user: {
 			userInfo: { userId  },
@@ -20,7 +20,6 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose }) => {
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 	const [loading, setLoading] = React.useState(false);
 
-  console.log(post);
   
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -30,24 +29,21 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose }) => {
         repostedBy : userId
 			})
 			.then((response) => {
+				console.log(response);
 				toast.success(response.data.msg);
+				onClose()
 			})
 			.catch((err) => toast.error(err.response.data.msg))
 			.finally(() => setLoading(false));
 	};
 	return (
-		<Modal onClose={onClose}>
-			<div>
+		<Modal onClose={onClose} isOpen={isOpen}>
+			<div className="relative bg-primary-200 w-full ring-1 ring-inset ring-gray-700/50 sm:min-w-[500px] max-w-[500px] p-3 rounded-lg">
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
-						Create a post
+						Share this post.
 					</h1>
 
-					<div
-						onClick={onClose}
-						className="hover:bg-gray-700 rounded-full p-1.5 absolute top-5 right-3 cursor-pointer ">
-						<CloseRounded sx={{ color: "#fff" }} />
-					</div>
 				</div>
 				<div className="flex flex-col items-center space-y-10">
 					<p className="text-white">

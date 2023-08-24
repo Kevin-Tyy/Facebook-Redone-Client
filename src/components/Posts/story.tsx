@@ -17,9 +17,6 @@ const Story = () => {
 	const [storyInView, setStoryInView] = useState<StoryType | null>(null);
 	const [stories, setstories] = useState<StoryType[]>([]);
 	const [loading, setLoading] = useState(false);
-	const handleStoryToggle = () => {
-		setIsToggled(!isToggled);
-	};
 	const fetchStory = async (url: string) => {
 		setLoading(true);
 		const dataObj = await axios.get(url);
@@ -52,11 +49,11 @@ const Story = () => {
 					</div>
 					<div className=" flex gap-4 h-[250px] overflow-x-scroll overflow-y-hidden pb-5">
 						<div className="min-w-[130px] overflow-hidden relative rounded-2xl">
-							<img src={ profileimage || "/code.jpg"} className="object-cover" />
+							<img src={profileimage || "/code.jpg"} className="object-cover" />
 							<div className="bg-primary-200 absolute bottom-0 w-full h-20"></div>
 							<div
 								className="flex flex-col justify-center items-center absolute bottom-7 left-7 cursor-pointer"
-								onClick={handleStoryToggle}>
+								onClick={() => setIsToggled(true)}>
 								<div className="bg-primary-200 p-1.5 rounded-full">
 									<div className="bg-blue-base text-white p-2  rounded-full">
 										<Add fontSize="medium" />
@@ -101,7 +98,7 @@ const Story = () => {
 										setStoryInView={setStoryInView}
 										storyInView={storyInView}
 										stories={stories}
-										handleStoryToggle={handleStoryToggle}
+										handleStoryToggle={() => setIsToggled(false)}
 									/>
 								)}
 							</div>
@@ -109,7 +106,7 @@ const Story = () => {
 					</div>
 				</div>
 			)}
-			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}
+			<StoryModal onClose={() => setIsToggled(false)} isOpen={isToggled} />
 		</div>
 	);
 };

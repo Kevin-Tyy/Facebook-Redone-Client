@@ -24,13 +24,13 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, userId }) => {
 				{comment?.user?.userId == userId && (
 					<p className="text-xs text-gray-500 absolute right-2 top-2">You commented</p>
 				)}
-				<Link to={`/profile/${comment?.user?.userId}`} className="flex items-center gap-2">
+				<Link to={`/profile/${comment?.user?.userId}`} className="flex  items-center gap-2">
 					<h1 className="text-lg font-semibold text-start text-white hover:underline capitalize inline">
 						{comment?.user?.username}
 					</h1>
-					<p className="text-gray-400  text-sm">{formattedDate}</p>
+					<p className="text-gray-400 text-sm">{formattedDate}</p>
 				</Link>
-				<p className="text-light">{comment.textContent}</p>
+				<p className="text-light text-start">{comment.textContent}</p>
 			</div>
 		</div>
 	);

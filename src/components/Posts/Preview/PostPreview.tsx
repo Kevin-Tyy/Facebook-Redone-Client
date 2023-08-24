@@ -9,14 +9,14 @@ import { loggedInUser } from "../../../redux/features/AuthSlice";
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
-import { motion } from "framer-motion";
 import Spinner from "../../Loaders/Spinner/Spinner";
 import CommentBox from "./components/CommentBox";
 import CommentForm from "./components/CommentForm";
-import { CloseRounded } from "@mui/icons-material";
 import RepostModal from "../../Modals/RepostModal";
+import Modal from "../../Modals";
 interface Props {
-	viewPost: (value: any) => void;
+	onClose: () => void;
+	isOpen: boolean;
 	setlikecount: (value: number) => void;
 	likecount: number;
 	post: Posts;
@@ -27,7 +27,8 @@ interface Props {
 }
 const PostPreview = ({
 	post,
-	viewPost,
+	onClose,
+	isOpen,
 	setlikecount,
 	likecount,
 	likedByLoggedInUser,
@@ -52,135 +53,117 @@ const PostPreview = ({
 			setcommentcount(data?.data.length);
 		}
 	};
-	useEffect(() => {
-		axios.post(`${BaseURL}/post/view/${postId}/${userId	}`)
-	}, []);
+	// useEffect(() => {
+	// 	axios.post(`${BaseURL}/post/view/${postId}/${userId}`);
+	// });
 	useEffect(() => {
 		populateComments();
 	}, [commentcount]);
 	return (
-		<div
-			className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-gray-950/50 backdrop-blur-md z-[10] flex justify-center items-center"
-			onClick={viewPost}>
-			<motion.div
-				onClick={(e) => e.stopPropagation()}
-				initial="hidden"
-				whileInView="visible"
-				viewport={{ once: true, amount: 0.1 }}
-				transition={{ duration: 0.2 }}
-				variants={{
-					hidden: { opacity: 0, y: -30 },
-					visible: { opacity: 1, y: 0 },
-				}}>
-				<div className="relative bg-primary-200 rounded-xl w-full max-w-[630px] flex flex-col gap-4  max-h-[95vh] border border-gray-700  overflow-y-scroll">
-					<div className="sticky top-0 bg-primary-200">
-						<div
-							onClick={viewPost}
-							className="absolute  top-4 right-4 bg-gray-700 text-white rounded-full p-1.5 cursor-pointer hover:bg-gray-800 active:bg-gray-600">
-							<CloseRounded sx={{ fontSize: 25 }} />
-						</div>
-						<p className="text-light text-2xl capitalize text-center p-6 border-b border-gray-600">
-							{creator?.username}'s post
-						</p>
-						<Link to={`/profile/${creator?.userId}`}>
-							<div className="flex gap-3 px-5 py-2 items-center">
-								<div className="bg-primary-100 p-0.5 rounded-full">
-									<img
-										src={
-											creator?.profileimage
-												? creator?.profileimage
-												: placeholderImage
-										}
-										className="w-12 h-12  rounded-full"
-									/>
-								</div>
-								<div className="flex flex-col">
-									<p className="text-light capitalize">
-										{creator?.firstname} {creator?.lastname}
-									</p>
-									<div className="flex gap-2 items-center text-gray-500">
-										<p className="capitalize text-sm">@{creator?.username}</p>
-										<span>•</span>
-										<p className="text-sm ">{formattedDate}</p>
-									</div>
-								</div>
-							</div>
-						</Link>
-					</div>
-					<div className="flex flex-col">
-						<div>
-							<p className="text-white px-5">{postText}</p>
-							<img
-								src={postMedia}
-								className=" w-[600px] max-h-[600px] object-cover"
-							/>
-							<div className="flex mt-6 justify-between px-4 py-2 text-gray-500">
-								<p className=" hover:underline cursor-pointer">
-									{likecount} Like
-									{likecount != 1 && "s"}
-								</p>
-								<div className="flex gap-3">
-									<p className=" cursor-pointer hover:underline">
-										{commentcount} Comment
-										{commentcount != 1 && "s"}
-									</p>
-									<p className=" cursor-pointer hover:underline">
-										0 reposts
-									</p>
-								</div>
-							</div>
-							<div className="p-2">
-								<ReactionPallete
-									userId={userId}
-									postId={postId}
-									likedByLoggedInUser={likedByLoggedInUser}
-									setLikedByLoggedInUser={setLikedByLoggedInUser}
-									setLikecount={setlikecount}
-									likecount={likecount}
-									setPostInView={null}
-									commentCount={commentcount}
-									viewCount={post.views.length}
-									setRepostModal={() => setRepostModal(true)}
+		<Modal isOpen={isOpen} onClose={onClose}>
+			<div className="relative bg-primary-200 rounded-xl w-full max-w-[630px] flex flex-col gap-4 max-h-[90vh] border border-gray-700  overflow-y-scroll">
+				<div className="sticky top-0 bg-primary-200">
+					<p className="text-light text-2xl capitalize text-center p-6 border-b border-gray-600">
+						{creator?.username}'s post
+					</p>
+					<Link to={`/profile/${creator?.userId}`}>
+						<div className="flex gap-3 px-5 py-2 items-center">
+							<div className="bg-primary-100 p-0.5 rounded-full">
+								<img
+									src={
+										creator?.profileimage
+											? creator?.profileimage
+											: placeholderImage
+									}
+									className="w-12 h-12  rounded-full"
 								/>
 							</div>
-							<div>
-								{comments ? (
-									<Fragment>
-										{comments.length > 0 ? (
-											<div className="p-2 flex flex-col gap-2">
-												{comments.map((comment, index) => (
-													<CommentBox
-														comment={comment}
-														userId={userId}
-														key={index}
-													/>
-												))}
-											</div>
-										) : (
-											<p className="text-center text-xl text-light py-6 mx-2 border border-primary-100 rounded-2xl">
-												No comments yet
-											</p>
-										)}
-									</Fragment>
-								) : (
-									<div className="border border-gray-800 m-2">
-										<Spinner />
-									</div>
-								)}
+							<div className="flex items-start flex-col">
+								<p className="text-light capitalize">
+									{creator?.firstname} {creator?.lastname}
+								</p>
+								<div className="flex gap-2 items-center text-gray-500">
+									<p className="capitalize text-sm">@{creator?.username}</p>
+									<span>•</span>
+									<p className="text-sm ">{formattedDate}</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<CommentForm
-						commentcount={commentcount}
-						setcommentcount={setcommentcount}
-						post={post}
-					/>
-					{repostModal && (
-						<RepostModal post={post} onClose={() => setRepostModal(false)} />
-					)}
+					</Link>
 				</div>
-			</motion.div>
-		</div>
+				<div className="flex flex-col">
+					<div>
+						<p className="text-white text-start px-5 pb-5">{postText}</p>
+						<img
+							src={postMedia}
+							className=" w-[600px] max-h-[600px] object-cover"
+						/>
+						<div className="flex mt-6 justify-between px-4 py-2 text-gray-500">
+							<p className=" hover:underline cursor-pointer">
+								{likecount} Like
+								{likecount != 1 && "s"}
+							</p>
+							<div className="flex gap-3">
+								<p className=" cursor-pointer hover:underline">
+									{commentcount} Comment
+									{commentcount != 1 && "s"}
+								</p>
+								<p className=" cursor-pointer hover:underline">0 reposts</p>
+							</div>
+						</div>
+						<div className="p-2">
+							<ReactionPallete
+								userId={userId}
+								postId={postId}
+								likedByLoggedInUser={likedByLoggedInUser}
+								setLikedByLoggedInUser={setLikedByLoggedInUser}
+								setLikecount={setlikecount}
+								likecount={likecount}
+								setPostInView={null}
+								commentCount={commentcount}
+								viewCount={post.views.length}
+								setRepostModal={() => setRepostModal(true)}
+							/>
+						</div>
+						<div>
+							{comments ? (
+								<Fragment>
+									{comments.length > 0 ? (
+										<div className="p-2 flex flex-col gap-2">
+											{comments.map((comment, index) => (
+												<CommentBox
+													comment={comment}
+													userId={userId}
+													key={index}
+												/>
+											))}
+										</div>
+									) : (
+										<p className="text-center text-xl text-light py-6 mx-2 border border-primary-100 rounded-2xl">
+											No comments yet
+										</p>
+									)}
+								</Fragment>
+							) : (
+								<div className="border border-gray-800 m-2">
+									<Spinner />
+								</div>
+							)}
+						</div>
+					</div>
+				</div>
+				<CommentForm
+					commentcount={commentcount}
+					setcommentcount={setcommentcount}
+					post={post}
+				/>
+				<RepostModal
+					post={post}
+					onClose={() => setRepostModal(false)}
+					isOpen={repostModal}
+				/>
+			</div>
+		</Modal>
 	);
 };
 
