@@ -12,26 +12,25 @@ interface RepostModalProps {
 	onClose: () => void;
 	isOpen: boolean;
 }
-const RepostModal: React.FC<RepostModalProps> = ({ post, onClose , isOpen}) => {
+const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
 	const {
 		user: {
-			userInfo: { userId  },
+			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 	const [loading, setLoading] = React.useState(false);
 
-  
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		axios
 			.post(`${BaseURL}/post/repost`, {
-        postId : post.postId,
-        repostedBy : userId
+				postId: post.postId,
+				repostedBy: userId,
 			})
 			.then((response) => {
 				console.log(response);
 				toast.success(response.data.msg);
-				onClose()
+				onClose();
 			})
 			.catch((err) => toast.error(err.response.data.msg))
 			.finally(() => setLoading(false));
@@ -43,7 +42,6 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose , isOpen}) => {
 					<h1 className="text-2xl text-center font-bold text-light">
 						Share this post.
 					</h1>
-
 				</div>
 				<div className="flex flex-col items-center space-y-10">
 					<p className="text-white">
@@ -51,7 +49,7 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose , isOpen}) => {
 					</p>
 					<form onSubmit={handleSubmit} className="flex items-center gap-4">
 						<Button
-              type="submit"
+							type="submit"
 							sx={{
 								color: "white",
 								backgroundColor: "#0C88EF",
@@ -62,7 +60,7 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose , isOpen}) => {
 								py: "12px",
 								"&:hover": { backgroundColor: "#3293e3" },
 							}}>
-							Repost 
+							Repost
 						</Button>
 						<div
 							onClick={onClose}
