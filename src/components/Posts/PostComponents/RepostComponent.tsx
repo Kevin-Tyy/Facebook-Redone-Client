@@ -1,8 +1,6 @@
 import ReactionPallete from "./ReactionPallete";
 import useDateFormatter from "../../../hooks/useDate";
-import {
-	MoreHoriz,
-} from "@mui/icons-material";
+import { MoreHoriz } from "@mui/icons-material";
 import * as iconshi from "react-icons/hi2";
 import * as iconsai from "react-icons/ai";
 import * as iconsfa from "react-icons/fa";
@@ -142,12 +140,10 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 								</div>
 							</Link>
 						</div>
-						<div className="flex flex-col gap-2">
+						<div className="flex flex-col gap-2" onClick={viewPost}>
 							<h1 className="text-white">{postText}</h1>
 							<div className="flex flex-col gap-2">
-								<div
-									className="relative cursor-pointer group"
-									onClick={viewPost}>
+								<div className="relative cursor-pointer group">
 									<img
 										src={post.postMedia && post.postMedia}
 										className="w-full max-h-[500px] object-cover rounded-xl "
@@ -189,23 +185,23 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 								<li
 									onClick={handleDeleteRequest}
 									className="p-3 pr-10 flex gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-									{<iconshi.HiOutlineTrash size={18}/>}
+									{<iconshi.HiOutlineTrash size={18} />}
 									Delete Post
 								</li>
 							)}
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsai.AiOutlineEye size={18}/>}
+								{<iconsai.AiOutlineEye size={18} />}
 								View Post
 							</li>
 							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{< iconsai.AiOutlineBell size={18}/>} Mute Notifications
+								{<iconsai.AiOutlineBell size={18} />} Mute Notifications
 							</li>
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{< iconsfa.FaRegComment/>} Add your comment
+								{<iconsfa.FaRegComment />} Add your comment
 							</li>
 						</ul>
 					</motion.div>

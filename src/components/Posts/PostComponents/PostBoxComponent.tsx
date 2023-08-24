@@ -106,10 +106,10 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 							<MoreHoriz sx={{ fontSize: 30 }} />
 						</div>
 					</div>
-					<div className="flex flex-col gap-2">
-						<h1 className="text-white">{postText}</h1>
+					<div className="flex flex-col gap-2" onClick={viewPost}>
+						<h1 className="text-white cursor-pointer">{postText}</h1>
 						<div className="flex flex-col gap-2">
-							<div className="relative cursor-pointer group" onClick={viewPost}>
+							<div className="relative cursor-pointer group">
 								<img
 									src={post.postMedia && post.postMedia}
 									className="w-full max-h-[500px] object-cover rounded-xl "
