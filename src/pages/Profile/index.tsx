@@ -31,10 +31,11 @@ const profile = () => {
 	const [isFriend, setIsFriend] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [pending, setPending] = useState(false);
+
 	const {
 		user: {
 			userInfo: { userId },
-		},
+		}, 
 	} = useSelector(loggedInUser) as {
 		user: {
 			userInfo: UserInfo;
@@ -92,7 +93,7 @@ const profile = () => {
 		<section className="min-h-screen w-full pb-20 bg-background-primary ">
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
-				<div className="w-full px-3 md:px-16 lg:px-0 lg:w-[80%] 2xl:w-[65%] flex flex-col gap-4">
+				<div className="w-full px-3 md:px-16 lg:px-0 lg:w-[80%] 2xl:w-[60%] flex flex-col gap-4">
 					<div>
 						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[30vh] p-20 justify-center z-[2]">
 							<div className="flex flex-col items-center absolute -bottom-48 justify-center">
