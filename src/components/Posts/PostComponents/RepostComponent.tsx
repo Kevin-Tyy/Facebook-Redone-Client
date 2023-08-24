@@ -156,7 +156,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 							</Link>
 						</div>
 						<div className="flex flex-col gap-2" onClick={viewPost}>
-							<h1 className="text-white">{postText}</h1>
+							<h1 className="text-white cursor-pointer">{postText}</h1>
 							<div className="flex flex-col gap-2">
 								<div className="relative cursor-pointer group">
 									<img
