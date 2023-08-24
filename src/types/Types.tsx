@@ -63,4 +63,5 @@ export interface Posts {
 	updatedAt: Date;
 	taggedPeople: Array<Userdata>;
 	views: Array<Userdata>;
+	numberOfReposts : number;
 }

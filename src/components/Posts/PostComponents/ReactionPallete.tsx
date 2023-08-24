@@ -10,6 +10,7 @@ import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Tooltip } from "@mui/material";
+import { Posts } from "../../../types/Types";
 interface Props {
 	userId: string;
 	postId: string;
@@ -21,6 +22,7 @@ interface Props {
 	commentCount: number;
 	setRepostModal: (value: any) => void;
 	viewCount: number;
+	post: Posts;
 }
 const ReactionPallete = ({
 	setPostInView,
@@ -33,7 +35,10 @@ const ReactionPallete = ({
 	likecount,
 	viewCount,
 	setRepostModal,
+	post,
 }: Props) => {
+	console.log(post);
+
 	const styleClass = `flex items-center justify-center cursor-pointer gap-[1px] font-bold`;
 	const handleLike = async () => {
 		setLikedByLoggedInUser(!likedByLoggedInUser);
@@ -57,7 +62,7 @@ const ReactionPallete = ({
 			<div className="flex w-4/5 justify-between items-center gap-2 p-1 rounded-lg ">
 				<Tooltip title={likedByLoggedInUser ? "Unlike" : "Like"}>
 					<div
-						className={` ${styleClass} text-gray-500 group  ${
+						className={` ${styleClass} text-pink-800 group  ${
 							likedByLoggedInUser && "text-pink-800 shadow-2xl"
 						}`}
 						onClick={handleLike}>
@@ -76,10 +81,10 @@ const ReactionPallete = ({
 				</Tooltip>
 				<Tooltip title="Comment">
 					<div
-						className={`${styleClass} text-gray-500 group`}
+						className={`${styleClass} text-sky-700 group`}
 						onClick={() => setPostInView && setPostInView(true)}>
 						<div
-							className={`${styleClass} transition-all duration-500 text-gray-500 group-hover:bg-sky-800/20 p-3 rounded-full group-hover:text-sky-700`}>
+							className={`${styleClass} transition-all duration-500  group-hover:bg-sky-800/20 p-3 rounded-full group-hover:text-sky-700`}>
 							<FaRegComment size={20} />
 						</div>
 						<p className=" text-sm translate-y-[1px] group-hover:text-sky-600 transition-all duration-500">
@@ -88,10 +93,15 @@ const ReactionPallete = ({
 					</div>
 				</Tooltip>
 				<Tooltip title="Repost this">
-					<div
-						onClick={setRepostModal}
-						className={`${styleClass} transition-all duration-500 text-gray-500 hover:bg-orange-800/20 p-3 rounded-full hover:text-orange-700`}>
-						<BsArrowRepeat size={25} />
+					<div className={`${styleClass} text-gray-500 group`}>
+						<div
+							onClick={setRepostModal}
+							className={`${styleClass} transition-all duration-500 text-gray-500 hover:bg-orange-800/20 p-3 rounded-full hover:text-orange-700 ${
+								post?.numberOfReposts !== 0 && "text-orange-700"
+							}`}>
+							<BsArrowRepeat size={25} />
+						</div>
+						{post?.numberOfReposts !== 0 && <p className="text-sm translate-y-[1px] text-orange-700 transition-all duration-500">{post?.numberOfReposts}</p>}
 					</div>
 				</Tooltip>
 				<Tooltip title="Views">

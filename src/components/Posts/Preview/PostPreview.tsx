@@ -123,6 +123,7 @@ const PostPreview = ({
 								commentCount={commentcount}
 								viewCount={post.views.length}
 								setRepostModal={() => setRepostModal(true)}
+								post={post}
 							/>
 						</div>
 						<div>

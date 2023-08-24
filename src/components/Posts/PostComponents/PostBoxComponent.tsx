@@ -131,6 +131,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 								commentCount={commentcount}
 								setRepostModal={() => setRepostModal(true)}
 								viewCount={viewCount}
+								post={post}
 							/>
 						</div>
 					</div>

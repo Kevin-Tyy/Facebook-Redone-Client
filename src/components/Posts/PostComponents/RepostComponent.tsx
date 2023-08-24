@@ -71,7 +71,6 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 			toast.error(data.msg);
 		}
 	};
-
 	return (
 		<>
 			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl p-3  border border-gray-800">
@@ -131,7 +130,9 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 										/>
 									</div>
 									<div className="flex flex-col">
-										<p className="text-light capitalize">{creator?.firstname} {creator.lastname}</p>
+										<p className="text-light capitalize">
+											{creator?.firstname} {creator.lastname}
+										</p>
 										<div className="flex items-center space-x-2 text-gray-500/80">
 											<p className="text-sm capitalize">@{creator?.username}</p>
 											<span>•</span>
@@ -168,6 +169,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 					commentCount={commentcount}
 					setRepostModal={() => setRepostModal(true)}
 					viewCount={post.views.length}
+					post={post}
 				/>
 
 				{showToggle && (
