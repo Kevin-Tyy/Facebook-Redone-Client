@@ -61,7 +61,7 @@ const PostPreview = ({
 	}, [commentcount]);
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="relative bg-primary-200 rounded-xl w-full max-w-[630px] flex flex-col gap-4 max-h-[90vh] border border-gray-700  overflow-y-scroll">
+			<div className="relative bg-primary-200 rounded-xl w-full sm:w-[630px] flex flex-col gap-4 max-h-[90vh] border border-gray-700  overflow-y-scroll">
 				<div className="sticky top-0 bg-primary-200">
 					<p className="text-light text-2xl capitalize text-center p-6 border-b border-gray-600">
 						{creator?.username}'s post

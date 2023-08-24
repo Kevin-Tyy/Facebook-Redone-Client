@@ -16,14 +16,14 @@ const PostLayout = ({ loading , userData , userId , isOpen , setIsOpen , posts }
 	return (
 		<div>
 			<div className="flex flex-col items-start lg:flex-row gap-5">
-				<div className="bg-primary-200 w-full lg:max-w-[550px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
+				<div className="bg-primary-200 w-full lg:max-w-[500px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
 					<div>
 						{loading ? (
 							<Skeleton height={40} />
 						) : (
-							<h1 className="text-2xl text-light text-center">
+							<h1 className="text-xl text-light text-center">
 								About{" "}
-								<span className="capitalize text-primary-100">
+								<span className="capitalize text-blue-base text-xl">
 									{userData?.userId == userId ? "You" : userData?.username}
 								</span>
 							</h1>

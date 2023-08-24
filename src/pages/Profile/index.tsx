@@ -164,7 +164,7 @@ const profile = () => {
 		}
 	};
 	return (
-		<div className="min-h-screen w-full pb-20 bg-gray-950 ">
+		<div className="min-h-screen w-full pb-20 bg-background-primary ">
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
 				<div className="w-full px-3 md:px-16 2xl:px-0 2xl:w-[60%] flex flex-col gap-4">
@@ -289,17 +289,16 @@ const profile = () => {
 					<div>{renderContent()}</div>
 				</div>
 			</div>
-			{isOpen && <DetailModal setIsOpen={setIsOpen} />}
-			{isToggled && <StoryModal handleStoryToggle={handleStoryToggle} />}
-			{imageUpdate && <ImageUpdate setImageUpdate={setImageUpdate} />}
-			{viewImage && (
+			<DetailModal onClose={() => setIsOpen(false)} isOpen={isOpen}/>
+			<StoryModal onClose={() => setIsToggled(false)} isOpen={isToggled} />
+			<ImageUpdate onClose={() => setImageUpdate(false)} isOpen={imageUpdate} />
 				<ProfileImage
+					isOpen={viewImage}
+					onClose={() => setViewImage(false)}
 					profileimage={previewimage as string}
 					username={userData?.username as string}
-					setViewImage={setViewImage}
 					email={userData?.email as string}
 				/>
-			)}
 		</div>
 	);
 };

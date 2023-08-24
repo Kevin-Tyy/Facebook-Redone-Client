@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import {
-	CloseRounded,
 	PeopleAltRounded,
 	EmojiEmotionsOutlined,
 	GifBoxRounded,
@@ -10,7 +9,7 @@ import { Button, CircularProgress } from "@mui/material";
 import { Image } from "@mui/icons-material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
@@ -19,7 +18,7 @@ import { Emoji } from "../../types/Types";
 import Modal from ".";
 interface Props {
 	onClose: () => void;
-	isOpen : boolean;
+	isOpen: boolean;
 }
 
 const utilIcons = [
@@ -95,17 +94,11 @@ const PostModal = ({ onClose, isOpen }: Props) => {
 
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-primary-200 w-full ring-1 ring-inset ring-gray-700/50 sm:min-w-[530px] max-w-[550px] p-3 rounded-lg">
+			<div className="relative bg-primary-200 ring-1 ring-inset ring-gray-700/50 w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
 						Create a post
 					</h1>
-
-					<div
-						onClick={() => onClose}
-						className="hover:bg-gray-700 rounded-full p-1.5 absolute top-5 right-3 cursor-pointer ">
-						<CloseRounded sx={{ color: "#fff" }} />
-					</div>
 				</div>
 				<div className="p-2">
 					<div className="flex items-center gap-2">
@@ -192,8 +185,6 @@ const PostModal = ({ onClose, isOpen }: Props) => {
 						<EmojiPicker onEmojiClick={onEmojiClick} theme={Theme.DARK} />
 					</div>
 				)}
-
-				<Toaster />
 			</div>
 		</Modal>
 	);

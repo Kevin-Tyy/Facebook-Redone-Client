@@ -1,18 +1,20 @@
-import { motion } from "framer-motion";
-import { CameraAltRounded, CloseRounded } from "@mui/icons-material";
+import { CameraAltRounded } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, updateImage } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/Types";
+import placeholderAvatar from "../../assets/avatar.webp"
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import Modal from "../Modals";
 interface Props {
-	setImageUpdate: (value: any) => void;
+	isOpen: boolean;
+	onClose: () => void;
 }
 
-const ImageUpdate = ({ setImageUpdate }: Props) => {
+const ImageUpdate = ({ isOpen, onClose }: Props) => {
 	const dispatch = useDispatch();
 	const [uploadImage, setUploadImage] = useState<any>("");
 	const [loading, setLoading] = useState(false);
@@ -55,29 +57,12 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 	return (
-		<div
-			className="h-screen w-full fixed top-0 bottom-0 right-0 left-0 bg-gray-900/50 backdrop-blur-sm z-[20] flex justify-center items-center"
-			onClick={() => setImageUpdate(false)}>
-			<motion.div
-				initial="hidden"
-				whileInView="visible"
-				viewport={{ once: false, amount: 0.1 }}
-				transition={{ duration: 0.1 }}
-				variants={{
-					hidden: { opacity: 0, y: -20 },
-					visible: { opacity: 1, y: 0 },
-				}}
-				onClick={(e) => e.stopPropagation()}
-				className="relative bg-primary-200 ring-1 ring-gray-700 w-[500px] rounded-xl flex flex-col items-center  p-8">
-				<div
-					onClick={() => setImageUpdate(false)}
-					className="absolute text-light top-2 right-2 p-2 hover:bg-gray-800 transition duration-100 rounded-3xl cursor-pointer active:bg-gray-900">
-					<CloseRounded />
-				</div>
+		<Modal onClose={onClose} isOpen={isOpen}>
+			<div className="relative bg-primary-200 ring-1 ring-gray-700 w-full sm:w-[500px] rounded-xl flex flex-col items-center  p-8">
 				<div className="bg-gradient-to-r from-sky-400 to-violet-700 absolute -top-28 rounded-full p-1.5">
 					<div className="bg-gray-950 rounded-full p-1.5">
 						<img
-							src={uploadImage ? uploadImage : profileimage}
+							src={uploadImage || profileimage || placeholderAvatar}
 							className="rounded-full w-40 h-40 object-cover"
 						/>
 					</div>
@@ -105,7 +90,7 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 						<div className="flex flex-col gap-6">
 							<label
 								htmlFor="upload"
-								className="border border-light flex justify-center text-white p-3 rounded-full cursor-pointer transition hover:bg-gray-800/30 active:bg-gray-900/40">
+								className="border border-light flex justify-center text-white p-3 rounded-full cursor-pointer transition hover:bg-primary-100/30 active:bg-primary-100/40">
 								{uploadImage ? "Change photo" : "Upload photo"}
 							</label>
 							<input
@@ -121,9 +106,9 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 								sx={{
 									width: "100%",
 									p: 1.5,
-									background: "rgb(40 , 88 , 158)",
+									background: "rgb(40 , 78 , 158)",
 									borderRadius: "50px",
-									"&:hover": { background: "rgb(40 , 48 , 158)" },
+									"&:hover": { background: "rgb(40 , 98 , 158)" },
 									color: "white",
 									textTransform: "capitalize",
 								}}>
@@ -136,14 +121,13 @@ const ImageUpdate = ({ setImageUpdate }: Props) => {
 						</div>
 					</form>
 					<p
-						onClick={() => setImageUpdate(false)}
+						onClick={onClose}
 						className="text-center text-light underline cursor-pointer">
 						Cancel
 					</p>
 				</div>
-			</motion.div>
-			<Toaster />
-		</div>
+			</div>
+		</Modal>
 	);
 };
 
