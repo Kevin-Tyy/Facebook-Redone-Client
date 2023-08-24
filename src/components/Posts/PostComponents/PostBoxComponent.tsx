@@ -116,23 +116,22 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 								/>
 								<div className="bg-white absolute inset-0  h-full w-full opacity-0 group-hover:opacity-[0.02] transition group-active:opacity-5"></div>
 							</div>
-
-							<ReactionPallete
-								userId={userId}
-								postId={postId}
-								likedByLoggedInUser={likedByLoggedInUser}
-								setLikedByLoggedInUser={setLikedByLoggedInUser}
-								setLikecount={setlikecount}
-								likecount={likecount}
-								setPostInView={setPostInView}
-								commentCount={commentcount}
-								setRepostModal={() => setRepostModal(true)}
-								viewCount={viewCount}
-								post={post}
-							/>
 						</div>
 					</div>
 				</div>
+				<ReactionPallete
+					userId={userId}
+					postId={postId}
+					likedByLoggedInUser={likedByLoggedInUser}
+					setLikedByLoggedInUser={setLikedByLoggedInUser}
+					setLikecount={setlikecount}
+					likecount={likecount}
+					setPostInView={setPostInView}
+					commentCount={commentcount}
+					setRepostModal={() => setRepostModal(true)}
+					viewCount={viewCount}
+					post={post}
+				/>
 
 				{showToggle && (
 					<motion.div

@@ -14,6 +14,7 @@ import CommentBox from "./components/CommentBox";
 import CommentForm from "./components/CommentForm";
 import RepostModal from "../../Modals/RepostModal";
 import Modal from "../../Modals";
+import LikesPopup from "../common/LikesPopup";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
@@ -38,6 +39,7 @@ const PostPreview = ({
 }: Props) => {
 	const { postId, postMedia, creator, postText, createdAt } = post;
 	const formattedDate = useDateFormatter(createdAt);
+	const [viewlikes, setViewLikes] = useState(false);
 	const [repostModal, setRepostModal] = useState(false);
 	const [comments, setcomments] = useState<Comment[] | null>(null);
 	const {
@@ -99,10 +101,15 @@ const PostPreview = ({
 							className=" w-[600px] max-h-[600px] object-cover"
 						/>
 						<div className="flex mt-6 justify-between px-4 py-2 text-gray-500">
-							<p className=" hover:underline cursor-pointer">
-								{likecount} Like
-								{likecount != 1 && "s"}
-							</p>
+							<div className="relative">
+								<p
+									className=" hover:underline cursor-pointer"
+									onClick={() => setViewLikes(true)}>
+									{likecount} Like
+									{likecount != 1 && "s"}
+								</p>
+								{viewlikes && <LikesPopup likes={post.likes} onClose={() => setViewLikes(false)}/>}
+							</div>
 							<div className="flex gap-3">
 								<p className=" cursor-pointer hover:underline">
 									{commentcount} Comment

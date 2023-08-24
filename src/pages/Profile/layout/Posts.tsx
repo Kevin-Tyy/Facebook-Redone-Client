@@ -4,15 +4,23 @@ import Skeleton from "react-loading-skeleton";
 import PostSkeleton from "../../../components/Loaders/Skeleton/Post";
 import PostComponent from "../../../components/Posts/Post";
 import { Posts, Userdata } from "../../../types/Types";
+import RepostBox from "../../../components/Posts/PostComponents/RepostComponent";
 interface Props {
-	loading : boolean
-	userData : Userdata | null
-	userId : string
-	isOpen : boolean
-	setIsOpen : any
-	posts : Posts[] | null
+	loading: boolean;
+	userData: Userdata | null;
+	userId: string;
+	isOpen: boolean;
+	setIsOpen: any;
+	posts: Posts[] | null;
 }
-const PostLayout = ({ loading , userData , userId , isOpen , setIsOpen , posts }: Props) => {
+const PostLayout = ({
+	loading,
+	userData,
+	userId,
+	isOpen,
+	setIsOpen,
+	posts,
+}: Props) => {
 	return (
 		<div>
 			<div className="flex flex-col items-start lg:flex-row gap-5">
@@ -58,7 +66,11 @@ const PostLayout = ({ loading , userData , userId , isOpen , setIsOpen , posts }
 								<div className="flex flex-col gap-6 ">
 									{posts.map((post, index) => (
 										<div key={index}>
-											<Box post={post}/>
+											{post.isReposted ? (
+												<RepostBox post={post} />
+											) : (
+												<Box post={post} />
+											)}
 										</div>
 									))}
 								</div>

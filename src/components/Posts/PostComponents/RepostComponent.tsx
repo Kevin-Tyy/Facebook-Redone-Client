@@ -69,6 +69,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 			toast.error(data.msg);
 		}
 	};
+	
 	return (
 		<>
 			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl p-3  border border-gray-800">
