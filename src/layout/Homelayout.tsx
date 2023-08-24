@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Nav";
-import BottomNav from "../components/shared/Nav";
+// import BottomNav from "../components/shared/Nav";
 
 const Homelayout = () => {
 	return (
 		<div>
 			<Navbar />
-			<BottomNav />
+			{/* <BottomNav /> */}
 			<Outlet />
 		</div>
 	);

@@ -5,7 +5,7 @@ import {
 	LiveTvRounded,
 } from "@mui/icons-material";
 
-export const Tabs = ["posts", "about", "friends", "groups", "photos", "videos"];
+export const Tabs = ["posts", "about", "friends", "groups", "photos"];
 
 export const navObj = [
 	{ icon: HomeRounded, title: "Home", link: "/" },
