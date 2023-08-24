@@ -1,4 +1,4 @@
-import ReactionPallete from "./ReactionPallete";
+import ReactionPallete from "../common/ReactionPallete";
 import useDateFormatter from "../../../hooks/useDate";
 import { MoreHoriz } from "@mui/icons-material";
 import * as iconshi from "react-icons/hi2";

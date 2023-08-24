@@ -3,7 +3,7 @@ import { Comment, Posts, UserInfo } from "../../../types/Types";
 import { Link } from "react-router-dom";
 import placeholderImage from "../../../assets/avatar.webp";
 import useDateFormatter from "../../../hooks/useDate";
-import ReactionPallete from "../PostComponents/ReactionPallete";
+import ReactionPallete from "../common/ReactionPallete";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import { useState, useEffect, Fragment } from "react";
