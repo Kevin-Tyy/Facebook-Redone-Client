@@ -73,8 +73,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 
 	return (
 		<>
-			<motion.div
-				className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
+			<motion.div className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
 				{creator?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You posted</p>
 				)}
@@ -93,8 +92,13 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 									/>
 								</div>
 								<div className="flex flex-col">
-									<p className="text-light capitalize">{creator?.username}</p>
-									<p className="text-xs text-light/60">{formattedDate}</p>
+									<p className="text-light capitalize">
+										{creator?.firstname} {creator?.lastname}
+									</p>
+									<div className="flex items-center space-x-2 text-gray-500/80">
+										<p className="text-sm capitalize">@{creator?.username}</p>
+										<p className="text-sm">{formattedDate}</p>
+									</div>
 								</div>
 							</div>
 						</Link>
@@ -181,9 +185,9 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 					setLikedByLoggedInUser={setLikedByLoggedInUser}
 				/>
 			)}
-			{repostModal && 
-				<RepostModal post={post} onClose={() => setRepostModal(false)}/>
-			}
+			{repostModal && (
+				<RepostModal post={post} onClose={() => setRepostModal(false)} />
+			)}
 		</>
 	);
 };

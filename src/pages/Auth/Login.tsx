@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { loggedInUser, login } from "../../redux/features/AuthSlice";
 import { decodeToken } from "../../utils/decodeToken";
+import Logo from "../../components/Logo";
 
 interface FormData {
 	username: string;
@@ -47,7 +48,7 @@ const Login: FC = () => {
 			if (!data.success) {
 				toast.error(data?.msg);
 			} else {
-				const userInfo = decodeToken(data?.token);				
+				const userInfo = decodeToken(data?.token);
 				dispatch(login(userInfo));
 				toast.success(data?.msg);
 				navigate("/home");
@@ -71,9 +72,12 @@ const Login: FC = () => {
 				<form
 					onSubmit={handleSubmit}
 					className=" flex flex-col gap-7 p-3 w-full sm:w-[400px]">
-					<h1 className="text-white text-center text-3xl font-bold">
-						Sign into your account
-					</h1>
+					<div className="flex flex-col gap-3 items-center">
+						<Logo />
+						<h1 className="text-white text-center text-3xl font-bold">
+							Sign into your account
+						</h1>
+					</div>
 					<hr className="border-t border-gray-700" />
 					<div
 						className={`text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500 ${

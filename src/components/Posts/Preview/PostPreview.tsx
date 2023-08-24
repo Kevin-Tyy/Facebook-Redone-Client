@@ -3,7 +3,7 @@ import { Comment, Posts, UserInfo } from "../../../types/Types";
 import { Link } from "react-router-dom";
 import placeholderImage from "../../../assets/avatar.webp";
 import useDateFormatter from "../../../hooks/useDate";
-import CommentComponent from "../PostComponents/ReactionPallete";
+import ReactionPallete from "../PostComponents/ReactionPallete";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import { useState, useEffect, Fragment } from "react";
@@ -14,6 +14,7 @@ import Spinner from "../../Loaders/Spinner/Spinner";
 import CommentBox from "./components/CommentBox";
 import CommentForm from "./components/CommentForm";
 import { CloseRounded } from "@mui/icons-material";
+import RepostModal from "../../Modals/RepostModal";
 interface Props {
 	viewPost: (value: any) => void;
 	setlikecount: (value: number) => void;
@@ -36,8 +37,8 @@ const PostPreview = ({
 }: Props) => {
 	const { postId, postMedia, creator, postText, createdAt } = post;
 	const formattedDate = useDateFormatter(createdAt);
+	const [repostModal, setRepostModal] = useState(false);
 	const [comments, setcomments] = useState<Comment[] | null>(null);
-
 	const {
 		user: {
 			userInfo: { userId },
@@ -115,12 +116,12 @@ const PostPreview = ({
 										{commentcount != 1 && "s"}
 									</p>
 									<p className="text-light cursor-pointer hover:underline">
-										0 shares
+										0 reposts
 									</p>
 								</div>
 							</div>
 							<div className="p-2">
-								<CommentComponent
+								<ReactionPallete
 									userId={userId}
 									postId={postId}
 									likedByLoggedInUser={likedByLoggedInUser}
@@ -128,7 +129,9 @@ const PostPreview = ({
 									setLikecount={setlikecount}
 									likecount={likecount}
 									setPostInView={null}
-								/>
+									commentCount={commentcount}
+									setRepostModal={() => setRepostModal(true)}
+									/>
 							</div>
 							<div>
 								{comments ? (
@@ -144,7 +147,7 @@ const PostPreview = ({
 												))}
 											</div>
 										) : (
-											<p className="text-center text-xl text-light py-6 mx-2 border border-gray-800">
+											<p className="text-center text-xl text-light py-6 mx-2 border border-primary-100 rounded-2xl">
 												No comments yet
 											</p>
 										)}
@@ -162,9 +165,11 @@ const PostPreview = ({
 						setcommentcount={setcommentcount}
 						post={post}
 					/>
+					{repostModal && (
+						<RepostModal post={post} onClose={() => setRepostModal(false)} />
+					)}
 				</div>
 			</motion.div>
-		
 		</div>
 	);
 };

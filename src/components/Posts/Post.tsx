@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import ButtonComp from "../Buttons/Button";
 import { UserInfo } from "../../types/Types";
+import placeholderAvatar from "../../assets/avatar.webp";
 const PostComponent = () => {
 	const [isPostModal, setIsPostModal] = useState<boolean>(false);
 	const {
@@ -32,7 +33,7 @@ const PostComponent = () => {
 				<div className="flex items-center gap-6">
 					<div className="bg-primary-100 p-[3px] rounded-full">
 						<img
-							src={profileimage}
+							src={profileimage || placeholderAvatar}
 							className="w-14 h-12  rounded-full object-cover"
 						/>
 					</div>
@@ -76,7 +77,7 @@ const PostComponent = () => {
 							backgroundColor: "#0C88EF",
 							textTransform: "capitalize",
 							borderRadius: "40px",
-							px : '30px',
+							px: "30px",
 							"&:hover": { backgroundColor: "#0C88EF" },
 						}}
 						onClick={() => setIsPostModal(true)}>

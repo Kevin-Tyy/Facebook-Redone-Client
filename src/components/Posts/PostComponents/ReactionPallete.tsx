@@ -1,12 +1,11 @@
-import {
-	BiComment,
-	BiHeart,
-	BiRepost,
-	BiUpload,
-} from "react-icons/bi";
-import { BsHeartFill } from "react-icons/bs";
+import { BsArrowRepeat } from "react-icons/bs";
 import { ImStatsBars } from "react-icons/im";
-
+import { FaRegComment } from "react-icons/fa";
+import {
+	AiOutlineCloudUpload,
+	AiFillHeart,
+	AiOutlineHeart,
+} from "react-icons/ai";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
@@ -20,7 +19,7 @@ interface Props {
 	setLikecount: (value: any) => void;
 	likecount: number;
 	commentCount: number;
-	setRepostModal : (value: any) => void;
+	setRepostModal: (value: any) => void;
 }
 const ReactionPallete = ({
 	setPostInView,
@@ -31,11 +30,11 @@ const ReactionPallete = ({
 	setLikecount,
 	commentCount,
 	likecount,
-	setRepostModal
+	setRepostModal,
 }: Props) => {
 	const styleClass = `flex items-center justify-center cursor-pointer gap-2 font-bold`;
 	const handleLike = async () => {
-		console.log(postId)
+		console.log(postId);
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
 			setLikecount(likecount - 1);
@@ -64,9 +63,9 @@ const ReactionPallete = ({
 						<div
 							className={` group-hover:bg-pink-800/20 group-hover:text-pink-600 p-3 rounded-full group-active:animate-ping transition-all duration-500`}>
 							{likedByLoggedInUser ? (
-								<BsHeartFill size={20} />
+								<AiFillHeart size={20} />
 							) : (
-								<BiHeart size={20} />
+								<AiOutlineHeart size={20} />
 							)}
 						</div>
 						<p className="group-hover:text-pink-600 transition-all duration-500">
@@ -80,7 +79,7 @@ const ReactionPallete = ({
 						onClick={() => setPostInView && setPostInView(true)}>
 						<div
 							className={`${styleClass} transition-all duration-500 text-gray-500 group-hover:bg-sky-800/20 p-3 rounded-full group-hover:text-sky-700`}>
-							<BiComment size={20} />
+							<FaRegComment size={20} />
 						</div>
 						<p className="group-hover:text-sky-600 transition-all duration-500">
 							{commentCount}
@@ -91,7 +90,7 @@ const ReactionPallete = ({
 					<div
 						onClick={setRepostModal}
 						className={`${styleClass} transition-all duration-500 text-gray-500 hover:bg-orange-800/20 p-3 rounded-full hover:text-orange-700`}>
-						<BiRepost size={25} />
+						<BsArrowRepeat size={25} />
 					</div>
 				</Tooltip>
 				<Tooltip title="Views">
@@ -103,7 +102,7 @@ const ReactionPallete = ({
 				<Tooltip title="Download this post">
 					<div
 						className={`${styleClass}  transition-all duration-500 text-gray-500 hover:bg-purple-800/10 p-3 rounded-full hover:text-purple-500`}>
-						<BiUpload size={25} />
+						<AiOutlineCloudUpload size={25} />
 					</div>
 				</Tooltip>
 			</div>

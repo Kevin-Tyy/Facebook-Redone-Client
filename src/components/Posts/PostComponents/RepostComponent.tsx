@@ -94,10 +94,12 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 								</div>
 								<div className="flex flex-col">
 									<p className="text-light capitalize">
-										{repostedBy?.username}
+										{repostedBy?.firstname} {repostedBy.lastname}
 									</p>
 									<p className="text-sm text-gray-500">
-										<span className="text-sm capitalize">{repostedBy?.username} </span>
+										<span className="text-sm capitalize">
+											@{repostedBy?.username}{" "}
+										</span>
 										reposted this.
 									</p>
 								</div>
@@ -110,8 +112,10 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 						</div>
 					</div>
 				</div>
-				<div className="flex gap-8 px-4">
-					<div className="w-1 flex-1 rounded-full mx-2 bg-gray-700 text-transparent">h</div>
+				<div className="flex gap-6 px-4">
+					<div className="w-1 flex-1 rounded-full mx-2 bg-gray-700 text-transparent">
+						h
+					</div>
 					<div className="flex self-end w-full flex-col">
 						<div className="flex justify-between items-start">
 							<Link to={`/profile/${creator?.userId}`}>
@@ -128,7 +132,10 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 									</div>
 									<div className="flex flex-col">
 										<p className="text-light capitalize">{creator?.username}</p>
-										<p className="text-xs text-light/60">{formattedDate}</p>
+										<div className="flex items-center space-x-2 text-gray-500/80">
+											<p className="text-sm capitalize">@{creator?.username}</p>
+											<p className="text-sm">{formattedDate}</p>
+										</div>{" "}
 									</div>
 								</div>
 							</Link>
@@ -172,29 +179,29 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 							visible: { opacity: 1, y: 0 },
 						}}
 						ref={toggleRef}
-						className="absolute top-24 right-6 bg-primary-200 border rounded-xl border-gray-700 p-2 z-50">
+						className="absolute top-16 right-6 bg-primary-200 ring-1 rounded-xl ring-gray-700 p-2 z-50">
 						<ul className="text-light flex flex-col ">
 							{creator?.userId == userId && (
 								<li
 									onClick={handleDeleteRequest}
-									className="p-4 pr-10 border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+									className="p-3 pr-10 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
 									<DeleteOutlineOutlined />
 									Delete Post
 								</li>
 							)}
 							<li
 								onClick={() => setPostInView(true)}
-								className="p-4 pr-10 flex items-start border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
+								className="p-3 pr-10 flex items-start gap-2 hover:bg-primary-100/30 transition rounded-md cursor-pointer">
 								<RemoveRedEyeOutlined />
 								View Post
 							</li>
-							<li className="p-4 pr-10 flex items-start border-b border-gray-700 gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
-								<NotificationsOffOutlined /> Mute Notification for this post
+							<li className="p-3 pr-10 flex items-start gap-2 hover:bg-primary-100/30 transition rounded-md cursor-pointer">
+								<NotificationsOffOutlined /> Mute Notifications
 							</li>
 							<li
 								onClick={() => setPostInView(true)}
-								className="p-4 pr-10 flex items-start gap-2 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
-								<CommentOutlined /> Comment about this post
+								className="p-3 pr-10 flex items-start gap-2 hover:bg-primary-100/30 transition rounded-md cursor-pointer">
+								<CommentOutlined /> Add your comment
 							</li>
 						</ul>
 					</motion.div>

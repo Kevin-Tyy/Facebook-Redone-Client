@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/features/AuthSlice";
 import { decodeToken } from "../../utils/decodeToken";
+import Logo from "../../components/Logo";
 
 const RegisterForm: FC = () => {
 	const navigate = useNavigate();
@@ -97,7 +98,12 @@ const RegisterForm: FC = () => {
 				<form
 					onSubmit={handleSubmit}
 					className="w-full sm:w-[400px] flex flex-col gap-7">
-					<h1 className="text-white text-center text-3xl font-bold">Create a new account</h1>
+					<div className="flex flex-col gap-3 items-center">
+						<Logo />
+						<h1 className="text-white text-center text-3xl font-bold">
+							Create a new account
+						</h1>
+					</div>
 					<hr className="border-1 border-gray-700" />
 					<Stepper activeStep={activeStep} alternativeLabel>
 						{steps.map((label, index) => (
@@ -113,9 +119,7 @@ const RegisterForm: FC = () => {
 							</Step>
 						))}
 					</Stepper>
-
 					{renderStepContent(activeStep)}
-
 					<RegButtons
 						isLoading={isLoading}
 						activeStep={activeStep}

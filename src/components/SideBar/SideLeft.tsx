@@ -12,6 +12,8 @@ import { useState } from "react";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import { UserInfo } from "../../types/Types";
+import placeholderAvatar from '../../assets/avatar.webp'
+
 import { NavLink } from "react-router-dom";
 const UtilObj = [
 	{ icon: <HomeRounded sx={{ fontSize: 25 }} />, title: "Home", link: "/" },
@@ -55,7 +57,7 @@ const Sidebar = () => {
 					<div className="flex items-center gap-3 rounded-lg">
 						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[2px] ">
 							<img
-								src={profileimage}
+								src={profileimage || placeholderAvatar}
 								className="rounded-full w-12 h-12 object-cover"
 							/>
 						</div>

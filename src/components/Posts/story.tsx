@@ -41,7 +41,7 @@ const Story = () => {
 	return (
 		<div className="w-full ">
 			{loading ? (
-				<div className="flex gap-6 h- overflow-x-scroll overflow-y-hidden pb-5">
+				<div className="flex gap-6 h-[250px] overflow-x-scroll overflow-y-hidden pb-5">
 					<StorySkeleton />
 				</div>
 			) : (
@@ -52,7 +52,7 @@ const Story = () => {
 					</div>
 					<div className=" flex gap-4 h-[250px] overflow-x-scroll overflow-y-hidden pb-5">
 						<div className="min-w-[130px] overflow-hidden relative rounded-2xl">
-							<img src={"/code.jpg"} className="object-cover" />
+							<img src={ profileimage || "/code.jpg"} className="object-cover" />
 							<div className="bg-primary-200 absolute bottom-0 w-full h-20"></div>
 							<div
 								className="flex flex-col justify-center items-center absolute bottom-7 left-7 cursor-pointer"
@@ -70,7 +70,7 @@ const Story = () => {
 								{stories.map((story, index) => (
 									<div
 										key={index}
-										className="h-full w-[130px] rounded-full relative cursor-pointer group"
+										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group"
 										onClick={() => {
 											handleStoryView();
 											setStoryInView(story);
@@ -90,9 +90,9 @@ const Story = () => {
 										</div>
 										<img
 											src={story.storyMedia}
-											className="h-full w-[130px] object-cover rounded-2xl transition duration-100 hover:scale-110"
+											className="h-full w-full object-cover  transition duration-500 group-hover:scale-110 "
 										/>
-										<div className="w-full h-full bg-gradient-to-b from-black/20 cursor-pointer to-black/40 z-[2] absolute inset-0 transition group-hover:bg-gray-500/10 rounded-lg"></div>
+										<div className="w-full h-full bg-gradient-to-b from-black/20 cursor-pointer to-black/40 z-[2] absolute inset-0 transition rounded-lg"></div>
 									</div>
 								))}
 								{isInView && (

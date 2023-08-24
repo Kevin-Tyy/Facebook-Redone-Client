@@ -12,6 +12,8 @@ import { loggedInUser } from "../../../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import EmojiPicker, { Theme } from "emoji-picker-react";
+import placeholderAvatar from "../../../../assets/avatar.webp";
+
 interface CommentFormProps {
 	setcommentcount: (value: any) => any;
 	commentcount: number;
@@ -70,11 +72,14 @@ const CommentForm: React.FC<CommentFormProps> = ({
 		<>
 			<div className="flex gap-2 items-start p-3 bg-primary-200 border-t border-gray-700 sticky bottom-0">
 				<div className="bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
-					<img src={profileimage} className="h-full  w-full rounded-full" />
+					<img
+						src={profileimage || placeholderAvatar}
+						className="h-full  w-full rounded-full"
+					/>
 				</div>
 				<form
 					onSubmit={handleSubmit}
-					className="bottom-0 bg-gray-800 w-full p-2 rounded-xl focus-within:outline outline-1 outline-light/40">
+					className="bottom-0 bg-primary-100/60 w-full p-2 rounded-xl focus-within:outline outline-1 outline-gray-700">
 					<textarea
 						value={commentText}
 						onChange={(e) => setCommentText(e.target.value)}
@@ -86,7 +91,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 							<ImageOutlined sx={{ fontSize: 20 }} />
 							<GifBoxOutlined sx={{ fontSize: 20 }} />
 						</div>
-						<button className="hover:bg-gray-700/60 p-1 transiton rounded-full ">
+						<button className="hover:bg-gray-700/60 p-1 transiton rounded-full text-blue-base">
 							<SendRounded sx={{ fontSize: 25 }} />
 						</button>
 					</div>
