@@ -46,7 +46,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 	);
 	const [likecount, setlikecount] = useState<number>(likes.length);
 	const [commentcount, setcommentcount] = useState<number>(comments.length);
-
+	const viewCount : number = post.views.length;
 	const handleOutsideClick = (e: any) => {
 		if (toggleRef.current && !toggleRef.current.contains(e.target)) {
 			setShowToggle(false);
@@ -97,6 +97,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 									</p>
 									<div className="flex items-center space-x-2 text-gray-500/80">
 										<p className="text-sm capitalize">@{creator?.username}</p>
+										<span>•</span>
 										<p className="text-sm">{formattedDate}</p>
 									</div>
 								</div>
@@ -129,6 +130,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 								setPostInView={setPostInView}
 								commentCount={commentcount}
 								setRepostModal={() => setRepostModal(true)}
+								viewCount={viewCount}
 							/>
 						</div>
 					</div>

@@ -20,6 +20,7 @@ interface Props {
 	likecount: number;
 	commentCount: number;
 	setRepostModal: (value: any) => void;
+	viewCount: number;
 }
 const ReactionPallete = ({
 	setPostInView,
@@ -30,9 +31,10 @@ const ReactionPallete = ({
 	setLikecount,
 	commentCount,
 	likecount,
+	viewCount,
 	setRepostModal,
 }: Props) => {
-	const styleClass = `flex items-center justify-center cursor-pointer gap-2 font-bold`;
+	const styleClass = `flex items-center justify-center cursor-pointer gap-[1px] font-bold`;
 	const handleLike = async () => {
 		console.log(postId);
 		setLikedByLoggedInUser(!likedByLoggedInUser);
@@ -68,7 +70,7 @@ const ReactionPallete = ({
 								<AiOutlineHeart size={20} />
 							)}
 						</div>
-						<p className="group-hover:text-pink-600 transition-all duration-500">
+						<p className=" text-sm translate-y-[1px] group-hover:text-pink-600 transition-all duration-500">
 							{likecount}
 						</p>
 					</div>
@@ -81,7 +83,7 @@ const ReactionPallete = ({
 							className={`${styleClass} transition-all duration-500 text-gray-500 group-hover:bg-sky-800/20 p-3 rounded-full group-hover:text-sky-700`}>
 							<FaRegComment size={20} />
 						</div>
-						<p className="group-hover:text-sky-600 transition-all duration-500">
+						<p className=" text-sm translate-y-[1px] group-hover:text-sky-600 transition-all duration-500">
 							{commentCount}
 						</p>
 					</div>
@@ -94,9 +96,14 @@ const ReactionPallete = ({
 					</div>
 				</Tooltip>
 				<Tooltip title="Views">
-					<div
-						className={`${styleClass}  transition-all duration-500 text-gray-500 hover:bg-green-800/20 p-3 rounded-full hover:text-green-700`}>
-						<ImStatsBars size={20} />
+					<div className={`${styleClass} text-gray-500 group`}>
+						<div
+							className={`${styleClass}  transition-all duration-500 text-gray-500 group-hover:bg-green-800/20 p-3 rounded-full group-hover:text-green-700`}>
+							<ImStatsBars size={20} />
+						</div>
+						<p className=" text-sm translate-y-[1px] group-hover:text-green-700 transition-all duration-500">
+							{viewCount}
+						</p>
 					</div>
 				</Tooltip>
 				<Tooltip title="Download this post">

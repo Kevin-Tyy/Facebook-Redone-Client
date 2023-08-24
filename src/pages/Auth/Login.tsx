@@ -87,7 +87,7 @@ const Login: FC = () => {
 						<input
 							type="text"
 							className="bg-transparent outline-none w-full placeholder:text-neutral-400"
-							placeholder="Username"
+							placeholder="Email or username"
 							disabled={isLoading}
 							onChange={handleInputChange}
 							name="username"

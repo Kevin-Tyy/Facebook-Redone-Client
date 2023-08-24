@@ -1,14 +1,11 @@
-export const options = {
-    // weekday: '',
-    hour: 'numeric',
-    minute: 'numeric',
-    year: 'numeric',
-    month: 'short',
-    hour12: false,
-    day: 'numeric',
-};
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo("en-US");
+
 const useDateFormatter = (date: Date) => {
-    const formattedDate = new Date(date).toLocaleString('en-US', options);
-    return  formattedDate ;
+	return timeAgo.format(new Date(date), 'mini');
 };
+
 export default useDateFormatter;

@@ -53,6 +53,9 @@ const PostPreview = ({
 		}
 	};
 	useEffect(() => {
+		axios.post(`${BaseURL}/post/view/${postId}/${userId	}`)
+	}, []);
+	useEffect(() => {
 		populateComments();
 	}, [commentcount]);
 	return (
@@ -92,8 +95,14 @@ const PostPreview = ({
 									/>
 								</div>
 								<div className="flex flex-col">
-									<p className="text-light capitalize">{creator?.username}</p>
-									<p className="text-xs text-light/60">{formattedDate}</p>
+									<p className="text-light capitalize">
+										{creator?.firstname} {creator?.lastname}
+									</p>
+									<div className="flex gap-2 items-center text-gray-500">
+										<p className="capitalize text-sm">@{creator?.username}</p>
+										<span>•</span>
+										<p className="text-sm ">{formattedDate}</p>
+									</div>
 								</div>
 							</div>
 						</Link>
@@ -105,17 +114,17 @@ const PostPreview = ({
 								src={postMedia}
 								className=" w-[600px] max-h-[600px] object-cover"
 							/>
-							<div className="flex  justify-between px-4 py-2">
-								<p className="text-light hover:underline cursor-pointer">
+							<div className="flex mt-6 justify-between px-4 py-2 text-gray-500">
+								<p className=" hover:underline cursor-pointer">
 									{likecount} Like
 									{likecount != 1 && "s"}
 								</p>
 								<div className="flex gap-3">
-									<p className="text-light cursor-pointer hover:underline">
+									<p className=" cursor-pointer hover:underline">
 										{commentcount} Comment
 										{commentcount != 1 && "s"}
 									</p>
-									<p className="text-light cursor-pointer hover:underline">
+									<p className=" cursor-pointer hover:underline">
 										0 reposts
 									</p>
 								</div>
@@ -130,8 +139,9 @@ const PostPreview = ({
 									likecount={likecount}
 									setPostInView={null}
 									commentCount={commentcount}
+									viewCount={post.views.length}
 									setRepostModal={() => setRepostModal(true)}
-									/>
+								/>
 							</div>
 							<div>
 								{comments ? (

@@ -134,6 +134,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 										<p className="text-light capitalize">{creator?.username}</p>
 										<div className="flex items-center space-x-2 text-gray-500/80">
 											<p className="text-sm capitalize">@{creator?.username}</p>
+											<span>•</span>
 											<p className="text-sm">{formattedDate}</p>
 										</div>{" "}
 									</div>
@@ -166,6 +167,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 					setPostInView={setPostInView}
 					commentCount={commentcount}
 					setRepostModal={() => setRepostModal(true)}
+					viewCount={post.views.length}
 				/>
 
 				{showToggle && (
