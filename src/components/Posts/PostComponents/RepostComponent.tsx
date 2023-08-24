@@ -1,12 +1,12 @@
 import ReactionPallete from "./ReactionPallete";
 import useDateFormatter from "../../../hooks/useDate";
 import {
-	CommentOutlined,
-	DeleteOutlineOutlined,
 	MoreHoriz,
-	NotificationsOffOutlined,
-	RemoveRedEyeOutlined,
 } from "@mui/icons-material";
+import * as iconshi from "react-icons/hi2";
+import * as iconsai from "react-icons/ai";
+import * as iconsfa from "react-icons/fa";
+
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
@@ -183,29 +183,29 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 							visible: { opacity: 1, y: 0 },
 						}}
 						ref={toggleRef}
-						className="absolute top-16 right-6 bg-primary-200 ring-1 rounded-xl ring-gray-700 p-2 z-50">
-						<ul className="text-light flex flex-col ">
-							{creator?.userId == userId && (
+						className="absolute top-16 right-6 bg-primary-200/10 backdrop-blur-lg ring-1 rounded-xl ring-gray-700 p-1 z-50">
+						<ul className="text-white flex flex-col ">
+							{post?.repostedBy?.userId == userId && (
 								<li
 									onClick={handleDeleteRequest}
-									className="p-3 pr-10 hover:bg-gray-800/70 transition rounded-md cursor-pointer">
-									<DeleteOutlineOutlined />
+									className="p-3 pr-10 flex gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+									{<iconshi.HiOutlineTrash size={18}/>}
 									Delete Post
 								</li>
 							)}
 							<li
 								onClick={() => setPostInView(true)}
-								className="p-3 pr-10 flex items-start gap-2 hover:bg-primary-100/30 transition rounded-md cursor-pointer">
-								<RemoveRedEyeOutlined />
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								{<iconsai.AiOutlineEye size={18}/>}
 								View Post
 							</li>
-							<li className="p-3 pr-10 flex items-start gap-2 hover:bg-primary-100/30 transition rounded-md cursor-pointer">
-								<NotificationsOffOutlined /> Mute Notifications
+							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								{< iconsai.AiOutlineBell size={18}/>} Mute Notifications
 							</li>
 							<li
 								onClick={() => setPostInView(true)}
-								className="p-3 pr-10 flex items-start gap-2 hover:bg-primary-100/30 transition rounded-md cursor-pointer">
-								<CommentOutlined /> Add your comment
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								{< iconsfa.FaRegComment/>} Add your comment
 							</li>
 						</ul>
 					</motion.div>
