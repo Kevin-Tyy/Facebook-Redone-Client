@@ -35,7 +35,7 @@ const profile = () => {
 	const {
 		user: {
 			userInfo: { userId },
-		}, 
+		},
 	} = useSelector(loggedInUser) as {
 		user: {
 			userInfo: UserInfo;
