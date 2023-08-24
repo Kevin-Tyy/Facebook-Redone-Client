@@ -4,6 +4,7 @@ import { MoreHoriz } from "@mui/icons-material";
 import * as iconshi from "react-icons/hi2";
 import * as iconsai from "react-icons/ai";
 import * as iconsfa from "react-icons/fa";
+import * as iconsbs from "react-icons/bs";
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
@@ -72,7 +73,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 		<>
 			<motion.div className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
 				{creator?.userId == userId && (
-					<p className="text-xs -my-1 text-gray-400">You posted</p>
+					<p className="text-xs -my-1 text-gray-400">You posted this.</p>
 				)}
 				<div className="flex flex-col gap-4">
 					<div className="flex justify-between items-start">
@@ -107,7 +108,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 						</div>
 					</div>
 					<div className="flex flex-col gap-2" onClick={viewPost}>
-						<h1 className="text-white cursor-pointer">{postText}</h1>
+						<h1 className="text-white cursor-pointer inline">{postText}</h1>
 						<div className="flex flex-col gap-2">
 							<div className="relative cursor-pointer group">
 								<img
@@ -159,6 +160,11 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<iconsai.AiOutlineEye size={18} />}
 								View Post
+							</li>
+							<li
+								onClick={() => setRepostModal(true)}
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								{<iconsbs.BsArrowRepeat size={18} />} Repost this
 							</li>
 							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<iconsai.AiOutlineBell size={18} />} Mute Notifications

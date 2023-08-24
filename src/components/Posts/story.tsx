@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import StoryModal from "../Modals/StoryModal";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-// import { useSelector } from "react-redux";
-// import { loggedInUser } from "../../redux/features/AuthSlice";
+import placeholderAvatar from "../../assets/avatar.webp";
 import StoryPreview from "./Preview/StoryPreview";
 
 import { StoryType, UserInfo } from "../../types/Types";
@@ -49,7 +48,10 @@ const Story = () => {
 					</div>
 					<div className=" flex gap-4 h-[250px] overflow-x-scroll overflow-y-hidden pb-5">
 						<div className="min-w-[130px] overflow-hidden relative rounded-2xl">
-							<img src={profileimage || "/code.jpg"} className="object-cover" />
+							<img
+								src={profileimage || placeholderAvatar}
+								className="object-cover rounded-b-3xl h-full w-full"
+							/>
 							<div className="bg-primary-200 absolute bottom-0 w-full h-20"></div>
 							<div
 								className="flex flex-col justify-center items-center absolute bottom-7 left-7 cursor-pointer"

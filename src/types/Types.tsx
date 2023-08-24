@@ -60,8 +60,8 @@ export interface Posts {
 	likes: Array<Userdata>;
 	comments: Array<Comment>;
 	repostedBy: Userdata;
-	updatedAt: Date;
 	taggedPeople: Array<Userdata>;
 	views: Array<Userdata>;
 	numberOfReposts : number;
+	repostedDate : Date;
 }

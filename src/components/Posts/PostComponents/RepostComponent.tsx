@@ -4,6 +4,7 @@ import { MoreHoriz } from "@mui/icons-material";
 import * as iconshi from "react-icons/hi2";
 import * as iconsai from "react-icons/ai";
 import * as iconsfa from "react-icons/fa";
+import * as iconsbs from "react-icons/bs";
 
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -24,9 +25,16 @@ interface RepostBoxProps {
 }
 
 const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
-	const { postId, creator, postText, createdAt, likes, comments, repostedBy } =
-		post;
-	const formattedDate = useDateFormatter(createdAt);
+	const {
+		postId,
+		creator,
+		postText,
+		createdAt,
+		likes,
+		comments,
+		repostedBy,
+		repostedDate,
+	} = post;
 	const [isPostInView, setPostInView] = useState(false);
 	const [showToggle, setShowToggle] = useState(false);
 	const [repostModal, setRepostModal] = useState(false);
@@ -69,12 +77,12 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 			toast.error(data.msg);
 		}
 	};
-	
+
 	return (
 		<>
 			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl p-3  border border-gray-800">
-				{creator?.userId == userId && (
-					<p className="text-xs -my-1 text-gray-400">You reposted</p>
+				{repostedBy?.userId == userId && (
+					<p className="text-xs -my-1 text-gray-400">You reposted this.</p>
 				)}
 				<div>
 					<div className="flex justify-between items-start">
@@ -94,12 +102,16 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 									<p className="text-light capitalize">
 										{repostedBy?.firstname} {repostedBy.lastname}
 									</p>
-									<p className="text-sm text-gray-500">
-										<span className="text-sm capitalize">
-											@{repostedBy?.username}{" "}
-										</span>
-										reposted this.
-									</p>
+									<div className="flex items-center space-x-2 text-gray-500/80">
+										<p className="text-sm text-gray-500">
+											<span className="text-sm capitalize">
+												@{repostedBy?.username}{" "}
+											</span>
+											reposted this.
+										</p>
+										<span>•</span>
+										<p className="text-sm">{useDateFormatter(createdAt)}</p>
+									</div>
 								</div>
 							</div>
 						</Link>
@@ -111,8 +123,8 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 					</div>
 				</div>
 				<div className="flex gap-6 px-4">
-					<div className="w-1 flex-1 rounded-full mx-2 bg-gray-700 text-transparent">
-						h
+					<div className="w-1 flex-1 rounded-full ml-2 bg-gray-700 text-transparent">
+						l
 					</div>
 					<div className="flex self-end w-full flex-col">
 						<div className="flex justify-between items-start">
@@ -135,7 +147,9 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 										<div className="flex items-center space-x-2 text-gray-500/80">
 											<p className="text-sm capitalize">@{creator?.username}</p>
 											<span>•</span>
-											<p className="text-sm">{formattedDate}</p>
+											<p className="text-sm">
+												{useDateFormatter(repostedDate)}
+											</p>
 										</div>{" "}
 									</div>
 								</div>
@@ -199,6 +213,12 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<iconsai.AiOutlineBell size={18} />} Mute Notifications
 							</li>
+							<li
+								onClick={() => setRepostModal(true)}
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								{<iconsbs.BsArrowRepeat size={18} />} Repost this
+							</li>
+
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
