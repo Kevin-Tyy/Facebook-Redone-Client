@@ -37,8 +37,6 @@ const ReactionPallete = ({
 	setRepostModal,
 	post,
 }: Props) => {
-	console.log(post);
-
 	const styleClass = `flex items-center justify-center cursor-pointer gap-[1px] font-bold`;
 	const handleLike = async () => {
 		setLikedByLoggedInUser(!likedByLoggedInUser);
