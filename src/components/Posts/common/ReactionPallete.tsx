@@ -60,8 +60,8 @@ const ReactionPallete = ({
 			<div className="flex w-4/5 justify-between items-center gap-2 p-1 rounded-lg ">
 				<Tooltip title={likedByLoggedInUser ? "Unlike" : "Like"}>
 					<div
-						className={` ${styleClass} text-pink-800 group  ${
-							likedByLoggedInUser && "text-pink-800 shadow-2xl"
+						className={` ${styleClass}  group  ${
+							likecount !== 0 ? "text-pink-800" : "text-gray-500"
 						}`}
 						onClick={handleLike}>
 						<div
@@ -79,7 +79,9 @@ const ReactionPallete = ({
 				</Tooltip>
 				<Tooltip title="Comment">
 					<div
-						className={`${styleClass} text-sky-700 group`}
+						className={`${styleClass} ${
+							commentCount !== 0 ? "text-sky-700" : "text-gray-500"
+						}  group`}
 						onClick={() => setPostInView && setPostInView(true)}>
 						<div
 							className={`${styleClass} transition-all duration-500  group-hover:bg-sky-800/20 p-3 rounded-full group-hover:text-sky-700`}>
@@ -99,7 +101,11 @@ const ReactionPallete = ({
 							}`}>
 							<BsArrowRepeat size={25} />
 						</div>
-						{post?.numberOfReposts !== 0 && <p className="text-sm translate-y-[1px] text-orange-700 transition-all duration-500">{post?.numberOfReposts}</p>}
+						{post?.numberOfReposts !== 0 && (
+							<p className="text-sm translate-y-[1px] text-orange-700 transition-all duration-500">
+								{post?.numberOfReposts}
+							</p>
+						)}
 					</div>
 				</Tooltip>
 				<Tooltip title="Views">
