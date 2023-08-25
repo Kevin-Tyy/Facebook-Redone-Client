@@ -1,8 +1,8 @@
 import { useState, FC, useEffect } from "react";
 import RegButtons from "../../components/Buttons/RegButtons";
 import { Stepper, Step, StepLabel } from "@mui/material";
-import StepOne from "../../components/Registration/StepOne";
-import StepTwo from "../../components/Registration/StepTwo";
+import StepOne from "../../components/Register/StepOne";
+import StepTwo from "../../components/Register/StepTwo";
 import { Link } from "react-router-dom";
 import { FormData } from "../../types/Types";
 import axios from "axios";
