@@ -99,7 +99,7 @@ const PostPreview = ({
 						<p className="text-white text-start px-5 pb-5">{postText}</p>
 						<img
 							src={postMedia}
-							className=" w-[600px] max-h-[600px] object-cover"
+							className="w-full max-h-[640px] object-cover"
 						/>
 						<div className="flex mt-6 justify-between px-4 py-2 text-gray-500">
 							<div className="relative">

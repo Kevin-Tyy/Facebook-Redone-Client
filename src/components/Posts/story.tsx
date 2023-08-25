@@ -102,11 +102,11 @@ const Story = () => {
 								))}
 								{isInView && (
 									<StoryPreview
-										handleView={handleStoryView}
 										setStoryInView={setStoryInView}
-										storyInView={storyInView}
+										onClose={() => setIsInView(false)}
 										stories={stories}
-										handleStoryToggle={() => setIsToggled(false)}
+										toggleStoryModal={() => setIsToggled(true)}
+										storyInView={storyInView}
 									/>
 								)}
 							</div>

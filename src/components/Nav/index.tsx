@@ -9,7 +9,6 @@ import {
 	NotificationAddSharp,
 	WbSunnyOutlined,
 } from "@mui/icons-material";
-
 import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import placeholderImage from "../../assets/avatar.webp";
@@ -62,9 +61,9 @@ const Navbar = () => {
 	return (
 		<div className="sticky top-0 z-[5]">
 			<div className="flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
-				<div className="w-full hidden md:flex gap-4 items-center p-3">
+				<div className="w-full flex gap-4 items-center p-3">
 					<Logo />
-					<div className="bg-primary-100/60 flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
+					<div className="bg-primary-100/60 hidden md:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
 						<Search sx={{ color: "#fff" }} />
 						<input
 							type="text"
@@ -90,17 +89,19 @@ const Navbar = () => {
 					))}
 				</div>
 				<div className="w-full justify-end flex gap-10 items-center">
-					<NotificationAddSharp
-						sx={{ color: "white", fontSize: 25, cursor: "pointer" }}
-					/>
-					<div className="bg-primary-100/60 rounded-full py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
+					<div className="hidden md:block">
+						<NotificationAddSharp
+							sx={{ color: "white", fontSize: 25, cursor: "pointer" }}
+						/>
+					</div>
+					<div className="bg-primary-100/60 rounded-full mx-1 py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">
 							<img
 								src={profileimage || placeholderImage}
 								alt="profile"
 								className="w-10 h-10  rounded-full object-cover"
 							/>
-							<div className="flex items-center">
+							<div className="hidden sm:flex items-center">
 								<p className="capitalize text-white font-bold">{username}</p>
 								<div className="group-hover:rotate-180 transition-all duration-500">
 									<ArrowDropDown sx={{ fontSize: 30, color: "white" }} />

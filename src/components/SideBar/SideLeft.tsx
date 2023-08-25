@@ -12,7 +12,7 @@ import { useState } from "react";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import { UserInfo } from "../../types/Types";
-import placeholderAvatar from '../../assets/avatar.webp'
+import placeholderAvatar from "../../assets/avatar.webp";
 
 import { NavLink } from "react-router-dom";
 const UtilObj = [
@@ -43,7 +43,7 @@ const Sidebar = () => {
 	const [activeTab, setActiveTab] = useState("Home");
 	const {
 		user: {
-			userInfo: { profileimage, username, email, userId },
+			userInfo: { profileimage, username, email, userId, firstname, lastname },
 		},
 	} = useSelector(loggedInUser) as {
 		user: {
@@ -52,18 +52,24 @@ const Sidebar = () => {
 	};
 	return (
 		<div className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[90px]  w-full max-w-[370px]">
-			<div className="bg-primary-200 p-8 rounded-md">
+			<div className="bg-primary-200 p-4 rounded-md ring-1 ring-gray-700/60">
 				<Link to={`/profile/${userId}`}>
 					<div className="flex items-center gap-3 rounded-lg">
-						<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[2px] ">
+						<div className="bg-primary-100 rounded-full p-[3px] ">
 							<img
 								src={profileimage || placeholderAvatar}
 								className="rounded-full w-12 h-12 object-cover"
 							/>
 						</div>
 						<div>
-							<p className="text-white capitalize">{username}</p>
-							<p className="text-gray-400">{email}</p>
+							<p className="text-white capitalize">
+								{firstname} {lastname}
+							</p>
+							<div className="flex items-center space-x-2 text-gray-400">
+								<p className="text-sm capitalize">@{username}</p>
+								<span>•</span>
+								<p className="text-sm">{email}</p>
+							</div>
 						</div>
 					</div>
 				</Link>
