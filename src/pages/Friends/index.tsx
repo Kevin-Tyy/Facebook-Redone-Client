@@ -14,6 +14,7 @@ import {
 	PersonAddAlt1Outlined,
 	PersonRemoveAlt1Outlined,
 } from "@mui/icons-material";
+import SideRight from "../../components/SideBar/SideRight";
 const index = () => {
 	const {
 		user: {
@@ -73,9 +74,9 @@ const index = () => {
 	return (
 		<div className="min-h-screen bg-background-primary pb-20">
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
-				<div className="w-full 2xl:w-3/5 flex justify-center gap-6">
+				<div className="h-full w-full flex justify-center gap-6">
 					<Sidebar />
-					<div className="flex flex-col gap-10 mt-8 w-full max-w-[800px]">
+					<div className="flex flex-col gap-10 mt-8 w-full max-w-[700px]">
 						{users ? (
 							<div className="flex flex-col gap-4 p-4 rounded-xl ">
 								<h1 className="text-light text-2xl text-center ">
@@ -197,6 +198,7 @@ const index = () => {
 							</div>
 						)}
 					</div>
+					<SideRight/>
 				</div>
 			</div>
 		</div>
