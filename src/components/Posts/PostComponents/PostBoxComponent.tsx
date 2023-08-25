@@ -18,6 +18,7 @@ import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Posts } from "../../../types/Types";
 import RepostModal from "../../Modals/RepostModal";
+import StyledHashtags from "../../../hooks/useHashTags";
 
 interface PostBoxProps {
 	post: Posts;
@@ -111,7 +112,9 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 						</div>
 					</div>
 					<div className="flex flex-col gap-2" onClick={viewPost}>
-						<h1 className="text-white cursor-pointer inline">{postText}</h1>
+						<h1 className="text-white cursor-pointer inline">
+							<StyledHashtags text={postText} />
+						</h1>
 						<div className="flex flex-col gap-2">
 							<div className="relative cursor-pointer group">
 								<img
@@ -191,6 +194,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 				setcommentcount={setcommentcount}
 				likedByLoggedInUser={likedByLoggedInUser}
 				setLikedByLoggedInUser={setLikedByLoggedInUser}
+				fetchPosts={fetchPosts}
 			/>
 
 			<RepostModal

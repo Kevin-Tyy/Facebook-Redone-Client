@@ -15,6 +15,7 @@ import CommentForm from "./components/CommentForm";
 import RepostModal from "../../Modals/RepostModal";
 import Modal from "../../Modals";
 import LikesPopup from "../common/LikesPopup";
+import StyledHashtags from "../../../hooks/useHashTags";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
@@ -25,6 +26,7 @@ interface Props {
 	setLikedByLoggedInUser: (value: any) => void;
 	commentcount: number;
 	setcommentcount: (value: any) => any;
+	fetchPosts: (value: string) => Promise<void>;
 }
 const PostPreview = ({
 	post,
@@ -36,6 +38,7 @@ const PostPreview = ({
 	setLikedByLoggedInUser,
 	commentcount,
 	setcommentcount,
+	fetchPosts,
 }: Props) => {
 	const { postId, postMedia, creator, postText, createdAt } = post;
 	const formattedDate = useDateFormatter(createdAt);
@@ -96,7 +99,9 @@ const PostPreview = ({
 				</div>
 				<div className="flex flex-col">
 					<div>
-						<p className="text-white text-start px-5 pb-5">{postText}</p>
+						<p className="text-white text-start px-5 pb-5">
+							<StyledHashtags text={postText} />
+						</p>
 						<img
 							src={postMedia}
 							className="w-full max-h-[640px] object-cover"
@@ -178,6 +183,7 @@ const PostPreview = ({
 					post={post}
 					onClose={() => setRepostModal(false)}
 					isOpen={repostModal}
+					fetchPosts={fetchPosts}
 				/>
 			</div>
 		</Modal>
