@@ -51,7 +51,7 @@ const Sidebar = () => {
 		};
 	};
 	return (
-		<div className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[90px]  w-[370px]">
+		<div className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[90px]  w-full max-w-[370px]">
 			<div className="bg-primary-200 p-8 rounded-md">
 				<Link to={`/profile/${userId}`}>
 					<div className="flex items-center gap-3 rounded-lg">

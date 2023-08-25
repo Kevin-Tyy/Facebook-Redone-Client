@@ -71,7 +71,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 
 	return (
 		<>
-			<motion.div className="relative bg-primary-200 rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
+			<motion.div className="relative bg-primary-200 rounded-xl sm:rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
 				{creator?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You posted this.</p>
 				)}

@@ -44,14 +44,12 @@ const PostComponent = () => {
 					</p>
 				</div>
 				<div className="flex gap-4 justify-between flex-wrap">
-					<div className="flex gap-2 md:gap-4 flex-wrap">
+					<div className="flex gap-2 md:gap-4 w-full sm:w-auto">
 						{utilObj.map((obj, index) => (
 							<div
 								key={index}
 								onClick={() => setIsPostModal(true)}
-								className={`${index == 3 && "hidden sm:block"} ${
-									index == 3 && "hidden md:block"
-								} `}>
+								className='w-full sm:w-auto'>
 								<ButtonComp color="#0E0f17">
 									<span
 										className={`text-${
@@ -70,21 +68,23 @@ const PostComponent = () => {
 							</div>
 						))}
 					</div>
-
-					<Button
-						sx={{
-							color: "white",
-							backgroundColor: "#0C88EF",
-							textTransform: "capitalize",
-							borderRadius: "40px",
-							px: "30px",
-							"&:hover": { backgroundColor: "#0C88EF" },
-						}}
-						onClick={() => setIsPostModal(true)}>
-						Post
-					</Button>
+					<div className="hidden sm:block">
+						<Button
+							sx={{
+								color: "white",
+								backgroundColor: "#0C88EF",
+								textTransform: "capitalize",
+								borderRadius: "40px",
+								px: "30px",
+								py: "9px",
+								"&:hover": { backgroundColor: "#0C88EF" },
+							}}
+							onClick={() => setIsPostModal(true)}>
+							Post
+						</Button>
+					</div>
 				</div>
-				<PostModal onClose={() => setIsPostModal(false)} isOpen={isPostModal}/>
+				<PostModal onClose={() => setIsPostModal(false)} isOpen={isPostModal} />
 			</div>
 		</div>
 	);

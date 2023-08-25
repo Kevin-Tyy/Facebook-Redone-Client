@@ -28,7 +28,7 @@ const Posts = () => {
 				</div>
 			) : (
 				<div>
-					<div className="flex flex-col gap-6">
+					<div className="flex flex-col gap-3 sm:gap-6">
 						{posts.map((post, index) => (
 							<div key={index}>
 								{post.isReposted ? (

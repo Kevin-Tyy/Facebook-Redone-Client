@@ -70,25 +70,27 @@ const Story = () => {
 								{stories.map((story, index) => (
 									<div
 										key={index}
-										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group"
+										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-gray-800"
 										onClick={() => {
 											handleStoryView();
 											setStoryInView(story);
 										}}>
-										<div className="z-[3] absolute flex flex-col justify-between items-start h-full pb-4 w-full gap-2 top-2 left-2">
-											<div className=" bg-blue-base rounded-full p-[3px] top-2 left-2">
-												<img
-													src={story.creator?.profileimage}
-													className="min-w-[35px] max-w-[35px] h-[35px] rounded-full object-cover "
-												/>
-											</div>
-											<div className="w-full overflow-hidden flex items-center gap-2">
-												<p className=" text-white capitalize whitespace-nowrap font-bold overflow-ellipsis">
-													{story.creator?.username}
-												</p>
-												<p className="text-gray-400 text-sm">
-													{useDateFormatter(story.createdAt)}
-												</p>
+										<div className="z-[3] absolute flex items-start h-full pb-4 w-full gap-2 top-2 left-2">
+											<div className="flex items-center gap-2">
+												<div className=" bg-blue-base w-full max-w-fit rounded-full p-[3px] flex items-start justify-start">
+													<img
+														src={story.creator?.profileimage}
+														className="min-w-[35px] max-w-[35px] h-[35px] rounded-full object-cover "
+													/>
+												</div>
+												<div className="w-full overflow-hidden leading-4">
+													<p className=" text-white capitalize whitespace-nowrap font-bold overflow-ellipsis">
+														{story.creator?.username.split(" ")[0]}
+													</p>
+													<p className="text-gray-300 text-xs">
+														{useDateFormatter(story.createdAt)}
+													</p>
+												</div>
 											</div>
 										</div>
 										<img

@@ -80,7 +80,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 
 	return (
 		<>
-			<motion.div className="relative flex flex-col bg-primary-200 rounded-2xl p-3  border border-gray-800">
+			<motion.div className="relative flex flex-col bg-primary-200 rounded-xl sm:rounded-2xl p-3  border border-gray-800">
 				{repostedBy?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You reposted this.</p>
 				)}

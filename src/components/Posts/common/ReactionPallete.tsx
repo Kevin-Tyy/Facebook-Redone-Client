@@ -57,7 +57,7 @@ const ReactionPallete = ({
 	};
 	return (
 		<div className="flex justify-center">
-			<div className="flex w-4/5 justify-between items-center gap-2 p-1 rounded-lg ">
+			<div className="flex w-full sm:w-4/5 justify-between items-center gap-2 p-1 rounded-lg ">
 				<Tooltip title={likedByLoggedInUser ? "Unlike" : "Like"}>
 					<div
 						className={` ${styleClass}  group  ${
