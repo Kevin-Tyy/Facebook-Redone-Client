@@ -120,13 +120,11 @@ const profile = () => {
 								) : (
 									<div className="flex flex-col  justify-center items-center gap-1">
 										<p className="capitalize text-4xl text-light">
-											{userData?.username}
-										</p>
-										<p className="text-light">
 											{userData?.firstname} {userData?.lastname}
 										</p>
-										<p className="text-light/30">{userData?.email}</p>
-										<div className="text-light/30 font-black flex gap-7">
+										<p className="text-light">@{userData?.username}</p>
+										<p className="text-gray-600">{userData?.email}</p>
+										<div className="text-gray-400 flex gap-7">
 											<p>
 												{userData && friendCount} Friend
 												{friendCount !== 1 && "s"}
