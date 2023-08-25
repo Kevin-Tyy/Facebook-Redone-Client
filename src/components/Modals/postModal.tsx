@@ -19,6 +19,7 @@ import Modal from ".";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
+	fetchPosts: (url: string) => Promise<void>;
 }
 
 const utilIcons = [
@@ -27,7 +28,7 @@ const utilIcons = [
 	<MoreHoriz fontSize="large" />,
 ];
 
-const PostModal = ({ onClose, isOpen }: Props) => {
+const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 	const [postText, setPostText] = useState<string>("");
 	const [postMedia, setPostMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,6 +55,8 @@ const PostModal = ({ onClose, isOpen }: Props) => {
 			if (data) {
 				setIsLoading(false);
 				if (data.success) {
+					fetchPosts(`${BaseURL}/post`);
+					onClose()
 					toast.success(data.msg);
 				} else {
 					toast.error(data.msg);

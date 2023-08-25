@@ -65,3 +65,13 @@ export interface Posts {
 	numberOfReposts : number;
 	repostedDate : Date;
 }
+
+export interface GroupType {
+	groupName: string
+	groupId: string
+	groupDescription: string
+	groupImage: string
+	admin : Userdata
+	groupMembers: Array<Userdata>
+	createdAt: Date
+}

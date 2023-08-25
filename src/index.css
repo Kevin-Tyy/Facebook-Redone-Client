@@ -29,3 +29,6 @@
 .active .bottomBorder {
   @apply w-3/5
 }
+.button{
+  @apply bg-white
+}

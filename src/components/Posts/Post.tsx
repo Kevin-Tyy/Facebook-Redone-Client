@@ -16,7 +16,11 @@ import { loggedInUser } from "../../redux/features/AuthSlice";
 import ButtonComp from "../Buttons/Button";
 import { UserInfo } from "../../types/Types";
 import placeholderAvatar from "../../assets/avatar.webp";
-const PostComponent = () => {
+const PostComponent = ({
+	fetchPosts,
+}: {
+	fetchPosts: (url: string) => Promise<void>;
+}) => {
 	const [isPostModal, setIsPostModal] = useState<boolean>(false);
 	const {
 		user: {
@@ -49,7 +53,7 @@ const PostComponent = () => {
 							<div
 								key={index}
 								onClick={() => setIsPostModal(true)}
-								className='w-full sm:w-auto'>
+								className="w-full sm:w-auto">
 								<ButtonComp color="#0E0f17">
 									<span
 										className={`text-${
@@ -84,7 +88,11 @@ const PostComponent = () => {
 						</Button>
 					</div>
 				</div>
-				<PostModal onClose={() => setIsPostModal(false)} isOpen={isPostModal} />
+				<PostModal
+					onClose={() => setIsPostModal(false)}
+					isOpen={isPostModal}
+					fetchPosts={fetchPosts}
+				/>
 			</div>
 		</div>
 	);

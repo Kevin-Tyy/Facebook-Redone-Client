@@ -21,9 +21,10 @@ import RepostModal from "../../Modals/RepostModal";
 
 interface PostBoxProps {
 	post: Posts;
+	fetchPosts: (url: string) => Promise<void>;
 }
 
-const PostBox: React.FC<PostBoxProps> = ({ post }) => {
+const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 	const { postId, creator, postText, createdAt, likes, comments } = post;
 	const formattedDate = useDateFormatter(createdAt);
 	const [isPostInView, setPostInView] = useState(false);
@@ -63,7 +64,9 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 	const handleDeleteRequest = async () => {
 		const { data } = await axios.delete(`${BaseURL}/post/${postId}`);
 		if (data?.success) {
-			toast.success(data.msg);
+			fetchPosts(`${BaseURL}/post`).then(() => {
+				toast.success(data.msg);
+			});
 		} else {
 			toast.error(data.msg);
 		}
@@ -194,6 +197,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 				post={post}
 				onClose={() => setRepostModal(false)}
 				isOpen={repostModal}
+				fetchPosts={fetchPosts}
 			/>
 		</>
 	);

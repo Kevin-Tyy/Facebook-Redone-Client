@@ -13,6 +13,7 @@ import FriendPage from "./pages/Friends";
 // import Chat from "./pages/Chat/Chat";
 import Homelayout from "./layout/Homelayout";
 import Loading from "./components/Loaders/fallback";
+import Groups from "./pages/group";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -42,7 +43,7 @@ const App: FC = () => {
 							<Route path="/profile/:id" element={<Profile />} />
 							<Route path="/friends" element={<FriendPage />} />
 							<Route path="/chat" element={<Chat />} />
-							<Route path="/groups" element={<h1 className="h-screen w-full bg-gray-950 text-white grid place-content-center">Hello world</h1>} />
+							<Route path="/groups" element={<Groups />} />
 
 							<Route
 								path="/home"

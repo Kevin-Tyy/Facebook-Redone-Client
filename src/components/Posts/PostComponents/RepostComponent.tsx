@@ -22,9 +22,10 @@ import RepostModal from "../../Modals/RepostModal";
 
 interface RepostBoxProps {
 	post: Posts;
+	fetchPosts: (url: string) => Promise<void>;
 }
 
-const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
+const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 	const {
 		postId,
 		creator,
@@ -72,7 +73,9 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 	const handleDeleteRequest = async () => {
 		const { data } = await axios.delete(`${BaseURL}/post/${postId}`);
 		if (data?.success) {
-			toast.success(data.msg);
+			fetchPosts(`${BaseURL}/post/`).then(() => {
+				toast.success(data.msg);
+			});
 		} else {
 			toast.error(data.msg);
 		}
@@ -244,6 +247,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post }) => {
 				post={post}
 				onClose={() => setRepostModal(false)}
 				isOpen={repostModal}
+				fetchPosts={fetchPosts}
 			/>
 		</>
 	);

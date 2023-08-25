@@ -6,13 +6,19 @@ import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 interface RepostModalProps {
 	post: Posts;
 	onClose: () => void;
 	isOpen: boolean;
+	fetchPosts: (url: string) => Promise<void>;
 }
-const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
+const RepostModal: React.FC<RepostModalProps> = ({
+	post,
+	onClose,
+	isOpen,
+	fetchPosts,
+}) => {
 	const {
 		user: {
 			userInfo: { userId },
@@ -22,22 +28,24 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
+		setLoading(true);
 		axios
 			.post(`${BaseURL}/post/repost`, {
 				postId: post.postId,
 				repostedBy: userId,
 			})
 			.then((response) => {
-				console.log(response);
-				toast.success(response.data.msg);
-				onClose();
+				fetchPosts(`${BaseURL}/post/`).then(() => {
+					toast.success(response.data.msg);
+					onClose();
+				});
 			})
 			.catch((err) => toast.error(err.response.data.msg))
 			.finally(() => setLoading(false));
 	};
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-primary-200  ring-1 ring-inset ring-gray-700/50 w-full xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
+			<div className="relative bg-primary-200  ring-1 ring-inset ring-gray-700/50 w-full xs:w-[400px] sm:w-[500px] p-6 rounded-lg">
 				<div className="p-3 border-b border-gray-700">
 					<h1 className="text-2xl text-center font-bold text-light">
 						Share this post.
@@ -45,7 +53,8 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
 				</div>
 				<div className="flex flex-col items-center space-y-10 mt-4">
 					<p className=" text-light/50 text-center">
-						This post will be shared to your timeline and your friends will be notified about this
+						This post will be shared to your timeline and your friends will be
+						notified about this
 					</p>
 					<form onSubmit={handleSubmit} className="flex items-center gap-4">
 						<Button
@@ -56,11 +65,11 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
 								textTransform: "capitalize",
 								borderRadius: "40px",
 								alignSelf: "flex-start",
-								px: "24px",
-								py: "8px",
+								width : '95px',
+								height : '35px',
 								"&:hover": { backgroundColor: "#3293e3" },
 							}}>
-							Repost
+							{loading ? <CircularProgress size={15} sx={{ color : 'white' }} /> : "Repost"}
 						</Button>
 						<div
 							onClick={onClose}
