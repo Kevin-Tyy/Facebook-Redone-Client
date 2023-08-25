@@ -9,6 +9,7 @@ import Sidebar from "../../components/SideBar/SideLeft";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import FriendLoader from "../../components/Loaders/Skeleton/FriendPageLoader";
+import placeholderAvatar from '../../assets/avatar.webp'
 import {
 	PersonAddAlt1Outlined,
 	PersonRemoveAlt1Outlined,
@@ -70,16 +71,16 @@ const index = () => {
 		));
 
 	return (
-		<div className="min-h-screen bg-gray-950 pb-20">
+		<div className="min-h-screen bg-background-primary pb-20">
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<div className="w-full 2xl:w-3/5 flex justify-center gap-6">
 					<Sidebar />
-					<div className="flex flex-col gap-10 mt-8 w-full max-w-[800px] 2xl:max-w-none">
+					<div className="flex flex-col gap-10 mt-8 w-full max-w-[800px]">
 						{users ? (
-							<div className="flex flex-col gap-4 bg-gray-900 p-4 rounded-xl  border border-gray-800">
+							<div className="flex flex-col gap-4 p-4 rounded-xl ">
 								<h1 className="text-light text-2xl text-center ">
 									Your friends{" "}
-									<span className="text-primary-100">({users?.length})</span>
+									<span className="text-blue-base text-xl">({users?.length})</span>
 								</h1>
 								{users.length > 0 ? (
 									<div className="flex flex-col gap-6">
@@ -91,7 +92,7 @@ const index = () => {
 													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
 														<div className="bg-primary-200 rounded-full p-1">
 															<img
-																src={user.profileimage}
+																src={user.profileimage || placeholderAvatar}
 																className="w-32 h-32 min-h-[130px] min-w-[130px] object-cover rounded-full"
 															/>
 														</div>
@@ -99,7 +100,7 @@ const index = () => {
 													<div className="flex flex-col gap-1 w-full">
 														<Link to={`/profile/${user.userId}`}>
 															<p className="text-xl text-white capitalize">
-																{user.username}
+																{user.firstname} {user.lastname}
 															</p>
 															<p className="text-light">{user.email}</p>
 														</Link>
@@ -128,7 +129,7 @@ const index = () => {
 										))}
 									</div>
 								) : (
-									<div className="text-base text-center text-light/60 pb-6">
+									<div className="text-lg text-center text-white p-4 pb-6 bg-primary-100/25">
 										😞 You have no friends!
 									</div>
 								)}
@@ -137,22 +138,22 @@ const index = () => {
 							<FriendLoader />
 						)}
 						{allUsers && (
-							<div className="flex flex-col gap-6 bg-gray-900 p-4 rounded-xl border border-gray-800">
+							<div className="flex flex-col gap-6 bg- p-4">
 								<h1 className="text-light text-2xl text-center ">
-									Suggestions
+									People you may know
 								</h1>
 
 								{allUsers.length > 0 ? (
 									<div className="flex flex-col gap-4">
 										{allUsers.map((user, index) => (
 											<div
-												className="bg-primary-200 p-4 rounded-lg border border-gray-800"
+												className="bg-primary-200/70 p-4 rounded-lg border border-gray-800"
 												key={index}>
 												<div className="flex flex-col sm:flex-row items-center gap-4">
 													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
 														<div className="bg-primary-200 rounded-full p-1">
 															<img
-																src={user.profileimage}
+																src={user.profileimage || placeholderAvatar}
 																className="w-32 h-32 min-h-[130px] min-w-[130px] object-cover rounded-full"
 															/>
 														</div>
@@ -189,7 +190,7 @@ const index = () => {
 										))}
 									</div>
 								) : (
-									<div className="text-base text-center text-light/60 pb-6">
+									<div className=" text-lg text-center text-white p-4 pb-6 bg-primary-100/25">
 										😞 No suggestions available!
 									</div>
 								)}

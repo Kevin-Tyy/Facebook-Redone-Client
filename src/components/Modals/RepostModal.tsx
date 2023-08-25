@@ -43,9 +43,9 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
 						Share this post.
 					</h1>
 				</div>
-				<div className="flex flex-col items-center space-y-10">
-					<p className="text-white">
-						Are you sure you want to repost this to your timeline?
+				<div className="flex flex-col items-center space-y-10 mt-4">
+					<p className=" text-light/50 text-center">
+						This post will be shared to your timeline and your friends will be notified about this
 					</p>
 					<form onSubmit={handleSubmit} className="flex items-center gap-4">
 						<Button
@@ -57,14 +57,14 @@ const RepostModal: React.FC<RepostModalProps> = ({ post, onClose, isOpen }) => {
 								borderRadius: "40px",
 								alignSelf: "flex-start",
 								px: "24px",
-								py: "12px",
+								py: "8px",
 								"&:hover": { backgroundColor: "#3293e3" },
 							}}>
 							Repost
 						</Button>
 						<div
 							onClick={onClose}
-							className={`text-red-600 ring-1 px-6 py-3 ring-red-700 rounded-full hover:bg-red-700/10 cursor-pointer ${
+							className={`text-red-600 ring-1 px-6 py-2 ring-red-700 rounded-full hover:bg-red-700/10 cursor-pointer ${
 								loading && "opacity-50"
 							}`}>
 							Cancel

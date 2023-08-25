@@ -55,9 +55,10 @@ const PostPreview = ({
 			setcommentcount(data?.data.length);
 		}
 	};
-	// useEffect(() => {
-	// 	axios.post(`${BaseURL}/post/view/${postId}/${userId}`);
-	// });
+	if (isOpen) {
+		axios.post(`${BaseURL}/post/view/${postId}/${userId}`);
+	}
+
 	useEffect(() => {
 		populateComments();
 	}, [commentcount]);
@@ -108,14 +109,22 @@ const PostPreview = ({
 									{likecount} Like
 									{likecount != 1 && "s"}
 								</p>
-								{viewlikes && <LikesPopup likes={post.likes} onClose={() => setViewLikes(false)}/>}
+								{viewlikes && (
+									<LikesPopup
+										likes={post.likes}
+										onClose={() => setViewLikes(false)}
+									/>
+								)}
 							</div>
 							<div className="flex gap-3">
 								<p className=" cursor-pointer hover:underline">
 									{commentcount} Comment
 									{commentcount != 1 && "s"}
 								</p>
-								<p className=" cursor-pointer hover:underline">0 reposts</p>
+								<p className=" cursor-pointer hover:underline">
+									{post.numberOfReposts} repost
+									{post.numberOfReposts !== 1 && "s"}
+								</p>
 							</div>
 						</div>
 						<div className="p-2">

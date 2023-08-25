@@ -10,6 +10,7 @@ import { StoryType, UserInfo } from "../../types/Types";
 import StorySkeleton from "../Loaders/Skeleton/Story";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
+import useDateFormatter from "../../hooks/useDate";
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [isInView, setIsInView] = useState(false);
@@ -81,9 +82,12 @@ const Story = () => {
 													className="min-w-[35px] max-w-[35px] h-[35px] rounded-full object-cover "
 												/>
 											</div>
-											<div className="w-full overflow-hidden">
+											<div className="w-full overflow-hidden flex items-center gap-2">
 												<p className=" text-white capitalize whitespace-nowrap font-bold overflow-ellipsis">
 													{story.creator?.username}
+												</p>
+												<p className="text-gray-400 text-sm">
+													{useDateFormatter(story.createdAt)}
 												</p>
 											</div>
 										</div>

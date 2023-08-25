@@ -8,7 +8,7 @@ import { BaseURL } from "../../utils/Link";
 import PeopleLoader from "../Loaders/Skeleton/People";
 import placeholderImage from "../../assets/avatar.webp";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PersonAdd } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
 import { fetchFriends } from "../../api/func";
@@ -58,7 +58,7 @@ const SideRight = () => {
 		(allUsers = allUsers.filter(
 			(suggest) => !users.some((friend) => friend.userId === suggest.userId)
 		));
-
+	const navigate = useNavigate();
 	return (
 		<div className="hidden xl:flex h-fit flex-col sticky top-[90px] w-full 2xl:min-w-[400px] max-w-[400px]">
 			<div className="bg-primary-200 p-5 flex rounded-lg w-full flex-col gap-4 ">
@@ -94,7 +94,9 @@ const SideRight = () => {
 				<h1 className="text-white text-xl">People you may know</h1>
 				{allUsers ? (
 					allUsers.length === 0 ? (
-						<div className="text-lg text-gray-400">No suggestions available</div>
+						<div className="text-lg text-gray-400">
+							No suggestions available
+						</div>
 					) : (
 						<div className="flex flex-col gap-7">
 							{allUsers.slice(0, 5).map((user, index) => (
@@ -117,7 +119,7 @@ const SideRight = () => {
 											</div>
 										</div>
 									</Link>
-								<Tooltip title="Add friend">
+									<Tooltip title="Add friend">
 										<PersonAdd
 											className="text-blue-base hover:scale-110 transition cursor-pointer"
 											onClick={() => addFriend(user?.userId)}
@@ -126,6 +128,7 @@ const SideRight = () => {
 								</div>
 							))}
 							<Button
+								onClick={() => navigate('/friends')}
 								sx={{
 									color: "white",
 									backgroundColor: "#0C88EF",
