@@ -1,4 +1,3 @@
-import { SportsEsportsRounded } from "@mui/icons-material";
 import Policy from "../shared/Policy";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -15,7 +14,7 @@ import { HiMiniHome, HiUserGroup, HiUsers } from "react-icons/hi2";
 import { BiSolidMessageRoundedDots } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 const UtilObj = [
-	{ icon: <HiMiniHome size={20} />, title: "Home", link: "/" },
+	{ icon: <HiMiniHome size={20} />, title: "Home", link: "/i/flow" },
 	{
 		icon: <HiUsers size={20} />,
 		title: "Friends",
@@ -32,11 +31,6 @@ const UtilObj = [
 		link: "/chat",
 	},
 	{
-		icon: <SportsEsportsRounded sx={{ fontSize: 20 }} />,
-		title: "Gaming",
-		link: "/i/flow",
-	},
-	{
 		icon: <BsFillBookmarkFill size={15} />,
 		title: "Saved",
 		link: "/i/saved",
@@ -44,7 +38,6 @@ const UtilObj = [
 ];
 const Sidebar = () => {
 	const [groups, setGroups] = useState<GroupType[] | null>(null);
-	const [activeTab, setActiveTab] = useState("Home");
 	const navigate = useNavigate();
 
 	const {
@@ -91,15 +84,14 @@ const Sidebar = () => {
 			<div className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
 				<div className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
-						<NavLink to={obj?.link} key={index}>
-							<div
-								onClick={() => setActiveTab(obj.title)}
-								className={`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${
-									activeTab === obj.title && "bg-primary-100/50"
-								}`}>
-								<span className="text-white">{obj.icon}</span>
-								<p className="text-white">{obj.title}</p>
-							</div>
+						<NavLink
+							to={obj?.link}
+							key={index}
+							className={({ isActive}) =>
+								`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${isActive && 'bg-primary-100/50'}`
+							}>
+							<span className="text-white">{obj.icon}</span>
+							<p className="text-white">{obj.title}</p>
 						</NavLink>
 					))}
 				</div>
@@ -144,9 +136,7 @@ const Sidebar = () => {
 									)}
 								</div>
 								<div className="text-gray-400">
-									<p
-										className="text-white cursor-pointer w-60 whitespace-nowrap overflow-hidden text-ellipsis"
-										onClick={() => navigate(`/group/${group._id}`)}>
+									<p className="text-white cursor-pointer w-60 whitespace-nowrap overflow-hidden text-ellipsis">
 										{group?.groupName}
 									</p>
 									<p className="w-64 whitespace-nowrap overflow-hidden text-ellipsis">
