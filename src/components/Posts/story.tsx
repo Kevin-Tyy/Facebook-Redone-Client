@@ -16,7 +16,6 @@ const Story = () => {
 	const [isInView, setIsInView] = useState(false);
 	const [stories, setstories] = useState<StoryType[]>([]);
 	const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
-	const [storyInView, setStoryInView] = useState<StoryType | null>(stories[currentStoryIndex]);
 	const [loading, setLoading] = useState(false);
 	const fetchStory = async (url: string) => {
 		setLoading(true);
@@ -36,9 +35,7 @@ const Story = () => {
 			userInfo: { profileimage },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
-	useEffect(() => {
-		setStoryInView(stories[currentStoryIndex])
-	}, [currentStoryIndex, stories])
+
 	return (
 		<div className="w-full ">
 			{loading ? (
@@ -106,11 +103,9 @@ const Story = () => {
 								))}
 								{isInView && (
 									<StoryPreview
-										setStoryInView={setStoryInView}
 										onClose={() => setIsInView(false)}
 										stories={stories}
 										toggleStoryModal={() => setIsToggled(true)}
-										storyInView={storyInView}
 										setCurrentStoryIndex={setCurrentStoryIndex}
 										currentStoryIndex={currentStoryIndex}
 									/>
