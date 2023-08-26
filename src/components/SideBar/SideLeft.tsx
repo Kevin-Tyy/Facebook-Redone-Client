@@ -81,8 +81,8 @@ const Sidebar = () => {
 					</div>
 				</Link>
 			</header>
-			<div className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
-				<div className="flex flex-col gap-4">
+			<section className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
+				<nav className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
 						<NavLink
 							to={obj?.link}
@@ -94,7 +94,7 @@ const Sidebar = () => {
 							<p className="text-white">{obj.title}</p>
 						</NavLink>
 					))}
-				</div>
+				</nav>
 				<Button
 					sx={{
 						color: "white",
@@ -109,7 +109,7 @@ const Sidebar = () => {
 					}}>
 					See more
 				</Button>
-			</div>
+			</section>
 			<section className="bg-primary-200 group p-3 rounded-xl">
 				<div className="mb-4 group w-fit cursor-default ml-3">
 					<h1 className="text-white text-lg mb-1">Explore</h1>

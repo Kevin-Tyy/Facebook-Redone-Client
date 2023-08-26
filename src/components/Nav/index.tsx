@@ -59,9 +59,9 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className="sticky top-0 z-[5]">
-			<div className="flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
-				<div className="w-full flex gap-4 items-center p-3">
+		<section className="sticky top-0 z-[5]">
+			<section className="flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
+				<header className="w-full flex gap-4 items-center p-3">
 					<Logo />
 					<div className="bg-primary-100/60 hidden md:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
 						<Search sx={{ color: "#fff" }} />
@@ -71,8 +71,8 @@ const Navbar = () => {
 							placeholder="Search facebook"
 						/>
 					</div>
-				</div>
-				<div className="w-full flex gap-2 self-end justify-center">
+				</header>
+				<nav className="w-full flex gap-2 self-end justify-center">
 					{navLinkIcons.map((item, index) => (
 						<Tooltip title={item.title} key={index}>
 							<NavLink
@@ -85,12 +85,12 @@ const Navbar = () => {
 							</NavLink>
 						</Tooltip>
 					))}
-				</div>
+				</nav>
 				<div className="w-full justify-end flex gap-10 items-center">
 					<div className="hidden md:block cursor-pointer text-white">
 						<BsFillBellFill size={22}/>
 					</div>
-					<div className="bg-primary-100/60 rounded-full mx-1 py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
+					<section className="bg-primary-100/60 rounded-full mx-1 py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">
 							<img
 								src={profileimage || placeholderImage}
@@ -104,7 +104,7 @@ const Navbar = () => {
 								</div>
 							</div>
 						</div>
-						<div className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-300 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-3xl w-full max-w-xs">
+						<nav className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-300 transition-all mt-6 right-0 bg-primary-200 m-2 ring-1 ring-inset ring-gray-700 rounded-3xl w-full max-w-xs">
 							<Link to={`/profile/${userId}`}>
 								<div className="flex items-center gap-3  p-4  m-1 cursor-pointer rounded-lg">
 									<img
@@ -132,11 +132,11 @@ const Navbar = () => {
 									</Link>
 								))}
 							</ul>
-						</div>
-					</div>
+						</nav>
+					</section>
 				</div>
-			</div>
-		</div>
+			</section>
+		</section>
 	);
 };
 
