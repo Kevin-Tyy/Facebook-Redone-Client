@@ -76,7 +76,7 @@ const index = () => {
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<div className="h-full w-full flex justify-center gap-6">
 					<Sidebar />
-					<div className="flex flex-col gap-10 mt-8 w-full max-w-[700px]">
+					<div className="flex flex-col gap-10 mt-8 w-full max-w-[800px]">
 						{users ? (
 							<div className="flex flex-col gap-4 p-4 rounded-xl ">
 								<h1 className="text-light text-2xl text-center ">

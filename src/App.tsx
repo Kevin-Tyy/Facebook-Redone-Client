@@ -14,6 +14,7 @@ import FriendPage from "./pages/Friends";
 import Homelayout from "./layout/Homelayout";
 import Loading from "./components/Loaders/fallback";
 import Groups from "./pages/group";
+import GroupPage from "./pages/group/pages";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -44,7 +45,7 @@ const App: FC = () => {
 							<Route path="/friends" element={<FriendPage />} />
 							<Route path="/chat" element={<Chat />} />
 							<Route path="/groups" element={<Groups />} />
-
+							<Route path="/group/:id" element={<GroupPage />} />
 							<Route
 								path="/home"
 								element={

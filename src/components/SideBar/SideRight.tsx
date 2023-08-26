@@ -111,11 +111,17 @@ const SideRight = () => {
 											/>
 											<div className="space-y-1">
 												<p className="text-light cursor-pointer capitalize">
-													{user?.username}
+													{user?.firstname} {user?.lastname}
 												</p>
-												<p className="text-sm text-gray-400/70">
-													{user?.email}
-												</p>
+												<div className="flex gap-1 text-gray-400/70">
+														<p className="text-sm capitalize">
+															@{user.username}
+														</p>
+														<span >•</span>
+		 												<p className="text-sm">
+															{user?.email}
+														</p>
+													</div>
 											</div>
 										</div>
 									</Link>

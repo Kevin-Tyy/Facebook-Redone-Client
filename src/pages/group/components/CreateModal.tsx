@@ -1,5 +1,3 @@
-import { TfiMusicAlt } from "react-icons/tfi";
-// import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { BiPencil } from "react-icons/bi";
 import axios, { AxiosResponse } from "axios";
@@ -10,6 +8,7 @@ import clsx from "clsx";
 import { BaseURL } from "../../../utils/Link";
 import Modal from "../../../components/Modals";
 import { UserInfo } from "../../../types/Types";
+import { HiUserGroup } from "react-icons/hi2";
 interface CreateModalProps {
 	onClose: () => void;
 	isOpen: boolean;
@@ -90,11 +89,11 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 										className="h-44 w-44 object-cover ring-1 ring-gray-800 rounded-sm"
 									/>
 								) : (
-									<div className="h-44 w-44 bg-gradient-to-br from-purple-700 to-gray-500 shadow flex items-center justify-center">
-										<TfiMusicAlt size={40} className="text-white" />
+									<div className="h-44 w-44 bg-gradient-to-br from-blue-700 rounded-md to-gray-500 shadow flex items-center justify-center">
+										<HiUserGroup size={40} className="text-white" />
 									</div>
 								)}
-								<div className="absolute inset-0 bg-black opacity-0 group-hover:bg-black/70 group-hover:opacity-100 z-10 flex flex-col items-center justify-center text-white cursor-pointer transition">
+								<div className="absolute inset-0 bg-black opacity-0 rounded-md group-hover:bg-black/70 group-hover:opacity-100 z-10 flex flex-col items-center justify-center text-white cursor-pointer transition">
 									<BiPencil size={35} />
 									<p className="text-sm">
 										{previewImage ? "Change" : "Choose"} photo

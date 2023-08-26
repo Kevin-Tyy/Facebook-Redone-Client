@@ -16,7 +16,7 @@ export const navObj = [
 	},
 	{
 		icon: BiLogoMessenger,
-		title: "Watch",
+		title: "Messages",
 		link: "/chat",
 	},
 ];

@@ -10,11 +10,15 @@ import Loading from "../../components/shared/loading.js";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice.js";
+import { HiUserGroup } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 const Groups = () => {
 	const [groups, setGroups] = useState<GroupType[] | null>(null);
 	const [createGroup, setCreateGroup] = useState(false);
 	const [limit, setLimit] = useState(5);
 	const [globalLoading, setGlobalLoading] = useState(false);
+	const navigate = useNavigate();
 	const {
 		user: {
 			userInfo: { userId },
@@ -32,16 +36,35 @@ const Groups = () => {
 	useEffect(() => {
 		fetchGroups();
 	}, []);
-	const joinGroup = (groupId: string) => {
+	const joinGroup = async (groupId: string, isMember: boolean) => {
 		setGlobalLoading(true);
-		axios
-			.post(`${BaseURL}/groups/join/${groupId}`, { userId: userId })
+		if (!isMember) {
+			return axios
+				.post(`${BaseURL}/groups/join/${groupId}`, { userId: userId })
+				.then((response) => {
+					fetchGroups();
+					toast.success(response.data.msg);
+					setGlobalLoading(false);
+				})
+				.catch((error) => {
+					toast.error(error.data.msg);
+					setGlobalLoading(false);
+				});
+		}
+		return axios
+			.delete(`${BaseURL}/groups/join/${groupId}`, {
+				data: {
+					userId: userId,
+				},
+			})
 			.then((response) => {
+				fetchGroups();
 				toast.success(response.data.msg);
 				setGlobalLoading(false);
 			})
 			.catch((error) => {
-				toast.error(error.data.msg);
+				toast.error(error.msg);
+				setGlobalLoading(false);
 			});
 	};
 
@@ -51,56 +74,134 @@ const Groups = () => {
 				<div className="w-full pt-6 flex justify-center gap-6">
 					<Sidebar />
 					<div className="w-full max-w-[800px]">
-						<div className="p-8  flex justify-between items-center">
-							<p className="text-white">
-								Groups, a new way to organize your posts and discussions
+						<div className="p-8 mb-4 flex gap-20 justify-between items-end bg-primary-200 rounded-xl">
+							<p className="text-white after:absolute after:'' ">
+								Groups, a new way to organize your posts and discussions <br />
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
+								laborum.
 							</p>
 							<button
 								onClick={() => setCreateGroup(true)}
-								className="bg-white p-4 rounded-full">
+								className="bg-white whitespace-nowrap  p-4 rounded-full flex items-center gap-2">
+								<HiUserGroup size={20} />
 								Create a group
 							</button>
 						</div>
 						<div className="flex flex-col gap-2">
+							<div className="mb-4 group w-fit cursor-default">
+								<h1 className="text-white text-lg mb-3">
+									Groups you may like.
+								</h1>
+								<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
+							</div>
+							{!groups && (
+								<div className="w-full h-[50vh] flex items-center justify-center">
+									<CircularProgress size={20} />
+								</div>
+							)}
+							{groups?.length === 0 && (
+								<div className="bg-primary-200 text-white rounded-xl p-10 grid place-content-center">
+									<p className="flex flex-col items-center gap-2">
+										<HiUserGroup size={30} />
+										No groups
+									</p>
+								</div>
+							)}
 							{groups?.slice(0, limit)?.map((group, index) => (
 								<div
 									key={index}
-									className="text-white rounded-lg bg-primary-200 p-6">
+									className="text-white rounded-lg bg-primary-200 hover:bg-primary-100/60 p-6">
 									<div className="relative flex gap-5 items-center">
-										<img
-											src={group.groupImage}
-											alt=""
-											className="w-[120px] rounded-md h-[120px] object-cover"
-										/>
+										<div
+											onClick={() => navigate(`/group/${group._id}`)}
+											className="cursor-pointer">
+											{group?.groupImage ? (
+												<img
+													src={group?.groupImage}
+													alt=""
+													className="w-[120px] rounded-md h-[120px] object-cover"
+												/>
+											) : (
+												<div className="w-[120px] h-[120px] grid place-content-center bg-gradient-to-br from-purple-700 rounded-md to-gray-400">
+													<HiUserGroup size={40} />
+												</div>
+											)}
+										</div>
 										<div className="text-gray-400 space-y-2">
-											<p className="text-white">{group.groupName}</p>
-											<p>{group.groupDescription}</p>
-											<div className="flex">
-												<p>{group.groupMembers.length} members</p>
+											<p
+												className="text-white cursor-pointer"
+												onClick={() => navigate(`/group/${group._id}`)}>
+												{group?.groupName}
+											</p>
+											<p>{group?.groupDescription}</p>
+											<div className="flex gap-2">
+												<p className="text-sm">
+													{group?.groupMembers?.length} member
+													{group?.groupMembers?.length !== 1 && "s"}
+												</p>
 												<span>•</span>
-												{group.groupMembers.some(
-													(member) => member.userId === userId
-												) && <p className="text-sm">You joined this group</p>}
+												<div className="hover:underline decoration-dotted cursor-pointer">
+													{group.groupMembers.some(
+														(member) => member?.userId === userId
+													) ? (
+														group.admin.userId === userId ? (
+															<p className="text-sm">You created this group</p>
+														) : (
+															<p className="text-sm">You joined this group</p>
+														)
+													) : group.groupMembers?.length > 2 ? (
+														<p className="text-sm">
+															<span className="capitalize text-sm">
+																{group.groupMembers[0]?.username},{" "}
+																{group.groupMembers[1]?.username}{" "}
+															</span>
+															and {group.groupMembers.length - 2} others are
+															members
+														</p>
+													) : (
+														group.groupMembers.length !== 0 && (
+															<p className="text-sm">
+																<span className="capitalize text-sm">
+																	{group.groupMembers[0]?.username}{" "}
+																</span>
+																is a member
+															</p>
+														)
+													)}
+												</div>
 											</div>
-											<p className="absolute top-0 right-0">
+											<p className="absolute text-xs top-0 right-0">
 												Created {useDateFormatter(new Date(group.createdAt))}{" "}
 												ago
 											</p>
 										</div>
 										<button
-											onClick={() => joinGroup(group._id)}
+											onClick={() =>
+												joinGroup(
+													group._id,
+													group.groupMembers.some(
+														(member) => member.userId === userId
+													)
+												)
+											}
 											className="absolute bottom-0 right-0 py-3 px-4 bg-blue-base rounded-full hover:bg-blue-light transition">
-											Join Group
+											{group.groupMembers.some(
+												(member) => member.userId === userId
+											)
+												? "Leave group"
+												: "Join group"}
 										</button>
 									</div>
 								</div>
 							))}
 						</div>
-						<button
-							className="bg-white py-3 px-6 rounded-full m-4"
-							onClick={() => setLimit(limit + 5)}>
-							See more
-						</button>
+						{groups && groups.length !== 0 && (
+							<button
+								className="bg-white py-3 px-6 rounded-full m-4"
+								onClick={() => setLimit(limit + 5)}>
+								See more
+							</button>
+						)}
 					</div>
 					<SideRight />
 				</div>
