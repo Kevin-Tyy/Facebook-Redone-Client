@@ -38,7 +38,7 @@ const Navbar = () => {
 		{
 			icon: <PeopleAltRounded />,
 			title: "Your friends",
-			link: `/friends`,
+			link: `/i/friends`,
 		},
 		{
 			icon: <Settings />,

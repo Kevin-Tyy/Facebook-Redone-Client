@@ -1,18 +1,18 @@
 import { BiLogoMessenger, BiSolidHome } from "react-icons/bi";
-import { HiUserGroup , HiUsers } from 'react-icons/hi2'
+import { HiUserGroup, HiUsers } from "react-icons/hi2";
 export const Tabs = ["posts", "about", "friends", "groups", "photos"];
 
 export const navObj = [
-	{ icon: BiSolidHome, title: "Home", link: "/" },
+	{ icon: BiSolidHome, title: "Home", link: "/i/flow" },
 	{
 		icon: HiUsers,
 		title: "Friends",
-		link: "/friends",
+		link: "/i/friends",
 	},
 	{
 		icon: HiUserGroup,
 		title: "Groups",
-		link: "/groups",
+		link: "/i/groups",
 	},
 	{
 		icon: BiLogoMessenger,

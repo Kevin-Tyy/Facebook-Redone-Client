@@ -4,23 +4,22 @@ import { useEffect, useState } from "react";
 import { UserInfo, Userdata } from "../../types/Types";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import ButtonComp from "../../components/Buttons/Button";
-import Sidebar from "../../components/SideBar/SideLeft";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import FriendLoader from "../../components/Loaders/Skeleton/FriendPageLoader";
-import placeholderAvatar from '../../assets/avatar.webp'
-import {
-	PersonAddAlt1Outlined,
-	PersonRemoveAlt1Outlined,
-} from "@mui/icons-material";
-import SideRight from "../../components/SideBar/SideRight";
+import placeholderAvatar from "../../assets/avatar.webp";
+import { HiUserAdd, HiUserRemove } from "react-icons/hi";
+import { Button } from "@mui/material";
+import { ChevronRight } from "@mui/icons-material";
+import { HiUsers } from "react-icons/hi2";
+
 const index = () => {
 	const {
 		user: {
 			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
+	const [limit, setLimit] = useState(5);
 	const [users, setUsers] = useState<Userdata[] | null>(null);
 	let [allUsers, setAllUsers] = useState<Userdata[] | null>(null);
 	const populateFriends = async () => {
@@ -70,137 +69,157 @@ const index = () => {
 		(allUsers = allUsers.filter(
 			(suggest) => !users.some((friend) => friend.userId === suggest.userId)
 		));
-
 	return (
-		<div className="min-h-screen bg-background-primary pb-20">
-			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
-				<div className="h-full w-full flex justify-center gap-6">
-					<Sidebar />
-					<div className="flex flex-col gap-10 mt-8 w-full max-w-[800px]">
-						{users ? (
-							<div className="flex flex-col gap-4 p-4 rounded-xl ">
-								<h1 className="text-light text-2xl text-center ">
-									Your friends{" "}
-									<span className="text-blue-base text-xl">({users?.length})</span>
-								</h1>
-								{users.length > 0 ? (
-									<div className="flex flex-col gap-6">
-										{users.map((user, index) => (
-											<div
-												className="bg-primary-200 p-4 rounded-lg border border-gray-800"
-												key={index}>
-												<div className="flex flex-col sm:flex-row items-center gap-4">
-													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
-														<div className="bg-primary-200 rounded-full p-1">
-															<img
-																src={user.profileimage || placeholderAvatar}
-																className="w-32 h-32 min-h-[130px] min-w-[130px] object-cover rounded-full"
-															/>
-														</div>
-													</div>
-													<div className="flex flex-col gap-1 w-full">
-														<Link to={`/profile/${user.userId}`}>
-															<p className="text-xl text-white capitalize">
-																{user.firstname} {user.lastname}
-															</p>
-															<p className="text-light">{user.email}</p>
-														</Link>
-														<p className="text-gray-500">{user.bio}</p>
-														<div className="flex flex-col md:flex-row w-full gap-3">
-															<div
-																onClick={() => removeFriend(user?.userId)}
-																className="w-full max-w-[300px]">
-																<ButtonComp color="#2563EB">
-																	<PersonRemoveAlt1Outlined />
-																	Remove friend
-																</ButtonComp>
-															</div>
+		<div className="h-full w-full min-h-[100vh] max-w-[750px] sm:min-w-[550px] flex flex-col gap-10">
+			{users ? (
+				<div className="flex flex-col gap-4 rounded-xl ">
+					{users.length > 0 ? (
+						<div className="flex flex-col gap-6">
+							<h1 className="text-light text-2xl text-center ">
+								Your friends{" "}
+								<span className="text-blue-base text-xl">
+									({users?.length})
+								</span>
+							</h1>
+							{users.map((user, index) => (
+								<div
+									className="bg-primary-200 p-6 rounded-lg border border-gray-800 relative"
+									key={index}>
+									<div className="flex items-center gap-4">
+										<img
+											src={user.profileimage || placeholderAvatar}
+											className="w-20 h-20 sm:h-32 sm:w-32 object-cover rounded-md"
+										/>
 
-															<Link
-																to={`/profile/${user?.userId}`}
-																className="w-full">
-																<button className="text-light border p-2 border-gray-700 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
-																	View profile
-																</button>
-															</Link>
-														</div>
-													</div>
+										<div className="flex flex-col gap-1 w-full">
+											<Link to={`/profile/${user.userId}`}>
+												<p className="text-lg text-white capitalize">
+													{user.firstname} {user.lastname}
+												</p>
+												<div className="flex text-gray-400 gap-1">
+													<p className="text-base">@{user?.username}</p>
+													<span>•</span>
+													<p className="text-base">{user?.email}</p>
 												</div>
+											</Link>
+											<p className="text-gray-300 text-sm">{user?.bio}</p>
+											<div className="flex justify-end sm:absolute top-3 right-3 gap-3">
+												<Button
+													onClick={() => removeFriend(user?.userId)}
+													sx={{
+														color: "white",
+														backgroundColor: "#0C88EF",
+														textTransform: "capitalize",
+														borderRadius: "40px",
+														mt: "10px",
+														alignSelf: "flex-start",
+														p: "10px",
+														display: "flex",
+														gap: "5px",
+														"&:hover": { backgroundColor: "#3293e3" },
+													}}>
+													<HiUserRemove size={18} />
+													Remove friend
+												</Button>
 											</div>
-										))}
+										</div>
 									</div>
-								) : (
-									<div className="text-lg text-center text-white p-4 pb-6 bg-primary-100/25">
-										😞 You have no friends!
-									</div>
-								)}
-							</div>
-						) : (
-							<FriendLoader />
-						)}
-						{allUsers && (
-							<div className="flex flex-col gap-6 bg- p-4">
-								<h1 className="text-light text-2xl text-center ">
-									People you may know
-								</h1>
-
-								{allUsers.length > 0 ? (
-									<div className="flex flex-col gap-4">
-										{allUsers.map((user, index) => (
-											<div
-												className="bg-primary-200/70 p-4 rounded-lg border border-gray-800"
-												key={index}>
-												<div className="flex flex-col sm:flex-row items-center gap-4">
-													<div className="bg-gradient-to-r from-sky-600 to-violet-900 rounded-full p-1">
-														<div className="bg-primary-200 rounded-full p-1">
-															<img
-																src={user.profileimage || placeholderAvatar}
-																className="w-32 h-32 min-h-[130px] min-w-[130px] object-cover rounded-full"
-															/>
-														</div>
-													</div>
-													<div className="flex flex-col gap-1 w-full">
-														<Link to={`/profile/${user.userId}`}>
-															<p className="text-xl text-white capitalize">
-																{user.username}
-															</p>
-															<p className="text-light">{user.email}</p>
-														</Link>
-														<p className="text-gray-500">{user.bio}</p>
-														<div className="flex flex-col md:flex-row w-full gap-3">
-															<div
-																onClick={() => addFriend(user?.userId)}
-																className="w-full max-w-[300px]">
-																<ButtonComp color="#0a5796">
-																	<PersonAddAlt1Outlined />
-																	Add friend
-																</ButtonComp>
-															</div>
-
-															<Link
-																to={`/profile/${user?.userId}`}
-																className="w-full">
-																<button className="text-light border border-gray-700 p-2 max-w-[300px] w-full h-full rounded-md hover:bg-gray-700/20">
-																	View profile
-																</button>
-															</Link>
-														</div>
-													</div>
-												</div>
-											</div>
-										))}
-									</div>
-								) : (
-									<div className=" text-lg text-center text-white p-4 pb-6 bg-primary-100/25">
-										😞 No suggestions available!
-									</div>
-								)}
-							</div>
-						)}
-					</div>
-					<SideRight/>
+								</div>
+							))}
+						</div>
+					) : (
+						<div className="text-lg  text-white p-10 bg-primary-200 rounded-md ring-1 ring-primary-100 grid place-content-center">
+							<p className="flex gap-2 items-center">
+								<HiUsers size={20} />
+								You have no friends!
+							</p>
+						</div>
+					)}
 				</div>
-			</div>
+			) : (
+				<FriendLoader />
+			)}
+			{allUsers && (
+				<div className="flex flex-col gap-6">
+					<h1 className="text-light text-2xl text-center ">
+						People you may know
+					</h1>
+
+					{allUsers.length > 0 ? (
+						<div className="flex flex-col gap-4">
+							{allUsers.slice(0, limit).map((user, index) => (
+								<div
+									className="bg-primary-200/70 p-6 rounded-lg border border-gray-800 relative"
+									key={index}>
+									<div className="flex items-center gap-4">
+										<img
+											src={user.profileimage || placeholderAvatar}
+											className="w-20 h-20 sm:h-32 sm:w-32 object-cover rounded-md"
+										/>
+
+										<div className="flex flex-col gap-1 w-full">
+											<Link to={`/profile/${user.userId}`}>
+												<p className="text-lg text-white capitalize">
+													{user.firstname} {user.lastname}
+												</p>
+												<div className="flex text-gray-400 gap-1">
+													<p className="text-base">@{user?.username}</p>
+													<span>•</span>
+													<p className="text-base">{user?.email}</p>
+												</div>
+											</Link>
+											<p className="text-gray-300 text-sm">{user?.bio}</p>
+										</div>
+									</div>
+									<div className="flex justify-end sm:absolute top-3 right-3 gap-3">
+										<Button
+											onClick={() => addFriend(user?.userId)}
+											sx={{
+												color: "white",
+												backgroundColor: "#0C88EF",
+												textTransform: "capitalize",
+												borderRadius: "40px",
+												mt: "10px",
+												p: "10px",
+												display: "flex",
+												gap: "5px",
+												"&:hover": { backgroundColor: "#3293e3" },
+											}}>
+											<HiUserAdd size={18} />
+											Add friend
+										</Button>
+									</div>
+								</div>
+							))}
+							<div className="flex justify-center">
+								<Button
+									onClick={() => setLimit((prev) => prev + 5)}
+									className="group"
+									sx={{
+										color: "white",
+										backgroundColor: "#0C88EF",
+										textTransform: "capitalize",
+										borderRadius: "40px",
+										mt: "10px",
+										pl: "20px",
+										py: "10px",
+										display: "flex",
+										"&:hover": { backgroundColor: "#3293e3" },
+									}}>
+									See more
+									<span className="invisible opacity-0 transition-all duration-700 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 group-hover:visible">
+										<ChevronRight />
+									</span>
+								</Button>
+							</div>
+						</div>
+					) : (
+						<div className=" text-lg text-center text-white p-4 pb-6 bg-primary-100/25">
+							😞 No suggestions available!
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };

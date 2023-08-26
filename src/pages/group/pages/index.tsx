@@ -36,7 +36,7 @@ const GroupPage = () => {
 	};
 	useEffect(() => {
 		fetchGroupData();
-	}, []);
+	}, [id]);
 	const joinGroup = async (groupId: string, isMember: boolean) => {
 		setGlobalLoading(true);
 		if (!isMember) {
@@ -73,7 +73,7 @@ const GroupPage = () => {
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<div className="w-full pt-6 flex justify-center gap-6">
 					<Sidebar />
-					<section className="w-full max-w-[850px]">
+					<section className="h-full min-h-screen w-full max-w-[850px]">
 						{!groupData ? (
 							<CircularProgress />
 						) : (
@@ -86,10 +86,16 @@ const GroupPage = () => {
 									<div className="absolute top-[80%] left-[5%]">
 										<div className="bg-primary-100 p-1 rounded-full w-fit">
 											<div className="bg-background-primary p-1 rounded-full w-fit">
-												<img
-													src={groupData.groupImage}
-													className="h-40 w-40 object-cover rounded-full"
-												/>
+												{groupData.groupImage ? (
+													<img
+														src={groupData.groupImage}
+														className="h-40 w-40 object-cover rounded-full"
+													/>
+												) : (
+													<div className=" h-40 w-40 grid place-content-center texwhi bg-gradient-to-br from-blue-700 rounded-full to-blue-300">
+														<HiUserGroup size={40} />
+													</div>
+												)}
 											</div>
 										</div>
 									</div>

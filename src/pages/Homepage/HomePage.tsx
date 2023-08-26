@@ -1,18 +1,14 @@
-import LeftSidebar from "../../components/SideBar/SideLeft";
-import RightSidebar from "../../components/SideBar/SideRight";
-import Body from "../../components/Body";
+import { FC } from "react";
+import Posts from "../../components/Posts";
+import Stories from "../../components/Posts/Story";
 
-const HomePage = () => {
-	document.title = "Facebook | Home";
+const Body: FC = () => {
 	return (
-		<div className="bg-background-primary h-auto w-full ">
-			<div className="h-full flex justify-center gap-6 p-2 pt-6 md:p-6">
-				<LeftSidebar />
-				<Body />
-				<RightSidebar />
-			</div>
+		<div className="h-full w-full min-h-[100vh] max-w-[700px] flex flex-col gap-3 sm:gap-6">
+			<Stories />
+			<Posts />
 		</div>
 	);
 };
 
-export default HomePage;
+export default Body;
