@@ -47,7 +47,7 @@ const Story = () => {
 						<h1 className="text-white text-lg">Stories</h1>
 						<div className="w-10 h-1 bg-blue-base rounded-full mt-1"></div>
 					</div>
-					<div className=" flex gap-4 h-[250px] overflow-x-scroll overflow-y-hidden pb-5">
+					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-5">
 						<div className="min-w-[130px] overflow-hidden relative rounded-2xl">
 							<img
 								src={profileimage || placeholderAvatar}
