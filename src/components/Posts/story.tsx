@@ -51,7 +51,7 @@ const Story = () => {
 						<div className="min-w-[130px] overflow-hidden relative rounded-2xl">
 							<img
 								src={profileimage || placeholderAvatar}
-								className="object-cover rounded-b-3xl h-full w-full"
+								className="object-cover rounde-3xl h-[160px] w-full"
 							/>
 							<div className="bg-primary-200 absolute bottom-0 w-full h-20"></div>
 							<div
@@ -70,7 +70,7 @@ const Story = () => {
 								{stories.map((story, index) => (
 									<div
 										key={index}
-										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-gray-800"
+										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-primary-100/40"
 										onClick={() => {
 											handleStoryView();
 											setStoryInView(story);

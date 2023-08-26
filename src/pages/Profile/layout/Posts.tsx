@@ -5,6 +5,7 @@ import PostSkeleton from "../../../components/Loaders/Skeleton/Post";
 import PostComponent from "../../../components/Posts/Post";
 import { Posts, Userdata } from "../../../types/Types";
 import RepostBox from "../../../components/Posts/PostComponents/RepostComponent";
+import axios from "axios";
 interface Props {
 	loading: boolean;
 	userData: Userdata | null;
@@ -12,6 +13,7 @@ interface Props {
 	isOpen: boolean;
 	setIsOpen: any;
 	posts: Posts[] | null;
+	setPosts: (value: any) => void;
 }
 const PostLayout = ({
 	loading,
@@ -20,7 +22,19 @@ const PostLayout = ({
 	isOpen,
 	setIsOpen,
 	posts,
+	setPosts,
 }: Props) => {
+	const fetchUserPosts = async (url: string) => {
+		try {
+			const {
+				data: { data },
+			} = await axios.get(url);
+			setPosts(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div>
 			<div className="flex flex-col items-start lg:flex-row gap-5">
@@ -67,9 +81,9 @@ const PostLayout = ({
 									{posts.map((post, index) => (
 										<div key={index}>
 											{post.isReposted ? (
-												<RepostBox post={post} />
+												<RepostBox post={post} fetchPosts={fetchUserPosts} />
 											) : (
-												<Box post={post} />
+												<Box post={post} fetchPosts={fetchUserPosts} />
 											)}
 										</div>
 									))}

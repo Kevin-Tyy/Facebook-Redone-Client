@@ -6,7 +6,6 @@ import {
 	LogoutRounded,
 	Settings,
 	ArrowDropDown,
-	NotificationAddSharp,
 	WbSunnyOutlined,
 } from "@mui/icons-material";
 import { useSelector } from "react-redux";
@@ -17,6 +16,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Tooltip } from "@mui/material";
 import { navObj as navLinkIcons } from "../../utils/utilObjects";
+import { BsFillBellFill } from "react-icons/bs";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -79,9 +79,7 @@ const Navbar = () => {
 								to={item.link}
 								className={` w-full cursor-pointer transition hover:text-blue-600 max-w-[100px]`}>
 								<div className="w-full group flex flex-col items-center justify-center text-white">
-									<div className="p-3">
-										{<item.icon sx={{ fontSize: 25 }} />}
-									</div>
+									<div className="p-3">{<item.icon size={22} />}</div>
 									<div className="bottomBorder h-1.5 rounded-t-md bg-blue-600 w-0 group-hover:w-3/5 transition-all duration-500"></div>
 								</div>
 							</NavLink>
@@ -89,10 +87,8 @@ const Navbar = () => {
 					))}
 				</div>
 				<div className="w-full justify-end flex gap-10 items-center">
-					<div className="hidden md:block">
-						<NotificationAddSharp
-							sx={{ color: "white", fontSize: 25, cursor: "pointer" }}
-						/>
+					<div className="hidden md:block cursor-pointer text-white">
+						<BsFillBellFill size={22}/>
 					</div>
 					<div className="bg-primary-100/60 rounded-full mx-1 py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">

@@ -110,7 +110,7 @@ const index = () => {
 															<div
 																onClick={() => removeFriend(user?.userId)}
 																className="w-full max-w-[300px]">
-																<ButtonComp color="#0a5796">
+																<ButtonComp color="#2563EB">
 																	<PersonRemoveAlt1Outlined />
 																	Remove friend
 																</ButtonComp>

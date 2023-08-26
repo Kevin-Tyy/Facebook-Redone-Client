@@ -1,26 +1,21 @@
-import {
-	GroupRounded,
-	HomeRounded,
-	PeopleRounded,
-	LiveTvRounded,
-} from "@mui/icons-material";
-
+import { BiLogoMessenger, BiSolidHome } from "react-icons/bi";
+import { HiUserGroup , HiUsers } from 'react-icons/hi2'
 export const Tabs = ["posts", "about", "friends", "groups", "photos"];
 
 export const navObj = [
-	{ icon: HomeRounded, title: "Home", link: "/" },
+	{ icon: BiSolidHome, title: "Home", link: "/" },
 	{
-		icon: PeopleRounded,
+		icon: HiUsers,
 		title: "Friends",
 		link: "/friends",
 	},
 	{
-		icon: GroupRounded,
+		icon: HiUserGroup,
 		title: "Groups",
 		link: "/groups",
 	},
 	{
-		icon: LiveTvRounded,
+		icon: BiLogoMessenger,
 		title: "Watch",
 		link: "/chat",
 	},

@@ -1,8 +1,7 @@
 import React from 'react'
 
-type Props = {}
 
-const PhotosLayout = (props: Props) => {
+const PhotosLayout : React.FC = () => {
   return (
     <div>PhotosLayout</div>
   )

@@ -67,6 +67,7 @@ export interface Posts {
 }
 
 export interface GroupType {
+	_id : string;
 	groupName: string
 	groupId: string
 	groupDescription: string

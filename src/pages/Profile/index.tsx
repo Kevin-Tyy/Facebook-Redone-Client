@@ -155,7 +155,7 @@ const profile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-primary-200 flex flex-wrap gap-2  p-2 justify-center rounded-md sticky top-[73px] z-10 shadow-2xl border border-gray-700/60">
+					<div className="bg-primary-200 flex flex-wrap gap-2  p-2 justify-center rounded-md md:sticky md:top-[73px] z-[2] shadow-2xl border border-gray-700/60">
 						{Tabs.map((tab, index) => (
 							<div
 								key={index}
@@ -187,7 +187,8 @@ const profile = () => {
 							userId,
 							isOpen,
 							setIsOpen,
-							posts
+							posts,
+							setPosts
 						)}
 					</div>
 				</div>

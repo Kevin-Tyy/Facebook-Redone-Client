@@ -13,7 +13,8 @@ export const renderContent: Function = (
 	userId,
 	isOpen,
 	setIsOpen,
-	posts
+	posts,
+	setPosts
 ) => {
 	switch (activeTab) {
 		case "posts":
@@ -25,6 +26,7 @@ export const renderContent: Function = (
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
 					posts={posts}
+					setPosts={setPosts}
 				/>
 			);
 
@@ -47,6 +49,7 @@ export const renderContent: Function = (
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
 					posts={posts}
+					setPosts={setPosts}
 				/>
 			);
 	}
