@@ -14,8 +14,9 @@ import useDateFormatter from "../../hooks/useDate";
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [isInView, setIsInView] = useState(false);
-	const [storyInView, setStoryInView] = useState<StoryType | null>(null);
 	const [stories, setstories] = useState<StoryType[]>([]);
+	const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+	const [storyInView, setStoryInView] = useState<StoryType | null>(stories[currentStoryIndex]);
 	const [loading, setLoading] = useState(false);
 	const fetchStory = async (url: string) => {
 		setLoading(true);
@@ -35,6 +36,9 @@ const Story = () => {
 			userInfo: { profileimage },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
+	useEffect(() => {
+		setStoryInView(stories[currentStoryIndex])
+	}, [currentStoryIndex, stories])
 	return (
 		<div className="w-full ">
 			{loading ? (
@@ -73,7 +77,7 @@ const Story = () => {
 										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-primary-100/40"
 										onClick={() => {
 											handleStoryView();
-											setStoryInView(story);
+											setCurrentStoryIndex(index)
 										}}>
 										<div className="z-[3] absolute flex items-start h-full pb-4 w-full gap-2 top-2 left-2">
 											<div className="flex items-center gap-2">
@@ -107,6 +111,8 @@ const Story = () => {
 										stories={stories}
 										toggleStoryModal={() => setIsToggled(true)}
 										storyInView={storyInView}
+										setCurrentStoryIndex={setCurrentStoryIndex}
+										currentStoryIndex={currentStoryIndex}
 									/>
 								)}
 							</div>

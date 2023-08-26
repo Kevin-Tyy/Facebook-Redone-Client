@@ -7,12 +7,15 @@ import { motion } from "framer-motion";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { useEffect, useState } from "react";
 interface Props {
 	onClose: () => void;
 	storyInView: StoryType | null;
 	stories: Array<StoryType>;
 	setStoryInView: (value: any) => void;
 	toggleStoryModal: () => void;
+	currentStoryIndex: number;
+	setCurrentStoryIndex: (args: any) => void;
 }
 
 const StoryPreview = ({
@@ -20,9 +23,19 @@ const StoryPreview = ({
 	storyInView,
 	setStoryInView,
 	stories,
+	currentStoryIndex,
+	setCurrentStoryIndex,
 	toggleStoryModal,
 }: Props) => {
 	const formattedDate = useDateFormatter(storyInView?.createdAt as Date);
+	const [progress, setProgress] = useState(0);
+
+	const nextImage = () => {
+		const nextIndex = (currentStoryIndex + 1) % stories.length;
+		setCurrentStoryIndex(nextIndex);
+		setProgress(0);
+	};
+
 	const renderDate = (rawDate: Date) => {
 		const formattedDate = useDateFormatter(rawDate);
 		return formattedDate;
@@ -36,10 +49,28 @@ const StoryPreview = ({
 			userInfo: UserInfo;
 		};
 	};
-	const loggedInUserStory: StoryType[] = stories.filter(
-		(story) => story.creator.userId === userId
-	);
-	const allStories = stories.filter((story) => story.creator.userId !== userId);
+
+	const playNextStory = () => {
+		const nextIndex = (currentStoryIndex + 1) % stories.length;
+		setCurrentStoryIndex(nextIndex);
+	};
+
+	const playPreviousStory = () => {
+		const previousIndex =
+			(currentStoryIndex - 1 + stories.length) % stories.length;
+		setCurrentStoryIndex(previousIndex);
+	};
+	useEffect(() => {
+		const timer = setInterval(() => {
+			if (progress < 100) {
+				setProgress(progress + 1);
+			} else {
+				nextImage();
+			}
+		}, 50); // Adjust the interval as needed
+
+		return () => clearInterval(timer);
+	}, [progress]);
 	return (
 		<div className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-background-primary backdrop-blur-lg z-[10] flex justify-center">
 			<div className="">
@@ -79,15 +110,20 @@ const StoryPreview = ({
 							<MoreHoriz className="text-white" />
 						</div>
 					</div>
+					<div className="absolute top-0 left-0 right-0 bg-white h-[5px]">
+						<div
+							className="bg-gradient-to-r from-sky-500 via-pink-600 to-violet-900 h-full rounded-lg"
+							style={{ width: `${progress}%` }}></div>
+					</div>
 					<button
 						className="text-white relative right-4 bg-primary-100/50 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110 "
-						onClick={() => {}}>
+						onClick={() => playPreviousStory()}>
 						<HiChevronLeft size={27} />
 					</button>
 					<img src={storyInView?.storyMedia} className="w-full" />
 					<div
 						className="text-white relative left-4 bg-primary-100/50 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110"
-						onClick={() => {}}>
+						onClick={() => playNextStory()}>
 						<HiChevronRight size={27} />
 					</div>
 					<p className="text-white absolute bottom-10">
@@ -110,50 +146,21 @@ const StoryPreview = ({
 					<div className="border-t border-gray-600 pt-2">
 						<div className="p-2">
 							<p className="text-2xl text-light xl:block hidden">Your story</p>
-							{loggedInUserStory ? (
-								<div className="flex flex-col gap-3 mt-2">
-									{loggedInUserStory.map((story, index) => (
-										<div
-											onClick={() => setStoryInView(story)}
-											key={index}
-											className={`h-full w-full rounded-lg relative bg-primary-100/40 p-2 flex items-center gap-2 ${
-												storyInView?.storyId == story.storyId &&
-												"border border-gray-700"
-											}`}>
-											<div className="bg-primary-100 rounded-full p-0.5">
-												<img
-													src={story?.creator?.profileimage}
-													className="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover"
-												/>
-											</div>
-											<div className="xl:block hidden">
-												<p className="text-light text-lg capitalize">
-													{story?.creator?.username}
-												</p>
-												<p className="text-xs text-gray-500">
-													{renderDate(story?.createdAt)}
-												</p>
-											</div>
-										</div>
-									))}
-								</div>
-							) : (
-								<div
-									className="p-2 cursor-pointer active:bg-gray-600/10 transition rounded-lg"
-									onClick={toggleStoryModal}>
-									<div className="flex gap-2 w-full  md:py-3 items-center">
-										<div className="bg-gray-800 p-1 md:p-2 rounded-full">
-											<Add sx={{ fontSize: 40 }} className="text-white" />
-										</div>
-										<div className="text-light  xl:block hidden">
-											<p>Create a story</p>
-											<p className="whitespace-nowrap text-sm text-gray-600">
-												Share a photo or write something
-											</p>
-										</div>
+							<div
+								className="p-2 cursor-pointer active:bg-gray-600/10 transition rounded-lg"
+								onClick={toggleStoryModal}>
+								<div className="flex gap-2 w-full  md:py-3 items-center">
+									<div className="bg-gray-800 p-1 md:p-2 rounded-full">
+										<Add sx={{ fontSize: 40 }} className="text-white" />
+									</div>
+									<div className="text-light  xl:block hidden">
+										<p>Create a story</p>
+										<p className="whitespace-nowrap text-sm text-gray-600">
+											Share a photo or write something
+										</p>
 									</div>
 								</div>
-							)}
+							</div>
 						</div>
 						{stories && (
 							<div className="p-2">
@@ -161,9 +168,9 @@ const StoryPreview = ({
 									All stories
 								</p>
 								<div className="flex flex-col gap-3 mt-4 cursor-pointer">
-									{allStories.map((story, index) => (
+									{stories.map((story, index) => (
 										<div
-											onClick={() => setStoryInView(story)}
+											onClick={() => setCurrentStoryIndex(index)}
 											key={index}
 											className={`h-full w-full rounded-lg relative bg-primary-100/40 p-2 flex items-center gap-2 ${
 												storyInView?.storyId == story.storyId &&
