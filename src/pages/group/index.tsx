@@ -120,7 +120,7 @@ const Groups = () => {
 										className="w-[120px] rounded-md h-[120px] object-cover"
 									/>
 								) : (
-									<div className="w-[120px] h-[120px] grid place-content-center bg-gradient-to-br from-purple-700 rounded-md to-gray-400">
+									<div className="w-[120px] h-[120px] grid place-content-center bg-gradient-to-br from-blue-700 rounded-md to-blue-300">
 										<HiUserGroup size={40} />
 									</div>
 								)}

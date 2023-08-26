@@ -84,19 +84,17 @@ const GroupPage = () => {
 										className="max-h-[300px] w-full object-cover rounded-t-2xl"
 									/>
 									<div className="absolute top-[80%] left-[5%]">
-										<div className="bg-primary-100 p-1 rounded-full w-fit">
-											<div className="bg-background-primary p-1 rounded-full w-fit">
-												{groupData.groupImage ? (
-													<img
-														src={groupData.groupImage}
-														className="h-40 w-40 object-cover rounded-full"
-													/>
-												) : (
-													<div className=" h-40 w-40 grid place-content-center texwhi bg-gradient-to-br from-blue-700 rounded-full to-blue-300">
-														<HiUserGroup size={40} />
-													</div>
-												)}
-											</div>
+										<div className="bg-primary-100 p-1.5 rounded-full w-fit">
+											{groupData.groupImage ? (
+												<img
+													src={groupData.groupImage}
+													className="h-40 w-40 object-cover rounded-full"
+												/>
+											) : (
+												<div className=" h-40 w-40 grid place-content-center texwhi bg-gradient-to-br from-blue-700 rounded-full to-blue-300 text-white">
+													<HiUserGroup size={40} />
+												</div>
+											)}
 										</div>
 									</div>
 								</header>
