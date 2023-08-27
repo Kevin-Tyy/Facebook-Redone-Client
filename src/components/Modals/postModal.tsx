@@ -16,6 +16,7 @@ import { UserInfo } from "../../types/Types";
 import EmojiPicker, { Theme } from "emoji-picker-react";
 import { Emoji } from "../../types/Types";
 import Modal from ".";
+import placeholderAvatar from '../../assets/avatar.webp'
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
@@ -106,7 +107,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 				<div className="p-2">
 					<div className="flex items-center gap-2">
 						<div className="bg-blue-base p-1 rounded-full">
-							<img src={profileimage} className="w-12 h-12  rounded-full" />
+							<img src={profileimage || placeholderAvatar} className="w-12 h-12  rounded-full" />
 						</div>
 						<div className="flex flex-col items-start">
 							<p className="text-light font-semibold capitalize">{username}</p>
