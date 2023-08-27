@@ -13,21 +13,26 @@ const PostLoader = () => {
 						<Skeleton width={50} height={50} circle />
 
 						<div className="flex flex-col gap-1 w-full">
-							<Skeleton height={15} borderRadius={10}/>
-							<Skeleton height={15} width={250} borderRadius={10}/>
+							<Skeleton height={15} borderRadius={10} />
+							<Skeleton height={15} width={250} borderRadius={10} />
 						</div>
 					</div>
 
 					<div className="flex flex-col">
-						<Skeleton borderRadius={10}/>
-						<Skeleton width={250} borderRadius={10}/>
+						<Skeleton borderRadius={10} />
+						<Skeleton width={250} borderRadius={10} />
 					</div>
-					<Skeleton height={300} borderRadius={20}/>
-					<div className="flex gap-4">
-						<div className="w-full"><Skeleton height={50} borderRadius={15}/></div>
-						<div className="w-full"><Skeleton height={50} borderRadius={15}/></div>
-						<div className="w-full"><Skeleton height={50} borderRadius={15}/></div>
-					
+					<Skeleton height={300} borderRadius={20} />
+					<div className="w-full flex justify-center">
+						<div className="flex w-10/12 justify-center gap-4">
+							{Array(5)
+								.fill(null)
+								.map((_, index) => (
+									<div className="w-full" key={index}>
+										<Skeleton circle height={35} width={35} />
+									</div>
+								))}
+						</div>
 					</div>
 				</div>
 			))}

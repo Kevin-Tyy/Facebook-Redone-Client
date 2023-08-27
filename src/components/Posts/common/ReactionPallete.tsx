@@ -1,16 +1,14 @@
-import { BsArrowRepeat } from "react-icons/bs";
+import { BsArrowRepeat, BsBookmark } from "react-icons/bs";
 import { ImStatsBars } from "react-icons/im";
 import { FaRegComment } from "react-icons/fa";
-import {
-	AiOutlineCloudUpload,
-	AiFillHeart,
-	AiOutlineHeart,
-} from "react-icons/ai";
+import { BsFillBookmarkFill } from "react-icons/bs";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Tooltip } from "@mui/material";
 import { Posts } from "../../../types/Types";
+import { useState } from "react";
 interface Props {
 	userId: string;
 	postId: string;
@@ -38,6 +36,38 @@ const ReactionPallete = ({
 	post,
 }: Props) => {
 	const styleClass = `flex items-center justify-center cursor-pointer gap-[1px] font-bold`;
+	const [isPostSaved, setIsPostSaved] = useState<boolean>(
+		!!post.saves.find((saved) => saved.userId === userId)
+	);
+	const savePost = async (): Promise<void> => {
+		if (isPostSaved) {
+			return axios
+				.delete(`${BaseURL}/save/${postId}/${userId}`)
+				.then((response) => {
+					toast.success(response.data.msg);
+					setIsPostSaved(false);
+				})
+				.catch((error) => {
+					console.log(error);
+					toast.error("Something went wrong, Retry");
+				});
+		} else {
+			axios
+				.post(`${BaseURL}/save`, {
+					userId: userId,
+					postId: postId,
+				})
+				.then((response) => {
+					setIsPostSaved(true);
+					toast.success(response.data.msg);
+				})
+				.catch((error) => {
+					toast.error("Something went wrong, Retry");
+					console.log(error);
+				});
+		}
+	};
+
 	const handleLike = async () => {
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
@@ -55,6 +85,9 @@ const ReactionPallete = ({
 			toast.success(data.msg);
 		}
 	};
+	// console.log(SavedPosts)
+	// console.log(post.saves)
+
 	return (
 		<div className="flex justify-center">
 			<div className="flex w-full sm:w-4/5 justify-between items-center gap-2 p-1 rounded-lg ">
@@ -119,10 +152,15 @@ const ReactionPallete = ({
 						</p>
 					</div>
 				</Tooltip>
-				<Tooltip title="Download this post">
+				<Tooltip title="Save this post">
 					<div
-						className={`${styleClass}  transition-all duration-500 text-gray-500 hover:bg-purple-800/10 p-3 rounded-full hover:text-purple-500`}>
-						<AiOutlineCloudUpload size={25} />
+						onClick={savePost}
+						className={`${styleClass}  transition-all duration-500 text-gray-500 hover:bg-purple-800/10 p-3 rounded-full hover:text-purple-600`}>
+						{isPostSaved ? (
+							<BsFillBookmarkFill size={18} />
+						) : (
+							<BsBookmark size={18} />
+						)}
 					</div>
 				</Tooltip>
 			</div>

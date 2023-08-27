@@ -64,6 +64,7 @@ export interface Posts {
 	views: Array<Userdata>;
 	numberOfReposts : number;
 	repostedDate : Date;
+	saves : Userdata[]
 }
 
 export interface GroupType {
@@ -75,4 +76,8 @@ export interface GroupType {
 	admin : Userdata
 	groupMembers: Array<Userdata>
 	createdAt: Date
+}
+export interface SavedPost {
+	creator : Userdata,
+	post : Posts
 }
