@@ -74,7 +74,7 @@ const Story = () => {
 									<div
 										onClick={() => {
 											setCurrentCreatorIndex(index);
-											setIsInView(true);
+											handleStoryView()
 										}}
 										key={index}
 										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-primary-100/40">
