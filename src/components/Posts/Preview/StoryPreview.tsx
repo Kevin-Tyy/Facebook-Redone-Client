@@ -24,7 +24,6 @@ const StoryPreview = ({
 	setCurrentStoryIndex,
 	toggleStoryModal,
 }: Props) => {
-
 	//logged in user data from redux session
 	const {
 		user: {
@@ -65,14 +64,15 @@ const StoryPreview = ({
 
 	//next creator by his index in creators set, update the current story to the first story in the creators' story list, and reset the story view progress
 	const previousCreator = () => {
-		setCurrentCreatorIndex((prevIndex) => (prevIndex + 1) % creators.length);
+		setCurrentCreatorIndex(
+			(prevIndex) => (prevIndex - 1 + creators.length) % creators.length
+		);
 		setCurrentStoryIndex(0);
 		setProgress(0);
+	};
 
-	}
-	
 	//switch stories created by a same story creator ----->
-	//next story in the current creator's story list by its index in the list, check if current story is last in the creator's story list, if so call nextCreator() function 
+	//next story in the current creator's story list by its index in the list, check if current story is last in the creator's story list, if so call nextCreator() function
 	const playNextStory = () => {
 		const nextIndex = (currentStoryIndex + 1) % currentStories.length;
 		const lastIndex = currentStories.length - 1;
@@ -90,13 +90,12 @@ const StoryPreview = ({
 	//previous story ....
 	const playPreviousStory = () => {
 		const previousIndex =
-		(currentStoryIndex - 1 + currentStories.length) % currentStories.length;
-		const lastIndex = currentStories.length - 1;
+			(currentStoryIndex - 1 + currentStories.length) % currentStories.length;
 		const indexOfItem = currentStories.findIndex(
 			(item) => item.storyId === currentStory.storyId
 		);
 		if (indexOfItem !== -1) {
-			if (indexOfItem === lastIndex) {
+			if (indexOfItem === 0) {
 				return previousCreator();
 			}
 		}
@@ -112,17 +111,17 @@ const StoryPreview = ({
 			} else {
 				playNextStory();
 			}
-		}, 20); // Adjust the interval as needed 
+		}, 30); // Adjust the interval as needed
 
 		return () => clearInterval(timer);
 	}, [progress]);
 
 	return (
 		<div className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-background-primary backdrop-blur-lg z-[10] flex justify-center">
-			<div className="">
+			<div className="h-screen flex flex-col sm:flex-row-reverse justify-between w-full">
 				<div
 					onClick={onClose}
-					className="absolute top-3 right-3 bg-gray-700 text-white rounded-full p-2 cursor-pointer hover:bg-gray-800 active:bg-gray-600 z-10">
+					className="absolute md:relative top-0 right-0 sm:self-start m-2 bg-gray-700 text-white rounded-full p-2 cursor-pointer hover:bg-gray-800 active:bg-gray-600 z-10">
 					<CloseRounded sx={{ fontSize: 30 }} />
 				</div>
 				<motion.div
@@ -134,8 +133,8 @@ const StoryPreview = ({
 						hidden: { opacity: 0, y: -30 },
 						visible: { opacity: 1, y: 0 },
 					}}
-					className="relative max-w-[600px] bg-black h-full flex justify-center items-center ml-24">
-					<div className="absolute top-0 left-0 flex w-full px-4 pt-2 items-center justify-between">
+					className="flex-1 relative w-full sm:max-w-[600px] bg-black h-full flex flex-col justify-between items-center lg:mr-24">
+					<div className="flex w-full px-4 pt-2 items-center justify-between">
 						<Link to={`/profile/${currentStory?.creator?.userId}`}>
 							<div className="flex items-center gap-2">
 								<div className="bg-gradient-to-r from-sky-500 to-violet-900 p-[4px] rounded-full">
@@ -149,7 +148,9 @@ const StoryPreview = ({
 										<p className="text-light capitalize text-xl">
 											{currentStory?.creator?.username}
 										</p>
-										<p className="text-gray-500 text-sm">{currentStory?.creator?.userId === userId && 'Your story'}</p>
+										<p className="text-gray-500 text-sm">
+											{currentStory?.creator?.userId === userId && "Your story"}
+										</p>
 									</div>
 									<p className="text-gray-500">
 										{renderDate(currentStory?.createdAt)}
@@ -161,21 +162,25 @@ const StoryPreview = ({
 							<MoreHoriz className="text-white" />
 						</div>
 					</div>
-					<div className="absolute top-0 left-0 right-0 bg-white h-1">
-						<div
-							className="bg-gradient-to-r from-sky-500 via-pink-600 to-violet-900 h-full rounded-lg transition-all"
-							style={{ width: `${progress}%` }}></div>
-					</div>
-					<button
-						className="text-white relative right-4 bg-primary-100/50 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110 "
-						onClick={() => playPreviousStory()}>
-						<HiChevronLeft size={27} />
-					</button>
-					<img src={currentStory?.storyMedia} className="w-full" />
-					<div
-						className="text-white relative left-4 bg-primary-100/50 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110"
-						onClick={() => playNextStory()}>
-						<HiChevronRight size={27} />
+					<div className="flex-1 mb-16 flex justify-center items-center">
+						<div className="absolute top-0 left-0 right-0 bg-light h-1">
+							<div
+								className="bg-gradient-to-r from-sky-500 via-pink-600 to-violet-900 h-full rounded-lg transition-all"
+								style={{ width: `${progress}%` }}></div>
+						</div>
+						<div className="flex items-center ">
+							<button
+								className="text-white absolute left-4 top-[50%] bg-primary-100 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110 "
+								onClick={() => playPreviousStory()}>
+								<HiChevronLeft size={27} />
+							</button>
+							<img src={currentStory?.storyMedia} className="w-full max-h-[70vh] sm:max-h-none" />
+							<div
+								className="text-white absolute right-4 top-[50%] bg-primary-100 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110"
+								onClick={() => playNextStory()}>
+								<HiChevronRight size={27} />
+							</div>
+						</div>
 					</div>
 					<p className="text-white absolute bottom-10">
 						{currentStory?.storyCaption}
@@ -190,36 +195,40 @@ const StoryPreview = ({
 						hidden: { opacity: 0, y: -30 },
 						visible: { opacity: 1, y: 0 },
 					}}
-					className="absolute h-screen top-0 left-0 bg-primary-200/60 p-2 md:p-4 flex flex-col gap-4 xl:min-w-[300px]">
-					<div className="pl-6">
+					className="h-[70px] sm:h-auto bg-primary-200/60 p-2 md:p-4 flex flex-row items-center sm:items-start sm:flex-col gap-4 xl:min-w-[300px] overflow-x-scroll">
+					<div className="hidden sm:flex gap-2 items-center">
 						<Logo />
+						<p className="hidden xl:block text-blue-base text-2xl font-bold">
+							Facebook
+						</p>
 					</div>
-					<div className="border-t border-gray-600 pt-2">
-						<div className="p-2">
-							<p className="text-2xl text-light xl:block hidden">Your story</p>
-							<div
-								className="p-2 cursor-pointer active:bg-gray-600/10 transition rounded-lg"
-								onClick={toggleStoryModal}>
-								<div className="flex gap-2 w-full  md:py-3 items-center">
-									<div className="bg-gray-800 p-1 md:p-2 rounded-full">
-										<Add sx={{ fontSize: 40 }} className="text-white" />
-									</div>
-									<div className="text-light  xl:block hidden">
-										<p>Create a story</p>
-										<p className="whitespace-nowrap text-sm text-gray-600">
-											Share a photo or write something
-										</p>
-									</div>
+
+					<div className="sm:border-t flex sm:block sm:w-full items-center gap-3 sm:border-gray-600 pt-2">
+						<p className="text-2xl text-light xl:block hidden">Your story</p>
+						<div
+							className=" cursor-pointer active:bg-gray-600/10 transition rounded-lg"
+							onClick={toggleStoryModal}>
+							<div className="flex gap-2 w-full  md:py-3 items-center">
+								<div className="bg-gray-800 p-1 md:p-2 rounded-full">
+									<Add sx={{ fontSize: 40 }} className="text-white" />
+								</div>
+								<div className="text-light  xl:block hidden">
+									<p>Create a story</p>
+									<p className="whitespace-nowrap text-sm text-gray-600">
+										Share a photo or write something
+									</p>
 								</div>
 							</div>
 						</div>
 						{stories && (
-							<div className="p-2">
-								<p className="text-2xl text-light  xl:block hidden">
+							<div className="w-full">
+								<p className="text-2xl text-light xl:block hidden">
 									All stories
 								</p>
-								<p className="text-sm text-gray-400">Tap to view a story</p>
-								<div className="flex flex-col gap-3 mt-4 cursor-pointer">
+								<p className="text-sm text-gray-400 xl:block: hidden">
+									Tap to view a story
+								</p>
+								<div className="flex flex-row sm:flex-col gap-3 sm:mt-4 cursor-pointer">
 									{creators.map((creatorId, index) => (
 										<div
 											onClick={() => {
@@ -228,7 +237,7 @@ const StoryPreview = ({
 												setCurrentCreatorIndex(index);
 											}}
 											key={index}
-											className={`h-full w-full rounded-lg relative bg-primary-100/40 p-2 flex items-center gap-2 ${
+											className={`h-full w-full min-w-fit rounded-lg relative bg-primary-100/40 p-2 flex items-center gap-2 ${
 												currentStory?.creator.userId === creatorId &&
 												"border border-gray-700"
 											}`}>
