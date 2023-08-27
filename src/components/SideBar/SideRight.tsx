@@ -110,15 +110,15 @@ const SideRight = () => {
 												className="h-12 w-12 rounded-full object-cover"
 											/>
 											<div className="space-y-1">
-												<p className="text-light cursor-pointer capitalize">
+												<p className="text-light cursor-pointer  capitalize">
 													{user?.firstname} {user?.lastname}
 												</p>
 												<div className="flex gap-1 text-gray-400/70">
-														<p className="text-sm capitalize">
+														<p className="text-sm whitespace-nowrap capitalize">
 															@{user.username}
 														</p>
 														<span >•</span>
-		 												<p className="text-sm">
+		 												<p className="text-sm  whitespace-nowrap">
 															{user?.email}
 														</p>
 													</div>
