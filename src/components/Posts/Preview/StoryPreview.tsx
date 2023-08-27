@@ -13,15 +13,15 @@ interface Props {
 	onClose: () => void;
 	stories: Array<StoryType>;
 	toggleStoryModal: () => void;
-	currentStoryIndex: number;
-	setCurrentStoryIndex: (args: any) => void;
+	currentCreatorIndex: number;
+	setCurrentCreatorIndex: (args: any) => void;
 }
 
 const StoryPreview = ({
 	onClose,
 	stories,
-	currentStoryIndex,
-	setCurrentStoryIndex,
+	currentCreatorIndex,
+	setCurrentCreatorIndex,
 	toggleStoryModal,
 }: Props) => {
 	//logged in user data from redux session
@@ -34,6 +34,7 @@ const StoryPreview = ({
 			userInfo: UserInfo;
 		};
 	};
+	const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
 
 	//simple state to track the progress of the story progress timer
 	const [progress, setProgress] = useState(0);
@@ -41,7 +42,6 @@ const StoryPreview = ({
 	//create a set of story creators as an array of userIds
 	const creators = [...new Set(stories.map((story) => story.creator.userId))];
 
-	const [currentCreatorIndex, setCurrentCreatorIndex] = useState(0);
 	//determine the current creator in view
 	const currentCreator = creators[currentCreatorIndex];
 
@@ -57,7 +57,9 @@ const StoryPreview = ({
 
 	//next creator by his index in creators set, update the current story to the first story in the creators' story list, and reset the story view progress
 	const nextCreator = () => {
-		setCurrentCreatorIndex((prevIndex) => (prevIndex + 1) % creators.length);
+		setCurrentCreatorIndex(
+			(prevIndex: any) => (prevIndex + 1) % creators.length
+		);
 		setCurrentStoryIndex(0);
 		setProgress(0);
 	};
@@ -65,7 +67,7 @@ const StoryPreview = ({
 	//next creator by his index in creators set, update the current story to the first story in the creators' story list, and reset the story view progress
 	const previousCreator = () => {
 		setCurrentCreatorIndex(
-			(prevIndex) => (prevIndex - 1 + creators.length) % creators.length
+			(prevIndex: any) => (prevIndex - 1 + creators.length) % creators.length
 		);
 		setCurrentStoryIndex(0);
 		setProgress(0);
@@ -174,7 +176,10 @@ const StoryPreview = ({
 								onClick={() => playPreviousStory()}>
 								<HiChevronLeft size={27} />
 							</button>
-							<img src={currentStory?.storyMedia} className="w-full max-h-[70vh] sm:max-h-none" />
+							<img
+								src={currentStory?.storyMedia}
+								className="w-full max-h-[70vh] sm:max-h-none"
+							/>
 							<div
 								className="text-white absolute right-4 top-[50%] bg-primary-100 p-2 rounded-full cursor-pointer transition hover:bg-primary-100 active:scale-110"
 								onClick={() => playNextStory()}>
