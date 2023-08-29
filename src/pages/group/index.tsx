@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice.js";
 import { HiUserGroup } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+import GroupLoader from "../../components/Loaders/Skeleton/GroupLoader.js";
 const Groups = () => {
 	const [groups, setGroups] = useState<GroupType[] | null>(null);
 	const [createGroup, setCreateGroup] = useState(false);
@@ -93,9 +93,7 @@ const Groups = () => {
 					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 				</div>
 				{!groups && (
-					<div className="w-full h-[50vh] flex items-center justify-center">
-						<CircularProgress size={20} />
-					</div>
+					<GroupLoader/>
 				)}
 				{groups?.length === 0 && (
 					<div className="bg-primary-200 text-white rounded-xl p-10 grid place-content-center">
@@ -210,6 +208,7 @@ const Groups = () => {
 			</section>
 			{groups && groups.length !== 0 && (
 				<button
+					disabled={groups.length <= limit}
 					className="bg-white py-3 px-6 rounded-full m-4"
 					onClick={() => setLimit(limit + 5)}>
 					See more
