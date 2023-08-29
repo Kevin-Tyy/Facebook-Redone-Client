@@ -11,16 +11,21 @@ import {
 import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import placeholderImage from "../../assets/avatar.webp";
-import { UserInfo } from "../../types/types";
+import { Notification, UserInfo } from "../../types/types";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Tooltip } from "@mui/material";
 import { navObj as navLinkIcons } from "../../utils/utilObjects";
 import { BsFillBellFill } from "react-icons/bs";
 import NotificationPopup from "./NotificationPopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BaseURL } from "../../utils/Link";
 const Navbar = () => {
 	const [toggleNotifications, setToggleNotifications] = useState(false);
+	const [notifications, setNotifications] = useState<Notification[] | null>(
+		null
+	);
 	const dispatch = useDispatch();
 	const {
 		user: {
@@ -59,7 +64,12 @@ const Navbar = () => {
 			dispatch(logout());
 		}
 	};
-
+	useEffect(() => {
+		axios.get(`${BaseURL}/notifications/${userId}`).then((response) => {
+			setNotifications(response.data.notifications);
+			// dispatch(addNotification())
+		});
+	}, []);
 	return (
 		<section className="sticky top-0 z-[5]">
 			<section className="relative flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
@@ -90,9 +100,12 @@ const Navbar = () => {
 				</nav>
 				<div className="w-full justify-end flex gap-10 items-center">
 					<div
-						className="hidden md:block cursor-pointer text-white"
+						className="hidden md:block cursor-pointer text-white relative p-2 rounded-md"
 						onClick={() => setToggleNotifications(true)}>
 						<BsFillBellFill size={22} />
+						{notifications?.length !== 0 && (
+							<div className="w-3 h-3 bg-red-600 absolute top-1 right-1 rounded-full"></div>
+						)}
 					</div>
 					<section className="bg-primary-100/60 rounded-full mx-1 py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">
