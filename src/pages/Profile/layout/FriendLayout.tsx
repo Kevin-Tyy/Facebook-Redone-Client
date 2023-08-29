@@ -71,7 +71,8 @@ const FriendLayout = ({ friends, userData }: Props) => {
 						</div>
 					) : (
 						<div className="text-base text-center text-light/60 pb-6">
-							😞 You have no friends!
+							{userData?.userId == userId ? 'You have' : `@${userData?.username.split(" ")[0]} has ` }
+							  no friends!
 						</div>
 					)}
 				</div>

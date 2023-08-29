@@ -1,4 +1,5 @@
 import Modal from "../../Modals";
+import placeholderImage from '../../../assets/avatar.webp'
 interface Props {
 	profileimage: string;
 	username: string;
@@ -26,7 +27,7 @@ const ProfileImage = ({
 					<div className="flex gap-2 items-center p-3">
 						<div className="bg-primary-100 p-[3px] rounded-full">
 							<img
-								src={profileimage}
+								src={profileimage || placeholderImage}
 								className="h-[50px] w-[50px] rounded-full"
 							/>
 						</div>
@@ -36,7 +37,7 @@ const ProfileImage = ({
 						</div>
 					</div>
 				</div>
-				<img src={profileimage} className="w-full h-full" />
+				<img src={profileimage || placeholderImage} className="w-full h-full" />
 			</div>
 		</Modal>
 	);

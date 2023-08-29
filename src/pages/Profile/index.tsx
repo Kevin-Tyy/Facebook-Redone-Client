@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BaseURL } from "../../utils/Link";
 import { toast } from "react-hot-toast";
@@ -19,6 +19,9 @@ import Image from "./components/Image";
 import { renderContent } from "./func/renderContext";
 const profile = () => {
 	const { id } = useParams();
+	const [loggedInUserData, setLoggedInUserData] = useState<Userdata | null>(
+		null
+	);
 	const [isToggled, setIsToggled] = useState(false);
 	const [userData, setUserData] = useState<Userdata | null>(null);
 	const [posts, setPosts] = useState<Posts[] | null>(null);
@@ -41,6 +44,15 @@ const profile = () => {
 			userInfo: UserInfo;
 		};
 	};
+	const fetchloggedInUser = useCallback(() => {
+		try {
+			axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+				setLoggedInUserData(response.data);
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}, [userId]);
 	const fetchProfile = async (url: string) => {
 		try {
 			const { data } = await axios.get(url);
@@ -72,6 +84,7 @@ const profile = () => {
 		setLoading(false);
 	};
 	useEffect(() => {
+		fetchloggedInUser();
 		fetchProfile(`${BaseURL}/user/${id}`);
 		fetchUserPosts(`${BaseURL}/post/${id}`);
 	}, [id]);
@@ -88,7 +101,11 @@ const profile = () => {
 	} else {
 		document.title = "Facebook";
 	}
-
+	const findMutualFriends = () => {
+		if (userData?.userId !== userId) {
+			return "2";
+		}
+	};
 	return (
 		<section className="min-h-screen w-full pb-20 bg-background-primary ">
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
@@ -122,14 +139,27 @@ const profile = () => {
 										<p className="capitalize text-4xl text-light">
 											{userData?.firstname} {userData?.lastname}
 										</p>
-										<p className="text-light">@{userData?.username}</p>
-										<p className="text-gray-600">{userData?.email}</p>
-										<div className="text-gray-400 flex gap-7">
-											<p>
-												{userData && friendCount} Friend
-												{friendCount !== 1 && "s"}
-											</p>
-											<p>
+										<div className="flex gap-2 text-gray-400">
+											<p>@{userData?.username.split(" ")[0]}</p>
+											<span>•</span>
+											<p>{userData?.email}</p>
+										</div>
+										<div className="text-gray-400 flex gap-5 mt-4 ">
+											<div className="flex gap-x-0.5">
+												<p className="text-sm">
+													{userData && friendCount} friend
+													{friendCount !== 1 && "s"}
+												</p>
+												<p className="text-sm">
+													(
+													{userData &&
+														loggedInUserData &&
+														(findMutualFriends() as any)}{" "}
+													mutual)
+												</p>
+
+											</div>
+											<p className="text-sm">
 												{posts && posts.length} Post
 												{posts && posts.length !== 1 && "s"}
 											</p>

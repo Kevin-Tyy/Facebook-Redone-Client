@@ -51,7 +51,7 @@ const Story = () => {
 						<div className="w-7 h-1 bg-blue-base rounded-full mt-1 transition-all duration-500 group-hover:w-full"></div>
 					</div>
 					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3">
-						<div className="w-[140px] overflow-hidden relative rounded-2xl">
+						<div className="w-[130px] overflow-hidden relative rounded-2xl">
 							<img
 								src={profileimage || placeholderAvatar}
 								className="object-cover rounde-3xl h-[160px] w-full"

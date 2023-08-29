@@ -1,4 +1,4 @@
-import { BiLogoMessenger, BiSolidHome } from "react-icons/bi";
+import { BiLogoMessenger, BiSolidBookmark, BiSolidHome } from "react-icons/bi";
 import { HiUserGroup, HiUsers } from "react-icons/hi2";
 export const Tabs = ["posts", "about", "friends", "groups", "photos"];
 
@@ -18,7 +18,11 @@ export const navObj = [
 		icon: BiLogoMessenger,
 		title: "Messages",
 		link: "/chat",
-	},
+	},{
+		icon : BiSolidBookmark,
+		title : 'Saved',
+		link : '/i/saved'
+	}
 ];
 export const trendDummyData = [
 	{
