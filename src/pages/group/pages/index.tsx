@@ -84,18 +84,18 @@ const GroupPage = () => {
 										className="max-h-[300px] w-full object-cover rounded-t-2xl"
 									/>
 									<div className="absolute top-[80%] left-[5%]">
-										<div className="bg-primary-100 p-1.5 rounded-full w-fit">
-											{groupData.groupImage ? (
+										{groupData.groupImage ? (
+											<div className="bg-primary-100 p-1.5 rounded-full w-fit">
 												<img
 													src={groupData.groupImage}
 													className="h-40 w-40 object-cover rounded-full"
 												/>
-											) : (
-												<div className=" h-40 w-40 grid place-content-center texwhi bg-gradient-to-br from-blue-700 rounded-full to-blue-300 text-white">
-													<HiUserGroup size={40} />
-												</div>
-											)}
-										</div>
+											</div>
+										) : (
+											<div className=" h-40 w-40 rounded-xl grid place-content-center bg-gradient-to-br from-blue-700 to-blue-300 text-white">
+												<HiUserGroup size={40} />
+											</div>
+										)}
 									</div>
 								</header>
 								<div className="bg-primary-200 rounded-b-xl h-[120px]">
@@ -115,22 +115,32 @@ const GroupPage = () => {
 											Created {useDateFormatter(new Date(groupData.createdAt))}{" "}
 											ago
 										</p>
-										<button
-											onClick={() =>
-												joinGroup(
-													groupData._id,
-													groupData.groupMembers.some(
-														(member) => member.userId === userId
+										{groupData?.admin.userId === userId ? (
+											<button
+												onClick={() =>
+													setDeleteModal(true)
+												}
+												className="self-end py-3 px-4 bg-red-600/20 rounded-full -translate-y-5 hover:bg-red-600/40 ring-1 ring-red-600 transition">
+													Delete group
+											</button>
+										) : (
+											<button
+												onClick={() =>
+													joinGroup(
+														groupData._id,
+														groupData.groupMembers.some(
+															(member) => member.userId === userId
+														)
 													)
+												}
+												className="self-end py-3 px-4 bg-blue-base rounded-full -translate-y-5 hover:bg-blue-light transition">
+												{groupData.groupMembers.some(
+													(member) => member.userId === userId
 												)
-											}
-											className="self-end py-3 px-4 bg-blue-base rounded-full -translate-y-5 hover:bg-blue-light transition">
-											{groupData.groupMembers.some(
-												(member) => member.userId === userId
-											)
-												? "Leave group"
-												: "Join group"}
-										</button>
+													? "Leave group"
+													: "Join group"}
+											</button>
+										)}
 									</div>
 								</div>
 								<div className="bg-primary-200 mt-3 p-20 rounded-xl flex justify-center items-center relative">

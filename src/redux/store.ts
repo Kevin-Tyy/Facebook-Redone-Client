@@ -1,33 +1,35 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import AuthSlice from "./features/AuthSlice";
-import storage from 'redux-persist/lib/storage'
+import storage from "redux-persist/lib/storage";
+import NotificationSlice from "./features/Notification";
 import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from 'redux-persist'
-
+	persistStore,
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from "redux-persist";
+const rootReducer = combineReducers({
+    auth : AuthSlice,
+	notifications : NotificationSlice,
+});
 const persistConfig = {
-    key: 'root',
-    version: 1,
-    storage,
+	key: "root",
+	version: 1,
+	storage,
 };
-const persistedReducer = persistReducer(persistConfig, AuthSlice);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
-	reducer: {
-		auth: persistedReducer,
-	},
+	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
-	getDefaultMiddleware({
-		serializableCheck: {
-			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-		},
-	}),
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
 });
 const persistor = persistStore(store);
 

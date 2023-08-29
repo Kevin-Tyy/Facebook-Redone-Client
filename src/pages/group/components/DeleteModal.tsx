@@ -6,7 +6,7 @@ import Modal from "../../../components/Modals";
 import { BaseURL } from "../../../utils/Link";
 import { useNavigate } from "react-router-dom";
 interface RepostModalProps {
-	groupId: string
+	groupId: string;
 	onClose: () => void;
 	isOpen: boolean;
 }
@@ -16,7 +16,7 @@ const RepostModal: React.FC<RepostModalProps> = ({
 	isOpen,
 }) => {
 	const [loading, setLoading] = React.useState(false);
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		setLoading(true);
@@ -25,7 +25,7 @@ const RepostModal: React.FC<RepostModalProps> = ({
 			.then((response) => {
 				toast.success(response.data?.msg);
 				onClose();
-				navigate('/groups')
+				navigate("/i/groups");
 			})
 			.catch((err) => toast.error(err.response.data.msg))
 			.finally(() => setLoading(false));
@@ -49,7 +49,7 @@ const RepostModal: React.FC<RepostModalProps> = ({
 							sx={{
 								color: "white",
 								backgroundColor: "rgb(220,38,38,0.2)",
-								border : '1px solid rgb(220,38,38)',
+								border: "1px solid rgb(220,38,38)",
 								textTransform: "capitalize",
 								borderRadius: "40px",
 								alignSelf: "flex-start",

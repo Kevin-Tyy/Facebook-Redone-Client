@@ -171,20 +171,22 @@ const Groups = () => {
 									Created {useDateFormatter(new Date(group.createdAt))} ago
 								</p>
 							</div>
-							<button
-								onClick={() =>
-									joinGroup(
-										group._id,
-										group.groupMembers.some(
-											(member) => member.userId === userId
+							{group.admin.userId !== userId && (
+								<button
+									onClick={() =>
+										joinGroup(
+											group._id,
+											group.groupMembers.some(
+												(member) => member.userId === userId
+											)
 										)
-									)
-								}
-								className="absolute bottom-0 right-0 py-3 px-4 bg-blue-base rounded-full hover:bg-blue-light transition">
-								{group.groupMembers.some((member) => member.userId === userId)
-									? "Leave group"
-									: "Join group"}
-							</button>
+									}
+									className="absolute bottom-0 right-0 py-3 px-4 bg-blue-base rounded-full hover:bg-blue-light transition">
+									{group.groupMembers.some((member) => member.userId === userId)
+										? "Leave group"
+										: "Join group"}
+								</button>
+							)}
 						</div>
 					</div>
 				))}
