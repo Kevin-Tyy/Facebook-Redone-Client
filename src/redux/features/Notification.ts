@@ -3,6 +3,7 @@ interface NotificationType {
 	message: string;
 	isSeen: boolean;
 	dateTime: Date;
+	link : string;
 }
 const notifications: NotificationType[] = [];
 
@@ -12,6 +13,7 @@ const NotificationSlice = createSlice({
 	reducers: {
 		addNotification: (state, { payload }) => {
 			state.push(payload);
+			console.log(payload);
 		},
 		clearNotifications: (state) => {
 			state = [];

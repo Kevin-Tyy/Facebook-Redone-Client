@@ -120,7 +120,24 @@ const Groups = () => {
 										className="w-[120px] rounded-md h-[120px] object-cover"
 									/>
 								) : (
-									<div className="w-[120px] h-[120px] grid place-content-center bg-gradient-to-br from-blue-700 rounded-md to-blue-300">
+									<div
+										className={`w-[120px] h-[120px] grid place-content-center bg-gradient-to-br ${
+											index % 3 === 0
+												? "from-blue-700"
+												: index % 3 === 1
+												? "from-green-700"
+												: index % 3 === 2
+												? "from-fuchsia-700"
+												: "from-red-700"
+										} rounded-md ${
+											index % 3 === 0
+												? "to-blue-300"
+												: index % 3 === 1
+												? "to-green-300"
+												: index % 3 === 2
+												? "to-fuchsia-300"
+												: "to-red-300"
+										}`}>
 										<HiUserGroup size={40} />
 									</div>
 								)}

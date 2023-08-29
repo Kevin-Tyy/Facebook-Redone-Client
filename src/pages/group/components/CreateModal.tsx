@@ -2,13 +2,14 @@ import { useState } from "react";
 import { BiPencil } from "react-icons/bi";
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import clsx from "clsx";
 import { BaseURL } from "../../../utils/Link";
 import Modal from "../../../components/Modals";
 import { UserInfo } from "../../../types/Types";
 import { HiUserGroup } from "react-icons/hi2";
+import { addNotification } from "../../../redux/features/Notification";
 interface CreateModalProps {
 	onClose: () => void;
 	isOpen: boolean;
@@ -16,10 +17,11 @@ interface CreateModalProps {
 }
 const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch()
 	const [previewImage, setPreviewImage] = useState<any>(null);
 	const {
 		user: {
-			userInfo: { userId },
+			userInfo: { userId , username },
 		},
 	} = useSelector(loggedInUser) as {
 		user: {
@@ -52,6 +54,12 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 			.then((response: AxiosResponse) => {
 				toast.success(response.data.msg);
 				fetchGroups();
+				dispatch(addNotification({
+					message : `${username} created a new group you might be interested in`,
+					dateTime : new Date(),
+					isSeen : false,
+					link : `/i/groups`
+				}))
 				onClose();
 			})
 			.catch((error) => {
