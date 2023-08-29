@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Userdata } from "../../../types/Types";
+import { Userdata } from "../../../types/types";
 import { Link } from "react-router-dom";
 
 interface LikesPopupProps {
@@ -35,9 +35,13 @@ const LikesPopup: React.FC<LikesPopupProps> = ({ likes, onClose }) => {
 			className="absolute top-6 -right- bg-primary-200/10 backdrop-blur-md ring-1 rounded-md ring-gray-700 p-1 z-50 w-32">
 			<ul className="text-white flex flex-col gap-2 p-2 ">
 				{likes.map((person, index) => (
-					<li key={index} className="hover:underline decoration-dotted whitespace-nowrap">
+					<li
+						key={index}
+						className="hover:underline decoration-dotted whitespace-nowrap">
 						<Link to={`/profile/${person.userId}`}>
-							<span>{person.firstname} {person.lastname}</span>
+							<span>
+								{person.firstname} {person.lastname}
+							</span>
 						</Link>
 					</li>
 				))}

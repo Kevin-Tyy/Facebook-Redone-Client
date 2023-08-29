@@ -1,4 +1,4 @@
-import { FormData } from "../../types/Types";
+import { FormData } from "../../types/types";
 import { EmailOutlined, PersonOutlined } from "@mui/icons-material";
 interface Props {
 	formData: FormData;
@@ -28,7 +28,7 @@ const StepOne = ({ formData, handleInputChange }: Props) => {
 					name="lastName"
 				/>
 			</div>
-			
+
 			<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">
 				<EmailOutlined />
 				<input

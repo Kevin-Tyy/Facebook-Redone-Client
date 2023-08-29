@@ -1,4 +1,4 @@
-import { FormData } from "../../types/Types";
+import { FormData } from "../../types/types";
 import {
 	VisibilityOutlined,
 	VisibilityOffOutlined,
@@ -22,7 +22,7 @@ const StepTwo = ({ formData, handleInputChange, setProfileImage }: Props) => {
 
 	useEffect(() => {
 		setProfileImage(upload);
-	}, [upload]);	
+	}, [upload]);
 	return (
 		<div className="flex flex-col gap-7">
 			<div className="text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500">

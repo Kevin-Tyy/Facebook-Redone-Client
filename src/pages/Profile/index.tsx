@@ -6,13 +6,13 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Tabs } from "../../utils/utilObjects";
-import { UserInfo, Userdata } from "../../types/Types";
+import { UserInfo, Userdata } from "../../types/types";
 import ImageUpdate from "../../components/Detail/ImageUpdate";
 import StoryModal from "../../components/Modals/StoryModal";
 import DetailModal from "../../components/Detail/UpdateModal";
 import ProfileImage from "../../components/Posts/Preview/ProfileImage";
 import Skeleton from "react-loading-skeleton";
-import { Posts } from "../../types/Types";
+import { Posts } from "../../types/types";
 
 import Button from "./components/Button";
 import Image from "./components/Image";
@@ -157,7 +157,6 @@ const profile = () => {
 														(findMutualFriends() as any)}{" "}
 													mutual)
 												</p>
-
 											</div>
 											<p className="text-sm">
 												{posts && posts.length} Post

@@ -1,4 +1,4 @@
-import { UserInfo, Userdata } from "../../../types/Types";
+import { UserInfo, Userdata } from "../../../types/types";
 import FriendLoader from "../../../components/Loaders/Skeleton/FriendPageLoader";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
@@ -71,8 +71,10 @@ const FriendLayout = ({ friends, userData }: Props) => {
 						</div>
 					) : (
 						<div className="text-base text-center text-light/60 pb-6">
-							{userData?.userId == userId ? 'You have' : `@${userData?.username.split(" ")[0]} has ` }
-							  no friends!
+							{userData?.userId == userId
+								? "You have"
+								: `@${userData?.username.split(" ")[0]} has `}
+							no friends!
 						</div>
 					)}
 				</div>

@@ -1,4 +1,4 @@
-import { Userdata } from "../../types/Types";
+import { Userdata } from "../../types/types";
 import ButtonComp from "../Buttons/Button";
 import Skeleton from "react-loading-skeleton";
 interface Props {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
 import PostBox from "./PostComponents/PostBoxComponent";
 import PostSkeleton from "../Loaders/Skeleton/Post";
-import { Posts as PostType } from "../../types/Types";
+import { Posts as PostType } from "../../types/types";
 import RepostBox from "./PostComponents/RepostComponent";
 import PostComponent from "./Post";
 
@@ -15,7 +15,7 @@ const Posts = () => {
 		const posts = data.data;
 		setPosts(posts);
 	};
-	
+
 	const initialFetchPosts = async (url: string) => {
 		setLoading(true);
 		const { data } = await axios.get(url);
@@ -25,11 +25,11 @@ const Posts = () => {
 	};
 
 	useEffect(() => {
-		initialFetchPosts(`${BaseURL}/post/`)
+		initialFetchPosts(`${BaseURL}/post/`);
 	}, [BaseURL]);
 	return (
 		<div className="flex flex-col gap-3 sm:gap-6">
-			<PostComponent fetchPosts={fetchPosts}/>
+			<PostComponent fetchPosts={fetchPosts} />
 			<div className="h-full w-full">
 				{loading ? (
 					<div>
@@ -41,9 +41,9 @@ const Posts = () => {
 							{posts.map((post, index) => (
 								<div key={index}>
 									{post.isReposted ? (
-										<RepostBox post={post} fetchPosts={fetchPosts}/>
+										<RepostBox post={post} fetchPosts={fetchPosts} />
 									) : (
-										<PostBox post={post} fetchPosts={fetchPosts}/>
+										<PostBox post={post} fetchPosts={fetchPosts} />
 									)}
 								</div>
 							))}

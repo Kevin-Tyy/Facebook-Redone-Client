@@ -1,5 +1,5 @@
 import { Add, CloseRounded, MoreHoriz } from "@mui/icons-material";
-import { StoryType, UserInfo } from "../../../types/Types";
+import { StoryType, UserInfo } from "../../../types/types";
 import useDateFormatter from "../../../hooks/useDate";
 import { Link } from "react-router-dom";
 import Logo from "../../Logo";

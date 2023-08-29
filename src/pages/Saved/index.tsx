@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SavedPost, UserInfo } from "../../types/Types";
+import { SavedPost, UserInfo } from "../../types/types";
 import { BaseURL } from "../../utils/Link";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
@@ -31,7 +31,7 @@ const Saved = () => {
 		};
 		getSavedPosts();
 	}, []);
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	return (
 		<section className="w-full max-w-[700px]">
 			<div className="mb-4 group w-fit cursor-default ml-3">
@@ -52,7 +52,7 @@ const Saved = () => {
 									<p className=" text-lg">You have not saved any posts yet</p>
 								</div>
 								<Button
-									onClick={() => navigate('/i/flow')}
+									onClick={() => navigate("/i/flow")}
 									sx={{
 										color: "white",
 										backgroundColor: "#0C88EF",

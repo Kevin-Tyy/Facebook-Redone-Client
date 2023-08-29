@@ -11,7 +11,7 @@ import { BaseURL } from "../../utils/Link";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { Emoji, UserInfo } from "../../types/Types";
+import { Emoji, UserInfo } from "../../types/types";
 import EmojiPicker, { Theme } from "emoji-picker-react";
 import placeholderAvatar from "../../assets/avatar.webp";
 import Modal from ".";

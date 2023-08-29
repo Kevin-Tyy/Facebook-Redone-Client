@@ -4,7 +4,7 @@ import { Stepper, Step, StepLabel } from "@mui/material";
 import StepOne from "../../components/Register/StepOne";
 import StepTwo from "../../components/Register/StepTwo";
 import { Link } from "react-router-dom";
-import { FormData } from "../../types/Types";
+import { FormData } from "../../types/types";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import toast, { Toaster } from "react-hot-toast";

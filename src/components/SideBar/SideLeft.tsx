@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { GroupType, UserInfo } from "../../types/Types";
+import { GroupType, UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
 
 import { NavLink } from "react-router-dom";
@@ -87,8 +87,10 @@ const Sidebar = () => {
 						<NavLink
 							to={obj?.link}
 							key={index}
-							className={({ isActive}) =>
-								`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${isActive && 'bg-primary-100/50'}`
+							className={({ isActive }) =>
+								`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${
+									isActive && "bg-primary-100/50"
+								}`
 							}>
 							<span className="text-white">{obj.icon}</span>
 							<p className="text-white">{obj.title}</p>

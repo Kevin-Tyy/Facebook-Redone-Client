@@ -7,7 +7,7 @@ import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Tooltip } from "@mui/material";
-import { Posts } from "../../../types/Types";
+import { Posts } from "../../../types/types";
 import { useState } from "react";
 interface Props {
 	userId: string;

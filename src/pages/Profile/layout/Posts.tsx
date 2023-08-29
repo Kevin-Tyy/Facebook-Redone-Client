@@ -3,7 +3,7 @@ import ProfileDetail from "../../../components/Detail/ProfileDetail";
 import Skeleton from "react-loading-skeleton";
 import PostSkeleton from "../../../components/Loaders/Skeleton/Post";
 import PostComponent from "../../../components/Posts/Post";
-import { Posts, Userdata } from "../../../types/Types";
+import { Posts, Userdata } from "../../../types/types";
 import RepostBox from "../../../components/Posts/PostComponents/RepostComponent";
 import axios from "axios";
 interface Props {

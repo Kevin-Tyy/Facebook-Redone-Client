@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CreateModal from "./components/CreateModal.jsx";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link.js";
-import { GroupType, UserInfo } from "../../types/Types.js";
+import { GroupType, UserInfo } from "../../types/types.js";
 import useDateFormatter from "../../hooks/useDate.js";
 import Loading from "../../components/shared/loading.js";
 import { toast } from "react-hot-toast";
@@ -92,9 +92,7 @@ const Groups = () => {
 					<h1 className="text-white text-lg mb-3">Groups you may like.</h1>
 					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 				</div>
-				{!groups && (
-					<GroupLoader/>
-				)}
+				{!groups && <GroupLoader />}
 				{groups?.length === 0 && (
 					<div className="bg-primary-200 text-white rounded-xl p-10 grid place-content-center">
 						<p className="flex flex-col items-center gap-2">
@@ -141,12 +139,14 @@ const Groups = () => {
 								)}
 							</div>
 							<div className="text-gray-400 space-y-2">
-								<p
-									className="text-white cursor-pointer"
-									onClick={() => navigate(`/group/${group._id}`)}>
-									{group?.groupName}
-								</p>
-								<p>{group?.groupDescription}</p>
+								<div>
+									<p
+										className="text-white cursor-pointer first-letter:capitalize hover:underline"
+										onClick={() => navigate(`/group/${group._id}`)}>
+										{group?.groupName}
+									</p>
+									<p>{group?.groupDescription}</p>
+								</div>
 								<div className="flex gap-2">
 									<p className="text-sm">
 										{group?.groupMembers?.length} member

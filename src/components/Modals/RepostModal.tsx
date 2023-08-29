@@ -1,5 +1,5 @@
 import React from "react";
-import { Posts, UserInfo } from "../../types/Types";
+import { Posts, UserInfo } from "../../types/types";
 import Modal from ".";
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -65,11 +65,15 @@ const RepostModal: React.FC<RepostModalProps> = ({
 								textTransform: "capitalize",
 								borderRadius: "40px",
 								alignSelf: "flex-start",
-								width : '95px',
-								height : '35px',
+								width: "95px",
+								height: "35px",
 								"&:hover": { backgroundColor: "#3293e3" },
 							}}>
-							{loading ? <CircularProgress size={15} sx={{ color : 'white' }} /> : "Repost"}
+							{loading ? (
+								<CircularProgress size={15} sx={{ color: "white" }} />
+							) : (
+								"Repost"
+							)}
 						</Button>
 						<div
 							onClick={onClose}

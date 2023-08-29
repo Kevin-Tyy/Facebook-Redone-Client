@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { useEffect, useState } from "react";
-import { UserInfo, Userdata } from "../../types/Types";
+import { UserInfo, Userdata } from "../../types/types";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import { Link } from "react-router-dom";

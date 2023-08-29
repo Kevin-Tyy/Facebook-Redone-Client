@@ -3,7 +3,7 @@ import { BaseURL } from "../../utils/Link";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { UserInfo, Userdata } from "../../types/Types";
+import { UserInfo, Userdata } from "../../types/types";
 import { Link } from "react-router-dom";
 import PeopleLoader from "../../components/Loaders/Skeleton/People";
 import placeholderImage from "../../assets/avatar.webp";

@@ -1,4 +1,4 @@
-import { Comment, Posts, UserInfo } from "../../../types/Types";
+import { Comment, Posts, UserInfo } from "../../../types/types";
 
 import { Link } from "react-router-dom";
 import placeholderImage from "../../../assets/avatar.webp";

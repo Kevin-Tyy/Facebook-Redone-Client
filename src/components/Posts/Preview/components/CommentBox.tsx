@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Comment } from "../../../../types/Types";
+import { Comment } from "../../../../types/types";
 import useDateFormatter from "../../../../hooks/useDate";
 import placeholderImage from "../../../../assets/avatar.webp";
 
@@ -9,7 +9,7 @@ interface CommentBoxProps {
 	userId: string;
 }
 const CommentBox: React.FC<CommentBoxProps> = ({ comment, userId }) => {
-	const formattedDate = useDateFormatter(comment.createdAt)
+	const formattedDate = useDateFormatter(comment.createdAt);
 	return (
 		<div className="flex gap-2 items-start">
 			<Link to={`/profile/${userId}`} className="max-w-full w-[50px] h-[45px]">
@@ -22,9 +22,13 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, userId }) => {
 			</Link>
 			<div className="w-full bg-primary-100/60 my-1 px-3 py-3 rounded-lg hover:bg-primary-100 transition relative">
 				{comment?.user?.userId == userId && (
-					<p className="text-xs text-gray-500 absolute right-2 top-2">You commented</p>
+					<p className="text-xs text-gray-500 absolute right-2 top-2">
+						You commented
+					</p>
 				)}
-				<Link to={`/profile/${comment?.user?.userId}`} className="flex  items-center gap-2">
+				<Link
+					to={`/profile/${comment?.user?.userId}`}
+					className="flex  items-center gap-2">
 					<h1 className="text-lg font-semibold text-start text-white hover:underline capitalize inline">
 						{comment?.user?.username}
 					</h1>

@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import ButtonComp from "../Buttons/Button";
-import { UserInfo } from "../../types/Types";
+import { UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
 const PostComponent = ({
 	fetchPosts,

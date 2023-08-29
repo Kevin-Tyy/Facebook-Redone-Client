@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Userdata } from "../../../types/Types";
+import { Userdata } from "../../../types/types";
 import FriendLayout from "../layout/FriendLayout";
 import GroupLayout from "../layout/GroupLayout";
 import PostLayout from "../layout/Posts";

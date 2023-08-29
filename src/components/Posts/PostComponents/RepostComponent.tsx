@@ -11,13 +11,13 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import placeholderImage from "../../../assets/avatar.webp";
 import { Link } from "react-router-dom";
-import { UserInfo } from "../../../types/Types";
+import { UserInfo } from "../../../types/types";
 import PostPreview from "../Preview/PostPreview";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
-import { Posts } from "../../../types/Types";
+import { Posts } from "../../../types/types";
 import RepostModal from "../../Modals/RepostModal";
 import StyledHashtags from "../../../hooks/useHashTags";
 
@@ -161,7 +161,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 						</div>
 						<div className="flex flex-col gap-2" onClick={viewPost}>
 							<h1 className="text-white cursor-pointer">
-								<StyledHashtags text={postText}/>
+								<StyledHashtags text={postText} />
 							</h1>
 							<div className="flex flex-col gap-2">
 								<div className="relative cursor-pointer group">

@@ -45,7 +45,7 @@ export interface StoryType {
 export interface Comment {
 	textContent: string;
 	user: UserInfo;
-    createdAt: Date;
+	createdAt: Date;
 }
 export interface Emoji {
 	emoji: string;
@@ -62,22 +62,31 @@ export interface Posts {
 	repostedBy: Userdata;
 	taggedPeople: Array<Userdata>;
 	views: Array<Userdata>;
-	numberOfReposts : number;
-	repostedDate : Date;
-	saves : Userdata[]
+	numberOfReposts: number;
+	repostedDate: Date;
+	saves: Userdata[];
 }
 
 export interface GroupType {
-	_id : string;
-	groupName: string
-	groupId: string
-	groupDescription: string
-	groupImage: string
-	admin : Userdata
-	groupMembers: Array<Userdata>
-	createdAt: Date
+	_id: string;
+	groupName: string;
+	groupId: string;
+	groupDescription: string;
+	groupImage: string;
+	admin: Userdata;
+	groupMembers: Array<Userdata>;
+	createdAt: Date;
 }
 export interface SavedPost {
-	creator : Userdata,
-	post : Posts
+	creator: Userdata;
+	post: Posts;
+}
+export interface Notification {
+	users: string[];
+	_id: string;
+	message: string;
+	dateTime: Date;
+	isSeen: boolean;
+	creator : Userdata
+	link : string;
 }

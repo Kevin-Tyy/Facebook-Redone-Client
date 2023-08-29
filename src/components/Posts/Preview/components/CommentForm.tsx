@@ -7,7 +7,7 @@ import {
 } from "@mui/icons-material";
 import axios from "axios";
 import { BaseURL } from "../../../../utils/Link";
-import { Emoji, Posts, UserInfo } from "../../../../types/Types";
+import { Emoji, Posts, UserInfo } from "../../../../types/types";
 import { loggedInUser } from "../../../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";

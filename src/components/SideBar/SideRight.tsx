@@ -2,7 +2,7 @@ import { LuSettings2 } from "react-icons/lu";
 import { trendDummyData } from "../../utils/utilObjects";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { UserInfo, Userdata } from "../../types/Types";
+import { UserInfo, Userdata } from "../../types/types";
 import { useEffect, useState } from "react";
 import { BaseURL } from "../../utils/Link";
 import PeopleLoader from "../Loaders/Skeleton/People";
@@ -114,14 +114,14 @@ const SideRight = () => {
 													{user?.firstname} {user?.lastname}
 												</p>
 												<div className="flex gap-1 text-gray-400/70">
-														<p className="text-sm whitespace-nowrap capitalize">
-															@{user.username}
-														</p>
-														<span >•</span>
-		 												<p className="text-sm  whitespace-nowrap">
-															{user?.email}
-														</p>
-													</div>
+													<p className="text-sm whitespace-nowrap capitalize">
+														@{user.username}
+													</p>
+													<span>•</span>
+													<p className="text-sm  whitespace-nowrap">
+														{user?.email}
+													</p>
+												</div>
 											</div>
 										</div>
 									</Link>
@@ -134,7 +134,7 @@ const SideRight = () => {
 								</div>
 							))}
 							<Button
-								onClick={() => navigate('/friends')}
+								onClick={() => navigate("/friends")}
 								sx={{
 									color: "white",
 									backgroundColor: "#0C88EF",

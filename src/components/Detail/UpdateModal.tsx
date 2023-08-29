@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import { Emoji, UserInfo } from "../../types/Types";
+import { Emoji, UserInfo } from "../../types/types";
 import {
 	BookOutlined,
 	LocationOnOutlined,

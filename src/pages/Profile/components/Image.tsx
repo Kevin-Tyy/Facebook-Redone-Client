@@ -1,4 +1,4 @@
-import { Userdata } from "../../../types/Types";
+import { Userdata } from "../../../types/types";
 import placeholderImage from "../../../assets/avatar.webp";
 import { CameraAltRounded } from "@mui/icons-material";
 import React from "react";
@@ -8,14 +8,14 @@ interface ImageProps {
 	setViewImage: (value: any) => void;
 	userData: Userdata;
 	setImageUpdate: (value: any) => void;
-  userId : string;
+	userId: string;
 }
 const Image: React.FC<ImageProps> = ({
 	userData,
 	setImageUpdate,
 	setPreviewImage,
 	setViewImage,
-  userId
+	userId,
 }) => {
 	return (
 		<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">

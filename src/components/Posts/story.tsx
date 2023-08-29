@@ -6,7 +6,7 @@ import { BaseURL } from "../../utils/Link";
 import placeholderAvatar from "../../assets/avatar.webp";
 import StoryPreview from "./Preview/StoryPreview";
 
-import { StoryType, UserInfo } from "../../types/Types";
+import { StoryType, UserInfo } from "../../types/types";
 import StorySkeleton from "../Loaders/Skeleton/Story";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
@@ -74,7 +74,7 @@ const Story = () => {
 									<div
 										onClick={() => {
 											setCurrentCreatorIndex(index);
-											handleStoryView()
+											handleStoryView();
 										}}
 										key={index}
 										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-primary-100/40">
@@ -93,9 +93,11 @@ const Story = () => {
 												<div className="w-full overflow-hidden leading-4">
 													<p className=" text-white capitalize whitespace-nowrap font-bold overflow-ellipsis">
 														{
-															stories.find(
-																(story) => story.creator.userId === creatorId
-															)?.creator?.username.split(" ")[0]
+															stories
+																.find(
+																	(story) => story.creator.userId === creatorId
+																)
+																?.creator?.username.split(" ")[0]
 														}{" "}
 													</p>
 													<p className="text-gray-300 text-xs">

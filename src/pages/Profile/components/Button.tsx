@@ -9,7 +9,7 @@ import { BaseURL } from "../../../utils/Link";
 import { Add, Edit } from "@mui/icons-material";
 import ButtonComp from "../../../components/Buttons/Button";
 import { toast } from "react-hot-toast";
-import { Userdata } from "../../../types/Types";
+import { Userdata } from "../../../types/types";
 interface ButtonProps {
 	pending: boolean;
 	isFriend: boolean;

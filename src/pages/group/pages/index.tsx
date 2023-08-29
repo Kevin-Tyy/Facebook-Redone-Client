@@ -3,7 +3,7 @@ import Sidebar from "../../../components/SideBar/SideLeft";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
-import { GroupType, UserInfo } from "../../../types/Types";
+import { GroupType, UserInfo } from "../../../types/types";
 import { CircularProgress } from "@mui/material";
 import bgImage from "../../../assets/noman.jpg";
 import { HiUserGroup, HiOutlineTrash } from "react-icons/hi2";
@@ -117,11 +117,9 @@ const GroupPage = () => {
 										</p>
 										{groupData?.admin.userId === userId ? (
 											<button
-												onClick={() =>
-													setDeleteModal(true)
-												}
+												onClick={() => setDeleteModal(true)}
 												className="self-end py-3 px-4 bg-red-600/20 rounded-full -translate-y-5 hover:bg-red-600/40 ring-1 ring-red-600 transition">
-													Delete group
+												Delete group
 											</button>
 										) : (
 											<button

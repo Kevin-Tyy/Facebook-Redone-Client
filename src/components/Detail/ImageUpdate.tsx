@@ -2,8 +2,8 @@ import { CameraAltRounded } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, updateImage } from "../../redux/features/AuthSlice";
-import { UserInfo } from "../../types/Types";
-import placeholderAvatar from "../../assets/avatar.webp"
+import { UserInfo } from "../../types/types";
+import placeholderAvatar from "../../assets/avatar.webp";
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
