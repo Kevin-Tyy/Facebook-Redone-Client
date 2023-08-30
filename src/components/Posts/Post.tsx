@@ -1,21 +1,16 @@
-import {
-	EmojiEmotionsRounded,
-	ImageRounded,
-	VideocamRounded,
-} from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { HiOutlineFaceSmile, HiOutlineCamera, HiOutlineVideoCamera } from "react-icons/hi2";
 import PostModal from "../Modals/PostModal";
 const utilObj = [
-	{ icon: <VideocamRounded />, title: "Live Video" },
-	{ icon: <ImageRounded />, title: "Photo/video" },
-	{ icon: <EmojiEmotionsRounded />, title: "Feeling/activity" },
+	{ icon: <HiOutlineVideoCamera size={26} />, title: "Live Video" },
+	{ icon: <HiOutlineCamera size={26}/>, title: "Photo/video" },
+	{ icon: <HiOutlineFaceSmile size={26} />, title: "Feeling/activity" },
 ];
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
-import ButtonComp from "../Buttons/Button";
 import { UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
+import { Button } from "@mui/material";
 const PostComponent = ({
 	fetchPosts,
 }: {
@@ -48,13 +43,20 @@ const PostComponent = ({
 					</p>
 				</div>
 				<div className="flex gap-4 justify-between flex-wrap">
-					<div className="flex gap-2 md:gap-4 w-full sm:w-auto">
+					<div className="flex gap-2 md:gap-4 w-full text-[#13131a]">
 						{utilObj.map((obj, index) => (
-							<div
-								key={index}
-								onClick={() => setIsPostModal(true)}
-								className="w-full sm:w-auto">
-								<ButtonComp color="#0E0f17">
+							<div key={index} onClick={() => setIsPostModal(true)} className="w-full bg-primary-100/30 rounded-md">
+								<Button
+									sx={{
+										color : 'white',
+										textTransform: "capitalize",
+										p: "10px",
+										borderRadius: "10px",
+										display: "flex",
+										whiteSpace: "nowrap",
+										gap: "15px",
+										width : "100%",
+									}}>
 									<span
 										className={`text-${
 											index == 0
@@ -68,24 +70,9 @@ const PostComponent = ({
 										{obj.icon}
 									</span>
 									{obj?.title}
-								</ButtonComp>
+								</Button>
 							</div>
 						))}
-					</div>
-					<div className="hidden sm:block">
-						<Button
-							sx={{
-								color: "white",
-								backgroundColor: "#0C88EF",
-								textTransform: "capitalize",
-								borderRadius: "40px",
-								px: "30px",
-								py: "9px",
-								"&:hover": { backgroundColor: "#0C88EF" },
-							}}
-							onClick={() => setIsPostModal(true)}>
-							Post
-						</Button>
 					</div>
 				</div>
 				<PostModal

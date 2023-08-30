@@ -7,6 +7,7 @@ import { BaseURL } from "../../utils/Link";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Button, CircularProgress } from "@mui/material";
+import createNotification from "../../api/functions/notifications";
 interface RepostModalProps {
 	post: Posts;
 	onClose: () => void;
@@ -21,7 +22,7 @@ const RepostModal: React.FC<RepostModalProps> = ({
 }) => {
 	const {
 		user: {
-			userInfo: { userId },
+			userInfo: { userId, username },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 	const [loading, setLoading] = React.useState(false);
@@ -37,6 +38,11 @@ const RepostModal: React.FC<RepostModalProps> = ({
 			.then((response) => {
 				fetchPosts(`${BaseURL}/post/`).then(() => {
 					toast.success(response.data.msg);
+					createNotification(
+						userId,
+						`${username} reposted something, add your thoughts to this`,
+						"/i/flow"
+					);
 					onClose();
 				});
 			})
