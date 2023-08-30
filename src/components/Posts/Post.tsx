@@ -19,7 +19,7 @@ import placeholderAvatar from "../../assets/avatar.webp";
 const PostComponent = ({
 	fetchPosts,
 }: {
-	fetchPosts?: (url: string) => Promise<void>;
+	fetchPosts: (url: string) => Promise<void>;
 }) => {
 	const [isPostModal, setIsPostModal] = useState<boolean>(false);
 	const {

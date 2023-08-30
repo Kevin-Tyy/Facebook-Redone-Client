@@ -9,6 +9,7 @@ import { BaseURL } from "../../../utils/Link";
 import Modal from "../../../components/Modals";
 import { UserInfo } from "../../../types/types";
 import { HiUserGroup } from "react-icons/hi2";
+import createNotification from "../../../api/func/notifications";
 interface CreateModalProps {
 	onClose: () => void;
 	isOpen: boolean;
@@ -52,13 +53,11 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 			.then((response: AxiosResponse) => {
 				toast.success(response.data.msg);
 				fetchGroups();
-				axios.post(`${BaseURL}/notifications`, {
-					userId : userId,
-					message: `${username} created a group you might be interested in. ${formData.groupName}`,
-					dateTime: new Date(),
-					link: `/i/groups`,
-					users: [],
-				});
+				createNotification(
+					userId,
+					`${username} created a group you might be interested in. ${formData.groupName}`,
+					`/i/groups`
+				);
 				onClose();
 			})
 			.catch((error) => {

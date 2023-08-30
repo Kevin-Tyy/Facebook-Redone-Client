@@ -17,6 +17,7 @@ import EmojiPicker, { Theme } from "emoji-picker-react";
 import { Emoji } from "../../types/types";
 import Modal from ".";
 import placeholderAvatar from "../../assets/avatar.webp";
+import createNotification from "../../api/func/notifications";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
@@ -57,6 +58,11 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 				setIsLoading(false);
 				if (data.success) {
 					fetchPosts(`${BaseURL}/post`);
+					createNotification(
+						userId,
+						`${username} created a new post. Add your thoughts and reactions`,
+						`/i/flow`
+					);
 					onClose();
 					toast.success(data.msg);
 				} else {
@@ -132,7 +138,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 						{postMedia && (
 							<img
 								src={postMedia}
-								className="my-3  h-60 object-cover mx-auto rounded-lg"
+								className="my-3 w-full h-60 object-cover mx-auto rounded-lg"
 							/>
 						)}
 						<div className="w-full border border-gray-700 py-3 rounded-md flex items-center justify-between px-4">

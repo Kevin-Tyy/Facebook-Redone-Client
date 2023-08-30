@@ -23,7 +23,7 @@ import StyledHashtags from "../../../hooks/useHashTags";
 
 interface RepostBoxProps {
 	post: Posts;
-	fetchPosts?: (url: string) => Promise<void>;
+	fetchPosts: (url: string) => Promise<void>;
 }
 
 const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {

@@ -15,6 +15,7 @@ import { Emoji, UserInfo } from "../../types/types";
 import EmojiPicker, { Theme } from "emoji-picker-react";
 import placeholderAvatar from "../../assets/avatar.webp";
 import Modal from ".";
+import createNotification from "../../api/func/notifications";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
@@ -70,6 +71,12 @@ const StoryModal = ({ onClose, isOpen }: Props) => {
 				setIsLoading(false);
 				if (data.success) {
 					toast.success(data.msg);
+					createNotification(
+						userId,
+						`${username} added to their story.Tap to view`,
+						`/i/flow`
+					);
+					onClose();
 				} else {
 					toast.error(data.msg);
 				}

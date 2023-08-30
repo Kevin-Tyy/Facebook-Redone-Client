@@ -32,6 +32,11 @@ const Saved = () => {
 		getSavedPosts();
 	}, []);
 	const navigate = useNavigate();
+	const fetchPosts = async (url: string) => {
+		const { data } = await axios.get(url);
+		const posts = data.data;
+		setSavedPosts(posts);
+	};
 	return (
 		<section className="w-full max-w-[700px]">
 			<div className="mb-4 group w-fit cursor-default ml-3">
@@ -72,9 +77,9 @@ const Saved = () => {
 						savedPosts.map((post, index) => (
 							<div key={index}>
 								{post.post.isReposted ? (
-									<RepostBox post={post.post} />
+									<RepostBox post={post.post} fetchPosts={fetchPosts} />
 								) : (
-									<PostBox post={post.post} />
+									<PostBox post={post.post} fetchPosts={fetchPosts} />
 								)}
 							</div>
 						))
