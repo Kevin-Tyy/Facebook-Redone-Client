@@ -15,7 +15,7 @@ import { Emoji, UserInfo } from "../../types/types";
 import EmojiPicker, { Theme } from "emoji-picker-react";
 import placeholderAvatar from "../../assets/avatar.webp";
 import Modal from ".";
-import createNotification from "../../api/func/notifications";
+import createNotification from "../../api/functions/notifications";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;

@@ -9,7 +9,7 @@ import { BaseURL } from "../../../utils/Link";
 import Modal from "../../../components/Modals";
 import { UserInfo } from "../../../types/types";
 import { HiUserGroup } from "react-icons/hi2";
-import createNotification from "../../../api/func/notifications";
+import createNotification from "../../../api/functions/notifications";
 interface CreateModalProps {
 	onClose: () => void;
 	isOpen: boolean;
@@ -55,7 +55,7 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 				fetchGroups();
 				createNotification(
 					userId,
-					`${username} created a group you might be interested in. ${formData.groupName}`,
+					`${username} created a group you might be interested in.${formData.groupName}`,
 					`/i/groups`
 				);
 				onClose();

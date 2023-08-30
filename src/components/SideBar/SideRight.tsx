@@ -11,7 +11,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { PersonAdd } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
-import { fetchFriends } from "../../api/func";
+import { fetchFriends } from "../../api/functions";
 import { toast } from "react-hot-toast";
 
 const SideRight = () => {
