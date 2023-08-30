@@ -55,6 +55,9 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
   const handleMarkAsRead = () => {
     axios.put(`${BaseURL}/notifications/${userId}`)
   }
+	const deleteNotifications = () => {
+		console.log('delete notifications')
+	}
 	return (
 		<motion.div
 			initial="hidden"
@@ -128,12 +131,11 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 				</div>
 				{notifications && notifications.length > 0 && (
 					<div
-						// onClick={handleViewNotifications}
 						className="bg-gradient-to-b from-transparent via-[#1d1f27] to-[#191d25] absolute bottom-0 h-28  w-full flex items-end justify-between p-2">
 						<button onClick={handleMarkAsRead} className=" w-fit text-blue-base m-1 hover:text-blue-light transition duration-500 hover:underline rounded-full">
 							Mark all as read
 						</button>
-						<Tooltip title="Delete notifications">
+						<Tooltip title="Delete notifications" onClick={deleteNotifications}>
 							<div className="text-gray-500 m-1 cursor-pointer hover:bg-primary-100 p-2 rounded-md transition hover:text-white">
 								<BsTrash size={21} />
 							</div>
