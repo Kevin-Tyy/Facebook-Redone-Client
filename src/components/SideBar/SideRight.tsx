@@ -134,7 +134,7 @@ const SideRight = () => {
 								</div>
 							))}
 							<Button
-								onClick={() => navigate("/friends")}
+								onClick={() => navigate("/i/friends")}
 								sx={{
 									color: "white",
 									backgroundColor: "#0C88EF",
