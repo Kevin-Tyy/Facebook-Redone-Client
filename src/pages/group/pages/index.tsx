@@ -75,7 +75,9 @@ const GroupPage = () => {
 					<Sidebar />
 					<section className="h-full min-h-screen w-full max-w-[850px]">
 						{!groupData ? (
-							<CircularProgress />
+							<div className="w-full h-full grid place-content-center pb-[20vh]">
+								<CircularProgress />
+							</div>
 						) : (
 							<section>
 								<header className="relative">
