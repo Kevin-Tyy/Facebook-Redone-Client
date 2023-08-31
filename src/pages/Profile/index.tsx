@@ -17,6 +17,7 @@ import { Posts } from "../../types/types";
 import Button from "./components/Button";
 import Image from "./components/Image";
 import { renderContent } from "./func/renderContext";
+import { __findMutualFriends } from "../../utils/apiFunctions";
 const profile = () => {
 	const { id } = useParams();
 	const [loggedInUserData, setLoggedInUserData] = useState<Userdata | null>(
@@ -102,15 +103,26 @@ const profile = () => {
 		document.title = "Facebook";
 	}
 	const findMutualFriends = () => {
-		if (userData?.userId !== userId) {
-			return "2";
+		if (loggedInUserData && userData) {
+			if (userData?.userId !== userId) {
+				const mutualFriends = __findMutualFriends(
+					loggedInUserData?.friendList,
+					userData?.friendList
+				);
+				return mutualFriends;
+			}
 		}
 	};
+	console.log(loggedInUserData?.userId);
+	console.log(userId);
+	console.log(userData?.userId);
+	console.log(findMutualFriends());
+
 	return (
 		<section className="min-h-screen w-full pb-20 bg-background-primary ">
 			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
-				<div className="w-full px-3 md:px-16 lg:px-0 lg:w-[80%] 2xl:w-[60%] flex flex-col gap-4">
+				<div className="w-full px-3 md:px-16 lg:px-4  2xl:w-full max-w-[1280px] flex flex-col gap-4">
 					<div>
 						<div className="relative bg-no-repeat bg-cover bg-center bg-[url('../src/assets/noman.jpg')] flex flex-col items-center h-[30vh] p-20 justify-center z-[2]">
 							<div className="flex flex-col items-center absolute -bottom-48 justify-center">
@@ -150,13 +162,13 @@ const profile = () => {
 													{userData && friendCount} friend
 													{friendCount !== 1 && "s"}
 												</p>
-												<p className="text-sm">
-													(
-													{userData &&
-														loggedInUserData &&
-														(findMutualFriends() as any)}{" "}
-													mutual)
-												</p>
+												{userData &&
+													loggedInUserData &&
+													userData.userId !== userId && (
+														<p className="text-sm">
+															({(findMutualFriends()?.length as any)} mutual)
+														</p>
+													)}
 											</div>
 											<p className="text-sm">
 												{posts && posts.length} Post

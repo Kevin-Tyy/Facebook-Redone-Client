@@ -60,8 +60,8 @@ const PostLayout = ({
 						/>
 					</div>
 				</div>
-				<div className="w-full flex flex-col gap-4">
-					{userData?.userId == userId && <PostComponent />}
+				<div className="w-full sm:min-w-[600px] flex flex-col gap-4">
+					{userData?.userId == userId && <PostComponent fetchPosts={fetchUserPosts}/>}
 					{userData?.username && (
 						<div className="bg-primary-200 p-2 rounded-md border border-gray-800">
 							<h1 className="text-light text-3xl text-center capitalize">

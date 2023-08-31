@@ -18,7 +18,7 @@ const Image: React.FC<ImageProps> = ({
 	userId,
 }) => {
 	return (
-		<div className="bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
+		<div className="relative bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
 			<div className="bg-black rounded-full p-[5px]">
 				<img
 					onClick={() => {

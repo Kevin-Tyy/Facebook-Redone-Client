@@ -66,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
 	return (
 		<div>
 			{userData?.userId == userId ? (
-				<div className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2">
+				<div className="absolute right-4 bottom-4 flex justify-center gap-2">
 					<div onClick={toggleStory}>
 						<ButtonComp color={"#0C88EF"}>
 							<Add />
@@ -82,7 +82,7 @@ const Button: React.FC<ButtonProps> = ({
 				</div>
 			) : (
 				<div
-					className="absolute right-[25%] md:right-4 bottom-4 flex justify-center gap-2"
+					className="absolute right-4 bottom-4 flex justify-center gap-2"
 					onClick={submitFriendRequest}>
 					<button
 						className={`py-2 w-36 justify-center flex  text-white rounded-md transition  ${
