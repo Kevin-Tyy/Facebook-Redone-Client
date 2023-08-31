@@ -155,7 +155,7 @@ const ReactionPallete = ({
 				<Tooltip title="Save this post">
 					<div
 						onClick={savePost}
-						className={`${styleClass}  transition-all duration-500 text-gray-500 hover:bg-purple-800/10 p-3 rounded-full hover:text-purple-600`}>
+						className={`${styleClass}  transition-all duration-500 text-gray-300 hover:bg-purple-800/10 p-3 rounded-full hover:text-purple-600`}>
 						{isPostSaved ? (
 							<BsFillBookmarkFill size={18} />
 						) : (

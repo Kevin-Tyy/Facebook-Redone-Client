@@ -1,16 +1,17 @@
-import { Add } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import StoryModal from "../Modals/StoryModal";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import placeholderAvatar from "../../assets/avatar.webp";
 import StoryPreview from "./Preview/StoryPreview";
-
+import { HiUserGroup } from "react-icons/hi2";
+import { BiPlus } from 'react-icons/bi'
 import { StoryType, UserInfo } from "../../types/types";
 import StorySkeleton from "../Loaders/Skeleton/Story";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
 import useDateFormatter from "../../hooks/useDate";
+import { Button } from "@mui/material";
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [isInView, setIsInView] = useState(false);
@@ -51,7 +52,7 @@ const Story = () => {
 						<div className="w-7 h-1 bg-blue-base rounded-full mt-1 transition-all duration-500 group-hover:w-full"></div>
 					</div>
 					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3">
-						<div className="w-[130px] overflow-hidden relative rounded-2xl">
+						<div className="w-[130px] min-w-[130px] overflow-hidden relative rounded-2xl">
 							<img
 								src={profileimage || placeholderAvatar}
 								className="object-cover rounde-3xl h-[160px] w-full"
@@ -61,13 +62,37 @@ const Story = () => {
 								className="flex flex-col justify-center items-center absolute bottom-7 left-7 cursor-pointer"
 								onClick={() => setIsToggled(true)}>
 								<div className="bg-primary-200 p-1.5 rounded-full">
-									<div className="bg-blue-base text-white p-2  rounded-full">
-										<Add fontSize="medium" />
+									<div className="bg-blue-base text-white p-1.5  rounded-full">
+										<BiPlus size={25} />
 									</div>
 								</div>
 								<p className="text-white">Add to story</p>
 							</div>
 						</div>
+						{stories.length < 1 && (
+							<div className="w-full h-full grid place-content-center">
+								<div className="flex space-x-2 items-center text-white">
+									<HiUserGroup size={24} />
+									<p className="text-lg">No stories available</p>
+								</div>
+								<Button
+									onClick={() => setIsToggled(true)}
+									sx={{
+										color: "white",
+										justifySelf : 'center',
+										backgroundColor: "#0C88EF",
+										textTransform: "capitalize",
+										borderRadius: "40px",
+										mt: "10px",
+										alignSelf: "flex-start",
+										px: "20px",
+										py: "10px",
+										"&:hover": { backgroundColor: "#3293e3" },
+									}}>
+									Create new
+								</Button>
+							</div>
+						)}
 						{stories && (
 							<div className=" flex gap-3">
 								{creators.map((creatorId, index) => (
