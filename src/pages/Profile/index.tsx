@@ -18,6 +18,7 @@ import Button from "./components/Button";
 import Image from "./components/Image";
 import { renderContent } from "./func/renderContext";
 import { __findMutualFriends } from "../../utils/apiFunctions";
+import { Avatar, AvatarGroup } from "@mui/material";
 const profile = () => {
 	const { id } = useParams();
 	const [loggedInUserData, setLoggedInUserData] = useState<Userdata | null>(
@@ -113,10 +114,6 @@ const profile = () => {
 			}
 		}
 	};
-	console.log(loggedInUserData?.userId);
-	console.log(userId);
-	console.log(userData?.userId);
-	console.log(findMutualFriends());
 
 	return (
 		<section className="min-h-screen w-full pb-20 bg-background-primary ">
@@ -157,7 +154,12 @@ const profile = () => {
 											<p>{userData?.email}</p>
 										</div>
 										<div className="text-gray-400 flex gap-5 mt-4 ">
-											<div className="flex gap-x-0.5">
+											<div className="flex items-center gap-x-0.5">
+												<AvatarGroup total={userData?.friendList.length}>
+													{userData?.friendList.slice(0,3).map((friend, index) => (
+														<Avatar src={friend.profileimage} key={index} sx={{ height : 20, width : 20}}/>
+													))}
+												</AvatarGroup>
 												<p className="text-sm">
 													{userData && friendCount} friend
 													{friendCount !== 1 && "s"}

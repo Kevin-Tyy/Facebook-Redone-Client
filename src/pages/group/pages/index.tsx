@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { GroupType, UserInfo } from "../../../types/types";
-import { CircularProgress } from "@mui/material";
+import { Avatar, AvatarGroup, CircularProgress } from "@mui/material";
 import bgImage from "../../../assets/noman.jpg";
 import { HiUserGroup, HiOutlineTrash } from "react-icons/hi2";
 import useDateFormatter from "../../../hooks/useDate";
@@ -100,7 +100,7 @@ const GroupPage = () => {
 										)}
 									</div>
 								</header>
-								<div className="bg-primary-200 rounded-b-xl h-[120px]">
+								<div className="bg-primary-200 rounded-b-xl min-h-[120px]">
 									<div className="ml-56 p-4 text-white relative flex flex-col">
 										<h1 className="text-xl flex items-center gap-2">
 											{groupData.groupName}{" "}
@@ -108,11 +108,23 @@ const GroupPage = () => {
 										</h1>
 										<p className="text-gray-400">
 											{groupData.groupDescription}
+											lorem
 										</p>
-										<p className="text-gray-400 text-sm">
-											{groupData.groupMembers.length} member
-											{groupData.groupMembers.length !== 1 && "s"}
-										</p>
+										<div className="flex mt-3 gap-3 items-center">
+											<AvatarGroup total={groupData.groupMembers.length}>
+												{groupData.groupMembers.slice(0, 5).map((member, index) => (
+													<Avatar
+														key={index}
+														src={member.profileimage}
+														sx={{ width: 20, height: 20 }}
+													/>
+												))}
+											</AvatarGroup>
+											<p className="text-gray-400 text-sm">
+												{groupData.groupMembers.length} member
+												{groupData.groupMembers.length !== 1 && "s"}
+											</p>
+										</div>
 										<p className="absolute top-0 right-0 p-4 text-gray-500 text-sm">
 											Created {useDateFormatter(new Date(groupData.createdAt))}{" "}
 											ago

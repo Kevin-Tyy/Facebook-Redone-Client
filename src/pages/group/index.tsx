@@ -11,6 +11,7 @@ import { loggedInUser } from "../../redux/features/AuthSlice.js";
 import { HiUserGroup } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import GroupLoader from "../../components/Loaders/Skeleton/GroupLoader.js";
+import { Avatar, AvatarGroup } from "@mui/material";
 const Groups = () => {
 	const [groups, setGroups] = useState<GroupType[] | null>(null);
 	const [createGroup, setCreateGroup] = useState(false);
@@ -75,8 +76,8 @@ const Groups = () => {
 				</h1>
 				<div className="w-10 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 			</div>
-			<header className="p-8 mb-4 flex gap-20 justify-between items-end bg-primary-200 rounded-xl">
-				<p className="text-white after:absolute after:'' ">
+			<header className="p-8 mb-4 flex flex-col md:flex-row gap-10 md:gap-20 justify-between items-start md:items-end bg-primary-200 rounded-xl">
+				<p className="text-white">
 					Groups, a new way to organize your posts and discussions <br />
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, laborum.
 				</p>
@@ -104,87 +105,100 @@ const Groups = () => {
 				{groups?.slice(0, limit)?.map((group, index) => (
 					<div
 						key={index}
-						className="text-white rounded-lg bg-primary-200 hover:bg-primary-100/60 p-6">
-						<div className="relative flex gap-5 items-center">
-							<div
-								onClick={() => navigate(`/group/${group._id}`)}
-								className="cursor-pointer">
-								{group?.groupImage ? (
-									<img
-										src={group?.groupImage}
-										alt=""
-										className="w-[120px] rounded-md h-[120px] object-cover"
-									/>
-								) : (
-									<div
-										className={`w-[120px] h-[120px] grid place-content-center bg-gradient-to-br ${
-											index % 3 === 0
-												? "from-blue-700"
-												: index % 3 === 1
-												? "from-green-700"
-												: index % 3 === 2
-												? "from-fuchsia-700"
-												: "from-red-700"
-										} rounded-md ${
-											index % 3 === 0
-												? "to-blue-300"
-												: index % 3 === 1
-												? "to-green-300"
-												: index % 3 === 2
-												? "to-fuchsia-300"
-												: "to-red-300"
-										}`}>
-										<HiUserGroup size={40} />
-									</div>
-								)}
-							</div>
-							<div className="text-gray-400 space-y-2">
-								<div>
-									<p
-										className="text-white cursor-pointer first-letter:capitalize hover:underline"
-										onClick={() => navigate(`/group/${group._id}`)}>
-										{group?.groupName}
-									</p>
-									<p>{group?.groupDescription}</p>
+						className="text-white rounded-lg bg-primary-200 hover:bg-primary-100/60 p-3 sm:p-6">
+						<div className="relative flex gap-8 flex-col">
+							<div className="relative flex gap-5 pt-5 sm:pt-0 md:gap-7 items-center">
+								<div
+									onClick={() => navigate(`/group/${group._id}`)}
+									className="cursor-pointer w-fit">
+									{group?.groupImage ? (
+										<img
+											src={group?.groupImage}
+											alt=""
+											className="w-[70px] h-[70px] min-w-[70px] sm:w-[120px] sm:min-w-[120px] rounded-md sm:h-[120px] object-cover"
+										/>
+									) : (
+										<div
+											className={`w-[120px] h-[120px] grid place-content-center bg-gradient-to-br ${
+												index % 3 === 0
+													? "from-blue-700"
+													: index % 3 === 1
+													? "from-green-700"
+													: index % 3 === 2
+													? "from-fuchsia-700"
+													: "from-red-700"
+											} rounded-md ${
+												index % 3 === 0
+													? "to-blue-300"
+													: index % 3 === 1
+													? "to-green-300"
+													: index % 3 === 2
+													? "to-fuchsia-300"
+													: "to-red-300"
+											}`}>
+											<HiUserGroup size={40} />
+										</div>
+									)}
 								</div>
-								<div className="flex gap-2">
-									<p className="text-sm">
-										{group?.groupMembers?.length} member
-										{group?.groupMembers?.length !== 1 && "s"}
-									</p>
-									<span>•</span>
-									<div className="hover:underline decoration-dotted cursor-pointer">
-										{group.groupMembers.some(
-											(member) => member?.userId === userId
-										) ? (
-											group.admin.userId === userId ? (
-												<p className="text-sm">You created this group</p>
-											) : (
-												<p className="text-sm">You joined this group</p>
-											)
-										) : group.groupMembers?.length > 2 ? (
-											<p className="text-sm">
-												<span className="capitalize text-sm">
-													{group.groupMembers[0]?.username},{" "}
-													{group.groupMembers[1]?.username}{" "}
-												</span>
-												and {group.groupMembers.length - 2} others are members
-											</p>
-										) : (
-											group.groupMembers.length !== 0 && (
+								<div className="text-gray-400 space-y-2 w-full">
+									<div className="w-full">
+										<p
+											className="text-white cursor-pointer line-clamp-1 w-full overflow-hidden text-ellipsis first-letter:capitalize hover:underline"
+											onClick={() => navigate(`/group/${group._id}`)}>
+											{group?.groupName}
+										</p>
+										<p className="w-full  text-sm sm:text-base line-clamp-2 overflow-hidden text-ellipsis">
+											{group?.groupDescription}
+										</p>
+									</div>
+									<div className="flex flex-wrap items-center gap-2">
+										<AvatarGroup total={group.groupMembers.length}>
+											{group.groupMembers.slice(0, 3).map((member, index) => (
+												<Avatar
+													key={index}
+													src={member.profileimage}
+													sx={{ width: 20, height: 20 }}
+												/>
+											))}
+										</AvatarGroup>
+										<p className="text-sm whitespace-nowrap">
+											{group?.groupMembers?.length} member
+											{group?.groupMembers?.length !== 1 && "s"}
+										</p>
+										<span>•</span>
+										<div className="hover:underline decoration-dotted cursor-pointer whitespace-nowrap">
+											{group.groupMembers.some(
+												(member) => member?.userId === userId
+											) ? (
+												group.admin.userId === userId ? (
+													<p className="text-sm">You created this group</p>
+												) : (
+													<p className="text-sm">You joined this group</p>
+												)
+											) : group.groupMembers?.length > 2 ? (
 												<p className="text-sm">
 													<span className="capitalize text-sm">
-														{group.groupMembers[0]?.username}{" "}
+														{group.groupMembers[0]?.username},{" "}
+														{group.groupMembers[1]?.username}{" "}
 													</span>
-													is a member
+													and {group.groupMembers.length - 2} others are members
 												</p>
-											)
-										)}
+											) : (
+												group.groupMembers.length !== 0 && (
+													<p className="text-sm">
+														<span className="capitalize text-sm">
+															{group.groupMembers[0]?.username}{" "}
+														</span>
+														is a member
+													</p>
+												)
+											)}
+										</div>
 									</div>
+									<p className="absolute text-xs top-0 right-0">
+										Created {useDateFormatter(new Date(group.createdAt))} ago
+									</p>
 								</div>
-								<p className="absolute text-xs top-0 right-0">
-									Created {useDateFormatter(new Date(group.createdAt))} ago
-								</p>
 							</div>
 							{group.admin.userId !== userId && (
 								<button
@@ -196,7 +210,7 @@ const Groups = () => {
 											)
 										)
 									}
-									className="absolute bottom-0 right-0 py-3 px-4 bg-blue-base rounded-full hover:bg-blue-light transition">
+									className="sm:absolute bottom-0 right-0 py-3 px-4 w-fit bg-blue-base rounded-full hover:bg-blue-light transition">
 									{group.groupMembers.some((member) => member.userId === userId)
 										? "Leave group"
 										: "Join group"}

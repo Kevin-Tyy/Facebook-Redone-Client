@@ -38,3 +38,7 @@
 .button {
 	@apply bg-white;
 }
+
+	.css-sxh3gq-MuiAvatar-root-MuiAvatarGroup-avatar {
+		@apply w-[20px] h-[20px] bg-gray-400 text-sm !important
+	}
