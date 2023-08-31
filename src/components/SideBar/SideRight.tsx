@@ -98,6 +98,7 @@ const SideRight = () => {
 							No suggestions available
 						</div>
 					) : (
+						
 						<div className="flex flex-col gap-7">
 							{allUsers.slice(0, 5).map((user, index) => (
 								<div
