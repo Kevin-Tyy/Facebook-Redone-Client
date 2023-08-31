@@ -88,7 +88,7 @@ const index = () => {
 									<div className="flex items-center gap-4">
 										<img
 											src={user.profileimage || placeholderAvatar}
-											className="w-20 h-20 sm:h-32 sm:w-32 object-cover rounded-md"
+											className="w-20 h-20 sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-md"
 										/>
 
 										<div className="flex flex-col gap-1 w-full">
@@ -154,7 +154,7 @@ const index = () => {
 									<div className="flex items-center gap-4">
 										<img
 											src={user.profileimage || placeholderAvatar}
-											className="w-20 h-20 sm:h-32 sm:w-32 object-cover rounded-md"
+											className="w-20 h-20 sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-md"
 										/>
 
 										<div className="flex flex-col gap-1 w-full">

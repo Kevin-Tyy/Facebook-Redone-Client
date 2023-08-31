@@ -138,7 +138,7 @@ const StoryPreview = ({
 					className="flex-1 relative w-full sm:max-w-[600px] bg-black h-full flex flex-col justify-between items-center lg:mr-24">
 					<div className="flex w-full px-4 pt-2 items-center justify-between">
 						<Link to={`/profile/${currentStory?.creator?.userId}`}>
-							<div className="flex items-center gap-2">
+							<div className="flex items-center mt-3 gap-2">
 								<div className="bg-gradient-to-r from-sky-500 to-violet-900 p-[4px] rounded-full">
 									<img
 										src={currentStory?.creator?.profileimage}
@@ -165,10 +165,24 @@ const StoryPreview = ({
 						</div>
 					</div>
 					<div className="flex-1 mb-16 flex justify-center items-center">
-						<div className="absolute top-0 left-0 right-0 bg-light h-1">
-							<div
-								className="bg-gradient-to-r from-sky-500 via-pink-600 to-violet-900 h-full rounded-lg transition-all"
-								style={{ width: `${progress}%` }}></div>
+						<div className="absolute top-0 right-0 left-0 flex gap-2 p-2">
+							{Array(currentStories.length)
+								.fill(null)
+								.map((_, index) => (
+									<div className="w-full bg-light h-1 rounded-full" key={index}>
+										<div
+											className="bg-gradient-to-r from-sky-500 via-pink-600 to-violet-900 h-full rounded-full transition-all duration-75"
+											style={{
+												width: `${
+													index === currentStoryIndex
+														? progress
+														: index < currentStoryIndex
+														? 100
+														: 0
+												}%`,
+											}}></div>
+									</div>
+								))}
 						</div>
 						<div className="flex items-center ">
 							<button

@@ -51,8 +51,8 @@ const Story = () => {
 						<h1 className="text-white text-lg">Stories</h1>
 						<div className="w-7 h-1 bg-blue-base rounded-full mt-1 transition-all duration-500 group-hover:w-full"></div>
 					</div>
-					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3">
-						<div className="w-[130px] min-w-[130px] overflow-hidden relative rounded-2xl">
+					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3 ">
+						<div className="w-32 min-w-[128px] overflow-hidden relative rounded-2xl  shadow-md shadow-black/40">
 							<img
 								src={profileimage || placeholderAvatar}
 								className="object-cover rounde-3xl h-[160px] w-full"
@@ -102,7 +102,7 @@ const Story = () => {
 											handleStoryView();
 										}}
 										key={index}
-										className="h-full w-[130px] overflow-hidden rounded-lg relative cursor-pointer group ring-1 ring-primary-100/40">
+										className="h-full w-32 min-w-[128px] overflow-hidden rounded-xl relative cursor-pointer group shadow-md shadow-black/40">
 										<div className="z-[3] absolute flex items-start h-full pb-4 w-full gap-2 top-2 left-2">
 											<div className="flex items-center gap-2">
 												<div className=" bg-blue-base w-full max-w-fit rounded-full p-[3px] flex items-start justify-start">

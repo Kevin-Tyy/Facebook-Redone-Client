@@ -61,9 +61,12 @@ const SideRight = () => {
 	const navigate = useNavigate();
 	return (
 		<div className="hidden xl:flex h-fit flex-col sticky top-[90px] w-full 2xl:min-w-[400px] max-w-[400px]">
-			<div className="bg-primary-200 p-5 flex rounded-lg w-full flex-col gap-4 ">
+			<div className="bg-primary-200 group p-5 flex rounded-lg w-full flex-col gap-4 ">
 				<div className="flex justify-between items-center text-white ">
-					<h1 className="text-xl">Trends for you</h1>
+					<div className="mb-4 w-fit cursor-default">
+						<h1 className="text-white text-xl">Trends for you</h1>
+						<div className="w-14 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
+					</div>
 					<LuSettings2
 						size={30}
 						className="hover:bg-gray-600/40 p-1.5 rounded-md cursor-pointer"
@@ -90,15 +93,17 @@ const SideRight = () => {
 					Show more
 				</p>
 			</div>
-			<div className="mt-3 bg-primary-200 p-5 rounded-lg w-full space-y-6 ">
-				<h1 className="text-white text-xl">People you may know</h1>
+			<div className="mt-3 group bg-primary-200 p-5 rounded-lg w-full space-y-6 ">
+				<div className="mb-4 w-fit cursor-default">
+					<h1 className="text-white text-xl">People you may know</h1>
+					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-32 transition-all duration-300"></div>
+				</div>{" "}
 				{allUsers ? (
 					allUsers.length === 0 ? (
 						<div className="text-lg text-gray-400">
 							No suggestions available
 						</div>
 					) : (
-						
 						<div className="flex flex-col gap-7">
 							{allUsers.slice(0, 5).map((user, index) => (
 								<div

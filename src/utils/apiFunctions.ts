@@ -18,3 +18,12 @@ export const __findMutualFriends = (
 
 	return mutualFriends;
 };
+
+// function findMutualElements(array1, array2) {
+//   const set1 = new Set(array1);
+//   const mutualElements = array2.filter(element => set1.has(element));
+//   return mutualElements;
+// }
+// function findMutualElements(array1, array2) {
+//   return array1.filter(element => array2.includes(element));
+// }
