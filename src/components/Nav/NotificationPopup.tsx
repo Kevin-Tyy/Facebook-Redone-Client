@@ -27,37 +27,61 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 		};
 	};
 	const componentRef = useRef<HTMLDivElement>(null);
+
+	//function to handle outside click events
 	const handleOutSideClick = (e: any) => {
 		if (componentRef.current && !componentRef.current.contains(e.target)) {
 			onClose();
 		}
 	};
+
+	//add event for clicks outside the component
 	useEffect(() => {
 		document.addEventListener("mousedown", handleOutSideClick);
 		return () => document.addEventListener("mousedown", handleOutSideClick);
 	}, []);
+
+	//fetch notifications on component mount
 	useEffect(() => {
+		__getNotifications();
+	}, []);
+	
+	//api function to fetch notifications from the server
+	const __getNotifications = () => {
 		axios.get(`${BaseURL}/notifications/${userId}`).then((response) => {
 			setTimeout(() => {
 				setNotifications(response.data.notifications);
 			}, 1000);
 		});
-	}, []);
+	};
+
 	const navigate = useNavigate();
-	// const handleViewNotifications = () => {
-	// 	axios.delete(`${BaseURL}/notifications/${userId}`);
-	// };
+
+	//api to handle setting notifications as read by component mounting
+
+	const handleViewNotifications = () => {
+		axios.delete(`${BaseURL}/notifications/${userId}`);
+	};
 	useEffect(() => {
-		axios.put(`${BaseURL}/notifications/${userId}`).then((response) => {
-			console.log(response);
-		});
+		if (notifications && notifications.length > 0) {
+			axios.put(`${BaseURL}/notifications/${userId}`).then(() => {
+				__getNotifications();
+			});
+		}
 	}, [notifications]);
-  const handleMarkAsRead = () => {
-    axios.put(`${BaseURL}/notifications/${userId}`)
-  }
+
+	//api to handle --mark all as read--
+	const handleMarkAsRead = () => {
+		axios.put(`${BaseURL}/notifications/${userId}`).then((response) => {
+			__getNotifications()
+		});
+	};
+	//api to handle --delete all notifications--
 	const deleteNotifications = () => {
-		console.log('delete notifications')
-	}
+		axios.delete(`${BaseURL}/notifications/${userId}`).then(() => {
+			__getNotifications();
+		});
+	};
 	return (
 		<motion.div
 			initial="hidden"
@@ -130,9 +154,10 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 						))}
 				</div>
 				{notifications && notifications.length > 0 && (
-					<div
-						className="bg-gradient-to-b from-transparent via-[#1d1f27] to-[#191d25] absolute bottom-0 h-28  w-full flex items-end justify-between p-2">
-						<button onClick={handleMarkAsRead} className=" w-fit text-blue-base m-1 hover:text-blue-light transition duration-500 hover:underline rounded-full">
+					<div className="bg-gradient-to-b from-transparent via-[#1d1f27] to-[#191d25] absolute bottom-0 h-28  w-full flex items-end justify-between p-2">
+						<button
+							onClick={handleMarkAsRead}
+							className=" w-fit text-blue-base m-1 hover:text-blue-light transition duration-500 hover:underline rounded-full">
 							Mark all as read
 						</button>
 						<Tooltip title="Delete notifications" onClick={deleteNotifications}>

@@ -22,7 +22,7 @@ import StyledHashtags from "../../../hooks/useHashTags";
 
 interface PostBoxProps {
 	post: Posts;
-	fetchPosts: (url: string) => Promise<void>;
+	fetchPosts : (url: string) => Promise<void>;
 }
 
 const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {

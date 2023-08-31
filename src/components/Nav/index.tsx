@@ -67,7 +67,6 @@ const Navbar = () => {
 	useEffect(() => {
 		axios.get(`${BaseURL}/notifications/${userId}`).then((response) => {
 			setNotifications(response.data.notifications);
-			// dispatch(addNotification())
 		});
 	}, []);
 	return (
@@ -75,7 +74,7 @@ const Navbar = () => {
 			<section className="relative flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
 				<header className="w-full flex gap-4 items-center p-3">
 					<Logo />
-					<div className="bg-primary-100/60 hidden md:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
+					<div className="bg-primary-100/60 hidden lg:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
 						<Search sx={{ color: "#fff" }} />
 						<input
 							type="text"
