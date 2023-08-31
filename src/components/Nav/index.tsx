@@ -1,13 +1,12 @@
 import Logo from "../Logo";
 import {
 	Search,
-	PersonRounded,
-	PeopleAltRounded,
 	LogoutRounded,
 	Settings,
 	ArrowDropDown,
 	WbSunnyOutlined,
 } from "@mui/icons-material";
+import { HiUsers, HiUser } from "react-icons/hi2";
 import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import placeholderImage from "../../assets/avatar.webp";
@@ -18,14 +17,18 @@ import { Tooltip } from "@mui/material";
 import { navObj as navLinkIcons } from "../../utils/utilObjects";
 import { BsFillBellFill } from "react-icons/bs";
 import NotificationPopup from "./NotificationPopup";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
+import SearchPopup from "./SearchPopup";
 const Navbar = () => {
 	const [toggleNotifications, setToggleNotifications] = useState(false);
 	const [notifications, setNotifications] = useState<Notification[] | null>(
 		null
 	);
+	const [searchKey, setSearchKey] = useState<string | null>(null);
+	const [searchPopupOpen, setSearchPopupOpen] = useState<boolean>(false);
+	const [isSearch, setSearch] = useState(false);
 	const dispatch = useDispatch();
 	const {
 		user: {
@@ -38,12 +41,12 @@ const Navbar = () => {
 	};
 	const toggleObj = [
 		{
-			icon: <PersonRounded />,
+			icon: <HiUser size={20} />,
 			title: "Your Profile",
 			link: `/profile/${userId}`,
 		},
 		{
-			icon: <PeopleAltRounded />,
+			icon: <HiUsers size={20} />,
 			title: "Your friends",
 			link: `/i/friends`,
 		},
@@ -69,26 +72,61 @@ const Navbar = () => {
 			setNotifications(response.data.notifications);
 		});
 	}, []);
+	const searchRef = useRef<HTMLDivElement | null>(null);
+	const handleSearchRefOutsideClick = (e: any) => {
+		if (searchRef.current && !searchRef.current.contains(e.target)) {
+			setSearch(false);
+			setSearchPopupOpen(false)
+		}
+	};
+	useEffect(() => {
+		document.addEventListener("mousedown", handleSearchRefOutsideClick);
+		return () =>
+			document.addEventListener("mousedown", handleSearchRefOutsideClick);
+	}, []);
 	return (
 		<section className="sticky top-0 z-[5]">
-			<section className="relative flex gap-4 justify-between items-center bg-primary-200 border-b border-gray-800">
-				<header className="w-full flex gap-4 items-center p-3">
+			<section className="relative flex xl:gap-[15%] justify-between items-center bg-primary-200 border-b border-gray-800">
+				<header
+					ref={searchRef}
+					className={`${
+						isSearch && "w-full "
+					} flex gap-4 items-center p-3 relative w-full max-w-[700px] `}>
 					<Logo />
-					<div className="bg-primary-100/60 hidden lg:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 transition focus-within:ring-inset rounded-full w-[300px] pl-4">
-						<Search sx={{ color: "#fff" }} />
+					<div
+						className={`bg-primary-100 absolute duration-500 left-20 flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-gray-600 focus-within:ring-inset rounded-full w-14 xl:w-[300px] transition-all pl-4 ${
+							isSearch && "max-w-full w-full"
+						}`}>
+						<Search
+							sx={{ color: "#fff", cursor: "pointer" }}
+							onClick={() => setSearch(true)}
+						/>
 						<input
 							type="text"
 							className="w-full bg-transparent outline-none text-white"
 							placeholder="Search facebook"
+							onChange={(e) => {
+								setSearchKey(e.target.value);
+								setSearchPopupOpen(true);
+							}}
 						/>
 					</div>
+					{searchPopupOpen && searchKey && (
+						<SearchPopup
+							searchKey={searchKey}
+							onClose={() => setSearchPopupOpen(false)}
+						/>
+					)}
 				</header>
-				<nav className="w-full flex gap-2 self-end justify-center">
+				<nav
+					className={`${
+						isSearch && "invisible opacity-0"
+					} w-full flex gap-2 self-end  justify-center transition-all duration-500`}>
 					{navLinkIcons.map((item, index) => (
 						<Tooltip title={item.title} key={index}>
 							<NavLink
 								to={item.link}
-								className={` w-full cursor-pointer transition hover:text-blue-600 max-w-[100px]`}>
+								className={` w-full  cursor-pointer transition hover:text-blue-600  max-w-[100px]`}>
 								<div className="w-full group flex flex-col items-center justify-center text-white">
 									<div className="p-3">{<item.icon size={22} />}</div>
 									<div className="bottomBorder h-1.5 rounded-t-md bg-blue-600 w-0 group-hover:w-3/5 transition-all duration-500"></div>
@@ -97,7 +135,7 @@ const Navbar = () => {
 						</Tooltip>
 					))}
 				</nav>
-				<div className="w-full justify-end flex gap-10 items-center">
+				<div className="w-full min-w-fit justify-end flex gap-2 xl:gap-10 items-center">
 					<div
 						className="hidden md:block cursor-pointer text-white relative p-2 rounded-md"
 						onClick={() => setToggleNotifications(true)}>
@@ -106,7 +144,7 @@ const Navbar = () => {
 							<div className="w-3 h-3 bg-red-600 absolute top-1 right-1 rounded-full"></div>
 						)}
 					</div>
-					<section className="bg-primary-100/60 rounded-full mx-1 py-1.5 px-2 cursor-pointer hover:bg-primary-100 transition group">
+					<section className="bg-primary-100/60 rounded-full mx-1 sm:py-1.5  sm:px-2 cursor-pointer hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">
 							<img
 								src={profileimage || placeholderImage}

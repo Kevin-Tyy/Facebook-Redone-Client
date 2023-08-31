@@ -91,7 +91,7 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 			}}
 			ref={componentRef}
 			className="fixed top-20 right-10">
-			<div className="h-[50vh] relative w-full max-w-[400px] sm:min-w-[400px] bg-primary-200 rounded-lg flex-col ring-1 ring-gray-700 overflow-hidden">
+			<div className="h-[50vh] relative w-full max-w-[400px] sm:min-w-[400px] bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col ring-1 ring-gray-700 overflow-hidden">
 				<div className="flex flex-1 h-full">
 					{!notifications && (
 						<div className="grid place-content-center w-full">
