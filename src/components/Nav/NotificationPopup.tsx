@@ -59,9 +59,6 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 
 	//api to handle setting notifications as read by component mounting
 
-	const handleViewNotifications = () => {
-		axios.delete(`${BaseURL}/notifications/${userId}`);
-	};
 	useEffect(() => {
 		if (notifications && notifications.length > 0) {
 			axios.put(`${BaseURL}/notifications/${userId}`).then(() => {
@@ -72,7 +69,7 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 
 	//api to handle --mark all as read--
 	const handleMarkAsRead = () => {
-		axios.put(`${BaseURL}/notifications/${userId}`).then((response) => {
+		axios.put(`${BaseURL}/notifications/${userId}`).then(() => {
 			__getNotifications()
 		});
 	};
