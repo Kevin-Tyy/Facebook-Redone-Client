@@ -6,7 +6,7 @@ import {
 	ArrowDropDown,
 	WbSunnyOutlined,
 } from "@mui/icons-material";
-import { HiUsers, HiUser } from "react-icons/hi2";
+import { HiUsers, HiUser, HiMoon } from "react-icons/hi2";
 import { useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import placeholderImage from "../../assets/avatar.webp";
@@ -58,8 +58,8 @@ const Navbar = () => {
 			Link: `/profile/${userId}`,
 		},
 		{
-			icon: <WbSunnyOutlined />,
-			title: "Change Modes",
+			icon: theme === "dark" ? <WbSunnyOutlined /> : <HiMoon size={20} />,
+			title: theme === "dark" ? "Switch to light" : "Switch to dark",
 			onClick: function () {
 				dispatch(toggleTheme(theme === "dark" ? "light" : "dark"));
 			},
@@ -70,6 +70,7 @@ const Navbar = () => {
 			title: "Logout",
 			onClick: function () {
 				dispatch(logout());
+				localStorage.clear()
 			},
 		},
 	];
@@ -105,7 +106,10 @@ const Navbar = () => {
 							isSearch && "max-w-full w-full"
 						}`}>
 						<Search
-							sx={{ color: theme === 'dark' ? "#fff" : '#334155', cursor: "pointer" }}
+							sx={{
+								color: theme === "dark" ? "#fff" : "#334155",
+								cursor: "pointer",
+							}}
 							onClick={() => setSearch(true)}
 						/>
 						<input
@@ -159,9 +163,16 @@ const Navbar = () => {
 								className="w-10 h-10  rounded-full object-cover"
 							/>
 							<div className="hidden sm:flex items-center">
-								<p className="capitalize  text-slate-500 dark:text-white ">{username}</p>
+								<p className="capitalize  text-slate-500 dark:text-white ">
+									{username}
+								</p>
 								<div className="group-hover:rotate-180 transition-all duration-500">
-									<ArrowDropDown sx={{ fontSize: 30, color : theme === 'dark' ? "#fff" : '#334155'}} />
+									<ArrowDropDown
+										sx={{
+											fontSize: 30,
+											color: theme === "dark" ? "#fff" : "#334155",
+										}}
+									/>
 								</div>
 							</div>
 						</div>
@@ -173,7 +184,9 @@ const Navbar = () => {
 										className="rounded-full w-12 h-12 object-cover"
 									/>
 									<div>
-										<p className=" text-slate-700 dark:text-white capitalize">{username}</p>
+										<p className=" text-slate-700 dark:text-white capitalize">
+											{username}
+										</p>
 										<p className="text-gray-400">{email}</p>
 									</div>
 								</div>

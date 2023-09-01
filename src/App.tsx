@@ -1,14 +1,14 @@
-import React, { FC, Suspense, lazy } from "react";
+import React, { FC, Suspense, lazy, useCallback, useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser } from "./redux/features/AuthSlice";
 import { Toaster } from "react-hot-toast";
 import FriendPage from "./pages/Friends";
 import Homelayout from "./layout/Homelayout";
 import Loading from "./components/Loaders/fallback";
 import PageLayout from "./layout/PageLayout";
-import { currentTheme } from "./redux/features/ThemeSlice";
+import { currentTheme, toggleTheme } from "./redux/features/ThemeSlice";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
@@ -26,19 +26,39 @@ interface User {
 const App: FC = () => {
 	const element = document.documentElement;
 	const { theme } = useSelector(currentTheme);
+	const dispatch = useDispatch();
+	console.log(theme);
+	//use browser window to check prefered color scheme
+	const queryTheme = window.matchMedia("(prefers-color-scheme:dark)");
 
-	const onWindowMatch = () => {};
-	switch (theme) {
-		case "dark":
+	const onWindowMatch = () => {
+		if (theme === "system" && queryTheme.matches) {
 			element.classList.add("dark");
-			break;
-		case "light":
+			dispatch(toggleTheme("dark"));
+		} else {
 			element.classList.remove("dark");
-			break;
-
-		default:
-			break;
-	}
+			dispatch(toggleTheme("light"));
+		}
+	};
+	useEffect(() => {
+		onWindowMatch();
+	}, [theme]);
+	useEffect(() => {
+		switch (theme) {
+			case "dark":
+				element.classList.add("dark");
+				dispatch(toggleTheme("dark"));
+				break;
+			case "light":
+				element.classList.remove("dark");
+				dispatch(toggleTheme("light"));
+				break;
+			default:
+				dispatch(toggleTheme("system"));
+				onWindowMatch();
+				break;
+		}
+	}, [theme]);
 	const user = useSelector(loggedInUser) as User;
 
 	return (
