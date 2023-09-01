@@ -64,7 +64,7 @@ const Sidebar = () => {
 	}, []);
 	return (
 		<section className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[90px]  w-full max-w-[370px]">
-			<header className="bg-primary-200 p-4 rounded-md ring-1 ring-gray-700/60">
+			<header className="bg-slate-200 dark:bg-primary-200 p-4 rounded-md dark:ring-1 dark:ring-gray-700/60">
 				<Link to={`/profile/${userId}`}>
 					<div className="flex items-center gap-3 rounded-lg">
 						<div className="bg-primary-100 rounded-full p-[3px] ">
@@ -74,7 +74,7 @@ const Sidebar = () => {
 							/>
 						</div>
 						<div>
-							<p className="text-white capitalize">
+							<p className="text-slate-600 dark:text-white capitalize">
 								{firstname} {lastname}
 							</p>
 							<div className="flex items-center space-x-2 text-gray-400">
@@ -86,19 +86,19 @@ const Sidebar = () => {
 					</div>
 				</Link>
 			</header>
-			<section className="bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
+			<section className="bg-slate-200 dark:bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
 				<nav className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
 						<NavLink
 							to={obj?.link}
 							key={index}
 							className={({ isActive }) =>
-								`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full hover:bg-primary-100 ${
-									isActive && "bg-primary-100/50"
+								`flex items-center gap-4 p-3 pl-6 cursor-pointer transition duration-200 rounded-md  w-full  hover:bg-slate-100 dark:hover:bg-primary-100 ${
+									isActive && " bg-slate-100 dark:bg-primary-100/50"
 								}`
 							}>
-							<span className="text-white">{obj.icon}</span>
-							<p className="text-white">{obj.title}</p>
+							<span className=" text-slate-700 dark:text-white">{obj.icon}</span>
+							<p className=" text-slate-700 dark:text-white">{obj.title}</p>
 						</NavLink>
 					))}
 				</nav>
@@ -117,16 +117,16 @@ const Sidebar = () => {
 					See more
 				</Button>
 			</section>
-			<section className="bg-primary-200 group p-3 rounded-xl">
+			<section className="bg-slate-200 dark:bg-primary-200 group p-3 rounded-xl">
 				<div className="mb-4 group w-fit cursor-default ml-3">
-					<h1 className="text-white text-lg mb-1">Explore</h1>
+					<h1 className=" text-slate-700 dark:text-white text-lg mb-1">Explore</h1>
 					<div className="w-10 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 				</div>
 				<div className="flex flex-col gap-2">
 					{groups?.slice(0, 2)?.map((group, index) => (
 						<div
 							key={index}
-							className="text-white rounded-lg bg-primary-200 hover:bg-primary-100/60 p-2 cursor-pointer"
+							className="text-white rounded-lg dark:bg-primary-200  hover:bg-slate-100 dark:hover:bg-primary-100/60 p-2 cursor-pointer"
 							onClick={() => navigate(`/group/${group._id}`)}>
 							<div className="relative flex gap-2 items-start">
 								<div>
@@ -143,7 +143,7 @@ const Sidebar = () => {
 									)}
 								</div>
 								<div className="text-gray-400">
-									<p className="text-white cursor-pointer w-60 whitespace-nowrap overflow-hidden text-ellipsis">
+									<p className=" text-slate-700 dark:text-white cursor-pointer w-60 whitespace-nowrap overflow-hidden text-ellipsis">
 										{group?.groupName}
 									</p>
 									<p className="w-64 whitespace-nowrap overflow-hidden text-ellipsis">

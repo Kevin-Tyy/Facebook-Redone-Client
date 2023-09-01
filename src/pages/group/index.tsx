@@ -70,32 +70,32 @@ const Groups = () => {
 	return (
 		<div className="h-full min-h-[100vh] w-full max-w-[750px] sm:min-w-[600px]">
 			<div className="mb-4 group w-fit cursor-default">
-				<h1 className="text-white text-xl mb-1 flex items-center gap-2">
+				<h1 className="text-slate-700 dark:text-white text-xl mb-1 flex items-center gap-2">
 					Groups
 					<HiUserGroup size={20} />
 				</h1>
 				<div className="w-10 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 			</div>
-			<header className="p-8 mb-4 flex flex-col md:flex-row gap-10 md:gap-20 justify-between items-start md:items-end bg-primary-200 rounded-xl">
-				<p className="text-white">
+			<header className="p-8 mb-4 flex flex-col md:flex-row gap-10 md:gap-20 justify-between items-start md:items-end bg-slate-200 dark:bg-primary-200 rounded-xl">
+				<p className=" text-slate-700 dark:text-white">
 					Groups, a new way to organize your posts and discussions <br />
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, laborum.
 				</p>
 				<button
 					onClick={() => setCreateGroup(true)}
-					className="bg-white whitespace-nowrap  p-3 rounded-full flex items-center gap-2">
+					className="bg-blue-500 text-white dark:text-black dark:bg-white whitespace-nowrap  p-3 rounded-full flex items-center gap-2">
 					<HiUserGroup size={20} />
 					Create a group
 				</button>
 			</header>
 			<section className="flex flex-col gap-2">
 				<div className="mb-4 group w-fit cursor-default">
-					<h1 className="text-white text-lg mb-3">Groups you may like.</h1>
+					<h1 className=" text-slate-700 dark:text-white text-lg mb-3">Groups you may like.</h1>
 					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 				</div>
 				{!groups && <GroupLoader />}
 				{groups?.length === 0 && (
-					<div className="bg-primary-200 text-white rounded-xl p-10 grid place-content-center">
+					<div className="bg-slate-200 dark:bg-primary-200  text-slate-700 dark:text-white rounded-xl p-10 grid place-content-center">
 						<p className="flex flex-col items-center gap-2">
 							<HiUserGroup size={30} />
 							No groups
@@ -105,7 +105,7 @@ const Groups = () => {
 				{groups?.slice(0, limit)?.map((group, index) => (
 					<div
 						key={index}
-						className="text-white rounded-lg bg-primary-200 hover:bg-primary-100/60 p-3 sm:p-6">
+						className=" text-slate-700 dark:text-white rounded-lg bg-slate-200 dark:bg-primary-200  hover:bg-slate-300/70 dark:hover:bg-primary-100/60 p-3 sm:p-6">
 						<div className="relative flex gap-8 flex-col">
 							<div className="relative flex gap-5 pt-5 sm:pt-0 md:gap-7 items-center">
 								<div
@@ -143,7 +143,7 @@ const Groups = () => {
 								<div className="text-gray-400 space-y-2 w-full">
 									<div className="w-full">
 										<p
-											className="text-white cursor-pointer line-clamp-1 w-full overflow-hidden text-ellipsis first-letter:capitalize hover:underline"
+											className=" text-slate-700 dark:text-white cursor-pointer line-clamp-1 w-full overflow-hidden text-ellipsis first-letter:capitalize hover:underline"
 											onClick={() => navigate(`/group/${group._id}`)}>
 											{group?.groupName}
 										</p>
@@ -210,7 +210,7 @@ const Groups = () => {
 											)
 										)
 									}
-									className="sm:absolute bottom-0 right-0 py-3 px-4 w-fit bg-blue-base rounded-full hover:bg-blue-light transition">
+									className="sm:absolute bottom-0 right-0 py-3 px-4 w-fit bg-blue-base rounded-full text-white hover:bg-blue-light transition">
 									{group.groupMembers.some((member) => member.userId === userId)
 										? "Leave group"
 										: "Join group"}
@@ -223,7 +223,7 @@ const Groups = () => {
 			{groups && groups.length !== 0 && (
 				<button
 					disabled={groups.length <= limit}
-					className="bg-white py-3 px-6 rounded-full m-4"
+					className=" bg-blue-500 text-white dark:text-black dark:bg-white py-3 px-6 rounded-full m-4"
 					onClick={() => setLimit(limit + 5)}>
 					See more
 				</button>

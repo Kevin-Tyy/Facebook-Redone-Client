@@ -30,8 +30,8 @@ const ProfileDetail = ({
 			) : (
 				<div className="flex gap-2">
 					<div className="w-full">
-						<h1 className="text-light ">Bio✍️</h1>
-						<p className="text-white">
+						<h1 className=" text-slate-500 dark:text-light ">Bio✍️</h1>
+						<p className=" text-slate-800 dark:text-white">
 							{userData?.bio ? userData?.bio : "No bio added"}
 						</p>
 					</div>
@@ -51,8 +51,8 @@ const ProfileDetail = ({
 				</div>
 			) : (
 				<div className="flex flex-col gap-2">
-					<h1 className="text-light ">Education👨‍🎓</h1>
-					<div className="text-white">
+					<h1 className=" text-slate-500 dark:text-light ">Education👨‍🎓</h1>
+					<div className=" text-slate-800 dark:text-white">
 						{userData?.education ? (
 							<p>
 								Went to{" "}
@@ -73,8 +73,8 @@ const ProfileDetail = ({
 				</div>
 			) : (
 				<div className="flex flex-col gap-2">
-					<h1 className="text-light ">Work👜</h1>
-					<p className="text-white">
+					<h1 className=" text-slate-500 dark:text-light ">Work👜</h1>
+					<p className=" text-slate-800 dark:text-white">
 						{userData?.work ? (
 							<span>
 								Works at{" "}
@@ -93,8 +93,8 @@ const ProfileDetail = ({
 				</div>
 			) : (
 				<div className="flex flex-col gap-2">
-					<h1 className="text-light ">Location🏠</h1>
-					<p className="text-white">
+					<h1 className=" text-slate-500 dark:text-light ">Location🏠</h1>
+					<p className=" text-slate-800 dark:text-white">
 						{userData?.location ? (
 							<span>
 								From{" "}
@@ -113,7 +113,7 @@ const ProfileDetail = ({
 					<ButtonComp color="#0C88EF">Edit details</ButtonComp>
 				</div>
 			)}
-			<hr className="border-1 border-gray-700 mt-4" />
+			<hr className="border-1  border-slate-400 dark:border-gray-700 mt-4" />
 			<p className="text-le px-3 text-gray-400 text-sm max-w-sm">
 				Your friends will be able to recognize you easily if you add more
 				details about yourself

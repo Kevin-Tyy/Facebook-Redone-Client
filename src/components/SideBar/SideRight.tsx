@@ -61,10 +61,10 @@ const SideRight = () => {
 	const navigate = useNavigate();
 	return (
 		<div className="hidden xl:flex h-fit flex-col sticky top-[90px] w-full 2xl:min-w-[400px] max-w-[400px]">
-			<div className="bg-primary-200 group p-5 flex rounded-lg w-full flex-col gap-4 ">
+			<div className="bg-slate-200 dark:bg-primary-200 group p-5 flex rounded-lg w-full flex-col gap-4 ">
 				<div className="flex justify-between items-center text-white ">
 					<div className="mb-4 w-fit cursor-default">
-						<h1 className="text-white text-xl">Trends for you</h1>
+						<h1 className=" text-slate-700 dark:text-white text-xl">Trends for you</h1>
 						<div className="w-14 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 					</div>
 					<LuSettings2
@@ -76,9 +76,9 @@ const SideRight = () => {
 					{trendDummyData.map((item, index) => (
 						<div
 							key={index}
-							className="flex justify-between gap-12 pb-4 items-end border-b-2 border-gray-700/70 p-2 font-">
+							className="flex justify-between gap-12 pb-4 items-end border-b-2  border-slate-300 dark:border-gray-700/70 p-2 font-">
 							<div className="space-y-2">
-								<h1 className="text-white">{item.title}</h1>
+								<h1 className=" text-slate-700 dark:text-white">{item.title}</h1>
 								<p className="text-gray-500/60 font-semibold text-[13px]">
 									{item.subtitle}
 								</p>
@@ -93,7 +93,7 @@ const SideRight = () => {
 					Show more
 				</p>
 			</div>
-			<div className="mt-3 group bg-primary-200 p-5 rounded-lg w-full space-y-6 ">
+			<div className="mt-3 group bg-slate-200 dark:bg-primary-200 p-5 rounded-lg w-full space-y-6 ">
 				<div className="mb-4 w-fit cursor-default">
 					<h1 className="text-white text-xl">People you may know</h1>
 					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-32 transition-all duration-300"></div>
@@ -116,7 +116,7 @@ const SideRight = () => {
 												className="h-12 w-12 rounded-full object-cover"
 											/>
 											<div className="space-y-1">
-												<p className="text-light cursor-pointer  capitalize">
+												<p className=" text-slate-700 dark:text-light cursor-pointer  capitalize">
 													{user?.firstname} {user?.lastname}
 												</p>
 												<div className="flex gap-1 text-gray-400/70">

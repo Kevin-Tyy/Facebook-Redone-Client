@@ -84,7 +84,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 
 	return (
 		<>
-			<motion.div className="relative flex flex-col bg-primary-200 rounded-xl sm:rounded-2xl p-3  border border-gray-800">
+			<motion.div className="relative flex flex-col bg-slate-200 dark:bg-primary-200 rounded-xl sm:rounded-2xl p-3  border dark:border-gray-800">
 				{repostedBy?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You reposted this.</p>
 				)}
@@ -103,7 +103,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 									/>
 								</div>
 								<div className="flex flex-col">
-									<p className="text-light capitalize">
+									<p className=" text-slate-700 dark:text-light capitalize">
 										{repostedBy?.firstname} {repostedBy.lastname}
 									</p>
 									<div className="flex items-center space-x-2 text-gray-500/80">
@@ -127,7 +127,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 					</div>
 				</div>
 				<div className="flex gap-6 px-4">
-					<div className="w-1 flex-1 rounded-full ml-2 bg-gray-700 text-transparent">
+					<div className="w-1 flex-1 rounded-full ml-2  bg-slate-400 dark:bg-gray-700 text-transparent">
 						l
 					</div>
 					<div className="flex self-end w-full flex-col">
@@ -145,7 +145,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 										/>
 									</div>
 									<div className="flex flex-col">
-										<p className="text-light capitalize">
+										<p className=" text-slate-700 dark:text-light capitalize">
 											{creator?.firstname} {creator.lastname}
 										</p>
 										<div className="flex items-center space-x-2 text-gray-500/80">

@@ -18,8 +18,8 @@ const FriendLayout = ({ friends, userData }: Props) => {
 	return (
 		<div>
 			{friends ? (
-				<div className="flex flex-col gap-4 bg-primary-100/20 p-4 rounded-xl border border-gray-800">
-					<h1 className="text-light text-2xl text-center capitalize">
+				<div className="flex flex-col gap-4 bg-slate-100 dark:bg-primary-100/20 p-4 rounded-xl border dark:border-gray-800">
+					<h1 className=" text-slate-700 dark:text-white text-2xl text-center capitalize">
 						{userData?.userId == userId ? "Your " : userData?.username + "'s"}{" "}
 						friends{" "}
 						<span className="text-blue-light text-2xl">
@@ -30,11 +30,11 @@ const FriendLayout = ({ friends, userData }: Props) => {
 						<div className="flex flex-col gap-6">
 							{friends.map((user, index) => (
 								<div
-									className="bg-primary-200 p-4 rounded-lg border border-gray-800"
+									className="bg-slate-200 dark:bg-primary-200 p-4 rounded-lg border dark:border-gray-800"
 									key={index}>
 									<div className="flex flex-col sm:flex-row items-center gap-4">
 										<Link to={`/profile/${user?.userId}`}>
-											<div className="bg-primary-200 rounded-full p-1">
+											<div className="bg-slate-100 dark:bg-primary-200 rounded-full p-1">
 												<img
 													src={user.profileimage || placeholderimage}
 													className="w-32 h-32 min-h-[130px] min-w-[130px] object-cover rounded-full"
@@ -43,14 +43,14 @@ const FriendLayout = ({ friends, userData }: Props) => {
 										</Link>
 										<div className="flex flex-col gap-2 w-full">
 											<Link to={`/profile/${user?.userId}`}>
-												<p className="text-xl text-white capitalize">
+												<p className="text-xl  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
 												<div className="flex gap-2">
 													<p className="text-gray-400">
 														@{user.username.split(" ")[0]}
 													</p>
-													<span className="text-white">•</span>
+													<span className=" text-slate-400 dark:text-white">•</span>
 													<p className="text-gray-400">{user.email}</p>
 												</div>
 											</Link>
@@ -59,7 +59,7 @@ const FriendLayout = ({ friends, userData }: Props) => {
 												<Link
 													to={`/profile/${user?.userId}`}
 													className="w-full">
-													<button className="text-light rounded-full p-3 max-w-[150px] w-full h-full bg-blue-base hover:bg-blue-light transition">
+													<button className="text-white rounded-full p-3 max-w-[150px] w-full h-full bg-blue-base hover:bg-blue-light transition">
 														View profile
 													</button>
 												</Link>

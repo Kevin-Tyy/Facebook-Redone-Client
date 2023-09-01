@@ -38,19 +38,19 @@ const PostLayout = ({
 	return (
 		<div>
 			<div className="flex flex-col items-start lg:flex-row gap-5">
-				<div className="bg-primary-200 w-full lg:max-w-[500px] p-5 xl:sticky top-[160px] rounded-lg border border-gray-700/50">
+				<div className="bg-slate-200 dark:bg-primary-200 w-full lg:max-w-[500px] p-5 xl:sticky top-[140px] rounded-lg border dark:border-gray-700/50">
 					<div>
 						{loading ? (
 							<Skeleton height={40} />
 						) : (
-							<h1 className="text-xl text-light text-center">
+							<h1 className="text-xl  text-slate-700 dark:text-light text-center">
 								About{" "}
 								<span className="capitalize text-blue-base text-xl">
 									{userData?.userId == userId ? "You" : userData?.username}
 								</span>
 							</h1>
 						)}
-						<hr className="border-1 border-gray-700 my-6" />
+						<hr className="border-1 border-slate-400 dark:border-gray-700 my-6" />
 						<ProfileDetail
 							userId={userId}
 							userData={userData}
@@ -63,8 +63,8 @@ const PostLayout = ({
 				<div className="w-full sm:min-w-[600px] flex flex-col gap-4">
 					{userData?.userId == userId && <PostComponent fetchPosts={fetchUserPosts}/>}
 					{userData?.username && (
-						<div className="bg-primary-200 p-2 rounded-md border border-gray-800">
-							<h1 className="text-light text-3xl text-center capitalize">
+						<div className="bg-slate-200 dark:bg-primary-200 p-2 rounded-md border dark:border-gray-800">
+							<h1 className=" text-slate-700 dark:text-light text-3xl text-center capitalize">
 								{userData?.userId == userId
 									? "Your"
 									: `${userData?.username}'s`}{" "}

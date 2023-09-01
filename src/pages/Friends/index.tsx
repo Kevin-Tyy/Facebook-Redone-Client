@@ -83,7 +83,7 @@ const index = () => {
 							</h1>
 							{users.map((user, index) => (
 								<div
-									className="bg-primary-200 p-6 rounded-lg border border-gray-800 relative"
+									className="bg-slate-100 dark:bg-primary-200 p-6 rounded-lg border dark:border-gray-800 relative"
 									key={index}>
 									<div className="flex items-center gap-4">
 										<img
@@ -93,7 +93,7 @@ const index = () => {
 
 										<div className="flex flex-col gap-1 w-full">
 											<Link to={`/profile/${user.userId}`}>
-												<p className="text-lg text-white capitalize">
+												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
 												<div className="flex text-gray-400 gap-1">
@@ -128,7 +128,7 @@ const index = () => {
 							))}
 						</div>
 					) : (
-						<div className="text-lg  text-white p-10 bg-primary-200 rounded-md ring-1 ring-primary-100 grid place-content-center">
+						<div className="text-lg   text-slate-700 dark:text-white p-10 bg-primary-200 rounded-md ring-1 ring-primary-100 grid place-content-center">
 							<p className="flex gap-2 items-center">
 								<HiUsers size={20} />
 								You have no friends!
@@ -149,7 +149,7 @@ const index = () => {
 						<div className="flex flex-col gap-4">
 							{allUsers.slice(0, limit).map((user, index) => (
 								<div
-									className="bg-primary-200/70 p-6 rounded-lg border border-gray-800 relative"
+									className="bg-slate-100 dark:bg-primary-200/70 p-6 rounded-lg border dark:border-gray-800 relative"
 									key={index}>
 									<div className="flex items-center gap-4">
 										<img
@@ -159,7 +159,7 @@ const index = () => {
 
 										<div className="flex flex-col gap-1 w-full">
 											<Link to={`/profile/${user.userId}`}>
-												<p className="text-lg text-white capitalize">
+												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
 												<div className="flex text-gray-400 gap-1">

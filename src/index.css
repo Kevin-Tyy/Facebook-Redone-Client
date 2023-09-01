@@ -14,7 +14,7 @@
 
 @layer base {
 	body {
-		@apply bg-[#0E0f17];
+		@apply bg-slate-200 dark:bg-[#0E0f17] duration-200;
 	}
 }
 
@@ -39,6 +39,6 @@
 	@apply bg-white;
 }
 
-	.css-sxh3gq-MuiAvatar-root-MuiAvatarGroup-avatar {
-		@apply w-[20px] h-[20px] bg-gray-400 text-sm !important
-	}
+.css-sxh3gq-MuiAvatar-root-MuiAvatarGroup-avatar {
+	@apply w-[20px] h-[20px] bg-gray-400 text-sm !important;
+}

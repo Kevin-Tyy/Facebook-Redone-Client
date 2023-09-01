@@ -7,7 +7,7 @@ interface Props {
 const GroupLayout = ({ userData }: Props) => {
 	return (
 		<div>
-			<div className="text-2xl text-light text-center mt-10">
+			<div className="text-2xl  text-slate-700 dark:text-light text-center mt-10">
 				<span className="capitalize text-2xl">{userData?.username}</span> hasn't
 				joined any groups yet
 			</div>

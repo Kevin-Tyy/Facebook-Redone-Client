@@ -12,9 +12,11 @@ import {
 	PURGE,
 	REGISTER,
 } from "redux-persist";
+import ThemeSlice from "./features/ThemeSlice";
 const rootReducer = combineReducers({
-    auth : AuthSlice,
-	notifications : NotificationSlice,
+	auth: AuthSlice,
+	notifications: NotificationSlice,
+	theme: ThemeSlice,
 });
 const persistConfig = {
 	key: "root",

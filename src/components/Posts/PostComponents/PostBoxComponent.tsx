@@ -75,7 +75,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 
 	return (
 		<>
-			<motion.div className="relative bg-primary-200 rounded-xl sm:rounded-2xl px-3 py-3 md:px-6  border border-gray-800">
+			<motion.div className="relative bg-slate-200 dark:bg-primary-200 rounded-xl sm:rounded-2xl px-3 py-3 md:px-6  border dark:border-gray-800">
 				{creator?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You posted this.</p>
 				)}
@@ -94,7 +94,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 									/>
 								</div>
 								<div className="flex flex-col">
-									<p className="text-light capitalize">
+									<p className=" text-slate-700 dark:text-light capitalize">
 										{creator?.firstname} {creator?.lastname}
 									</p>
 									<div className="flex items-center space-x-2 text-gray-500/80">
@@ -112,7 +112,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 						</div>
 					</div>
 					<div className="flex flex-col gap-2" onClick={viewPost}>
-						<h1 className="text-white cursor-pointer inline">
+						<h1 className=" text-slate-700 dark:text-white cursor-pointer inline">
 							<StyledHashtags text={postText} />
 						</h1>
 						<div className="flex flex-col gap-2">

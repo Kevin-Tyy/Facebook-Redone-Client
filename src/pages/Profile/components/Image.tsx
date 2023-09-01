@@ -35,7 +35,7 @@ const Image: React.FC<ImageProps> = ({
 				<CameraAltRounded
 					onClick={() => setImageUpdate(true)}
 					sx={{ fontSize: 50 }}
-					className="absolute right-0 top-36 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
+					className="absolute right-0 top-36  bg-slate-400 dark:bg-gray-900 p-2  text-white dark:text-light border dark:border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
 				/>
 			)}
 		</div>

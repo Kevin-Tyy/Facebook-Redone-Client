@@ -1,4 +1,4 @@
-import React, { FC, Suspense, lazy } from "react";
+import React, { FC, Suspense, lazy, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { useSelector } from "react-redux";
@@ -23,7 +23,6 @@ interface User {
 }
 const App: FC = () => {
 	const user = useSelector(loggedInUser) as User;
-
 	return (
 		<React.Fragment>
 			<BrowserRouter>

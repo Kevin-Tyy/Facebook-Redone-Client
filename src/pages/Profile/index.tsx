@@ -116,8 +116,8 @@ const profile = () => {
 	};
 
 	return (
-		<section className="min-h-screen w-full pb-20 bg-background-primary ">
-			<div className="h-[45vh]  w-full absolute bg-gray-800/30 "></div>
+		<section className="min-h-screen w-full pb-20 bg-slate-300/50 dark:bg-background-primary ">
+			<div className="h-[45vh]  w-full absolute bg-slate-100 dark:bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
 				<div className="w-full px-3 md:px-16 lg:px-4  2xl:w-full max-w-[1280px] flex flex-col gap-4">
 					<div>
@@ -145,7 +145,7 @@ const profile = () => {
 									</div>
 								) : (
 									<div className="flex flex-col  justify-center items-center gap-1">
-										<p className="capitalize text-4xl text-light">
+										<p className="capitalize text-4xl  text-slate-700 dark:text-light">
 											{userData?.firstname} {userData?.lastname}
 										</p>
 										<div className="flex gap-2 text-gray-400">
@@ -182,7 +182,7 @@ const profile = () => {
 							</div>
 						</div>
 						<div className="flex justify-center">
-							<div className="bg-primary-200 h-[260px] md:h-[220px] w-full relative z-[1] rounded-b-lg">
+							<div className="bg-slate-200 dark:bg-primary-200 h-[260px] md:h-[220px] w-full relative z-[1] rounded-b-lg">
 								<Button
 									pending={pending}
 									isFriend={isFriend}
@@ -198,13 +198,13 @@ const profile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-primary-200 flex flex-wrap gap-2  p-2 justify-center rounded-md md:sticky md:top-[73px] z-[2] shadow-2xl border border-gray-700/60">
+					<div className="bg-slate-200 dark:bg-primary-200 flex flex-wrap gap-2  p-2 justify-center rounded-md md:sticky md:top-[73px] z-[2] shadow-lg border dark:border-gray-700/60">
 						{Tabs.map((tab, index) => (
 							<div
 								key={index}
 								onClick={() => setActiveTab(tab)}
-								className={`px-5 py-2 rounded-md relative transition duration-150 capitalize cursor-pointer hover:bg-primary-100/50 hover:ring-1 hover:ring-gray-700 text-white ${
-									activeTab == tab && "bg-primary-100/70  ring-1 ring-gray-600"
+								className={`px-5 py-2 rounded-md relative transition duration-150 capitalize cursor-pointer hover:bg-slate-100 dark:hover:bg-primary-100/50 dark:hover:ring-1 dark:hover:ring-gray-700  text-slate-700 dark:text-white ${
+									activeTab == tab && "bg-slate-300 dark:bg-primary-100/70  ring-1  ring-slate-400/50 dark:ring-gray-600"
 								}`}>
 								<div>
 									{index === 0 && (
@@ -237,7 +237,7 @@ const profile = () => {
 				</div>
 			</div>
 			<DetailModal onClose={() => setIsOpen(false)} isOpen={isOpen} />
-			<StoryModal onClose={() => setIsToggled(false)} isOpen={isToggled} />
+			<StoryModal onClose={() => setIsToggled(false)} isOpen={isToggled} fetchStories={() => {}}/>
 			<ImageUpdate onClose={() => setImageUpdate(false)} isOpen={imageUpdate} />
 			<ProfileImage
 				isOpen={viewImage}

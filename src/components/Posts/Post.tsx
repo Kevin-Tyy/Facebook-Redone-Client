@@ -11,6 +11,7 @@ import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
 import { Button } from "@mui/material";
+import { currentTheme } from "../../redux/features/ThemeSlice";
 const PostComponent = ({
 	fetchPosts,
 }: {
@@ -26,9 +27,10 @@ const PostComponent = ({
 			userInfo: UserInfo;
 		};
 	};
+	const { theme } = useSelector(currentTheme)
 	return (
 		<div className="">
-			<div className="flex flex-col bg-primary-200 rounded-2xl p-4 md:p-6 gap-6">
+			<div className="flex flex-col bg-slate-200 dark:bg-primary-200 rounded-2xl p-4 md:p-6 gap-6">
 				<div className="flex items-center gap-6">
 					<div className="bg-primary-100 p-[3px] rounded-full">
 						<img
@@ -37,7 +39,7 @@ const PostComponent = ({
 						/>
 					</div>
 					<p
-						className="bg-primary-100/30 text-light hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
+						className=" bg-slate-100 dark:bg-primary-100/30  text-slate-400 dark:text-light hover:bg-slate-300/30 dark:hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
 						onClick={() => setIsPostModal(true)}>
 						What's on your mind, <span className="capitalize">{username}</span>?
 					</p>
@@ -45,10 +47,10 @@ const PostComponent = ({
 				<div className="flex gap-4 justify-between flex-wrap">
 					<div className="flex gap-2 md:gap-4 w-full text-[#13131a]">
 						{utilObj.map((obj, index) => (
-							<div key={index} onClick={() => setIsPostModal(true)} className="w-full bg-primary-100/30 rounded-md">
+							<div key={index} onClick={() => setIsPostModal(true)} className="w-full  bg-slate-100 dark:bg-primary-100/30 rounded-md">
 								<Button
 									sx={{
-										color : 'white',
+										color : theme === 'dark' ? "#fff" : '#334155',
 										textTransform: "capitalize",
 										p: "10px",
 										borderRadius: "10px",

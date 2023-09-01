@@ -4,7 +4,7 @@ import Sidebar from "../components/SideBar/SideLeft";
 
 const PageLayout = () => {
 	return (
-		<main className="min-h-screen bg-background-primary">
+		<main className="min-h-screen bg-white dark:bg-background-primary">
 			<section className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<section className="w-full pt-6 flex justify-center gap-6">
 					<Sidebar />

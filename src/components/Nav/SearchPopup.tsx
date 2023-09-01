@@ -41,7 +41,7 @@ const SearchPopup = ({ searchKey, onClose }: Props) => {
 				visible: { opacity: 1, y: 0 },
 			}}
 			className="fixed top-20 left-10">
-			<div className="h-[50vh] relative w-full max-w-[500px] min-w-[400px] bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col ring-1 ring-gray-700 overflow-hidden">
+			<div className="h-[50vh] relative w-full max-w-[500px] min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col dark:ring-1 dark:ring-gray-700 overflow-hidden">
 				{loading && (
 					<div className="grid place-content-center h-full">
 						<CircularProgress size={20} />
@@ -51,7 +51,7 @@ const SearchPopup = ({ searchKey, onClose }: Props) => {
 					<div className="p-3 space-y-4 h-full overflow-y-auto">
 						<div className="flex justify-between items-start">
 							<div className="mb-4 group w-fit cursor-default ml-3">
-								<h1 className="text-white text-lg mb-1">People</h1>
+								<h1 className=" text-slate-700 dark:text-white text-lg mb-1">People</h1>
 								<div className="w-10 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 							</div>
 							<p className="text-gray-400 px-2">
@@ -70,14 +70,14 @@ const SearchPopup = ({ searchKey, onClose }: Props) => {
 							{peopleResults.map((person, index) => (
 								<div
 									key={index}
-									className="flex items-start justify-between bg-primary-100/30 py-4 px-3 rounded-md">
+									className="flex items-start justify-between  bg-slate-200 dark:bg-primary-100/30 py-4 px-3 rounded-md">
 									<div className="flex w-full gap-3">
 										<img
 											src={person.profileimage || placeholderAvatar}
 											className="w-12 h-12 object-cover rounded-full"
 										/>
 										<div className="w-4/5">
-											<p className="text-white capitalize">
+											<p className=" text-slate-700 dark:text-white capitalize">
 												{person.firstname} {person.lastname}
 											</p>
 											<div className="flex items-center space-x-2 text-gray-400 overflow-hidden text-ellipsis">
