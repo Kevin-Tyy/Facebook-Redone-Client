@@ -65,21 +65,21 @@ const Story = () => {
 						<div className="w-7 h-1 bg-blue-base rounded-full mt-1 transition-all duration-500 group-hover:w-full"></div>
 					</div>
 					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3 ">
-						<div className="w-32 min-w-[128px] overflow-hidden relative rounded-2xl  shadow-md shadow-black/40">
+						<div className="w-32 min-w-[128px] overflow-hidden relative rounded-2xl  shadow-md shadow-slate-300 dark:shadow-black/40">
 							<img
 								src={profileimage || placeholderAvatar}
 								className="object-cover rounde-3xl h-[160px] w-full"
 							/>
-							<div className="bg-primary-200 absolute bottom-0 w-full h-20"></div>
+							<div className="bg-slate-200 dark:bg-primary-200 absolute bottom-0 w-full h-20"></div>
 							<div
 								className="flex flex-col justify-center items-center absolute bottom-7 left-7 cursor-pointer"
 								onClick={() => setIsToggled(true)}>
-								<div className="bg-primary-200 p-1.5 rounded-full">
+								<div className="bg-slate-200 dark:bg-primary-200 p-1 dark:p-1.5 rounded-full">
 									<div className="bg-blue-base text-white p-1.5  rounded-full">
 										<BiPlus size={25} />
 									</div>
 								</div>
-								<p className="text-white">Add to story</p>
+								<p className=" text-slate-700 dark:text-white">Add to story</p>
 							</div>
 						</div>
 						{stories.length < 1 && (
@@ -115,7 +115,7 @@ const Story = () => {
 											handleStoryView();
 										}}
 										key={index}
-										className="h-full w-32 min-w-[128px] overflow-hidden rounded-xl relative cursor-pointer group shadow-md shadow-black/40">
+										className="h-full w-32 min-w-[128px] overflow-hidden rounded-xl relative cursor-pointer group shadow-md shadow-slate-300 dark:shadow-black/40">
 										<div className="z-[3] absolute flex items-start h-full pb-4 w-full gap-2 top-2 left-2">
 											<div className="flex items-center gap-2">
 												<div className=" bg-blue-base w-full max-w-fit rounded-full p-[3px] flex items-start justify-start">

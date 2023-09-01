@@ -127,7 +127,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 					</div>
 				</div>
 				<div className="flex gap-6 px-4">
-					<div className="w-1 flex-1 rounded-full ml-2  bg-slate-400 dark:bg-gray-700 text-transparent">
+					<div className="w-1 flex-1 rounded-full ml-2  bg-slate-400/60 dark:bg-gray-700 text-transparent">
 						l
 					</div>
 					<div className="flex self-end w-full flex-col">
