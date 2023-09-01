@@ -1,4 +1,4 @@
-import React, { FC, Suspense, lazy, useCallback, useEffect } from "react";
+import React, { FC, Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -43,6 +43,7 @@ const App: FC = () => {
 	useEffect(() => {
 		onWindowMatch();
 	}, [theme]);
+	
 	useEffect(() => {
 		switch (theme) {
 			case "dark":
