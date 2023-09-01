@@ -143,9 +143,9 @@ const Story = () => {
 													(story) => story.creator.userId === creatorId
 												)?.storyMedia
 											}
-											className="h-full w-full object-cover  transition duration-500"
+											className="h-full w-full object-cover transition duration-500"
 										/>
-										<div className="w-full h-full bg-gradient-to-b from-black/20 cursor-pointer to-black/40 z-[2] absolute inset-0 transition rounded-lg"></div>
+										<div className="w-full h-full  bg-black/30 cursor-pointer opacity-10 group-hover:bg-black z-[2] absolute inset-0 transition rounded-lg"></div>
 									</div>
 								))}
 								{isInView && (

@@ -171,7 +171,7 @@ const StoryPreview = ({
 								.map((_, index) => (
 									<div className="w-full bg-light h-1 rounded-full" key={index}>
 										<div
-											className="bg-gradient-to-r from-sky-500 via-pink-600 to-violet-900 h-full rounded-full transition-all duration-75"
+											className="bg-gradient-to-r from-sky-500 via-fuchsia-600 to-violet-600 h-full rounded-full transition-all duration-75"
 											style={{
 												width: `${
 													index === currentStoryIndex
