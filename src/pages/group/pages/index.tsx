@@ -69,7 +69,7 @@ const GroupPage = () => {
 			});
 	};
 	return (
-		<main className=" min-h-screen bg-background-primary pb-20">
+		<main className=" min-h-screen bg-white dark:bg-background-primary pb-20">
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<div className="w-full pt-6 flex justify-center gap-6">
 					<Sidebar />
@@ -87,7 +87,7 @@ const GroupPage = () => {
 									/>
 									<div className="absolute top-[80%] left-[5%]">
 										{groupData.groupImage ? (
-											<div className="bg-primary-100 p-1.5 rounded-full w-fit">
+											<div className="bg-slate-500 dark:bg-primary-100 p-1.5 rounded-full w-fit">
 												<img
 													src={groupData.groupImage}
 													className="h-40 w-40 object-cover rounded-full"
@@ -100,25 +100,26 @@ const GroupPage = () => {
 										)}
 									</div>
 								</header>
-								<div className="bg-primary-200 rounded-b-xl min-h-[120px]">
-									<div className="ml-56 p-4 text-white relative flex flex-col">
+								<div className="bg-slate-200 dark:bg-primary-200 rounded-b-xl min-h-[120px]">
+									<div className="ml-56 p-4  text-slate-700 dark:text-white relative flex flex-col">
 										<h1 className="text-xl flex items-center gap-2">
 											{groupData.groupName}{" "}
 											<HiUserGroup className="text-gray-600" />
 										</h1>
 										<p className="text-gray-400">
 											{groupData.groupDescription}
-											lorem
 										</p>
 										<div className="flex mt-3 gap-3 items-center">
 											<AvatarGroup total={groupData.groupMembers.length}>
-												{groupData.groupMembers.slice(0, 5).map((member, index) => (
-													<Avatar
-														key={index}
-														src={member.profileimage}
-														sx={{ width: 20, height: 20 }}
-													/>
-												))}
+												{groupData.groupMembers
+													.slice(0, 5)
+													.map((member, index) => (
+														<Avatar
+															key={index}
+															src={member.profileimage}
+															sx={{ width: 20, height: 20 }}
+														/>
+													))}
 											</AvatarGroup>
 											<p className="text-gray-400 text-sm">
 												{groupData.groupMembers.length} member
@@ -132,7 +133,7 @@ const GroupPage = () => {
 										{groupData?.admin.userId === userId ? (
 											<button
 												onClick={() => setDeleteModal(true)}
-												className="self-end py-3 px-4 bg-red-600/20 rounded-full -translate-y-5 hover:bg-red-600/40 ring-1 ring-red-600 transition">
+												className="self-end py-3 px-4 bg-red-600/20 rounded-full text-white -translate-y-5 hover:bg-red-600/40 ring-1 ring-red-600 transition">
 												Delete group
 											</button>
 										) : (
@@ -145,7 +146,7 @@ const GroupPage = () => {
 														)
 													)
 												}
-												className="self-end py-3 px-4 bg-blue-base rounded-full -translate-y-5 hover:bg-blue-light transition">
+												className="self-end py-3 px-4 bg-blue-base rounded-full text-white -translate-y-5 hover:bg-blue-light transition">
 												{groupData.groupMembers.some(
 													(member) => member.userId === userId
 												)
@@ -155,10 +156,10 @@ const GroupPage = () => {
 										)}
 									</div>
 								</div>
-								<div className="bg-primary-200 mt-3 p-20 rounded-xl flex justify-center items-center relative">
+								<div className="bg-slate-200 dark:bg-primary-200 mt-3 p-20 rounded-xl flex justify-center items-center relative">
 									<div className="absolute right-2 top-2">
 										{groupData.admin.userId === userId && (
-											<div className="text-white hover:bg-primary-100 p-2 rounded-md cursor-pointer">
+											<div className="text-white hover:bg-slate-400 dark:hover:bg-primary-100 p-2 rounded-md cursor-pointer">
 												<HiOutlineTrash
 													size={18}
 													onClick={() => setDeleteModal(true)}
@@ -166,7 +167,7 @@ const GroupPage = () => {
 											</div>
 										)}
 									</div>
-									<h1 className="text-white text-center">
+									<h1 className=" text-slate-700 dark:text-white text-center">
 										No activity in the group yet
 									</h1>
 								</div>
@@ -174,8 +175,8 @@ const GroupPage = () => {
 						)}
 					</section>
 					<section className="hidden xl:flex h-fit flex-col sticky top-[90px] w-full 2xl:min-w-[400px] max-w-[400px]">
-						<div className="bg-primary-200 p-5 flex rounded-lg w-full flex-col gap-4 ">
-							<div className="flex justify-between items-center text-white ">
+						<div className="bg-slate-200 dark:bg-primary-200 p-5 flex rounded-lg w-full flex-col gap-4 ">
+							<div className="flex justify-between items-center  text-slate-700 dark:text-white ">
 								<h1 className="text-xl">Group Members</h1>
 								<HiUserGroup
 									size={30}
@@ -187,14 +188,14 @@ const GroupPage = () => {
 									{groupData?.groupMembers.map((member, index) => (
 										<Link to={`/profile/${member.userId}`} key={index}>
 											<div className="flex gap-2  items-center">
-												<div className="bg-primary-100 w-fit p-1 rounded-full">
+												<div className="bg-slate-300 dark:bg-primary-100 w-fit p-1 rounded-full">
 													<img
 														src={member.profileimage || placeholderImage}
 														className="w-16 h-16 object-cover rounded-full"
 													/>
 												</div>
 												<div className="space-y-1">
-													<p className="text-light cursor-pointer capitalize">
+													<p className=" text-slate-700 dark:text-light cursor-pointer capitalize hover:underline">
 														{member.firstname} {member.lastname}
 														{member.userId === userId && (
 															<span className="text-sm text-gray-500">
@@ -203,7 +204,7 @@ const GroupPage = () => {
 															</span>
 														)}
 														{groupData.admin.userId === member.userId && (
-															<span className="text-gray-400 text-sm">
+															<span className="text-gray-400 text-sm">{" "}
 																(admin)
 															</span>
 														)}

@@ -61,7 +61,7 @@ const Story = () => {
 			) : (
 				<div className="space-y-2 ">
 					<div className="w-fit group">
-						<h1 className="text-white text-lg">Stories</h1>
+						<h1 className=" text-slate-700 dark:text-white text-lg">Stories</h1>
 						<div className="w-7 h-1 bg-blue-base rounded-full mt-1 transition-all duration-500 group-hover:w-full"></div>
 					</div>
 					<div className=" flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3 ">

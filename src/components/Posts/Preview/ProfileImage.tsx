@@ -16,14 +16,14 @@ const ProfileImage = ({
 }: Props) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="relative w-[600px] bg-primary-200 rounded-md py-4">
+			<div className="relative w-[600px] bg-slate-200 dark:bg-primary-200 rounded-md py-4">
 				<div className="p-1">
 					<div className="p-2">
-						<p className="capitalize text-light text-center text-xl">
+						<p className="capitalize  text-slate-700 dark:text-light text-center text-xl">
 							{username} <span>Updated his profile picture</span>
 						</p>
 					</div>
-					<hr className="border-[1px] border-gray-800 " />
+					<hr className="border-[1px] border-slate-300 dark:border-gray-800 " />
 					<div className="flex gap-2 items-center p-3">
 						<div className="bg-primary-100 p-[3px] rounded-full">
 							<img
@@ -32,8 +32,8 @@ const ProfileImage = ({
 							/>
 						</div>
 						<div>
-							<p className="capitalize text-light text-left">{username}</p>
-							<p className="text-gray-400/90">{email}</p>
+							<p className="capitalize  text-slate-700 dark:text-light text-left">{username}</p>
+							<p className=" text-slate-500 dark:text-gray-400/90">{email}</p>
 						</div>
 					</div>
 				</div>

@@ -26,7 +26,6 @@ const Saved = () => {
 		const getSavedPosts = async (): Promise<void> => {
 			axios.get(`${BaseURL}/save/${userId}`).then((response) => {
 				setSavedPosts(response.data.posts);
-				console.log(response.data);
 			});
 		};
 		getSavedPosts();
@@ -40,7 +39,7 @@ const Saved = () => {
 	return (
 		<section className="w-full max-w-[700px]">
 			<div className="mb-4 group w-fit cursor-default ml-3">
-				<h1 className="text-center text-lg text-white">Saved Posts</h1>
+				<h1 className="text-center text-lg  text-slate-700 dark:text-white">Saved Posts</h1>
 				<div className="w-10 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 			</div>
 			<div>

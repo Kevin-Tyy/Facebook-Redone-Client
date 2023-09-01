@@ -94,9 +94,9 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 	});
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="relative bg-primary-200 w-[450px] md:w-[550px] max-h-[1000px]  rounded-xl border border-gray-700 ">
+			<div className="relative bg-slate-200 dark:bg-primary-200 w-[450px] md:w-[550px] max-h-[1000px]  rounded-xl border border-gray-700 ">
 				<div className="p-3 h-[70px] flex items-center justify-center border-b border-gray-700">
-					<h1 className="text-center text-light text-2xl">Edit Profile</h1>
+					<h1 className="text-center  text-slate-700 dark:text-light text-2xl">Edit Profile</h1>
 				</div>
 
 				<form onSubmit={handleSubmit}>
@@ -104,10 +104,10 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 						<div className="flex flex-col gap-4">
 							<div className="flex gap-3"></div>
 							<div className="flex items-center justify-between">
-								<label className="text-light">Bio</label>
+								<label className=" text-slate-700 dark:text-light">Bio</label>
 								<span
 									onClick={() => setbioinput(!bioinput)}
-									className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
+									className="rounded-full  text-slate-700 dark:text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-slate-300 dark:hover:bg-gray-800/50">
 									{bioinput ? "Discard" : "Edit"}
 								</span>
 							</div>
@@ -121,31 +121,31 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										hidden: { opacity: 0, y: -30 },
 										visible: { opacity: 1, y: 0 },
 									}}
-									className="flex items-center gap-2">
-									<div className="relative flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
-										<BookOutlined className="text-white" />
+									className="flex items-start gap-2">
+									<div className="relative flex gap-2 w-full bg-transparent outline outline-1 outline-gray-400 dark:outline-gray-700 p-3 rounded-xl focus-within:outline-slate-400 dark:focus-within:outline-white/70">
+										<BookOutlined className=" text-slate-700 dark:text-white" />
 
 										<textarea
 											onChange={(e) => setbio(e.target.value)}
 											value={newbio}
-											className="w-full  outline-none bg-transparent text-white resize-none h-[100px]"
+											className="w-full  outline-none bg-transparent  text-slate-700 dark:text-white resize-none h-[100px]"
 											placeholder="Update your bio (optional)"></textarea>
 										<div
-											className="cursor-pointer text-white absolute bottom-1 right-1 hover:bg-gray-600/40 rounded-full p-1"
+											className="cursor-pointer  text-slate-700 dark:text-white absolute bottom-1 right-1 hover:bg-gray-600/40 rounded-full p-1"
 											onClick={() => setShowPicker(true)}>
 											<EmojiEmotionsOutlined />
 										</div>
 									</div>
 									<span
 										onClick={() => setbioinput(false)}
-										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
+										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2  text-slate-700 dark:text-white rounded-lg cursor-pointer">
 										Cancel
 									</span>
 								</motion.div>
 							)}
 							<hr className="border-gray-700" />
 							<div className="flex items-center justify-between">
-								<label className="text-light">Location</label>
+								<label className=" text-slate-700 dark:text-light">Location</label>
 								<span
 									onClick={() => {
 										setlocationinput(!locationinput);
@@ -153,7 +153,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										!work && setworkinput(false);
 										!education && seteducationinput(false);
 									}}
-									className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
+									className="rounded-full  text-slate-700 dark:text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-slate-300 dark:hover:bg-gray-800/50">
 									{locationinput ? "Discard" : "Edit"}
 								</span>
 							</div>
@@ -168,28 +168,28 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										hidden: { opacity: 0, y: -30 },
 										visible: { opacity: 1, y: 0 },
 									}}
-									className="flex items-center gap-2">
-									<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
-										<LocationOnOutlined className="text-light" />
+									className="flex items-start gap-2">
+									<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-400 dark:outline-gray-700 p-3 rounded-xl focus-within:outline-slate-400 dark:focus-within:outline-white/70">
+										<LocationOnOutlined className=" text-slate-700 dark:text-light" />
 										<input
 											type="text"
 											name="location"
 											onChange={handleChange}
 											placeholder={`Update your location (optional)`}
-											className="w-full bg-transparent text-white outline-none"
+											className="w-full bg-transparent  text-slate-700 dark:text-white outline-none"
 											value={location}
 										/>
 									</div>
 									<span
 										onClick={() => setlocationinput(false)}
-										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
+										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2  text-slate-700 dark:text-white rounded-lg cursor-pointer">
 										Cancel
 									</span>
 								</motion.div>
 							)}
 							<hr className="border-gray-700" />
 							<div className="flex items-center justify-between">
-								<label className="text-light">Work</label>
+								<label className=" text-slate-700 dark:text-light">Work</label>
 								<span
 									onClick={() => {
 										setworkinput(!workinput);
@@ -197,7 +197,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										!education && seteducationinput(false);
 										!location && setlocationinput(false);
 									}}
-									className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
+									className="rounded-full  text-slate-700 dark:text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-slate-300 dark:hover:bg-gray-800/50">
 									{workinput ? "Discard" : "Edit"}
 								</span>
 							</div>
@@ -211,21 +211,21 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										hidden: { opacity: 0, y: -30 },
 										visible: { opacity: 1, y: 0 },
 									}}
-									className="flex items-center gap-2">
-									<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
-										<WorkOutlineOutlined className="text-light" />
+									className="flex items-start gap-2">
+									<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-400 dark:outline-gray-700 p-3 rounded-xl focus-within:outline-slate-400 dark:focus-within:outline-white/70">
+										<WorkOutlineOutlined className=" text-slate-700 dark:text-light" />
 										<input
 											type="text"
 											name="work"
 											onChange={handleChange}
 											placeholder={`Update your work (optional)`}
-											className="w-full bg-transparent text-white outline-none"
+											className="w-full bg-transparent  text-slate-700 dark:text-white outline-none"
 											value={work}
 										/>
 									</div>
 									<span
 										onClick={() => setworkinput(false)}
-										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
+										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2  text-slate-700 dark:text-white rounded-lg cursor-pointer">
 										Cancel
 									</span>
 								</motion.div>
@@ -233,7 +233,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 
 							<hr className="border-gray-700" />
 							<div className="flex items-center justify-between">
-								<label className="text-light">Education</label>
+								<label className=" text-slate-700 dark:text-light">Education</label>
 								<span
 									onClick={() => {
 										seteducationinput(!educationinput);
@@ -241,7 +241,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										!work && setworkinput(false);
 										!location && setlocationinput(false);
 									}}
-									className="rounded-full text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-gray-800/50">
+									className="rounded-full  text-slate-700 dark:text-light px-6 py-2 cursor-pointer active:scale-95 transition hover:bg-slate-300 dark:hover:bg-gray-800/50">
 									{educationinput ? "Discard" : "Edit"}
 								</span>
 							</div>
@@ -255,21 +255,21 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 										hidden: { opacity: 0, y: -30 },
 										visible: { opacity: 1, y: 0 },
 									}}
-									className="flex items-center gap-2">
-									<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-700 p-3 rounded-xl focus-within:outline-white/70">
-										<SchoolOutlined className="text-light" />
+									className="flex items-start gap-2">
+									<div className="flex gap-2 w-full bg-transparent outline outline-1 outline-gray-400 dark:outline-gray-700 p-3 rounded-xl focus-within:outline-slate-400 dark:focus-within:outline-white/70">
+										<SchoolOutlined className=" text-slate-700 dark:text-light" />
 										<input
 											onChange={handleChange}
 											type="text"
 											name="education"
 											placeholder={`Update your education profile (optional)`}
-											className="w-full bg-transparent text-white outline-none"
+											className="w-full bg-transparent  text-slate-700 dark:text-white outline-none"
 											value={education}
 										/>
 									</div>
 									<span
 										onClick={() => seteducationinput(false)}
-										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2 text-white rounded-lg cursor-pointer">
+										className="bg-red-600/10 ring-1 ring-red-600 hover:bg-red-600/20 transition p-2  text-slate-700 dark:text-white rounded-lg cursor-pointer">
 										Cancel
 									</span>
 								</motion.div>

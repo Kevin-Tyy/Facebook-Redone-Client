@@ -51,14 +51,14 @@ const RepostModal: React.FC<RepostModalProps> = ({
 	};
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-primary-200  ring-1 ring-inset ring-gray-700/50 w-full xs:w-[400px] sm:w-[500px] p-6 rounded-lg">
-				<div className="p-3 border-b border-gray-700">
-					<h1 className="text-2xl text-center font-bold text-light">
+			<div className="relative bg-slate-200 dark:bg-primary-200  ring-1 ring-inset ring-slate-300 dark:ring-gray-700/50 w-full xs:w-[400px] sm:w-[500px] p-6 rounded-lg">
+				<div className="p-3 border-b  border-slate-400 dark:border-gray-700">
+					<h1 className="text-2xl text-center font-bold  text-slate-700 dark:text-light">
 						Share this post.
 					</h1>
 				</div>
 				<div className="flex flex-col items-center space-y-10 mt-4">
-					<p className=" text-light/50 text-center">
+					<p className="  text-slate-700 dark:text-light/50 text-center">
 						This post will be shared to your timeline and your friends will be
 						notified about this
 					</p>

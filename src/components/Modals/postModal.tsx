@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import {
-	PeopleAltRounded,
 	EmojiEmotionsOutlined,
 	GifBoxRounded,
 	MoreHoriz,
@@ -18,6 +17,7 @@ import { Emoji } from "../../types/types";
 import Modal from ".";
 import placeholderAvatar from "../../assets/avatar.webp";
 import createNotification from "../../api/functions/notifications";
+import { HiUsers } from "react-icons/hi2";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
@@ -104,9 +104,9 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-primary-200 ring-1 ring-inset ring-gray-700/50 w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
-				<div className="p-3 border-b border-gray-700">
-					<h1 className="text-2xl text-center font-bold text-light">
+			<div className="relative bg-slate-200 dark:bg-primary-200 ring-1 ring-inset ring-gray-700/50 w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
+				<div className="p-3 border-b  border-slate-400 dark:border-gray-700">
+					<h1 className="text-2xl text-center font-bold  text-slate-500 dark:text-light">
 						Create a post
 					</h1>
 				</div>
@@ -119,9 +119,9 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 							/>
 						</div>
 						<div className="flex flex-col items-start">
-							<p className="text-light font-semibold capitalize">{username}</p>
-							<div className="text-light bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
-								<PeopleAltRounded sx={{ fontSize: 15 }} />
+							<p className=" text-slate-500 dark:text-light font-semibold capitalize">{username}</p>
+							<div className=" text-slate-500 dark:text-light bg-slate-300 dark:bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
+								<HiUsers sx={{ fontSize: 15 }} />
 								Friends
 							</div>
 						</div>
@@ -131,7 +131,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 							rows={7}
 							onChange={(e) => setPostText(e.target.value)}
 							value={postText}
-							className={`w-full resize-none outline-none  bg-transparent text-2xl text-light p-2 ${
+							className={`w-full resize-none outline-none  bg-transparent text-2xl  text-slate-700 dark:text-light p-2 ${
 								postMedia ? "h-20" : "h-40"
 							}`}
 							placeholder={`What's on your mind, ${username}?`}></textarea>
@@ -141,8 +141,8 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 								className="my-3 w-full h-60 object-cover mx-auto rounded-lg"
 							/>
 						)}
-						<div className="w-full border border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
-							<p className="text-light">Add to your post</p>
+						<div className="w-full border  border-slate-400 dark:border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
+							<p className=" text-slate-700 dark:text-light">Add to your post</p>
 							<div className="flex gap-3">
 								<label htmlFor="imagepost">
 									<Image
@@ -167,7 +167,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 												? "text-yellow-400"
 												: index == 1
 												? "text-sky-800"
-												: "text-gray-600"
+												: " text-slat`e-700 dark:text-gray-600"
 										}`}>
 										{icon}
 									</span>

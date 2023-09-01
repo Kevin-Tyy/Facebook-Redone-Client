@@ -81,10 +81,10 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 	};
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="bg-primary-200 p-5 w-[500px] rounded-lg">
+			<div className="bg-slate-200 dark:bg-primary-200 p-5 w-[500px] rounded-lg">
 				<div className="space-y-4">
-					<div className="border-b border-gray-700 pb-3">
-						<h1 className="text-xl text-white text-center">Create a group</h1>
+					<div className="border-b border-slate-400 dark:border-gray-700 pb-3">
+						<h1 className="text-xl  text-slate-700 dark:text-white text-center">Create a group</h1>
 					</div>
 					<form onSubmit={onSubmit} className="">
 						<div className="flex gap-4">
@@ -99,7 +99,7 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 										<HiUserGroup size={40} className="text-white" />
 									</div>
 								)}
-								<div className="absolute inset-0 bg-black opacity-0 rounded-md group-hover:bg-black/70 group-hover:opacity-100 z-10 flex flex-col items-center justify-center text-white cursor-pointer transition">
+								<div className="absolute inset-0 bg-white dark:bg-black opacity-0 rounded-md group-hover:bg-white/30  dark:group-hover:bg-black/70 group-hover:opacity-100 z-10 flex flex-col items-center justify-center text-white cursor-pointer transition">
 									<BiPencil size={35} />
 									<p className="text-sm">
 										{previewImage ? "Change" : "Choose"} photo
@@ -123,13 +123,13 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 									required
 									type="text"
 									className={clsx(
-										"bg-primary-100 text-xs w-full p-3 text-white outline-none rounded-md focus:ring-1 focus:ring-inset focus:ring-gray-500",
+										"bg-slate-400 dark:bg-primary-100 text-xs w-full p-3  text-slate-700 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 outline-none rounded-md focus:ring-1 focus:ring-inset focus:ring-gray-500",
 										loading && "opacity-60"
 									)}
 								/>
 								<textarea
 									className={clsx(
-										"h-32 resize-none bg-primary-100 w-full p-3 text-white outline-none rounded-md focus:ring-1 focus:ring-inset focus:ring-gray-500 text-xs",
+										"h-32 resize-none bg-slate-400 dark:bg-primary-100 w-full p-3  text-slate-700 dark:text-white outline-none rounded-md focus:ring-1 placeholder:text-gray-600 focus:ring-inset focus:ring-gray-500 text-xs dark:placeholder:text-gray-400",
 										loading && "opacity-60"
 									)}
 									onChange={handleInputChange}
@@ -141,7 +141,7 @@ const CreateModal = ({ onClose, isOpen, fetchGroups }: CreateModalProps) => {
 									disabled={loading}
 									type="submit"
 									className={clsx(
-										"button text-black w-28 py-3 rounded-full text-sm font-bold flex justify-center items-center",
+										"button text-white dark:text-black w-28 py-3 rounded-full text-sm font-bold flex justify-center items-center",
 										loading && "opacity-60"
 									)}>
 									Create

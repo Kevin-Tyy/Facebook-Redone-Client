@@ -87,7 +87,7 @@ const Button: React.FC<ButtonProps> = ({
 					<button
 						className={`py-2 w-36 justify-center flex  text-white rounded-md transition  ${
 							isFriend
-								? "bg-red-500/10 ring-1 ring-red-600 hover:bg-red-600/20"
+								? "bg-red-500/50 dark:bg-red-500/10 ring-1 ring-red-600/80 hover:bg-red-600/20"
 								: "bg-blue-base hover:bg-blue-light"
 						}`}>
 						{pending ? (

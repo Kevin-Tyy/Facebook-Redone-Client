@@ -70,7 +70,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 	};
 	return (
 		<>
-			<div className="flex gap-2 items-start p-3 bg-primary-200 border-t border-gray-700 sticky bottom-0">
+			<div className="flex gap-2 items-start p-3  bg-slate-300 dark:bg-primary-200 border-t  border-slate-400 dark:border-gray-700 sticky bottom-0">
 				<div className="bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
 					<img
 						src={profileimage || placeholderAvatar}
@@ -79,11 +79,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
 				</div>
 				<form
 					onSubmit={handleSubmit}
-					className="bottom-0 bg-primary-100/60 w-full p-2 rounded-xl focus-within:outline outline-1 outline-gray-700">
+					className="bottom-0  bg-slate-400/50 dark:bg-primary-100/60 w-full p-2 rounded-xl focus-within:outline outline-1  outline-slate-400 dark:outline-gray-700">
 					<textarea
 						value={commentText}
 						onChange={(e) => setCommentText(e.target.value)}
-						className="w-full resize-none bg-transparent outline-none text-white p-1"
+						className="w-full resize-none bg-transparent outline-none  text-slate-700 dark:text-white p-1"
 						placeholder="Write a comment"></textarea>
 					<div className="text-light flex justify-between items-center">
 						<div className="flex gap-1" onClick={() => setShowPicker(true)}>

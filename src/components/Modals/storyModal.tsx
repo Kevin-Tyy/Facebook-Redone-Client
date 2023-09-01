@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import {
-	PeopleAltRounded,
+	
 	EmojiEmotionsOutlined,
 	GifBoxRounded,
 	MoreHoriz,
 } from "@mui/icons-material";
+import { HiUsers } from "react-icons/hi2";
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
@@ -105,9 +106,9 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-primary-200  ring-1 ring-inset ring-gray-700/50  w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
-				<div className="p-3 border-b border-gray-700">
-					<h1 className="text-2xl text-center font-bold text-light">
+			<div className="relative bg-slate-200 dark:bg-primary-200  ring-1 ring-inset ring-gray-700/50  w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
+				<div className="p-3 border-b  border-slate-400 dark:border-gray-700">
+					<h1 className="text-2xl text-center font-bold  text-slate-500 dark:text-light">
 						Add to your story
 					</h1>
 				</div>
@@ -120,9 +121,9 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 							/>
 						</div>
 						<div className="flex flex-col items-start">
-							<p className="text-light font-semibold capitalize">{username}</p>
-							<div className="text-light bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
-								<PeopleAltRounded sx={{ fontSize: 15 }} />
+							<p className=" text-slate-500 dark:text-light font-semibold capitalize">{username}</p>
+							<div className=" text-slate-600 dark:text-light bg-slate-300 dark:bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
+								<HiUsers size={15}/>
 								Friends
 							</div>
 						</div>
@@ -130,14 +131,14 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 						<label
 							htmlFor="imagepost"
-							className="flex flex-col items-center justify-center h-96 border border-dashed rounded-md cursor-pointer border-gray-700 my-3">
+							className="flex flex-col items-center justify-center h-96 border border-dashed rounded-md cursor-pointer border-slate-400 dark:border-gray-700 my-3">
 							{storyMedia ? (
 								<img
 									src={storyMedia}
 									className="my-3 w-full max-w-[80%] h-72 object-cover mx-auto rounded-lg"
 								/>
 							) : (
-								<p className="text-light text-lg">Click or drag and drop </p>
+								<p className=" text-slate-400 dark:text-light text-lg">Click or drag and drop </p>
 							)}
 							{storyMedia && (
 								<p className="text-light bg-primary-100 py-1 px-2 rounded-full">
@@ -153,13 +154,13 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 							onChange={handleFileInput}
 						/>
 
-						<div className="w-full border border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
+						<div className="w-full border  border-slate-400 dark:border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
 							<input
 								onChange={(e) => setStoryCaption(e.target.value)}
 								type="text"
 								value={storyCaption}
 								placeholder="Add a caption"
-								className="text-light bg-transparent outline-none w-full"
+								className=" text-slate-700 dark:text-light bg-transparent outline-none w-full"
 							/>
 							<div className="flex gap-3">
 								{utilIcons.map((icon, index) => (

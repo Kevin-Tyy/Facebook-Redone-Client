@@ -19,7 +19,7 @@ const Image: React.FC<ImageProps> = ({
 }) => {
 	return (
 		<div className="relative bg-gradient-to-r from-violet-800 to-sky-500 rounded-full p-[5px]">
-			<div className="bg-black rounded-full p-[5px]">
+			<div className="bg-white dark:bg-black rounded-full p-[5px]">
 				<img
 					onClick={() => {
 						setPreviewImage(userData?.profileimage as string);

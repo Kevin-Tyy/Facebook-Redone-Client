@@ -58,7 +58,7 @@ const ImageUpdate = ({ isOpen, onClose }: Props) => {
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-primary-200 ring-1 ring-gray-700 w-full sm:w-[500px] rounded-xl flex flex-col items-center  p-8">
+			<div className="relative bg-slate-200 dark:bg-primary-200 ring-1 ring-slate-400 dark:ring-gray-700 w-full sm:w-[500px] rounded-xl flex flex-col items-center  p-8">
 				<div className="bg-gradient-to-r from-sky-400 to-violet-700 absolute -top-28 rounded-full p-1.5">
 					<div className="bg-gray-950 rounded-full p-1.5">
 						<img
@@ -69,19 +69,19 @@ const ImageUpdate = ({ isOpen, onClose }: Props) => {
 					<label htmlFor="upload">
 						<CameraAltRounded
 							sx={{ fontSize: 50 }}
-							className="absolute right-0 top-32 bg-gray-900 p-2 text-light border border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
+							className="absolute right-0 top-32 bg-slate-300 dark:bg-gray-900 p-2 text-white dark:text-light border border-gray-400 dark:border-gray-700 rounded-full cursor-pointer bottom-12 active:scale-95 hover:scale-105"
 						/>
 					</label>
 				</div>
-				<div className="border-t border-gray-600 mt-16  pt-4 flex flex-col gap-4">
-					<p className="text-light text-lg font-thin text-center">
+				<div className="border-t border-gray-400 dark:border-gray-600 mt-16  pt-4 flex flex-col gap-4">
+					<p className=" text-slate-700 dark:text-light text-lg font-thin text-center">
 						Click{" "}
 						<label htmlFor="upload" className="cursor-pointer font-black">
 							here
 						</label>{" "}
 						to update your profile image{" "}
 					</p>
-					<p className="text-light text-center text-sm">
+					<p className=" text-slate-700 dark:text-light text-center text-sm">
 						It will be easier for your friends to recognise you if you upload
 						your real photos to. You can upload the image in JPG, GIF or PNG
 						format
@@ -90,7 +90,7 @@ const ImageUpdate = ({ isOpen, onClose }: Props) => {
 						<div className="flex flex-col gap-6">
 							<label
 								htmlFor="upload"
-								className="border border-light flex justify-center text-white p-3 rounded-full cursor-pointer transition hover:bg-primary-100/30 active:bg-primary-100/40">
+								className="border  border-slate-500  flex justify-center  text-slate-700 dark:text-white p-3 rounded-full cursor-pointer transition  hover:bg-slate-300 dark:hover:bg-primary-100/30 active:bg-primary-100/40">
 								{uploadImage ? "Change photo" : "Upload photo"}
 							</label>
 							<input
@@ -122,7 +122,7 @@ const ImageUpdate = ({ isOpen, onClose }: Props) => {
 					</form>
 					<p
 						onClick={onClose}
-						className="text-center text-light underline cursor-pointer">
+						className="text-center  text-slate-700 dark:text-light underline cursor-pointer">
 						Cancel
 					</p>
 				</div>

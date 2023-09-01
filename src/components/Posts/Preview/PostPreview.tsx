@@ -67,9 +67,9 @@ const PostPreview = ({
 	}, [commentcount]);
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="relative bg-primary-200 rounded-xl w-full sm:w-[630px] flex flex-col gap-4 max-h-[90vh] border border-gray-700  overflow-y-scroll">
-				<div className="sticky top-0 bg-primary-200">
-					<p className="text-light text-2xl capitalize text-center p-6 border-b border-gray-600">
+			<div className="relative bg-slate-200 dark:bg-primary-200 rounded-xl w-full sm:w-[630px] flex flex-col gap-4 max-h-[90vh] border border-slate-400 dark:border-gray-700  overflow-y-scroll">
+				<div className="sticky top-0 bg-slate-200 dark:bg-primary-200">
+					<p className=" text-slate-700 dark:text-light text-2xl capitalize text-center p-6 border-b  border-slate-400 dark:border-gray-600">
 						{creator?.username}'s post
 					</p>
 					<Link to={`/profile/${creator?.userId}`}>
@@ -85,7 +85,7 @@ const PostPreview = ({
 								/>
 							</div>
 							<div className="flex items-start flex-col">
-								<p className="text-light capitalize">
+								<p className=" text-slate-700 dark:text-light capitalize">
 									{creator?.firstname} {creator?.lastname}
 								</p>
 								<div className="flex gap-2 items-center text-gray-500">
@@ -106,7 +106,7 @@ const PostPreview = ({
 							src={postMedia}
 							className="w-full max-h-[640px] object-cover"
 						/>
-						<div className="flex mt-6 justify-between px-4 py-2 text-gray-500">
+						<div className="flex mt-6 justify-between px-4 py-2  text-slate-400 dark:text-gray-500">
 							<div className="relative">
 								<p
 									className=" hover:underline cursor-pointer"
@@ -161,13 +161,13 @@ const PostPreview = ({
 											))}
 										</div>
 									) : (
-										<p className="text-center text-xl text-light py-6 mx-2 border border-primary-100 rounded-2xl">
+										<p className="text-center text-xl  text-slate-700 dark:text-light py-6 mx-2 border  border-slate-400 dark:border-primary-100 rounded-2xl">
 											No comments yet
 										</p>
 									)}
 								</Fragment>
 							) : (
-								<div className="border border-gray-800 m-2">
+								<div className="border  border-slate-400 dark:border-gray-800 m-2">
 									<Spinner />
 								</div>
 							)}

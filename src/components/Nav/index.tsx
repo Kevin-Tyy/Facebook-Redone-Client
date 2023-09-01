@@ -161,11 +161,11 @@ const Navbar = () => {
 							<div className="hidden sm:flex items-center">
 								<p className="capitalize  text-slate-500 dark:text-white ">{username}</p>
 								<div className="group-hover:rotate-180 transition-all duration-500">
-									<ArrowDropDown sx={{ fontSize: 30, color:theme === 'dark' ? "#fff" : '#334155'}} />
+									<ArrowDropDown sx={{ fontSize: 30, color : theme === 'dark' ? "#fff" : '#334155'}} />
 								</div>
 							</div>
 						</div>
-						<nav className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 overflow-hidden duration-300 transition-all mt-6 right-0 bg-slate-200 dark:bg-primary-200 m-2 dark:ring-1 ring-inset dark:ring-gray-700 rounded-3xl w-full max-w-xs">
+						<nav className="absolute invisible group-hover:visible -translate-y-3 group-hover:translate-y-0 ring-1 ring-slate-300  opacity-0 group-hover:opacity-100 overflow-hidden duration-300 transition-all mt-6 right-0 bg-slate-200 dark:bg-primary-200 m-2 ring-inset dark:ring-gray-700 rounded-3xl w-full max-w-xs">
 							<Link to={`/profile/${userId}`}>
 								<div className="flex items-center gap-3  p-4  m-1 cursor-pointer rounded-lg">
 									<img
@@ -178,7 +178,7 @@ const Navbar = () => {
 									</div>
 								</div>
 							</Link>
-							<ul className="flex flex-col space-y-1">
+							<ul className="flex flex-col space-y-1 ">
 								{toggleObj.map((obj, index) => (
 									<Link to={obj?.link as string} key={index}>
 										<div

@@ -138,7 +138,7 @@ const Sidebar = () => {
 										/>
 									) : (
 										<div className=" h-14 w-14 grid place-content-center bg-gradient-to-br from-blue-700 rounded-md to-blue-300">
-											<HiUserGroup size={20} />
+											<HiUserGroup size={20}/>
 										</div>
 									)}
 								</div>
@@ -150,7 +150,7 @@ const Sidebar = () => {
 										{group?.groupDescription}
 									</p>
 								</div>
-								<HiUserGroup className="absolute top-2 right-2" />
+								<HiUserGroup className="absolute top-2 right-2 text-blue-base dark:text-white" />
 							</div>
 						</div>
 					))}

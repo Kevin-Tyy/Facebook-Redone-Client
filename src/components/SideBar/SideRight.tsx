@@ -95,7 +95,7 @@ const SideRight = () => {
 			</div>
 			<div className="mt-3 group bg-slate-200 dark:bg-primary-200 p-5 rounded-lg w-full space-y-6 ">
 				<div className="mb-4 w-fit cursor-default">
-					<h1 className="text-white text-xl">People you may know</h1>
+					<h1 className=" text-slate-700 dark:text-white text-xl">People you may know</h1>
 					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-32 transition-all duration-300"></div>
 				</div>{" "}
 				{allUsers ? (

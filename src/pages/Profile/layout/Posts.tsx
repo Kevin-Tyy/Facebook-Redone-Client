@@ -89,12 +89,12 @@ const PostLayout = ({
 									))}
 								</div>
 							) : (
-								<p className="text-center text-light text-xl mt-4">
+								<p className="text-center  text-slate-700 dark:text-light text-xl mt-4">
 									😞
 									{userData?.userId == userId ? (
 										"You haven't"
 									) : (
-										<span className="capitalize">
+										<span className="first-letter:uppercase text-xl">
 											{userData?.username} hasn't
 										</span>
 									)}{" "}
