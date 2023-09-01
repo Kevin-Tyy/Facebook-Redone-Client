@@ -154,8 +154,8 @@ const StoryPreview = ({
 											{currentStory?.creator?.userId === userId && "Your story"}
 										</p>
 									</div>
-									<p className="text-gray-500">
-										{renderDate(currentStory?.createdAt)}
+									<p className="text-gray-500 text-sm">
+										{renderDate(currentStory?.createdAt)} ago.
 									</p>
 								</div>
 							</div>
