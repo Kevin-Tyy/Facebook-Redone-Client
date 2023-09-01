@@ -8,7 +8,7 @@ const GroupLoader = () => {
 		<div className="flex flex-col gap-6">
 			{loaderArray.map((_, index) => (
 				<div
-					className="bg-[#1a1b2b9d] p-4 flex flex-col gap-4 rounded-lg"
+					className="bg-gray-300 dark:bg-[#1a1b2b9d] p-4 flex flex-col gap-4 rounded-lg"
 					key={index}>
 					<div className="flex w-full gap-4">
 						<Skeleton borderRadius={10} width={100} height={100} />

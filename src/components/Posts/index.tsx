@@ -6,6 +6,8 @@ import PostSkeleton from "../Loaders/Skeleton/Post";
 import { Posts as PostType } from "../../types/types";
 import RepostBox from "./PostComponents/RepostComponent";
 import PostComponent from "./Post";
+import { toast } from "react-hot-toast";
+import { BsTools } from "react-icons/bs"
 
 const Posts = () => {
 	const [posts, setPosts] = useState<Array<PostType>>([]);
@@ -16,12 +18,19 @@ const Posts = () => {
 		setPosts(posts);
 	};
 
-	const initialFetchPosts = async (url: string) => {
+	const initialFetchPosts = (url: string) => {
 		setLoading(true);
-		const { data } = await axios.get(url);
-		const posts = data.data;
-		setPosts(posts);
-		setLoading(false);
+		axios
+			.get(url)
+			.then((response) => {
+				setPosts(response.data.data);
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
 
 	useEffect(() => {
@@ -47,6 +56,14 @@ const Posts = () => {
 									)}
 								</div>
 							))}
+						</div>
+					</div>
+				)}
+				{posts.length < 1 && (
+					<div className="grid place-content-center mt-10">
+						<div className="flex space-x-2 items-center text-slate-700 dark:text-white">
+							<BsTools size={20} />
+							<p className="text-lg">Couldn't retrive posts</p>
 						</div>
 					</div>
 				)}

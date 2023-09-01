@@ -84,7 +84,7 @@ const Story = () => {
 						</div>
 						{stories.length < 1 && (
 							<div className="w-full h-full grid place-content-center">
-								<div className="flex space-x-2 items-center text-white">
+								<div className="flex space-x-2 items-center text-slate-700 dark:text-white">
 									<HiUserGroup size={24} />
 									<p className="text-lg">No stories available</p>
 								</div>
