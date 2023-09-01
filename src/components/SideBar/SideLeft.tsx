@@ -10,32 +10,9 @@ import placeholderAvatar from "../../assets/avatar.webp";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import { HiMiniHome, HiUserGroup, HiUsers } from "react-icons/hi2";
+import { HiMiniHome, HiUser, HiUserGroup, HiUsers } from "react-icons/hi2";
 import { BiSolidMessageRoundedDots } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
-const UtilObj = [
-	{ icon: <HiMiniHome size={20} />, title: "Home", link: "/i/flow" },
-	{
-		icon: <HiUsers size={20} />,
-		title: "Friends",
-		link: "/i/friends",
-	},
-	{
-		icon: <HiUserGroup size={20} />,
-		title: "Groups",
-		link: "/i/groups",
-	},
-	{
-		icon: <BiSolidMessageRoundedDots size={20} />,
-		title: "Messages",
-		link: "/chat",
-	},
-	{
-		icon: <BsFillBookmarkFill size={15} />,
-		title: "Saved",
-		link: "/i/saved",
-	},
-];
 const Sidebar = () => {
 	const [groups, setGroups] = useState<GroupType[] | null>(null);
 	const navigate = useNavigate();
@@ -49,6 +26,34 @@ const Sidebar = () => {
 			userInfo: UserInfo;
 		};
 	};
+	const UtilObj = [
+		{ icon: <HiMiniHome size={20} />, title: "Home", link: "/i/flow" },
+		{
+			icon: <HiUsers size={20} />,
+			title: "Friends",
+			link: "/i/friends",
+		},
+		{
+			icon: <HiUserGroup size={20} />,
+			title: "Groups",
+			link: "/i/groups",
+		},
+		{
+			icon: <BiSolidMessageRoundedDots size={20} />,
+			title: "Messages",
+			link: "/chat",
+		},
+		{
+			icon: <BsFillBookmarkFill size={15} />,
+			title: "Saved",
+			link: "/i/saved",
+		},
+		{
+			icon: <HiUser size={20} />,
+			title: "My profile",
+			link: `/profile/${userId}`,
+		},
+	];
 	const fetchGroups = () => {
 		axios.get(`${BaseURL}/groups`).then((response) => {
 			setGroups(response.data);
