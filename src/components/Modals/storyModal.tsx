@@ -19,6 +19,7 @@ import createNotification from "../../api/functions/notifications";
 interface Props {
 	onClose: () => void;
 	isOpen: boolean;
+	fetchStories: (value: string) => void;
 }
 
 const utilIcons = [
@@ -26,7 +27,7 @@ const utilIcons = [
 	<GifBoxRounded fontSize="large" />,
 	<MoreHoriz fontSize="large" />,
 ];
-const StoryModal = ({ onClose, isOpen }: Props) => {
+const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 	const [storyCaption, setStoryCaption] = useState<string>("");
 	const [storyMedia, setStoryMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -76,6 +77,7 @@ const StoryModal = ({ onClose, isOpen }: Props) => {
 						`${username} added to their story.Tap to view`,
 						`/i/flow`
 					);
+					fetchStories(`${BaseURL}/stories`);
 					onClose();
 				} else {
 					toast.error(data.msg);

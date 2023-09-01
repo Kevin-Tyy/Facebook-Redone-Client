@@ -5,28 +5,41 @@ import { BaseURL } from "../../utils/Link";
 import placeholderAvatar from "../../assets/avatar.webp";
 import StoryPreview from "./Preview/StoryPreview";
 import { HiUserGroup } from "react-icons/hi2";
-import { BiPlus } from 'react-icons/bi'
+import { BiPlus } from "react-icons/bi";
 import { StoryType, UserInfo } from "../../types/types";
 import StorySkeleton from "../Loaders/Skeleton/Story";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { useSelector } from "react-redux";
 import useDateFormatter from "../../hooks/useDate";
 import { Button } from "@mui/material";
+import { toast } from "react-hot-toast";
 const Story = () => {
 	const [isToggled, setIsToggled] = useState(false);
 	const [isInView, setIsInView] = useState(false);
 	const [stories, setstories] = useState<StoryType[]>([]);
 	const [currentCreatorIndex, setCurrentCreatorIndex] = useState(0);
 	const [loading, setLoading] = useState(false);
-	const fetchStory = async (url: string) => {
+	const initialfetchStory = (url: string) => {
 		setLoading(true);
-		const dataObj = await axios.get(url);
-		const { stories } = dataObj.data;
-		setstories(stories);
-		setLoading(false);
+		axios
+			.get(url)
+			.then((response) => {
+				setstories(response.data.stories);
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	};
+	const fetchStories = (url: string) => {
+		axios.get(url).then((response) => {
+			setstories(response.data.stories);
+		});
 	};
 	useEffect(() => {
-		fetchStory(`${BaseURL}/stories`);
+		initialfetchStory(`${BaseURL}/stories`);
 	}, []);
 	const handleStoryView = () => {
 		setIsInView(!isInView);
@@ -79,7 +92,7 @@ const Story = () => {
 									onClick={() => setIsToggled(true)}
 									sx={{
 										color: "white",
-										justifySelf : 'center',
+										justifySelf: "center",
 										backgroundColor: "#0C88EF",
 										textTransform: "capitalize",
 										borderRadius: "40px",
@@ -162,7 +175,11 @@ const Story = () => {
 					</div>
 				</div>
 			)}
-			<StoryModal onClose={() => setIsToggled(false)} isOpen={isToggled} />
+			<StoryModal
+				onClose={() => setIsToggled(false)}
+				isOpen={isToggled}
+				fetchStories={fetchStories}
+			/>
 		</div>
 	);
 };
