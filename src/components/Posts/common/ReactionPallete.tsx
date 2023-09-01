@@ -1,8 +1,8 @@
 import { BsArrowRepeat, BsBookmark } from "react-icons/bs";
-import { ImStatsBars } from "react-icons/im";
 import { FaRegComment } from "react-icons/fa";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { HiEye } from 'react-icons/hi2'
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
@@ -85,8 +85,6 @@ const ReactionPallete = ({
 			toast.success(data.msg);
 		}
 	};
-	// console.log(SavedPosts)
-	// console.log(post.saves)
 
 	return (
 		<div className="flex justify-center">
@@ -145,7 +143,7 @@ const ReactionPallete = ({
 					<div className={`${styleClass} text-gray-500 group`}>
 						<div
 							className={`${styleClass}  transition-all duration-500 text-gray-500 group-hover:bg-green-800/20 p-3 rounded-full group-hover:text-green-700`}>
-							<ImStatsBars size={20} />
+							<HiEye size={23} />
 						</div>
 						<p className=" text-sm translate-y-[1px] group-hover:text-green-700 transition-all duration-500">
 							{viewCount}
