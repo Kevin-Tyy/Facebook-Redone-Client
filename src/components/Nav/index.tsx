@@ -70,7 +70,7 @@ const Navbar = () => {
 			title: "Logout",
 			onClick: function () {
 				dispatch(logout());
-				localStorage.clear()
+				localStorage.clear();
 			},
 		},
 	];
@@ -151,9 +151,12 @@ const Navbar = () => {
 						className="hidden md:block cursor-pointer  text-slate-600 dark:text-white relative p-2 rounded-md"
 						onClick={() => setToggleNotifications(true)}>
 						<BsFillBellFill size={22} />
-						{notifications?.length !== 0 && (
-							<div className="w-3 h-3 bg-red-600 absolute top-1 right-1 rounded-full"></div>
-						)}
+						{notifications?.length !== 0 &&
+							!notifications?.every((notification) =>
+								notification.Seen.some((user) => user.userId === userId)
+							) && (
+								<div className="w-3 h-3 bg-red-600 absolute top-1 right-1 rounded-full"></div>
+							)}
 					</div>
 					<section className=" bg-white dark:bg-primary-100/60 rounded-full mx-1 sm:py-1.5  sm:px-2 cursor-pointer  hover:bg-slate-100 dark:hover:bg-primary-100 transition group">
 						<div className="flex items-center gap-2">

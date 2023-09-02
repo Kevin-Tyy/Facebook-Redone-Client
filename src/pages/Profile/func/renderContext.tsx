@@ -14,7 +14,8 @@ export const renderContent: Function = (
 	isOpen,
 	setIsOpen,
 	posts,
-	setPosts
+	setPosts,
+	loggedInUserData
 ) => {
 	switch (activeTab) {
 		case "posts":
@@ -33,7 +34,7 @@ export const renderContent: Function = (
 		case "friends":
 			return (
 				<FriendLayout
-					friends={userData?.friendList as Userdata[]}
+					loggedInUserData={loggedInUserData as Userdata}
 					userData={userData as Userdata}
 				/>
 			);

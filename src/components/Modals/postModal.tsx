@@ -104,7 +104,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-slate-200 dark:bg-primary-200 ring-1 ring-inset ring-gray-700/50 w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
+			<div className="relative bg-slate-100 dark:bg-primary-200 ring-1 ring-inset ring-gray-700/50 w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
 				<div className="p-3 border-b  border-slate-400 dark:border-gray-700">
 					<h1 className="text-2xl text-center font-bold  text-slate-500 dark:text-light">
 						Create a post

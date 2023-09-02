@@ -86,7 +86,7 @@ export interface Notification {
 	_id: string;
 	message: string;
 	dateTime: Date;
-	isSeen: boolean;
+	Seen: Userdata[];
 	creator : Userdata
 	link : string;
 }

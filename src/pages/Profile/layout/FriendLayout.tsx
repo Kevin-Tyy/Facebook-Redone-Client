@@ -7,15 +7,16 @@ import placeholderimage from "../../../assets/avatar.webp";
 import { Avatar, AvatarGroup } from "@mui/material";
 import { __findMutualFriends } from "../../../utils/apiFunctions";
 interface Props {
-	friends: Userdata[];
 	userData: Userdata;
+	loggedInUserData: Userdata;
 }
-const FriendLayout = ({ friends, userData }: Props) => {
+const FriendLayout = ({ loggedInUserData, userData }: Props) => {
 	const {
 		user: {
 			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
+	const friends = userData.friendList;
 	return (
 		<div>
 			{friends ? (
@@ -67,14 +68,28 @@ const FriendLayout = ({ friends, userData }: Props) => {
 														/>
 													))}
 												</AvatarGroup>
-												<p className="text-slate-500 text-sm">
-													{user?.friendList?.length} friend
-													{user?.friendList?.length !== 1 && "s"} (
-													{
-														__findMutualFriends(friends, user?.friendList)
-															?.length as any
-													}{" "}
-													mutual)
+												<p className="text-slate-500">
+													<span className="text-sm">
+														{user?.friendList?.length} friend
+														{user?.friendList?.length !== 1 && "s"}
+													</span>{" "}
+													{user.userId === userId &&
+													user.userId === loggedInUserData?.userId ? (
+														<span className="text-sm">
+															(you)
+														</span>
+													) : (
+														<span className="text-sm">
+															(
+															{
+																__findMutualFriends(
+																	loggedInUserData?.friendList,
+																	user?.friendList
+																)?.length as any
+															}{" "}
+															mutual)
+														</span>
+													)}
 												</p>
 											</div>{" "}
 											<div className="flex flex-col md:flex-row w-full gap-3">

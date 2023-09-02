@@ -116,7 +116,7 @@ const profile = () => {
 	};
 
 	return (
-		<section className="min-h-screen w-full pb-20 bg-slate-300/50 dark:bg-background-primary ">
+		<section className="min-h-screen w-full pb-20 bg-slate-300 dark:bg-background-primary ">
 			<div className="h-[45vh]  w-full absolute bg-slate-100 dark:bg-gray-800/30 "></div>
 			<div className="flex w-full justify-center ">
 				<div className="w-full px-3 md:px-16 lg:px-4  2xl:w-full max-w-[1280px] flex flex-col gap-4">
@@ -238,7 +238,8 @@ const profile = () => {
 							isOpen,
 							setIsOpen,
 							posts,
-							setPosts
+							setPosts,
+							loggedInUserData
 						)}
 					</div>
 				</div>
