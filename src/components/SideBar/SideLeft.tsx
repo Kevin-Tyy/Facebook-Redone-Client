@@ -6,11 +6,12 @@ import { loggedInUser } from "../../redux/features/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { GroupType, UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
-
+import bgProfileImage from '../../assets/noman.jpg'
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
-import { HiMiniHome, HiUser, HiUserGroup, HiUsers } from "react-icons/hi2";
+import { HiMiniHome, HiUserGroup, HiUsers } from "react-icons/hi2";
+import { HiUser} from 'react-icons/hi'
 import { BiSolidMessageRoundedDots } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 const Sidebar = () => {
@@ -63,17 +64,19 @@ const Sidebar = () => {
 		fetchGroups();
 	}, []);
 	return (
-		<section className="h-fit hidden xl:flex flex-col space-y-6 sticky top-[90px]  w-full max-w-[370px]">
-			<header className="bg-slate-200 dark:bg-primary-200 p-4 rounded-md dark:ring-1 dark:ring-gray-700/60">
+		<section className="h-fit hidden xl:flex flex-col space-y-4 sticky top-[90px]  w-full max-w-[370px]">
+			<header className="relative h-[160px] bg-slate-200 dark:bg-primary-200 p-4 rounded-md dark:ring-1 dark:ring-gray-700/60">
+				<img src={bgProfileImage} className="absolute inset-0 h-24 w-full object-cover rounded-t-lg"/>
+				<HiUser size={18} className="absolute top-1 right-1 text-white"/>
 				<Link to={`/profile/${userId}`}>
-					<div className="flex items-center gap-3 rounded-lg">
-						<div className="bg-primary-100 rounded-full p-[3px] ">
+					<div className="flex items-end gap-2 rounded-lg relative top-9">
+						<div className="bg-slate-300 dark:bg-primary-100 rounded-full p-[3px] ">
 							<img
 								src={profileimage || placeholderAvatar}
-								className="rounded-full w-12 h-12 object-cover"
+								className="rounded-full w-24 h-24 object-cover"
 							/>
 						</div>
-						<div>
+						<div className="relative -top-1">
 							<p className="text-slate-600 dark:text-white capitalize">
 								{firstname} {lastname}
 							</p>
@@ -86,7 +89,7 @@ const Sidebar = () => {
 					</div>
 				</Link>
 			</header>
-			<section className="bg-slate-200 dark:bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-4">
+			<section className="bg-slate-200 dark:bg-primary-200 py-3 px-2 flex flex-col rounded-lg gap-">
 				<nav className="flex flex-col gap-4">
 					{UtilObj.map((obj, index) => (
 						<NavLink

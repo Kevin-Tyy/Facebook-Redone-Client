@@ -87,7 +87,7 @@ const GroupPage = () => {
 									/>
 									<div className="absolute top-[80%] left-[5%]">
 										{groupData.groupImage ? (
-											<div className="bg-slate-500 dark:bg-primary-100 p-1.5 rounded-full w-fit">
+											<div className="bg-slate-300 dark:bg-primary-100 p-1.5 rounded-full w-fit">
 												<img
 													src={groupData.groupImage}
 													className="h-40 w-40 object-cover rounded-full"

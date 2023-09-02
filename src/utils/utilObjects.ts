@@ -40,4 +40,9 @@ export const trendDummyData = [
 		subtitle: "Artificial Intelligence - Trending",
 		statistics: "",
 	},
+	{
+		title : "AI War",
+		subtitle: "Microsoft - Google Analytics",
+		statistics : "5,552 Posts"
+	}
 ];

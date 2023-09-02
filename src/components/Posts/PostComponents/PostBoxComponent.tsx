@@ -1,10 +1,10 @@
 import ReactionPallete from "../common/ReactionPallete";
 import useDateFormatter from "../../../hooks/useDate";
 import { MoreHoriz } from "@mui/icons-material";
-import * as iconshi from "react-icons/hi2";
-import * as iconsai from "react-icons/ai";
-import * as iconsfa from "react-icons/fa";
-import * as iconsbs from "react-icons/bs";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { AiOutlineEye, AiOutlineBell } from "react-icons/ai";
+import { FaRegComment } from "react-icons/fa";
+import { BsArrowRepeat } from "react-icons/bs";
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
@@ -22,7 +22,7 @@ import StyledHashtags from "../../../hooks/useHashTags";
 
 interface PostBoxProps {
 	post: Posts;
-	fetchPosts : (url: string) => Promise<void>;
+	fetchPosts: (url: string) => Promise<void>;
 }
 
 const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
@@ -157,28 +157,28 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 								<li
 									onClick={handleDeleteRequest}
 									className="p-3 pr-10 flex gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-									{<iconshi.HiOutlineTrash size={18} />}
+									{<HiOutlineTrash size={18} />}
 									Delete Post
 								</li>
 							)}
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsai.AiOutlineEye size={18} />}
+								{<AiOutlineEye size={18} />}
 								View Post
 							</li>
 							<li
 								onClick={() => setRepostModal(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsbs.BsArrowRepeat size={18} />} Repost this
+								{<BsArrowRepeat size={18} />} Repost this
 							</li>
 							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsai.AiOutlineBell size={18} />} Mute Notifications
+								{<AiOutlineBell size={18} />} Mute Notifications
 							</li>
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsfa.FaRegComment />} Add your comment
+								{<FaRegComment />} Add your comment
 							</li>
 						</ul>
 					</motion.div>
