@@ -154,23 +154,29 @@ const profile = () => {
 											<p>{userData?.email}</p>
 										</div>
 										<div className="text-gray-400 flex gap-5 mt-4 ">
-											<div className="flex items-center gap-x-0.5">
+											<div className="flex items-center gap-x-1">
 												<AvatarGroup total={userData?.friendList.length}>
-													{userData?.friendList.slice(0,3).map((friend, index) => (
-														<Avatar src={friend.profileimage} key={index} sx={{ height : 20, width : 20}}/>
-													))}
+													{userData?.friendList
+														.slice(0, 3)
+														.map((friend, index) => (
+															<Avatar
+																src={friend.profileimage}
+																key={index}
+																sx={{ height: 20, width: 20 }}
+															/>
+														))}
 												</AvatarGroup>
 												<p className="text-sm">
 													{userData && friendCount} friend
 													{friendCount !== 1 && "s"}
+													{userData &&
+														loggedInUserData &&
+														userData.userId !== userId && (
+															<span className="text-sm pl-1">
+																({findMutualFriends()?.length as any} mutual)
+															</span>
+														)}
 												</p>
-												{userData &&
-													loggedInUserData &&
-													userData.userId !== userId && (
-														<p className="text-sm">
-															({(findMutualFriends()?.length as any)} mutual)
-														</p>
-													)}
 											</div>
 											<p className="text-sm">
 												{posts && posts.length} Post
@@ -204,7 +210,8 @@ const profile = () => {
 								key={index}
 								onClick={() => setActiveTab(tab)}
 								className={`px-5 py-2 rounded-md relative transition duration-150 capitalize cursor-pointer hover:bg-slate-100 dark:hover:bg-primary-100/50 dark:hover:ring-1 dark:hover:ring-gray-700  text-slate-700 dark:text-white ${
-									activeTab == tab && "bg-slate-300 dark:bg-primary-100/70  ring-1  ring-slate-400/50 dark:ring-gray-600"
+									activeTab == tab &&
+									"bg-slate-300 dark:bg-primary-100/70  ring-1  ring-slate-400/50 dark:ring-gray-600"
 								}`}>
 								<div>
 									{index === 0 && (
@@ -237,7 +244,11 @@ const profile = () => {
 				</div>
 			</div>
 			<DetailModal onClose={() => setIsOpen(false)} isOpen={isOpen} />
-			<StoryModal onClose={() => setIsToggled(false)} isOpen={isToggled} fetchStories={() => {}}/>
+			<StoryModal
+				onClose={() => setIsToggled(false)}
+				isOpen={isToggled}
+				fetchStories={() => {}}
+			/>
 			<ImageUpdate onClose={() => setImageUpdate(false)} isOpen={imageUpdate} />
 			<ProfileImage
 				isOpen={viewImage}

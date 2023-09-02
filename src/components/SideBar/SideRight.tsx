@@ -23,9 +23,13 @@ const SideRight = () => {
 
 	let [users, setUsers] = useState<Array<Userdata>>([]);
 	let [allUsers, setAllUsers] = useState<Userdata[] | null>(null);
-	const fetchPeople = async () => {
-		const { data } = await axios.get(`${BaseURL}/user/`);
-		setAllUsers(data);
+	const fetchPeople = () => {
+		axios.get(`${BaseURL}/user/`).then((response) => {
+			setAllUsers(response.data);
+		}).catch((error) =>{
+			toast.error(error.message)
+			setAllUsers([])
+		});
 	};
 	async function fetchUserFriends() {
 		const result = await fetchFriends(userId);
@@ -64,7 +68,9 @@ const SideRight = () => {
 			<div className="bg-slate-200 dark:bg-primary-200 group p-5 flex rounded-lg w-full flex-col gap-4 ">
 				<div className="flex justify-between items-center text-white ">
 					<div className="mb-4 w-fit cursor-default">
-						<h1 className=" text-slate-700 dark:text-white text-xl">Trends for you</h1>
+						<h1 className=" text-slate-700 dark:text-white text-xl">
+							Trends for you
+						</h1>
 						<div className="w-14 h-1 bg-blue-base rounded-full mt-1 group-hover:w-full transition-all duration-300"></div>
 					</div>
 					<LuSettings2
@@ -78,7 +84,9 @@ const SideRight = () => {
 							key={index}
 							className="flex justify-between gap-12 pb-4 items-end border-b-2  border-slate-300 dark:border-gray-700/70 p-2 font-">
 							<div className="space-y-2">
-								<h1 className=" text-slate-700 dark:text-white">{item.title}</h1>
+								<h1 className=" text-slate-700 dark:text-white">
+									{item.title}
+								</h1>
 								<p className="text-gray-500/60 font-semibold text-[13px]">
 									{item.subtitle}
 								</p>
@@ -95,7 +103,9 @@ const SideRight = () => {
 			</div>
 			<div className="mt-3 group bg-slate-200 dark:bg-primary-200 p-5 rounded-lg w-full space-y-6 ">
 				<div className="mb-4 w-fit cursor-default">
-					<h1 className=" text-slate-700 dark:text-white text-xl">People you may know</h1>
+					<h1 className=" text-slate-700 dark:text-white text-xl">
+						People you may know
+					</h1>
 					<div className="w-20 h-1 bg-blue-base rounded-full mt-1 group-hover:w-32 transition-all duration-300"></div>
 				</div>{" "}
 				{allUsers ? (

@@ -9,9 +9,10 @@ import { toast } from "react-hot-toast";
 import FriendLoader from "../../components/Loaders/Skeleton/FriendPageLoader";
 import placeholderAvatar from "../../assets/avatar.webp";
 import { HiUserAdd, HiUserRemove } from "react-icons/hi";
-import { Button } from "@mui/material";
+import { Avatar, AvatarGroup, Button } from "@mui/material";
 import { ChevronRight } from "@mui/icons-material";
 import { HiUsers } from "react-icons/hi2";
+import { __findMutualFriends } from "../../utils/apiFunctions";
 
 const index = () => {
 	const {
@@ -23,8 +24,15 @@ const index = () => {
 	const [users, setUsers] = useState<Userdata[] | null>(null);
 	let [allUsers, setAllUsers] = useState<Userdata[] | null>(null);
 	const populateFriends = async () => {
-		const { data } = await axios.get(`${BaseURL}/user/${userId}/friends`);
-		setUsers(data.data);
+		axios
+			.get(`${BaseURL}/user/${userId}/friends`)
+			.then((response) => {
+				setUsers(response.data.data);
+			})
+			.catch((error) => {
+				toast.error(error.message);
+				setUsers([]);
+			});
 	};
 	const removeFriend = async (friendId: string) => {
 		const { data } = await axios.delete(`${BaseURL}/user/${userId}/friends`, {
@@ -48,11 +56,18 @@ const index = () => {
 			populateFriends();
 		} else {
 			toast.error(data?.msg);
+			setAllUsers([]);
 		}
 	};
 	const fetchUsers = async () => {
-		const { data } = await axios.get(`${BaseURL}/user/`);
-		setAllUsers(data);
+		axios
+			.get(`${BaseURL}/user/`)
+			.then((response) => {
+				setAllUsers(response.data);
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
 	};
 	useEffect(() => {
 		populateFriends();
@@ -69,6 +84,7 @@ const index = () => {
 		(allUsers = allUsers.filter(
 			(suggest) => !users.some((friend) => friend.userId === suggest.userId)
 		));
+
 	return (
 		<div className="h-full w-full min-h-[100vh] max-w-[750px] sm:min-w-[550px] flex flex-col gap-10">
 			{users ? (
@@ -91,7 +107,7 @@ const index = () => {
 											className="w-20 h-20 sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-md"
 										/>
 
-										<div className="flex flex-col gap-1 w-full">
+										<div className="flex flex-col items-start gap-1 w-full">
 											<Link to={`/profile/${user.userId}`}>
 												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
@@ -102,7 +118,26 @@ const index = () => {
 													<p className="text-base">{user?.email}</p>
 												</div>
 											</Link>
-											<p className="text-gray-300 text-sm">{user?.bio}</p>
+											<div className="flex gap-2 items-center">
+												<AvatarGroup total={user?.friendList?.length}>
+													{user?.friendList.slice(0, 4).map((friend, index) => (
+														<Avatar
+															src={friend?.profileimage}
+															sx={{ width: 20, height: 20 }}
+															key={index}
+														/>
+													))}
+												</AvatarGroup>
+												<p className="text-slate-500 text-sm">
+													{user?.friendList?.length} friend
+													{user?.friendList?.length !== 1 && "s"} (
+													{
+														__findMutualFriends(users!, user?.friendList)
+															?.length as any
+													}{" "}
+													mutual)
+												</p>
+											</div>
 											<div className="flex justify-end sm:absolute top-3 right-3 gap-3">
 												<Button
 													onClick={() => removeFriend(user?.userId)}
@@ -128,7 +163,7 @@ const index = () => {
 							))}
 						</div>
 					) : (
-						<div className="text-lg   text-slate-700 dark:text-white p-10 bg-primary-200 rounded-md ring-1 ring-primary-100 grid place-content-center">
+						<div className="text-lg   text-slate-700 dark:text-white p-10 bg-slate-200 dark:bg-primary-200 rounded-md dark:ring-1 dark:ring-primary-100 grid place-content-center">
 							<p className="flex gap-2 items-center">
 								<HiUsers size={20} />
 								You have no friends!
@@ -157,7 +192,7 @@ const index = () => {
 											className="w-20 h-20 sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-md"
 										/>
 
-										<div className="flex flex-col gap-1 w-full">
+										<div className="flex flex-col items-start gap-1 w-full">
 											<Link to={`/profile/${user.userId}`}>
 												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
@@ -168,7 +203,25 @@ const index = () => {
 													<p className="text-base">{user?.email}</p>
 												</div>
 											</Link>
-											<p className="text-gray-300 text-sm">{user?.bio}</p>
+											<div className="flex gap-2 items-center">
+												<AvatarGroup total={user?.friendList?.length}>
+													{user?.friendList.slice(0, 4).map((friend, index) => (
+														<Avatar
+															key={index}
+															src={friend?.profileimage}
+															sx={{ width: 20, height: 20 }}
+														/>
+													))}
+												</AvatarGroup>
+												<p className="text-slate-500 text-sm">
+													{user?.friendList?.length} friend
+													{user?.friendList?.length !== 1 && "s"} (
+													{users &&
+														(__findMutualFriends(users!, user?.friendList)
+															?.length as any)}{" "}
+													mutual)
+												</p>
+											</div>
 										</div>
 									</div>
 									<div className="flex justify-end sm:absolute top-3 right-3 gap-3">

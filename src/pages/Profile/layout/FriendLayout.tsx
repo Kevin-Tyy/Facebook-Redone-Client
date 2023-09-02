@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { loggedInUser } from "../../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import placeholderimage from "../../../assets/avatar.webp";
+import { Avatar, AvatarGroup } from "@mui/material";
+import { __findMutualFriends } from "../../../utils/apiFunctions";
 interface Props {
 	friends: Userdata[];
 	userData: Userdata;
@@ -14,7 +16,6 @@ const FriendLayout = ({ friends, userData }: Props) => {
 			userInfo: { userId },
 		},
 	} = useSelector(loggedInUser) as { user: { userInfo: UserInfo } };
-
 	return (
 		<div>
 			{friends ? (
@@ -41,7 +42,7 @@ const FriendLayout = ({ friends, userData }: Props) => {
 												/>
 											</div>
 										</Link>
-										<div className="flex flex-col gap-2 w-full">
+										<div className="flex flex-col items-start gap-2 w-full">
 											<Link to={`/profile/${user?.userId}`}>
 												<p className="text-xl  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
@@ -50,11 +51,32 @@ const FriendLayout = ({ friends, userData }: Props) => {
 													<p className="text-gray-400">
 														@{user.username.split(" ")[0]}
 													</p>
-													<span className=" text-slate-400 dark:text-white">•</span>
+													<span className=" text-slate-400 dark:text-white">
+														•
+													</span>
 													<p className="text-gray-400">{user.email}</p>
 												</div>
 											</Link>
-											<p className="text-gray-500">{user.bio}</p>
+											<div className="flex gap-2 items-center">
+												<AvatarGroup total={user?.friendList?.length}>
+													{user?.friendList.slice(0, 4).map((friend, index) => (
+														<Avatar
+															key={index}
+															src={friend?.profileimage}
+															sx={{ width: 20, height: 20 }}
+														/>
+													))}
+												</AvatarGroup>
+												<p className="text-slate-500 text-sm">
+													{user?.friendList?.length} friend
+													{user?.friendList?.length !== 1 && "s"} (
+													{
+														__findMutualFriends(friends, user?.friendList)
+															?.length as any
+													}{" "}
+													mutual)
+												</p>
+											</div>{" "}
 											<div className="flex flex-col md:flex-row w-full gap-3">
 												<Link
 													to={`/profile/${user?.userId}`}

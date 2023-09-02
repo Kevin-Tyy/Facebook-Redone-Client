@@ -43,7 +43,6 @@ const Button: React.FC<ButtonProps> = ({
 				},
 			});
 			if (data?.success) {
-				toast.success(data?.msg);
 				setIsFriend(false);
 				setFriendCount((friendCount as number) - 1);
 			} else {
@@ -54,7 +53,6 @@ const Button: React.FC<ButtonProps> = ({
 				friendId: userData?.userId,
 			});
 			if (data?.success) {
-				toast.success(data?.msg);
 				setIsFriend(true);
 				setFriendCount((friendCount as number) + 1);
 			} else {
