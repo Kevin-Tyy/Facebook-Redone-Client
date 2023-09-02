@@ -27,7 +27,7 @@ const App: FC = () => {
 	const element = document.documentElement;
 	const { theme } = useSelector(currentTheme);
 	const dispatch = useDispatch();
-	console.log(theme);
+
 	//use browser window to check prefered color scheme
 	const queryTheme = window.matchMedia("(prefers-color-scheme:dark)");
 

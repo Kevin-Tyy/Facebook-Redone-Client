@@ -91,7 +91,7 @@ const index = () => {
 				<div className="flex flex-col gap-4 rounded-xl ">
 					{users.length > 0 ? (
 						<div className="flex flex-col gap-6">
-							<h1 className="text-light text-2xl text-center ">
+							<h1 className="text-slate-500 dark:text-light text-2xl text-center ">
 								Your friends{" "}
 								<span className="text-blue-base text-xl">
 									({users?.length})
@@ -176,7 +176,7 @@ const index = () => {
 			)}
 			{allUsers && (
 				<div className="flex flex-col gap-6">
-					<h1 className="text-light text-2xl text-center ">
+					<h1 className="text-slate-500 dark:text-light text-2xl text-center ">
 						People you may know
 					</h1>
 
@@ -267,7 +267,7 @@ const index = () => {
 							</div>
 						</div>
 					) : (
-						<div className=" text-lg text-center text-white p-4 pb-6 bg-primary-100/25">
+						<div className=" text-lg text-center text-slate-700 dark:text-white p-4 pb-6 bg-slate-200 dark:bg-primary-100/25">
 							😞 No suggestions available!
 						</div>
 					)}
