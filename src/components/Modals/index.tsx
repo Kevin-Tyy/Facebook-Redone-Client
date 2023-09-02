@@ -36,8 +36,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 							<Dialog.Panel>
 								<button
 									onClick={onClose}
-									className="hover:bg-gray-700 rounded-full p-1.5 absolute top-5 right-3 cursor-pointer z-10">
-									<CloseRounded sx={{ color: "#fff" }} />
+									className="text-slate-500 dark:text-white hover:bg-slate-300 dark:hover:bg-gray-700 rounded-full p-1.5 absolute top-5 right-3 cursor-pointer z-10">
+									<CloseRounded  />
 								</button>
 								{children}
 							</Dialog.Panel>

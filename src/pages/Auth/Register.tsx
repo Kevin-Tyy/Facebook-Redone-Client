@@ -94,24 +94,24 @@ const RegisterForm: FC = () => {
 
 	return (
 		<div className="relative">
-			<div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-br from-gray-800 bg-gray-950 flex justify-center items-center">
+			<div className="fixed bottom-0 z-[-1] h-screen w-full dark:bg-gradient-to-br bg-slate-100  from-gray-800 to-gray-950 flex justify-center items-center">
 				<form
 					onSubmit={handleSubmit}
 					className="w-full sm:w-[400px] flex flex-col gap-7">
 					<div className="flex flex-col gap-3 items-center">
 						<Logo />
-						<h1 className="text-white text-center text-3xl font-bold">
+						<h1 className="text-slate-500 dark:text-white text-center text-3xl font-bold">
 							Create a new account
 						</h1>
 					</div>
-					<hr className="border-1 border-gray-700" />
-					<Stepper activeStep={activeStep} alternativeLabel>
+					<hr className="border-1 border-slate-400 dark:border-gray-700" />
+					<Stepper activeStep={activeStep} alternativeLabel >
 						{steps.map((label, index) => (
 							<Step key={label}>
 								<StepLabel>
 									<p
 										className={`${
-											index == activeStep ? "text-white" : "text-gray-600"
+											index == activeStep ? "text-slate-900 dark:text-white" : "text-gray-600"
 										}`}>
 										{label}
 									</p>
@@ -129,7 +129,7 @@ const RegisterForm: FC = () => {
 					/>
 					<hr className="border-t border-gray-700" />
 					<div className="text-center">
-						<p className="text-white">
+						<p className="text-slate-600 dark:text-white">
 							Already have an account?{" "}
 							<Link
 								to="/login"
@@ -137,7 +137,7 @@ const RegisterForm: FC = () => {
 								Sign in
 							</Link>
 						</p>
-						<p className="mt-5 text-gray-500 text-sm">
+						<p className="mt-5 text-slate-700 dark:text-gray-500 text-sm">
 							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt
 							placeat perferendis exercitationem illum explicabo delectus?
 						</p>

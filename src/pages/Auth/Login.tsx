@@ -53,6 +53,7 @@ const Login: FC = () => {
 				toast.success(data?.msg);
 				navigate("/home");
 			}
+
 		} catch (error) {
 			toast.error("Something went wrong, Try again later");
 		}
@@ -68,25 +69,25 @@ const Login: FC = () => {
 	return (
 		<div className="relative">
 			{/* <div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black"></div> */}
-			<div className="bg-gradient-to-br from-gray-800 bg-gray-950  h-screen w-full flex justify-center items-center">
+			<div className="bg-slate-100 dark:bg-gradient-to-br from-gray-800 dark:bg-gray-950  h-screen w-full flex justify-center items-center">
 				<form
 					onSubmit={handleSubmit}
 					className=" flex flex-col gap-7 p-3 w-full sm:w-[400px]">
 					<div className="flex flex-col gap-3 items-center">
 						<Logo />
-						<h1 className="text-white text-center text-3xl font-bold">
+						<h1 className="text-slate-500 dark:text-white text-center text-3xl font-bold">
 							Sign into your account
 						</h1>
 					</div>
 					<hr className="border-t border-gray-700" />
 					<div
-						className={`text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500 ${
+						className={`text-slate-700 dark:text-white flex items-center gap-3  p-3 bg-gray-300 dark:bg-gray-800 rounded-md transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-400 dark:focus-within:outline-gray-500 ${
 							isLoading && "opacity-60"
 						}`}>
 						<PersonOutlined />
 						<input
 							type="text"
-							className="bg-transparent outline-none w-full placeholder:text-neutral-400"
+							className="bg-transparent outline-none w-full placeholder:text-slate-500 dark:placeholder:text-neutral-400 text-black dark:text-white"
 							placeholder="Email or username"
 							disabled={isLoading}
 							onChange={handleInputChange}
@@ -96,13 +97,13 @@ const Login: FC = () => {
 					</div>
 					<div className="flex flex-col gap-2">
 						<div
-							className={`text-white flex items-center gap-3  p-3 bg-gray-800 rounded-full transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-500 ${
+							className={`text-slate-700 dark:text-white flex items-center gap-3  p-3 bg-gray-300 dark:bg-gray-800 rounded-md transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-400 dark:focus-within:outline-gray-500 ${
 								isLoading && "opacity-60"
 							}`}>
 							<KeyOutlined />
 							<input
 								type={isPasswordVisible ? "text" : "password"}
-								className="bg-transparent outline-none w-full placeholder:text-neutral-400"
+								className="bg-transparent outline-none w-full placeholder:text-slate-500 dark:placeholder:text-neutral-400"
 								disabled={isLoading}
 								placeholder="Password"
 								onChange={handleInputChange}
@@ -133,11 +134,11 @@ const Login: FC = () => {
 						disabled={isLoading}
 						sx={{
 							color: "white",
-							backgroundColor: "rgb(30 , 58 , 138)",
-							borderRadius: "9999px",
+							backgroundColor: "#0C88EF",
+							borderRadius: "7px",
 							textTransform: "capitalize",
 							p: "12px",
-							"&:hover": { backgroundColor: "rgb(40 , 58 , 138)" },
+							"&:hover": { backgroundColor: "#3293e3" },
 							"&:focus": { backgroundColor: "rgb(40 , 58 , 138" },
 						}}>
 						{isLoading ? (
@@ -149,7 +150,7 @@ const Login: FC = () => {
 					<hr className="border-t border-gray-700" />
 
 					<div className="text-center">
-						<p className="text-white">
+						<p className="text-slate-700 dark:text-white">
 							Don't have an account?{" "}
 							<Link
 								to="/register"

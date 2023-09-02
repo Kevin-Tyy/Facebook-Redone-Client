@@ -22,7 +22,7 @@ const RegButton = ({isLoading,activeStep,handleBack,handleNext,steps}: Props) =>
 						sx={{
 							color: "white",
 							backgroundColor: "rgb(180, 44, 250)",
-							borderRadius: "9999px",
+							borderRadius: "9px",
 							textTransform: "capitalize",
 							p: "12px",
 							"&:hover": { backgroundColor: "rgb(211, 44, 220)" },
@@ -39,11 +39,11 @@ const RegButton = ({isLoading,activeStep,handleBack,handleNext,steps}: Props) =>
 						onClick={handleNext}
 						sx={{
 							color: "white",
-							backgroundColor: "rgb(30 , 58 , 138)",
-							borderRadius: "9999px",
+							backgroundColor: "#0C88EF",
+							borderRadius: "9px",
 							textTransform: "capitalize",
 							p: "12px",
-							"&:hover": { backgroundColor: "rgb(40 , 58 , 138)" },
+							"&:hover": { backgroundColor: "#3293e3" },
 							"&:focus": { backgroundColor: "rgb(40 , 58 , 138" },
 						}}>
 						Next
@@ -56,11 +56,11 @@ const RegButton = ({isLoading,activeStep,handleBack,handleNext,steps}: Props) =>
 						type="submit"
 						sx={{
 							color: "white",
-							backgroundColor: "rgb(30 , 58 , 138)",
-							borderRadius: "9999px",
+							backgroundColor: "#0C88EF",
+							borderRadius: "9px",
 							textTransform: "capitalize",
 							p: "12px",
-							"&:hover": { backgroundColor: "rgb(40 , 58 , 138)" },
+							"&:hover": { backgroundColor: "#3293e3" },
 							"&:focus": { backgroundColor: "rgb(40 , 58 , 138" },
 						}}>
 						{isLoading ? (
