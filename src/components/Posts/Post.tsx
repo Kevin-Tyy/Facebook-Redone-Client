@@ -35,7 +35,7 @@ const PostComponent = ({
 	return (
 		<div className="">
 			<div className="flex flex-col bg-slate-200 dark:bg-primary-200 rounded-2xl p-4 md:p-6 gap-6">
-				<div className="flex items-center gap-3 sm:gap-6">
+				<div className="flex items-center gap-2 sm:gap-6">
 					<div className="bg-slate-300 dark:bg-primary-100 p-[3px] rounded-full w-full max-w-fit">
 						<img
 							src={profileimage || placeholderAvatar}
@@ -43,7 +43,7 @@ const PostComponent = ({
 						/>
 					</div>
 					<p
-						className=" bg-slate-100 dark:bg-primary-100/30  text-slate-400 dark:text-light hover:bg-slate-400/30 dark:hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
+						className=" bg-slate-100 dark:bg-primary-100/30 whitespace-nowrap overflow-hidden text-ellipsis text-slate-400 dark:text-light hover:bg-slate-400/30 dark:hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
 						onClick={() => setIsPostModal(true)}>
 						What's on your mind, <span className="capitalize">{username}</span>?
 					</p>
