@@ -34,6 +34,7 @@ const Navbar = () => {
 	const [searchPopupOpen, setSearchPopupOpen] = useState<boolean>(false);
 	const [mobileSearch, setMobileSearch] = useState<boolean>(false);
 	const [mobileSidebar, setMobileSidebar] = useState<boolean>(false);
+	const [mobileSearchPopup, setMobileSearchPopup] = useState<boolean>(false);
 	const [isSearch, setSearch] = useState(false);
 	const dispatch = useDispatch();
 	const { theme } = useSelector(currentTheme);
@@ -56,6 +57,13 @@ const Navbar = () => {
 			icon: <HiUsers size={20} />,
 			title: "Your friends",
 			link: `/i/friends`,
+		},
+		{
+			icon: <BsFillBellFill size={20}/>,
+			title: "Notifications",
+			onClick: function () {
+				setToggleNotifications(true);
+			},
 		},
 		{
 			icon: <Settings />,
@@ -99,7 +107,7 @@ const Navbar = () => {
 			!mobileSearchRef.current.contains(e.target)
 		) {
 			setMobileSearch(false);
-			setSearchPopupOpen(false);
+			setMobileSearchPopup(false);
 		}
 	};
 	useEffect(() => {
@@ -129,7 +137,7 @@ const Navbar = () => {
 						className={`${
 							mobileSearch && "bg-white dark:bg-primary-100 "
 						} absolute right-14 duration-500 flex items-center gap-3 p-1 focus-within:ring-1 focus-within:ring-slate-400/30 dark:focus-within:ring-gray-600 focus-within:ring-inset overflow-hidden rounded-full w-12 xl:w-[300px] transition-all pl-4 ${
-							mobileSearch && "max-w-full w-[90%]"
+							mobileSearch && "max-w-full w-[80%]"
 						}`}>
 						<Search
 							sx={{
@@ -144,13 +152,13 @@ const Navbar = () => {
 							placeholder="Search facebook"
 							onChange={(e) => {
 								setSearchKey(e.target.value);
-								setSearchPopupOpen(true);
+								setMobileSearchPopup(true);
 							}}
 						/>
-						{searchPopupOpen && searchKey && (
+						{mobileSearchPopup && searchKey && (
 							<SearchPopup
 								searchKey={searchKey}
-								onClose={() => setSearchPopupOpen(false)}
+								onClose={() => setMobileSearchPopup(false)}
 							/>
 						)}
 						<CloseRounded
@@ -173,8 +181,8 @@ const Navbar = () => {
 						}  p-1 sm:p-3 relative sm:w-full max-w-[700px] hidden sm:flex gap-4 items-center`}>
 						<Logo />
 						<div
-							className={`bg-white dark:bg-primary-100 absolute duration-500 left-20 hidden md:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-slate-400/30 dark:focus-within:ring-gray-600 focus-within:ring-inset rounded-full w-14 xl:w-[300px] transition-all pl-4 ${
-								isSearch && "max-w-full w-full"
+							className={`bg-transparent xl:bg-white xl:dark:bg-primary-100 absolute duration-500 left-20 hidden md:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-slate-400/30 dark:focus-within:ring-gray-600 focus-within:ring-inset rounded-full w-14 xl:w-[300px] transition-all pl-4 ${
+								isSearch && "max-w-full w-full bg-white dark:bg-primary-100 "
 							}`}>
 							<Search
 								sx={{
@@ -202,7 +210,7 @@ const Navbar = () => {
 					</header>
 					<nav
 						className={`${
-							isSearch && "invisible opacity-0"
+							isSearch && "absolute -z-10 opacity-0"
 						} w-full flex sm:gap-2 self-end  justify-center transition-all duration-500`}>
 						{navLinkIcons.map((item, index) => (
 							<Tooltip title={item.title} key={index}>
@@ -210,7 +218,7 @@ const Navbar = () => {
 									to={item.link}
 									className={` w-full  cursor-pointer transition hover:text-blue-600  max-w-[100px]`}>
 									<div className="w-full group flex flex-col items-center justify-center text-slate-600 dark:text-white">
-										<div className="p-3">{<item.icon size={22} />}</div>
+										<div className="px-3 sm:px-10 pb-4">{<item.icon size={22} />}</div>
 										<div className="bottomBorder h-1.5 rounded-t-md bg-blue-600 w-0 group-hover:w-3/5 transition-all duration-500"></div>
 									</div>
 								</NavLink>
@@ -219,7 +227,7 @@ const Navbar = () => {
 					</nav>
 					<div className="pl-4 pr-2 sm:p-0 sm:w-full min-w-fit justify-end flex gap-2 xl:gap-10 items-center">
 						<div
-							className="hidden md:block cursor-pointer  text-slate-600 dark:text-white relative p-2 rounded-md"
+							className="hidden xl:block cursor-pointer  text-slate-600 dark:text-white relative p-2 rounded-md"
 							onClick={() => setToggleNotifications(true)}>
 							<BsFillBellFill size={22} />
 							{notifications?.length !== 0 &&
@@ -236,7 +244,7 @@ const Navbar = () => {
 									alt="profile"
 									className="w-8 h-8 sm:w-10 sm:h-10  rounded-full object-cover"
 								/>
-								<div className="hidden sm:flex items-center">
+								<div className="hidden lg:flex items-center">
 									<p className="capitalize  text-slate-500 dark:text-white ">
 										{username}
 									</p>
