@@ -178,10 +178,10 @@ const Navbar = () => {
 						ref={searchRef}
 						className={`${
 							isSearch && "min-w-[50vw] "
-						}  p-1 sm:p-3 relative sm:w-full max-w-[700px] hidden sm:flex gap-4 items-center`}>
+						}  p-1 sm:p-3 relative sm:w-full max-w-[700px] hidden sm:flex items-center`}>
 						<Logo />
 						<div
-							className={`bg-transparent xl:bg-white xl:dark:bg-primary-100 absolute duration-500 left-20 hidden md:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-slate-400/30 dark:focus-within:ring-gray-600 focus-within:ring-inset rounded-full w-14 xl:w-[300px] transition-all pl-4 ${
+							className={`bg-transparent xl:bg-white xl:dark:bg-primary-100 absolute duration-500 left-[65px] xl:left-20 hidden sm:flex items-center gap-3 p-3.5 focus-within:ring-1 focus-within:ring-slate-400/30 dark:focus-within:ring-gray-600 focus-within:ring-inset rounded-full w-14 xl:w-[300px] transition-all pl-4 ${
 								isSearch && "max-w-full w-full bg-white dark:bg-primary-100 "
 							}`}>
 							<Search
