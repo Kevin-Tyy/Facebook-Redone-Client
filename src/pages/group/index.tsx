@@ -107,7 +107,7 @@ const Groups = () => {
 						key={index}
 						className=" text-slate-700 dark:text-white rounded-lg bg-slate-200 dark:bg-primary-200  hover:bg-slate-300/70 dark:hover:bg-primary-100/60 p-3 sm:p-6">
 						<div className="relative flex gap-8 flex-col">
-							<div className="relative flex gap-5 pt-5 sm:pt-0 md:gap-7 items-center">
+							<div className="relative flex gap-5 pt-5 sm:pt-0 md:gap-7 items-start sm:items-center">
 								<div
 									onClick={() => navigate(`/group/${group._id}`)}
 									className="cursor-pointer w-fit">

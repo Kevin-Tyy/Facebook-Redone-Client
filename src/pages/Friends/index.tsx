@@ -101,10 +101,10 @@ const index = () => {
 								<div
 									className="bg-slate-100 dark:bg-primary-200 p-6 rounded-lg border dark:border-gray-800 relative"
 									key={index}>
-									<div className="flex items-center gap-4">
+									<div className="flex sm:items-center gap-4">
 										<img
 											src={user.profileimage || placeholderAvatar}
-											className="w-20 h-20 sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-md"
+											className="w-20 h-20 min-h-[80px] min-w-[80px]  sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-full"
 										/>
 
 										<div className="flex flex-col items-start gap-1 w-full">
@@ -112,10 +112,14 @@ const index = () => {
 												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
-												<div className="flex text-gray-400 gap-1">
-													<p className="text-base">@{user?.username}</p>
+												<div className="flex text-gray-400 gap-1 w-[95%]">
+													<p className="text-base whitespace-nowrap">
+														@{user?.username}
+													</p>
 													<span>•</span>
-													<p className="text-base">{user?.email}</p>
+													<p className="text-base whitespace-nowrap overflow-hidden text-ellipsis">
+														{user?.email}
+													</p>
 												</div>
 											</Link>
 											<div className="flex gap-2 items-center">
@@ -138,26 +142,26 @@ const index = () => {
 													mutual)
 												</p>
 											</div>
-											<div className="flex justify-end sm:absolute top-3 right-3 gap-3">
-												<Button
-													onClick={() => removeFriend(user?.userId)}
-													sx={{
-														color: "white",
-														backgroundColor: "#0C88EF",
-														textTransform: "capitalize",
-														borderRadius: "40px",
-														mt: "10px",
-														alignSelf: "flex-start",
-														p: "10px",
-														display: "flex",
-														gap: "5px",
-														"&:hover": { backgroundColor: "#3293e3" },
-													}}>
-													<HiUserRemove size={18} />
-													Remove friend
-												</Button>
-											</div>
 										</div>
+									</div>
+									<div className="flex justify-start mt-8 sm:mt-0 sm:absolute top-3 right-3 gap-3">
+										<Button
+											onClick={() => removeFriend(user?.userId)}
+											sx={{
+												color: "white",
+												backgroundColor: "#0C88EF",
+												textTransform: "capitalize",
+												borderRadius: "40px",
+												mt: "10px",
+												alignSelf: "flex-start",
+												p: "10px",
+												display: "flex",
+												gap: "5px",
+												"&:hover": { backgroundColor: "#3293e3" },
+											}}>
+											<HiUserRemove size={18} />
+											Remove friend
+										</Button>
 									</div>
 								</div>
 							))}
@@ -186,10 +190,10 @@ const index = () => {
 								<div
 									className="bg-slate-100 dark:bg-primary-200/70 p-6 rounded-lg border dark:border-gray-800 relative"
 									key={index}>
-									<div className="flex items-center gap-4">
+									<div className="flex sm:items-center gap-4">
 										<img
 											src={user.profileimage || placeholderAvatar}
-											className="w-20 h-20 sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-md"
+											className="w-20 h-20 min-h-[80px] min-w-[80px]  sm:h-32 sm:w-32 sm:min-h-[120px] sm:min-w-[120px] object-cover rounded-full"
 										/>
 
 										<div className="flex flex-col items-start gap-1 w-full">
@@ -197,10 +201,14 @@ const index = () => {
 												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
-												<div className="flex text-gray-400 gap-1">
-													<p className="text-base">@{user?.username}</p>
+												<div className="flex text-gray-400 gap-1 w-[95%]">
+													<p className="text-base whitespace-nowrap">
+														@{user?.username}
+													</p>
 													<span>•</span>
-													<p className="text-base">{user?.email}</p>
+													<p className="text-base whitespace-nowrap overflow-hidden text-ellipsis">
+														{user?.email}
+													</p>
 												</div>
 											</Link>
 											<div className="flex gap-2 items-center">
@@ -224,7 +232,7 @@ const index = () => {
 											</div>
 										</div>
 									</div>
-									<div className="flex justify-end sm:absolute top-3 right-3 gap-3">
+									<div className="flex justify-start mt-8 sm:mt-0 sm:absolute top-3 right-3 gap-3">
 										<Button
 											onClick={() => addFriend(user?.userId)}
 											sx={{

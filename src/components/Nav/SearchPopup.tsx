@@ -40,8 +40,8 @@ const SearchPopup = ({ searchKey, onClose }: Props) => {
 				hidden: { opacity: 0, y: -30 },
 				visible: { opacity: 1, y: 0 },
 			}}
-			className="fixed top-20 left-10">
-			<div className="h-[50vh] relative w-full max-w-[500px] min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col dark:ring-1 dark:ring-gray-700 overflow-hidden">
+			className="fixed top-20 left-10 z-50">
+			<div className="h-[50vh] relative w-full max-w-[500px] min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-xl rounded-lg flex-col ring-1 ring-slate-300 dark:ring-gray-700 overflow-hidden">
 				{loading && (
 					<div className="grid place-content-center h-full">
 						<CircularProgress size={20} />

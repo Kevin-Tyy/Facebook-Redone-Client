@@ -1,8 +1,12 @@
-import { HiOutlineFaceSmile, HiOutlineCamera, HiOutlineVideoCamera } from "react-icons/hi2";
+import {
+	HiOutlineFaceSmile,
+	HiOutlineCamera,
+	HiOutlineVideoCamera,
+} from "react-icons/hi2";
 import PostModal from "../Modals/PostModal";
 const utilObj = [
 	{ icon: <HiOutlineVideoCamera size={26} />, title: "Live Video" },
-	{ icon: <HiOutlineCamera size={26}/>, title: "Photo/video" },
+	{ icon: <HiOutlineCamera size={26} />, title: "Photo/video" },
 	{ icon: <HiOutlineFaceSmile size={26} />, title: "Feeling/activity" },
 ];
 import { useState } from "react";
@@ -27,37 +31,46 @@ const PostComponent = ({
 			userInfo: UserInfo;
 		};
 	};
-	const { theme } = useSelector(currentTheme)
+	const { theme } = useSelector(currentTheme);
 	return (
 		<div className="">
 			<div className="flex flex-col bg-slate-200 dark:bg-primary-200 rounded-2xl p-4 md:p-6 gap-6">
-				<div className="flex items-center gap-6">
-					<div className="bg-primary-100 p-[3px] rounded-full">
+				<div className="flex items-center gap-3 sm:gap-6">
+					<div className="bg-slate-300 dark:bg-primary-100 p-[3px] rounded-full w-full max-w-fit">
 						<img
 							src={profileimage || placeholderAvatar}
 							className="w-14 h-12  rounded-full object-cover"
 						/>
 					</div>
 					<p
-						className=" bg-slate-100 dark:bg-primary-100/30  text-slate-400 dark:text-light hover:bg-slate-300/30 dark:hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
+						className=" bg-slate-100 dark:bg-primary-100/30  text-slate-400 dark:text-light hover:bg-slate-400/30 dark:hover:bg-primary-100 rounded-full transition duration-300 cursor-pointer  w-full p-4"
 						onClick={() => setIsPostModal(true)}>
 						What's on your mind, <span className="capitalize">{username}</span>?
 					</p>
+					<div
+						className="flex flex-col rounded-md hover:bg-slate-400/40 dark:hover:bg-primary-100/40 transition text-blue-base cursor-pointer px-3 py-1 items-center sm:hidden"
+						onClick={() => setIsPostModal(true)}>
+						<HiOutlineCamera size={25} />
+						<p className="text-sm">Photo</p>
+					</div>
 				</div>
-				<div className="flex gap-4 justify-between flex-wrap">
+				<div className="hidden sm:flex gap-4 justify-between flex-wrap">
 					<div className="flex gap-2 md:gap-4 w-full text-[#13131a]">
 						{utilObj.map((obj, index) => (
-							<div key={index} onClick={() => setIsPostModal(true)} className="w-full  bg-slate-100 dark:bg-primary-100/30 rounded-md">
+							<div
+								key={index}
+								onClick={() => setIsPostModal(true)}
+								className={`w-full  bg-slate-100 dark:bg-primary-100/30 rounded-md`}>
 								<Button
 									sx={{
-										color : theme === 'dark' ? "#fff" : '#334155',
+										color: theme === "dark" ? "#fff" : "#334155",
 										textTransform: "capitalize",
 										p: "10px",
 										borderRadius: "10px",
 										display: "flex",
 										whiteSpace: "nowrap",
 										gap: "15px",
-										width : "100%",
+										width: "100%",
 									}}>
 									<span
 										className={`text-${
