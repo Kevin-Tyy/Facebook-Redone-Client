@@ -124,7 +124,7 @@ const Navbar = () => {
 	}, []);
 	return (
 		<section className="sticky top-0 z-[5]">
-			<main className="flex flex-col relative gap-5 bg-slate-200 shadow dark:bg-primary-200 border-b dark:border-gray-800">
+			<main className="flex flex-col relative gap-6 bg-slate-200 shadow dark:bg-primary-200 border-b dark:border-gray-800">
 				<section className="relative flex items-center justify-between sm:hidden px-2 pt-4">
 					<h1
 						className={`${
