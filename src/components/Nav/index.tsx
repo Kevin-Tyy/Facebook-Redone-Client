@@ -292,7 +292,7 @@ const Navbar = () => {
 						</section>
 					</div>
 					{toggleNotifications && (
-						<NotificationPopup onClose={() => setToggleNotifications(false)} />
+						<NotificationPopup updateBadge={() => setNotifications([])} onClose={() => setToggleNotifications(false)} />
 					)}
 				</section>
 				<div

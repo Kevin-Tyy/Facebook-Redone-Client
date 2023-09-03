@@ -1,41 +1,35 @@
-import { useEffect, useState, useRef } from "react";
-import {
-	EmojiEmotionsOutlined,
-	GifBoxRounded,
-	MoreHoriz,
-} from "@mui/icons-material";
-import { Button, CircularProgress } from "@mui/material";
-import { Image } from "@mui/icons-material";
-import axios from "axios";
-import { BaseURL } from "../../utils/Link";
-import toast from "react-hot-toast";
+import React, { useEffect, useRef, useState } from "react";
+import Modal from "../../../components/Modals";
 import { useSelector } from "react-redux";
-import { loggedInUser } from "../../redux/features/AuthSlice";
-import { UserInfo } from "../../types/types";
+import { loggedInUser } from "../../../redux/features/AuthSlice";
+import { Emoji, GroupType, UserInfo } from "../../../types/types";
+import { BaseURL } from "../../../utils/Link";
+import { toast } from "react-hot-toast";
+import createNotification from "../../../api/functions/notifications";
+import axios from "axios";
+import { Button, CircularProgress } from "@mui/material";
+import placeholderAvatar from "../../../assets/avatar.webp";
 import EmojiPicker, { Theme } from "emoji-picker-react";
-import { Emoji } from "../../types/types";
-import Modal from ".";
-import placeholderAvatar from "../../assets/avatar.webp";
-import createNotification from "../../api/functions/notifications";
-import { HiUsers } from "react-icons/hi2";
+import { AttachFile } from "@mui/icons-material";
+import { HiUsers } from "react-icons/hi";
 interface Props {
-	onClose: () => void;
 	isOpen: boolean;
-	fetchPosts: (url: string) => Promise<void>;
+	onClose: () => void;
+	groupData: GroupType;
+	fetchGroupData: () => void;
 }
-
-const utilIcons = [
-	<EmojiEmotionsOutlined fontSize="large" />,
-	<GifBoxRounded fontSize="large" />,
-	<MoreHoriz fontSize="large" />,
-];
-
-const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
-	const [postText, setPostText] = useState<string>("");
-	const [postMedia, setPostMedia] = useState<any>("");
+const GrpPostModal: React.FC<Props> = ({
+	isOpen,
+	onClose,
+	groupData,
+	fetchGroupData,
+}) => {
+	const [text, setText] = useState<string>("");
+	const [media, setMedia] = useState<any>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [showPicker, setShowPicker] = useState<boolean>(false);
 	const pickerRef = useRef<HTMLDivElement | null>(null);
+	const { groupName, _id, groupMembers } = groupData;
 	const {
 		user: {
 			userInfo: { userId, username, profileimage },
@@ -45,23 +39,27 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 			userInfo: UserInfo;
 		};
 	};
-
 	const submitPostDetails = async (url: string) => {
 		try {
 			setIsLoading(true);
 			const { data } = await axios.post(url, {
-				postText,
-				postMedia,
-				userId,
+				text: text,
+				image: media,
+				userId: userId,
+				groupId: _id,
 			});
 			if (data) {
 				setIsLoading(false);
 				if (data.success) {
-					fetchPosts(`${BaseURL}/post`);
+					fetchGroupData();
 					createNotification(
 						userId,
-						`${username} created a new post. Add your thoughts and reactions`,
-						`/i/flow`
+						`${username} shared a new post in a group you're in, ${groupName}. Add your thoughts and reactions`,
+						`/group/${_id}`,
+
+						groupMembers
+							.filter((member) => member.userId !== userId)
+							.map((member) => member._id)
 					);
 					onClose();
 					toast.success(data.msg);
@@ -76,7 +74,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		submitPostDetails(`${BaseURL}/post`);
+		submitPostDetails(`${BaseURL}/groups/media`);
 	};
 	const handleFileInput = (e: any) => {
 		const file = e.target.files[0];
@@ -84,7 +82,7 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 		reader.readAsDataURL(file);
 		reader.onloadend = () => {
 			const result = reader.result;
-			setPostMedia(result);
+			setMedia(result);
 		};
 	};
 	const handleClickOutside = (event: any) => {
@@ -99,11 +97,11 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 		};
 	}, []);
 	const onEmojiClick = (emojiObject: Emoji) => {
-		setPostText((prevInput) => prevInput + emojiObject.emoji);
+		setText((prevInput) => prevInput + emojiObject.emoji);
 	};
 
 	return (
-		<Modal onClose={onClose} isOpen={isOpen}>
+		<Modal isOpen={isOpen} onClose={onClose}>
 			<div className="relative bg-slate-100 dark:bg-primary-200 ring-1 ring-inset ring-gray-700/50 w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
 				<div className="p-3 border-b  border-slate-400 dark:border-gray-700">
 					<h1 className="text-2xl text-center font-bold  text-slate-500 dark:text-light">
@@ -119,60 +117,43 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 							/>
 						</div>
 						<div className="flex flex-col items-start">
-							<p className=" text-slate-500 dark:text-light font-semibold capitalize">{username}</p>
+							<p className=" text-slate-500 dark:text-light font-semibold capitalize">
+								{username}
+							</p>
 							<div className=" text-slate-500 text-sm dark:text-light bg-slate-300 dark:bg-gray-700 px-1 py-[1px] rounded-md flex items-center gap-1 cursor-pointer transition duration-100 active:bg-gray-600">
 								<HiUsers sx={{ fontSize: 15 }} />
-								Friends
+								Group
 							</div>
 						</div>
 					</div>
-					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+					<form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
 						<textarea
 							rows={7}
-							onChange={(e) => setPostText(e.target.value)}
-							value={postText}
-							className={`w-full resize-none outline-none  bg-transparent text-2xl  text-slate-700 dark:text-light p-2 ${
-								postMedia ? "h-20" : "h-40"
+							onChange={(e) => setText(e.target.value)}
+							value={text}
+							className={`w-full resize-none rounded-lg outline-none  bg-transparent text-lg ring-1 ring-slate-700/20 text-slate-700 dark:text-light p-2 ${
+								media ? "h-20" : "h-40"
 							}`}
-							placeholder={`What's on your mind, ${username}?`}></textarea>
-						{postMedia && (
+							placeholder={`Share your thoughts in the group..`}></textarea>
+						{media && (
 							<img
-								src={postMedia}
+								src={media}
 								className="my-3 w-full h-60 object-cover mx-auto rounded-lg"
 							/>
 						)}
-						<div className="w-full border  border-slate-400 dark:border-gray-700 py-3 rounded-md flex items-center justify-between px-4">
-							<p className=" text-slate-700 dark:text-light">Add to your post</p>
-							<div className="flex gap-3">
-								<label htmlFor="imagepost">
-									<Image
-										className="text-green-500 cursor-pointer"
-										fontSize="large"
-									/>
-								</label>
-								<input
-									id="imagepost"
-									type="file"
-									accept="image/*"
-									className="hidden"
-									onChange={handleFileInput}
-								/>
 
-								{utilIcons.map((icon, index) => (
-									<span
-										onClick={() => setShowPicker(true)}
-										key={index}
-										className={` cursor-pointer ${
-											index == 0
-												? "text-yellow-400"
-												: index == 1
-												? "text-sky-800"
-												: " text-slat`e-700 dark:text-gray-600"
-										}`}>
-										{icon}
-									</span>
-								))}
-							</div>
+						<div>
+							<label htmlFor="imagepost" className="flex gap-2 cursor-pointer">
+								<AttachFile sx={{ color: "#e1e1e1" }} />
+								<p className="text-slate-600 dark:text-light">Attach files</p>
+							</label>
+							<input
+								id="imagepost"
+								type="file"
+								accept="image/*"
+								className="hidden"
+								onChange={handleFileInput}
+							/>
 						</div>
 						<Button
 							type="submit"
@@ -184,12 +165,11 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 								color: "#d5d5d5",
 								textTransform: "capitalize",
 							}}
-							className="text-white rounded-md transtition duration-75">
-							{isLoading ? (
-								<CircularProgress size={24} sx={{ color: "#f5f5f5" }} />
-							) : (
-								"Post"
+							className="text-white rounded-md transtition duration-75 flex gap-4">
+							{isLoading && (
+								<CircularProgress size={20} sx={{ color: "#f5f5f5" }} />
 							)}
+							{isLoading ? "Processing..." : "Share"}
 						</Button>
 					</form>
 				</div>
@@ -203,4 +183,4 @@ const PostModal = ({ onClose, isOpen, fetchPosts }: Props) => {
 	);
 };
 
-export default PostModal;
+export default GrpPostModal;

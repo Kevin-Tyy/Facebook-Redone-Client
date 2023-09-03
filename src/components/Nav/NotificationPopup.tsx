@@ -12,9 +12,10 @@ import { BiBell } from "react-icons/bi";
 import { BsFillBellFill, BsTrash } from "react-icons/bs";
 import { HiEye } from "react-icons/hi";
 interface Props {
+	updateBadge: () => void;
 	onClose: () => void;
 }
-const NotificationPopup: FC<Props> = ({ onClose }) => {
+const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 	const [notifications, setNotifications] = useState<Notification[] | null>(
 		null
 	);
@@ -62,6 +63,7 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 	//api to handle --mark all as read--
 	const handleMarkAsRead = () => {
 		axios.put(`${BaseURL}/notifications/${userId}`).then(() => {
+			updateBadge()
 			__getNotifications();
 		});
 	};
@@ -69,6 +71,7 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 	const deleteNotifications = () => {
 		setNotifications(null);
 		axios.delete(`${BaseURL}/notifications/${userId}`).then(() => {
+			updateBadge()
 			__getNotifications();
 		});
 	};
@@ -123,7 +126,7 @@ const NotificationPopup: FC<Props> = ({ onClose }) => {
 									{notifications.map((notification) => (
 										<div
 											onClick={() => navigate(notification?.link)}
-											className="relative flex justify-between items-start gap-10 m-2 p-3 bg-gradient-to-br bg-slate-200 dark:bg-primary-100/40 hover:from-slate-300/60 dark:hover:bg-primary-100/70 rounded-lg cursor-pointer"
+											className="relative flex justify-between items-start gap-10 m-2 p-3 bg-gradient-to-br bg-slate-200 dark:bg-primary-100/40 hover:bg-slate-300/60 dark:hover:bg-primary-100/70 rounded-lg cursor-pointer"
 											key={notification._id}>
 											<div className="flex items-start gap-4">
 												{notification?.creator?.profileimage ? (

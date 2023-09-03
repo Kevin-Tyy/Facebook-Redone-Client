@@ -112,7 +112,7 @@ const index = () => {
 												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
-												<div className="flex text-gray-400 gap-1 w-[95%]">
+												<div className="flex text-gray-400 gap-1 w-[95%] md:w-full">
 													<p className="text-base whitespace-nowrap">
 														@{user?.username}
 													</p>
@@ -201,7 +201,7 @@ const index = () => {
 												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
-												<div className="flex text-gray-400 gap-1 w-[95%]">
+												<div className="flex text-gray-400 gap-1 w-[95%] md:w-full">
 													<p className="text-base whitespace-nowrap">
 														@{user?.username}
 													</p>

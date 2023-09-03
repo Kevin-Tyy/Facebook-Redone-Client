@@ -7,6 +7,7 @@ export interface FormData {
 }
 
 export interface Userdata {
+	_id: string
 	firstname: string; //
 	userId: string; //
 	username: string; //
@@ -89,4 +90,13 @@ export interface Notification {
 	Seen: Userdata[];
 	creator : Userdata
 	link : string;
+}
+
+export interface GroupMedia {
+	image : string;
+	text : string;
+	creator : Userdata
+	createdAt : Date;
+	likes : Userdata[]
+	comments : Comment[]
 }

@@ -3,8 +3,8 @@ import Sidebar from "../../../components/SideBar/SideLeft";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
-import { GroupType, UserInfo } from "../../../types/types";
-import { Avatar, AvatarGroup, CircularProgress } from "@mui/material";
+import { GroupMedia, GroupType, UserInfo } from "../../../types/types";
+import { Avatar, AvatarGroup, CircularProgress, Tooltip } from "@mui/material";
 import bgImage from "../../../assets/noman.jpg";
 import { HiUserGroup, HiOutlineTrash } from "react-icons/hi2";
 import useDateFormatter from "../../../hooks/useDate";
@@ -15,10 +15,14 @@ import { loggedInUser } from "../../../redux/features/AuthSlice";
 import { Link } from "react-router-dom";
 import placeholderImage from "../../../assets/avatar.webp";
 import DeleteModal from "../components/DeleteModal";
+import GrpPostModal from "../components/GrpPostModal";
+import MediaComponent from "../components/MediaComponent";
+import ShareComponent from "../components/ShareComponent";
 const GroupPage = () => {
 	const { id } = useParams();
 	const [globalLoading, setGlobalLoading] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
+	const [groupPostModal, setGroupPostModal] = useState(false);
 	const {
 		user: {
 			userInfo: { userId },
@@ -29,9 +33,11 @@ const GroupPage = () => {
 		};
 	};
 	const [groupData, setGroupData] = useState<GroupType | null>(null);
+	const [groupMedia, setGroupMedia] = useState<GroupMedia[] | null>(null);
 	const fetchGroupData = () => {
 		axios.get(`${BaseURL}/groups/${id}`).then((response) => {
-			setGroupData(response.data);
+			setGroupData(response.data.group);
+			setGroupMedia(response.data.groupMedia);
 		});
 	};
 	useEffect(() => {
@@ -71,7 +77,7 @@ const GroupPage = () => {
 	return (
 		<main className=" min-h-screen bg-white dark:bg-background-primary pb-20">
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
-				<div className="w-full pt-6 flex justify-center gap-6">
+				<div className="w-full sm:pt-6 flex justify-center gap-6">
 					<Sidebar />
 					<section className="h-full min-h-screen w-full max-w-[850px]">
 						{!groupData ? (
@@ -83,9 +89,9 @@ const GroupPage = () => {
 								<header className="relative">
 									<img
 										src={bgImage}
-										className="max-h-[300px] w-full object-cover rounded-t-2xl"
+										className="max-h-[250px] w-full object-cover rounded-t-2xl"
 									/>
-									<div className="absolute top-[80%] left-[5%]">
+									<div className="absolute top-[75%] left-[5%]">
 										{groupData.groupImage ? (
 											<div className="bg-slate-300 dark:bg-primary-100 p-1.5 rounded-full w-fit">
 												<img
@@ -101,15 +107,15 @@ const GroupPage = () => {
 									</div>
 								</header>
 								<div className="bg-slate-200 dark:bg-primary-200 rounded-b-xl min-h-[120px]">
-									<div className="ml-56 p-4  text-slate-700 dark:text-white relative flex flex-col">
+									<div className="pt-32 sm:pt-4 sm:ml-56 p-4  text-slate-700 dark:text-white relative flex flex-col space-y-1">
 										<h1 className="text-xl flex items-center gap-2">
 											{groupData.groupName}{" "}
 											<HiUserGroup className="text-gray-600" />
 										</h1>
-										<p className="text-gray-400">
+										<p className="text-gray-400 w-5/6">
 											{groupData.groupDescription}
 										</p>
-										<div className="flex mt-3 gap-3 items-center">
+										<div className="flex py-3 gap-3 items-center">
 											<AvatarGroup total={groupData.groupMembers.length}>
 												{groupData.groupMembers
 													.slice(0, 5)
@@ -131,11 +137,15 @@ const GroupPage = () => {
 											ago
 										</p>
 										{groupData?.admin.userId === userId ? (
-											<button
-												onClick={() => setDeleteModal(true)}
-												className="self-end py-3 px-4 bg-red-600/20 rounded-full text-white -translate-y-5 hover:bg-red-600/40 ring-1 ring-red-600 transition">
-												Delete group
-											</button>
+											<div className="absolute right-3 bottom-2">
+												<Tooltip title="Delete group">
+													<div
+														className="text-red-500 hover:bg-slate-400 dark:hover:bg-primary-100 p-2 rounded-md cursor-pointer"
+														onClick={() => setDeleteModal(true)}>
+														<HiOutlineTrash size={18} />
+													</div>
+												</Tooltip>
+											</div>
 										) : (
 											<button
 												onClick={() =>
@@ -156,21 +166,38 @@ const GroupPage = () => {
 										)}
 									</div>
 								</div>
-								<div className="bg-slate-200 dark:bg-primary-200 mt-3 p-20 rounded-xl flex justify-center items-center relative">
-									<div className="absolute right-2 top-2">
-										{groupData.admin.userId === userId && (
-											<div className="text-white hover:bg-slate-400 dark:hover:bg-primary-100 p-2 rounded-md cursor-pointer">
-												<HiOutlineTrash
-													size={18}
-													onClick={() => setDeleteModal(true)}
-												/>
-											</div>
+								<div className="bg-slate-200 dark:bg-primary-200 mt-1 sm:mt-3 rounded-xl  relative">
+									{groupData &&
+										groupData.groupMembers.some(
+											(member) => member.userId === userId
+										) && (
+											<ShareComponent
+												groupData={groupData}
+												fetchGroupData={fetchGroupData}
+											/>
 										)}
-									</div>
-									<h1 className=" text-slate-700 dark:text-white text-center">
-										No activity in the group yet
-									</h1>
 								</div>
+								{groupMedia && groupMedia?.length === 0 ? (
+									<div className=" flex bg-slate-200 dark:bg-primary-200 mt-1 p-10 rounded-lg sm:mt-3 flex-col justify-center items-center">
+										<h1 className=" text-slate-700 dark:text-white text-center">
+											No activity in the group yet
+										</h1>
+										<button
+											onClick={() => setGroupPostModal(true)}
+											className="bg-blue-base text-white p-3 rounded-full mt-3">
+											Create new post
+										</button>
+									</div>
+								) : (
+									<div className="mt-3">
+										<h1 className="text-lg text-slate-500 text-center mt-6 mb-4 dark:text-white">
+											Activity within this group
+										</h1>
+										{groupMedia?.map((item, index) => (
+											<MediaComponent item={item} key={index} />
+										))}
+									</div>
+								)}
 							</section>
 						)}
 					</section>
@@ -204,7 +231,8 @@ const GroupPage = () => {
 															</span>
 														)}
 														{groupData.admin.userId === member.userId && (
-															<span className="text-gray-400 text-sm">{" "}
+															<span className="text-gray-400 text-sm">
+																{" "}
 																(admin)
 															</span>
 														)}
@@ -226,12 +254,21 @@ const GroupPage = () => {
 					</section>
 				</div>
 			</div>
+
 			{globalLoading && <Loading />}
 			<DeleteModal
 				onClose={() => setDeleteModal(false)}
 				isOpen={deleteModal}
 				groupId={id!}
 			/>
+			{groupData && (
+				<GrpPostModal
+					isOpen={groupPostModal}
+					onClose={() => setGroupPostModal(false)}
+					groupData={groupData}
+					fetchGroupData={fetchGroupData}
+				/>
+			)}
 		</main>
 	);
 };
