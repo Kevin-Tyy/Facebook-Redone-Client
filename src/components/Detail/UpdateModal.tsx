@@ -94,8 +94,8 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 	});
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="relative bg-slate-200 dark:bg-primary-200 w-[450px] md:w-[550px] max-h-[1000px]  rounded-xl border border-gray-700 ">
-				<div className="p-3 h-[70px] flex items-center justify-center border-b border-gray-700">
+			<div className="relative bg-slate-200 dark:bg-primary-200 w-[450px] md:w-[550px] max-h-[1000px]  rounded-xl border border-slate-500 dark:border-gray-700 ">
+				<div className="p-3 h-[70px] flex items-center justify-center border-b border-slate-300 dark:border-gray-700">
 					<h1 className="text-center  text-slate-700 dark:text-light text-2xl">Edit Profile</h1>
 				</div>
 
@@ -143,7 +143,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 									</span>
 								</motion.div>
 							)}
-							<hr className="border-gray-700" />
+							<hr className="border-slate-300 dark:border-gray-700" />
 							<div className="flex items-center justify-between">
 								<label className=" text-slate-700 dark:text-light">Location</label>
 								<span
@@ -187,7 +187,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 									</span>
 								</motion.div>
 							)}
-							<hr className="border-gray-700" />
+							<hr className="border-slate-300 dark:border-gray-700" />
 							<div className="flex items-center justify-between">
 								<label className=" text-slate-700 dark:text-light">Work</label>
 								<span
@@ -231,7 +231,7 @@ const UpdateModal = ({ onClose, isOpen }: Props) => {
 								</motion.div>
 							)}
 
-							<hr className="border-gray-700" />
+							<hr className="border-slate-300 dark:border-gray-700" />
 							<div className="flex items-center justify-between">
 								<label className=" text-slate-700 dark:text-light">Education</label>
 								<span

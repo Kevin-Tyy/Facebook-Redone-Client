@@ -90,8 +90,8 @@ const Chat = () => {
 						)}
 					</div>
 					<div className="flex-grow bg-slate-200 dark:bg-primary-200 rounded-lg border dark:border-gray-800 flex justify-center items-center">
-						<h1 className="text-3xl bg-gradient-to-r from-sky-600 to-violet-900 text-transparent bg-clip-text font-black p-10">
-							Select a friend to chat
+						<h1 className="text-2xl bg-gradient-to-r from-sky-600 to-violet-900 text-transparent bg-clip-text font-black p-10">
+							Chats temporarily not available
 						</h1>
 					</div>
 				</div>

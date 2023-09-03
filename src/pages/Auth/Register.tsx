@@ -94,17 +94,17 @@ const RegisterForm: FC = () => {
 
 	return (
 		<div className="relative">
-			<div className="fixed bottom-0 z-[-1] h-screen w-full dark:bg-gradient-to-br bg-slate-100  from-gray-800 to-gray-950 flex justify-center items-center">
+			<div className="fixed bottom-0 z-[-1] h-screen w-full dark:bg-gradient-to-br p-3 bg-slate-100  from-gray-800 to-gray-950 flex xs:pb-[10vh] justify-center items-center">
 				<form
 					onSubmit={handleSubmit}
-					className="w-full sm:w-[400px] flex flex-col gap-7">
+					className="w-full xs:max-w-[400px] flex flex-col gap-7">
 					<div className="flex flex-col gap-3 items-center">
 						<Logo />
 						<h1 className="text-slate-500 dark:text-white text-center text-3xl font-bold">
 							Create a new account
 						</h1>
 					</div>
-					<hr className="border-1 border-slate-400 dark:border-gray-700" />
+					<hr className="border-1 border-slate-300 dark:border-gray-700" />
 					<Stepper activeStep={activeStep} alternativeLabel >
 						{steps.map((label, index) => (
 							<Step key={label}>
@@ -127,7 +127,7 @@ const RegisterForm: FC = () => {
 						handleNext={handleNext}
 						steps={steps}
 					/>
-					<hr className="border-t border-gray-700" />
+					<hr className="border-t border-slate-300 dark:border-gray-700" />
 					<div className="text-center">
 						<p className="text-slate-600 dark:text-white">
 							Already have an account?{" "}

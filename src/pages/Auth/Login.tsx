@@ -69,17 +69,17 @@ const Login: FC = () => {
 	return (
 		<div className="relative">
 			{/* <div className="fixed bottom-0 z-[-1] h-screen w-full bg-gradient-to-b from-black/10 via-black/70 to-black"></div> */}
-			<div className="bg-slate-100 dark:bg-gradient-to-br from-gray-800 dark:bg-gray-950  h-screen w-full flex justify-center items-center">
+			<div className="bg-slate-100 dark:bg-gradient-to-br xs:pb-[10vh] from-gray-800 dark:bg-gray-950 p-2  h-screen w-full flex justify-center items-center">
 				<form
 					onSubmit={handleSubmit}
-					className=" flex flex-col gap-7 p-3 w-full sm:w-[400px]">
+					className=" flex flex-col gap-7 p-3 w-full xs:max-w-[400px]">
 					<div className="flex flex-col gap-3 items-center">
 						<Logo />
 						<h1 className="text-slate-500 dark:text-white text-center text-3xl font-bold">
 							Sign into your account
 						</h1>
 					</div>
-					<hr className="border-t border-gray-700" />
+					<hr className="border-t border-slate-300 dark:border-slate-500 " />
 					<div
 						className={`text-slate-700 dark:text-white flex items-center gap-3  p-3 bg-gray-300 dark:bg-gray-800 rounded-md transition duration-400 outline-1 focus-within:outline focus-within:outline-gray-400 dark:focus-within:outline-gray-500 ${
 							isLoading && "opacity-60"
@@ -147,7 +147,7 @@ const Login: FC = () => {
 							"Sign in"
 						)}
 					</Button>
-					<hr className="border-t border-gray-700" />
+					<hr className="border-t border-slate-300 dark:border-gray-700" />
 
 					<div className="text-center">
 						<p className="text-slate-700 dark:text-white">

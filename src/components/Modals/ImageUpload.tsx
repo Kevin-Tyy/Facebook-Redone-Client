@@ -36,7 +36,7 @@ const ImageUpload = ({
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className="relative bg-slate-200  dark:bg-primary-200 w-[500px] rounded-xl flex flex-col items-center ring-1 ring-slate-300 dark:ring-primary-100 p-8">
+			<div className="relative bg-slate-200  dark:bg-primary-200 sm:w-[500px] rounded-xl flex flex-col items-center ring-1 ring-slate-300 dark:ring-primary-100 p-8">
 				<label
 					htmlFor="upload"
 					className="cursor-pointer bg-gradient-to-r from-sky-400 to-violet-700 absolute -top-28 rounded-full p-1.5">
@@ -70,7 +70,7 @@ const ImageUpload = ({
 							onClick={handleSubmitFile}
 							type="submit"
 							sx={{
-								width: "80%",
+								width: "100%",
 								mx : 'auto',
 								p: 1.5,
 								backgroundColor: "#0C88EF",

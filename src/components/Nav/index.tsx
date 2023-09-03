@@ -303,7 +303,7 @@ const Navbar = () => {
 						className={`fixed top-0 right-0 h-screen sm:hidden max-w-sm overflow-hidden transition-all duration-700 ${
 							mobileSidebar ? "w-full" : "w-0"
 						}`}>
-						<MobileSidebar onClose={() => setMobileSidebar(false)} />
+						<MobileSidebar setToggleNotifications={() => setToggleNotifications(true)} onClose={() => setMobileSidebar(false)} />
 					</div>
 				</div>
 			</main>

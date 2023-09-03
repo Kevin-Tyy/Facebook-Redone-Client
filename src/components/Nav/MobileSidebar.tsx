@@ -13,10 +13,12 @@ import { loggedInUser, logout } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/types";
 import placeholderImage from "../../assets/avatar.webp";
 import { useEffect, useRef } from "react";
+import { BsFillBellFill } from "react-icons/bs";
 interface Props {
 	onClose: () => void;
+	setToggleNotifications : () => void;
 }
-const MobileSidebar: React.FC<Props> = ({ onClose }) => {
+const MobileSidebar: React.FC<Props> = ({ onClose, setToggleNotifications }) => {
 	const dispatch = useDispatch();
 	const { theme } = useSelector(currentTheme);
 	const {
@@ -38,6 +40,14 @@ const MobileSidebar: React.FC<Props> = ({ onClose }) => {
 			icon: <HiUsers size={20} />,
 			title: "Your friends",
 			link: `/i/friends`,
+		},
+		{
+			icon: <BsFillBellFill size={20} />,
+			title: "Notifications",
+			onClick: function () {
+				onClose()
+				setToggleNotifications();
+			},
 		},
 		{
 			icon: <Settings />,
@@ -75,7 +85,9 @@ const MobileSidebar: React.FC<Props> = ({ onClose }) => {
 		};
 	}, []);
 	return (
-		<nav ref={sidebarRef} className="h-full relative w-auto ring-1 ring-slate-400 duration-300 transition-all bg-slate-200 dark:bg-primary-200 ring-inset dark:ring-gray-700 rounded-l-3xl pt-10">
+		<nav
+			ref={sidebarRef}
+			className="h-full relative w-auto ring-1 ring-slate-400 duration-300 transition-all bg-slate-200 dark:bg-primary-200 ring-inset dark:ring-gray-700 rounded-l-3xl pt-10">
 			<CloseRounded
 				sx={{ fontSize: 33 }}
 				onClick={onClose}

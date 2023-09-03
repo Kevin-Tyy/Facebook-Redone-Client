@@ -19,13 +19,12 @@ const ProfileDetail = ({
 	const viewUpdateModal = () => {
 		setIsOpen(!isOpen);
 	};
-
 	return (
 		<div className="flex flex-col gap-6">
 			{loading ? (
 				<div>
-					<Skeleton height={40} />
-					<Skeleton />
+					<Skeleton height={15} width={250} borderRadius={10} />
+					<Skeleton height={30} borderRadius={5} />
 				</div>
 			) : (
 				<div className="flex gap-2">
@@ -46,67 +45,59 @@ const ProfileDetail = ({
 			)}
 			{loading ? (
 				<div>
-					<Skeleton height={40} />
-					<Skeleton />
+					<Skeleton height={15} width={250} borderRadius={10} />
+					<Skeleton height={30} borderRadius={5} />
 				</div>
 			) : (
-				<div className="flex flex-col gap-2">
-					<h1 className=" text-slate-500 dark:text-light ">Education👨‍🎓</h1>
-					<div className=" text-slate-800 dark:text-white">
-						{userData?.education ? (
-							<p>
-								Went to{" "}
-								<span className="underline capitalize">
-									{userData?.education}
-								</span>
-							</p>
-						) : (
-							"No Education added"
-						)}
+				userData?.education && (
+					<div className="flex flex-col gap-2">
+						<h1 className=" text-slate-500 dark:text-light ">Education👨‍🎓</h1>
+						<p>
+							Went to{" "}
+							<span className="underline capitalize">
+								{userData?.education}
+							</span>
+						</p>
 					</div>
-				</div>
+				)
 			)}
 			{loading ? (
 				<div>
-					<Skeleton height={40} />
-					<Skeleton />
+					<Skeleton height={15} width={250} borderRadius={10} />
+					<Skeleton height={30} borderRadius={5} />
 				</div>
 			) : (
-				<div className="flex flex-col gap-2">
-					<h1 className=" text-slate-500 dark:text-light ">Work👜</h1>
-					<p className=" text-slate-800 dark:text-white">
-						{userData?.work ? (
+				userData?.work && (
+					<div className="flex flex-col gap-2">
+						<h1 className=" text-slate-500 dark:text-light ">Work👜</h1>
+						<p className=" text-slate-800 dark:text-white">
 							<span>
 								Works at{" "}
 								<span className="underline capitalize">{userData?.work}</span>
 							</span>
-						) : (
-							"No Work added"
-						)}
-					</p>
-				</div>
+						</p>
+					</div>
+				)
 			)}
 			{loading ? (
 				<div>
-					<Skeleton height={40} />
-					<Skeleton />
+					<Skeleton height={15} width={250} borderRadius={10} />
+					<Skeleton height={30} borderRadius={5} />
 				</div>
 			) : (
-				<div className="flex flex-col gap-2">
-					<h1 className=" text-slate-500 dark:text-light ">Location🏠</h1>
-					<p className=" text-slate-800 dark:text-white">
-						{userData?.location ? (
+				userData?.location && (
+					<div className="flex flex-col gap-2">
+						<h1 className=" text-slate-500 dark:text-light ">Location🏠</h1>
+						<p className=" text-slate-800 dark:text-white">
 							<span>
 								From{" "}
 								<span className="underline capitalize">
 									{userData?.location}
 								</span>
 							</span>
-						) : (
-							"No location added"
-						)}
-					</p>
-				</div>
+						</p>
+					</div>
+				)
 			)}
 			{userData?.userId == userId && (
 				<div onClick={viewUpdateModal} className="max-w-[100px]">
