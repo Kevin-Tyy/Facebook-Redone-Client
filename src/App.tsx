@@ -10,6 +10,7 @@ import Loading from "./components/Loaders/fallback";
 import PageLayout from "./layout/PageLayout";
 import { currentTheme, toggleTheme } from "./redux/features/ThemeSlice";
 import { SkeletonTheme } from "react-loading-skeleton";
+import Landing from "./pages/Landing";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -43,7 +44,7 @@ const App: FC = () => {
 	useEffect(() => {
 		onWindowMatch();
 	}, [theme]);
-	
+
 	useEffect(() => {
 		switch (theme) {
 			case "dark":
@@ -70,6 +71,7 @@ const App: FC = () => {
 				<BrowserRouter>
 					<Suspense fallback={<Loading />}>
 						<Routes>
+							<Route index element={<Landing/>} />
 							<Route path="/register" element={<Register />} />
 							<Route path="/login" element={<Login />} />
 							<Route
