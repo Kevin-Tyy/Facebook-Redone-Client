@@ -34,7 +34,6 @@ const MediaComponent: React.FC<Props> = ({ item }) => {
 		item.likes.some((item) => item.userId === userId)
 	);
 	const [likecount, setLikecount] = useState(item.likes.length);
-	console.log(likedByLoggedInUser);
 	const handleLike = async () => {
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
@@ -146,7 +145,7 @@ const MediaComponent: React.FC<Props> = ({ item }) => {
 								className={`${styleClass}  transition-all duration-500 text-gray-500 group-hover:bg-green-800/20 p-3 rounded-full group-hover:text-green-700`}>
 								<BiShare size={20} />
 							</div>
-							<p className=" text-sm translate-y-[1px] group-hover:text-green-700 transition-all duration-500"></p>
+							<p className=" text-sm translate-y-[1px] group-hover:text-green-700 transition-all duration-500">{item?.shares}</p>
 						</div>
 					</Tooltip>
 				</div>
@@ -154,7 +153,7 @@ const MediaComponent: React.FC<Props> = ({ item }) => {
 			<ReshareModal
 				post={item}
 				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
+			onClose={() => setIsModalOpen(false)}
 			/>
 		</div>
 	);

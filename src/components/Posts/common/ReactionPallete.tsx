@@ -2,13 +2,16 @@ import { BsArrowRepeat, BsBookmark } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { HiEye } from 'react-icons/hi2'
+import { HiEye } from "react-icons/hi2";
 import axios from "axios";
 import { BaseURL } from "../../../utils/Link";
 import { toast } from "react-hot-toast";
 import { Tooltip } from "@mui/material";
-import { Posts } from "../../../types/types";
+import { Posts, UserInfo } from "../../../types/types";
 import { useState } from "react";
+import createNotification from "../../../api/functions/notifications";
+import { useSelector } from "react-redux";
+import { loggedInUser } from "../../../redux/features/AuthSlice";
 interface Props {
 	userId: string;
 	postId: string;
@@ -35,6 +38,15 @@ const ReactionPallete = ({
 	setRepostModal,
 	post,
 }: Props) => {
+	const {
+		user: {
+			userInfo: { username },
+		},
+	} = useSelector(loggedInUser) as {
+		user: {
+			userInfo: UserInfo;
+		};
+	};
 	const styleClass = `flex items-center justify-center cursor-pointer gap-[1px] font-bold`;
 	const [isPostSaved, setIsPostSaved] = useState<boolean>(
 		!!post.saves.find((saved) => saved.userId === userId)
@@ -72,17 +84,36 @@ const ReactionPallete = ({
 		setLikedByLoggedInUser(!likedByLoggedInUser);
 		if (likedByLoggedInUser) {
 			setLikecount(likecount - 1);
-			const { data } = await axios.delete(`${BaseURL}/post/react/like`, {
+			await axios.delete(`${BaseURL}/post/react/like`, {
 				data: { userId, postId },
 			});
-			toast.success(data.msg);
 		} else {
 			setLikecount(likecount + 1);
 			const { data } = await axios.post(`${BaseURL}/post/react/like`, {
 				userId,
 				postId,
 			});
-			toast.success(data.msg);
+			if (data.success && post?.creator?.userId !== userId) {
+				if (post?.isReposted) {
+					createNotification(
+						userId,
+						`${username} ${
+							likecount ? `and ${likecount} others` : ""
+						} liked your post`,
+						`#`,
+						[post?.repostedBy?._id]
+					);
+				} else {
+					createNotification(
+						userId,
+						`${username} ${
+							likecount ? `and ${likecount} others` : ""
+						} liked your post`,
+						`#`,
+						[post?.creator?._id]
+					);
+				}
+			}
 		}
 	};
 

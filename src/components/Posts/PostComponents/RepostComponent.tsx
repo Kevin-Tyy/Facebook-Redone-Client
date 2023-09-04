@@ -1,10 +1,10 @@
 import ReactionPallete from "../common/ReactionPallete";
 import useDateFormatter from "../../../hooks/useDate";
 import { MoreHoriz } from "@mui/icons-material";
-import * as iconshi from "react-icons/hi2";
-import * as iconsai from "react-icons/ai";
-import * as iconsfa from "react-icons/fa";
-import * as iconsbs from "react-icons/bs";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { AiOutlineEye, AiOutlineBell } from "react-icons/ai";
+import { FaRegComment } from "react-icons/fa";
+import { BsArrowRepeat } from "react-icons/bs";
 
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -88,46 +88,44 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 				{repostedBy?.userId == userId && (
 					<p className="text-xs -my-1 text-gray-400">You reposted this.</p>
 				)}
-				<div>
-					<div className="flex justify-between items-start">
-						<Link to={`/profile/${repostedBy?.userId}`}>
-							<div className="flex gap-3 items-center py-3 ">
-								<div className="bg-slate-400 dark:bg-primary-100 p-[3px] rounded-full">
-									<img
-										src={
-											repostedBy?.profileimage
-												? repostedBy?.profileimage
-												: placeholderImage
-										}
-										className="w-12 h-12  rounded-full object-cover"
-									/>
-								</div>
-								<div className="flex flex-col">
-									<p className=" text-slate-700 dark:text-light capitalize">
-										{repostedBy?.firstname} {repostedBy.lastname}
+				<div className="flex justify-between items-start">
+					<Link to={`/profile/${repostedBy?.userId}`}>
+						<div className="flex gap-3 items-center pt-3 pb-1 ">
+							<div className="bg-slate-400 dark:bg-primary-100 p-[3px] rounded-full">
+								<img
+									src={
+										repostedBy?.profileimage
+											? repostedBy?.profileimage
+											: placeholderImage
+									}
+									className="w-12 h-12  rounded-full object-cover"
+								/>
+							</div>
+							<div className="flex flex-col">
+								<p className=" text-slate-700 dark:text-light capitalize">
+									{repostedBy?.firstname} {repostedBy.lastname}
+								</p>
+								<div className="flex items-center space-x-2 text-gray-500/80">
+									<p className="text-sm text-gray-500">
+										<span className="text-sm capitalize">
+											@{repostedBy?.username}{" "}
+										</span>
+										reposted this.
 									</p>
-									<div className="flex items-center space-x-2 text-gray-500/80">
-										<p className="text-sm text-gray-500">
-											<span className="text-sm capitalize">
-												@{repostedBy?.username}{" "}
-											</span>
-											reposted this.
-										</p>
-										<span>•</span>
-										<p className="text-sm">{useDateFormatter(createdAt)}</p>
-									</div>
+									<span>•</span>
+									<p className="text-sm">{useDateFormatter(createdAt)}</p>
 								</div>
 							</div>
-						</Link>
-						<div
-							onClick={() => setShowToggle(true)}
-							className="text-white self-start  rounded-full p-1 m-2 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-slate-200/50 dark:hover:bg-primary-100/60 ">
-							<MoreHoriz sx={{ fontSize: 30 }} />
 						</div>
+					</Link>
+					<div
+						onClick={() => setShowToggle(true)}
+						className="text-white self-start  rounded-full p-1 m-2 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-slate-200/50 dark:hover:bg-primary-100/60 ">
+						<MoreHoriz sx={{ fontSize: 30 }} />
 					</div>
 				</div>
 				<div className="flex gap-4 sm:gap-6 px-2 sm:px-4">
-					<div className="w-1 flex-1 rounded-full ml-2  bg-slate-400/60 dark:bg-gray-700 text-transparent">
+					<div className="w-1 flex-1 rounded-full ml-2 my-3 bg-slate-400/60 dark:bg-gray-700 text-transparent">
 						l
 					</div>
 					<div className="flex self-end w-full flex-col">
@@ -200,35 +198,35 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 							visible: { opacity: 1, y: 0 },
 						}}
 						ref={toggleRef}
-						className="absolute top-16 right-6 bg-slate-300/50 dark:bg-primary-200/10 backdrop-blur-lg ring-1 rounded-xl ring-slate-300 dark:ring-gray-700 p-1 z-50">
+						className="absolute top-16 right-6 bg-slate-300/50 dark:bg-primary-200/50 backdrop-blur-lg ring-1 rounded-xl ring-slate-300 dark:ring-gray-700 p-1 z-50">
 						<ul className="text-slate-800 dark:text-white flex flex-col ">
 							{post?.repostedBy?.userId == userId && (
 								<li
 									onClick={handleDeleteRequest}
 									className="p-3 pr-10 flex gap-3 hover:bg-slate-200/50 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-									{<iconshi.HiOutlineTrash size={18} />}
+									{<HiOutlineTrash size={18} />}
 									Delete Post
 								</li>
 							)}
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsai.AiOutlineEye size={18} />}
+								{<AiOutlineEye size={18} />}
 								View Post
 							</li>
 							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsai.AiOutlineBell size={18} />} Mute Notifications
+								{<AiOutlineBell size={18} />} Mute Notifications
 							</li>
 							<li
 								onClick={() => setRepostModal(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsbs.BsArrowRepeat size={18} />} Repost this
+								{<BsArrowRepeat size={18} />} Repost this
 							</li>
 
 							<li
 								onClick={() => setPostInView(true)}
 								className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
-								{<iconsfa.FaRegComment />} Add your comment
+								{<FaRegComment />} Add your comment
 							</li>
 						</ul>
 					</motion.div>

@@ -20,6 +20,7 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 	const [notifications, setNotifications] = useState<Notification[] | null>(
 		null
 	);
+	const [limit, setLimit] = useState(10);
 	const {
 		user: {
 			userInfo: { userId },
@@ -64,7 +65,7 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 	//api to handle --mark all as read--
 	const handleMarkAsRead = () => {
 		axios.put(`${BaseURL}/notifications/${userId}`).then(() => {
-			updateBadge()
+			updateBadge();
 			__getNotifications();
 		});
 	};
@@ -72,7 +73,7 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 	const deleteNotifications = () => {
 		setNotifications(null);
 		axios.delete(`${BaseURL}/notifications/${userId}`).then(() => {
-			updateBadge()
+			updateBadge();
 			__getNotifications();
 		});
 	};
@@ -89,9 +90,11 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 			}}
 			ref={componentRef}
 			className="fixed top-20 sm:right-10">
-			<div className="h-[60vh] relative w-full max-w-[400px] min-w-[100vw] xs:min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col ring-1 ring-slate-300 dark:ring-gray-700 overflow-hidden">
-				<button className="absolute top-2 right-2 p-2 bg-slate-400 dark:bg-primary-100 rounded-full text-slate-600 dark:text-white block sm:hidden" onClick={onClose}>
-					<CloseRounded sx={{ fontSize : 20}}/>
+			<div className="h-[60vh] sm:h-[50vh] relative w-full max-w-[400px] min-w-[100vw] xs:min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col ring-1 ring-slate-300 dark:ring-gray-700 overflow-hidden">
+				<button
+					className="absolute top-2 right-2 p-2 bg-slate-400 dark:bg-primary-100 rounded-full text-slate-600 dark:text-white block sm:hidden"
+					onClick={onClose}>
+					<CloseRounded sx={{ fontSize: 20 }} />
 				</button>
 				<div className="flex flex-1 h-full">
 					{!notifications && (
@@ -109,7 +112,7 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 								</h1>
 							</div>
 						) : (
-							<section className="p-1 w-full h-full pb-44 overflow-y-scroll">
+							<section className="p-1 w-full h-full pb-24 overflow-y-scroll">
 								<div className="mt-3 p-2 group w-fit cursor-default ml-3">
 									<h1 className="text-slate-500 dark:text-white text-xl mb-1 flex items-center gap-1 relative ">
 										{" "}
@@ -120,17 +123,24 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 												notification.Seen.some((user) => user.userId === userId)
 											) && (
 												<span className="text-white bg-red-600 p-1 rounded-full w-6 h-6 text-sm absolute -top-3 grid place-content-center -right-5">
-													{notifications.length}
+													{
+														notifications.filter(
+															(notification) =>
+																!notification.Seen.find(
+																	(seen) => seen.userId == userId
+																)
+														).length
+													}
 												</span>
 											)}
 									</h1>
 									<div className="w-3/5 h-1 bg-blue-base rounded-full mt-2 group-hover:w-full transition-all duration-300"></div>
 								</div>
 								<div className="space-y-3 mt-3 h-fit overflow-y-scroll">
-									{notifications.map((notification) => (
+									{notifications.slice(0, limit).map((notification) => (
 										<div
 											onClick={() => navigate(notification?.link)}
-											className="relative flex justify-between items-start gap-10 m-2 p-3 bg-gradient-to-br bg-slate-200 dark:bg-primary-100/40 hover:bg-slate-300/60 dark:hover:bg-primary-100/70 rounded-lg cursor-pointer"
+											className="relative flex justify-between items-start gap-10 m-2 p-4 bg-gradient-to-br bg-slate-200 dark:bg-primary-100/40 hover:bg-slate-300/60 dark:hover:bg-primary-100/70 rounded-lg cursor-pointer"
 											key={notification._id}>
 											<div className="flex items-start gap-4">
 												{notification?.creator?.profileimage ? (
@@ -139,11 +149,11 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 														className="w-8 h-8 object-cover rounded-full"
 													/>
 												) : (
-													<div className="bg-gradient-to-br  from-blue-700 to-blue-200 p-2 rounded-full">
-														<BsFillBellFill size={15} className="text-white" />
+													<div className="bg-gradient-to-br  from-blue-700 to-blue-200 p-1.5 rounded-full">
+														<BsFillBellFill size={12} className="text-white" />
 													</div>
 												)}
-												<h1 className="text-slate-700 dark:text-gray-400 first-letter:capitalize w-3/4">
+												<h1 className="text-slate-700 dark:text-gray-400 first-letter:capitalize">
 													{notification.message}
 												</h1>
 											</div>
@@ -157,12 +167,22 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 											)}
 										</div>
 									))}
+									<button
+										disabled={notifications.length - limit < 0}
+										className=" text-blue-base hover:text-blue-light w-full hover:underline text-center pt-2"
+										onClick={() => setLimit((prev) => prev + 5)}>
+										See more(
+										{notifications.length - limit > 0
+											? notifications.length - limit
+											: 0}
+										)
+									</button>
 								</div>
 							</section>
 						))}
 				</div>
 				{notifications && notifications.length > 0 && (
-					<div className="bg-gradient-to-b from-transparent via-gray-100 dark:via-[#1d1f27] to-slate-200 dark:to-[#191d25] absolute bottom-0 h-28  w-full flex items-end justify-between p-2">
+					<div className="bg-gradient-to-b from-transparent via-gray-100 dark:via-[#1d1f27] to-slate-200 dark:to-[#191d25] absolute bottom-0 h-24  w-full flex items-end justify-between p-2">
 						<button
 							onClick={handleMarkAsRead}
 							className=" w-fit text-blue-base m-1 hover:text-blue-light transition duration-500 hover:underline rounded-full">

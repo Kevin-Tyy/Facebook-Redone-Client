@@ -7,7 +7,8 @@ import { Posts as PostType } from "../../types/types";
 import RepostBox from "./PostComponents/RepostComponent";
 import PostComponent from "./Post";
 import { toast } from "react-hot-toast";
-import { BsTools } from "react-icons/bs"
+import { BsTools } from "react-icons/bs";
+import GroupSharedBox from "./PostComponents/GroupSharedComp";
 
 const Posts = () => {
 	const [posts, setPosts] = useState<Array<PostType>>([]);
@@ -50,7 +51,11 @@ const Posts = () => {
 							{posts.map((post, index) => (
 								<div key={index}>
 									{post.isReposted ? (
-										<RepostBox post={post} fetchPosts={fetchPosts} />
+										post.isGroupShared ? (
+											<GroupSharedBox post={post} fetchPosts={fetchPosts} />
+										) : (
+											<RepostBox post={post} fetchPosts={fetchPosts} />
+										)
 									) : (
 										<PostBox post={post} fetchPosts={fetchPosts} />
 									)}

@@ -71,7 +71,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 	return (
 		<>
 			<div className="flex gap-2 items-start p-3  bg-slate-100 dark:bg-primary-200 border-t  border-slate-400 dark:border-gray-700 sticky bottom-0">
-				<div className="bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
+				<div className="bg-slate-400 dark:bg-primary-100 p-1 w-[55px] h-[50px] rounded-full">
 					<img
 						src={profileimage || placeholderAvatar}
 						className="h-full  w-full rounded-full"
@@ -91,7 +91,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 							<ImageOutlined sx={{ fontSize: 20 }} />
 							<GifBoxOutlined sx={{ fontSize: 20 }} />
 						</div>
-						<button className="hover:bg-gray-700/60 p-1 transiton rounded-full text-blue-base">
+						<button className="hover:bg-slate-300 dark:hover:bg-gray-700/60 p-1 transiton rounded-full text-blue-base">
 							<SendRounded sx={{ fontSize: 25 }} />
 						</button>
 					</div>

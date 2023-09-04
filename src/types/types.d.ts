@@ -66,6 +66,8 @@ export interface Posts {
 	numberOfReposts: number;
 	repostedDate: Date;
 	saves: Userdata[];
+	isGroupShared : boolean;
+	group : GroupType
 }
 
 export interface GroupType {
@@ -100,4 +102,5 @@ export interface GroupMedia {
 	createdAt : Date;
 	likes : Userdata[]
 	comments : Comment[]
+	shares : number
 }
