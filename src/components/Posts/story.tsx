@@ -90,7 +90,7 @@ const Story = () => {
 						</div>
 						<div
 							ref={rowRef}
-							className="relative flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden pb-3 ">
+							className="relative flex gap-4 h-[230px] overflow-x-scroll overflow-y-hidden">
 							<div className="w-32 min-w-[128px] overflow-hidden relative rounded-2xl  shadow-md shadow-slate-300 dark:shadow-black/40">
 								<img
 									src={profileimage || placeholderAvatar}

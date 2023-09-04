@@ -198,7 +198,7 @@ const index = () => {
 
 										<div className="flex flex-col items-start gap-1 w-full">
 											<Link to={`/profile/${user.userId}`}>
-												<p className="text-lg  text-slate-700 dark:text-whie capitalize">
+												<p className="text-lg  text-slate-700 dark:text-white capitalize">
 													{user.firstname} {user.lastname}
 												</p>
 												<div className="flex text-gray-400 gap-1 w-[95%] md:w-full">

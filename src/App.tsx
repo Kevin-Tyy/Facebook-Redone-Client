@@ -80,6 +80,7 @@ const App: FC = () => {
 									user?.loggedIn ? <Homelayout /> : <Navigate to="/login" />
 								}>
 								<Route path="/i" element={<PageLayout />}>
+									<Route index element={<Navigate to={'/i/flow'}/>}/>
 									<Route path="flow" element={<HomePage />} />
 									<Route path="friends" element={<FriendPage />} />
 									<Route path="groups" element={<Groups />} />
