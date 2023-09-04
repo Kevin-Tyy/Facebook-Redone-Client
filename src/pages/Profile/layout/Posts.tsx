@@ -6,6 +6,7 @@ import PostComponent from "../../../components/Posts/Post";
 import { Posts, Userdata } from "../../../types/types";
 import RepostBox from "../../../components/Posts/PostComponents/RepostComponent";
 import axios from "axios";
+import GroupSharedBox from "../../../components/Posts/PostComponents/GroupSharedComp";
 interface Props {
 	loading: boolean;
 	userData: Userdata | null;
@@ -61,7 +62,9 @@ const PostLayout = ({
 					</div>
 				</div>
 				<div className="w-full sm:min-w-[600px] flex flex-col gap-4">
-					{userData?.userId == userId && <PostComponent fetchPosts={fetchUserPosts}/>}
+					{userData?.userId == userId && (
+						<PostComponent fetchPosts={fetchUserPosts} />
+					)}
 					{userData?.username && (
 						<div className="bg-slate-200 dark:bg-primary-200 p-2 rounded-md border dark:border-gray-800">
 							<h1 className=" text-slate-700 dark:text-light text-3xl text-center capitalize">
@@ -81,7 +84,14 @@ const PostLayout = ({
 									{posts.map((post, index) => (
 										<div key={index}>
 											{post.isReposted ? (
-												<RepostBox post={post} fetchPosts={fetchUserPosts} />
+												post?.isGroupShared ? (
+													<GroupSharedBox
+														post={post}
+														fetchPosts={fetchUserPosts}
+													/>
+												) : (
+													<RepostBox post={post} fetchPosts={fetchUserPosts} />
+												)
 											) : (
 												<Box post={post} fetchPosts={fetchUserPosts} />
 											)}

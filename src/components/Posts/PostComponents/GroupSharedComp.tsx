@@ -135,10 +135,10 @@ const GroupSharedComponent: React.FC<Props> = ({ post, fetchPosts }) => {
 							<Link to={`/group/${group?._id}`}>
 								<div className="flex gap-3 items-center pb-3 ">
 									<div className="relative rounded-full">
-										<div className="bg-gradient-to-br from-blue-600 to-blue-200 h-14 w-14 grid place-content-center rounded-md text-white">
+										<div className="bg-gradient-to-br from-blue-700 to-blue-200 h-14 w-14 grid place-content-center rounded-md text-white">
 											<HiUserGroup size={24} />
 										</div>
-										<div className="bg-primary-200 p-1 absolute -right-4 top-8 rounded-full">
+										<div className="bg-slate-200 dark:bg-primary-200 p-1 absolute -right-4 top-8 rounded-full">
 											<img
 												src={
 													creator?.profileimage

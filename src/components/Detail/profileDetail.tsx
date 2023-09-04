@@ -52,7 +52,7 @@ const ProfileDetail = ({
 				userData?.education && (
 					<div className="flex flex-col gap-2">
 						<h1 className=" text-slate-500 dark:text-light ">Education👨‍🎓</h1>
-						<p>
+						<p className=" text-slate-800 dark:text-white">
 							Went to{" "}
 							<span className="underline capitalize">
 								{userData?.education}

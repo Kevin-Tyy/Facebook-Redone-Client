@@ -90,7 +90,7 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 				)}
 				<div className="flex justify-between items-start">
 					<Link to={`/profile/${repostedBy?.userId}`}>
-						<div className="flex gap-3 items-center pt-3 pb-1 ">
+						<div className="flex gap-3 items-center pt-3">
 							<div className="bg-slate-400 dark:bg-primary-100 p-[3px] rounded-full">
 								<img
 									src={
@@ -129,10 +129,10 @@ const RepostBox: React.FC<RepostBoxProps> = ({ post, fetchPosts }) => {
 						l
 					</div>
 					<div className="flex self-end w-full flex-col">
-						<div className="flex justify-between items-start">
+						<div className="flex justify-between items-start ml-4">
 							<Link to={`/profile/${creator?.userId}`}>
 								<div className="flex gap-3 items-center pb-3 ">
-									<div className="bg-primary-100 p-[3px] rounded-full">
+									<div className="bg-slate-300 dark:bg-primary-100 p-[3px] rounded-full">
 										<img
 											src={
 												creator?.profileimage
