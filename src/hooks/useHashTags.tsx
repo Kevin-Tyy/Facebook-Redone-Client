@@ -6,7 +6,7 @@ const StyledHashtags = ({ text }: { text: string }) => {
 	// Split the text by hashtags and non-hashtags
 	const parts = text.split(hashtagRegex);
 	return (
-		<p className=" text-slate-700 dark:text-white">
+		<span className=" text-slate-700 dark:text-white">
 			{parts.map((part, index) => {
 				if (part.match(hashtagRegex)) {
 					return (
@@ -17,7 +17,7 @@ const StyledHashtags = ({ text }: { text: string }) => {
 				}
 				return part;
 			})}
-		</p>
+		</span>
 	);
 };
 

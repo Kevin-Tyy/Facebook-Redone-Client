@@ -21,10 +21,10 @@ const Landing = () => {
 	}, []);
 	const { theme } = useSelector(currentTheme);
 	return (
-		<div className="bg-white">
+		<div className="bg-white dark:bg-primary-200">
 			<div
 				className={`flex items-center sticky top-0 bg-white dark:bg-primary-200 p-4 justify-between transition duration-1000 ${
-					isScrolled && "shadow-xl"
+					isScrolled && "shadow-lg"
 				}`}>
 				<h1
 					className={`

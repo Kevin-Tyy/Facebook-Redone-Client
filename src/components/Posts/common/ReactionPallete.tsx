@@ -96,14 +96,14 @@ const ReactionPallete = ({
 						}`}
 						onClick={handleLike}>
 						<div
-							className={` group-hover:bg-pink-800/20 group-hover:text-pink-600 p-3 rounded-full group-active:animate-ping transition-all duration-500`}>
+							className={` group-hover:bg-pink-800/20 group-hover:text-pink-600 p-1.5 sm:p-3 rounded-full group-active:animate-ping transition-all duration-500`}>
 							{likedByLoggedInUser ? (
 								<AiFillHeart size={20} />
 							) : (
 								<AiOutlineHeart size={20} />
 							)}
 						</div>
-						<p className=" text-sm translate-y-[1px] group-hover:text-pink-600 transition-all duration-500">
+						<p className=" text- sm:text-sm translate-y-[1px] group-hover:text-pink-600 transition-all duration-500">
 							{likecount}
 						</p>
 					</div>
@@ -115,10 +115,10 @@ const ReactionPallete = ({
 						}  group`}
 						onClick={() => setPostInView && setPostInView(true)}>
 						<div
-							className={`${styleClass} transition-all duration-500  group-hover:bg-sky-800/20 p-3 rounded-full group-hover:text-sky-700`}>
+							className={`${styleClass} transition-all duration-500  group-hover:bg-sky-800/20 p-1.5 sm:p-3 rounded-full group-hover:text-sky-700`}>
 							<FaRegComment size={20} />
 						</div>
-						<p className=" text-sm translate-y-[1px] group-hover:text-sky-600 transition-all duration-500">
+						<p className=" text- sm:text-sm translate-y-[1px] group-hover:text-sky-600 transition-all duration-500">
 							{commentCount}
 						</p>
 					</div>
@@ -127,13 +127,13 @@ const ReactionPallete = ({
 					<div className={`${styleClass} text-gray-500 group`}>
 						<div
 							onClick={setRepostModal}
-							className={`${styleClass} transition-all duration-500 text-gray-500 hover:bg-orange-800/20 p-3 rounded-full hover:text-orange-700 ${
+							className={`${styleClass} transition-all duration-500 text-gray-500 hover:bg-orange-800/20 p-1.5 sm:p-3 rounded-full hover:text-orange-700 ${
 								post?.numberOfReposts !== 0 && "text-orange-700"
 							}`}>
 							<BsArrowRepeat size={25} />
 						</div>
 						{post?.numberOfReposts !== 0 && (
-							<p className="text-sm translate-y-[1px] text-orange-700 transition-all duration-500">
+							<p className="text- sm:text-sm translate-y-[1px] text-orange-700 transition-all duration-500">
 								{post?.numberOfReposts}
 							</p>
 						)}
@@ -142,10 +142,10 @@ const ReactionPallete = ({
 				<Tooltip title="Views">
 					<div className={`${styleClass} text-gray-500 group`}>
 						<div
-							className={`${styleClass}  transition-all duration-500 text-gray-500 group-hover:bg-green-800/20 p-3 rounded-full group-hover:text-green-700`}>
+							className={`${styleClass}  transition-all duration-500 text-gray-500 group-hover:bg-green-800/20 p-1.5 sm:p-3 rounded-full group-hover:text-green-700`}>
 							<HiEye size={23} />
 						</div>
-						<p className=" text-sm translate-y-[1px] group-hover:text-green-700 transition-all duration-500">
+						<p className=" text- sm:text-sm translate-y-[1px] group-hover:text-green-700 transition-all duration-500">
 							{viewCount}
 						</p>
 					</div>
@@ -153,7 +153,7 @@ const ReactionPallete = ({
 				<Tooltip title="Save this post">
 					<div
 						onClick={savePost}
-						className={`${styleClass}  transition-all duration-500 text-gray-300 hover:bg-purple-800/10 p-3 rounded-full hover:text-purple-600`}>
+						className={`${styleClass}  transition-all duration-500 dark:text-gray-300 hover:bg-purple-800/10 p-1.5 sm:p-3 rounded-full hover:text-purple-600`}>
 						{isPostSaved ? (
 							<BsFillBookmarkFill size={18} />
 						) : (

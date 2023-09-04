@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { BiBell } from "react-icons/bi";
 import { BsFillBellFill, BsTrash } from "react-icons/bs";
 import { HiEye } from "react-icons/hi";
+import { CloseRounded } from "@mui/icons-material";
 interface Props {
 	updateBadge: () => void;
 	onClose: () => void;
@@ -87,8 +88,11 @@ const NotificationPopup: FC<Props> = ({ onClose, updateBadge }) => {
 				visible: { opacity: 1, y: 0 },
 			}}
 			ref={componentRef}
-			className="fixed top-20 right-10">
-			<div className="h-[50vh] relative w-full max-w-[400px] min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col ring-1 ring-slate-300 dark:ring-gray-700 overflow-hidden">
+			className="fixed top-20 sm:right-10">
+			<div className="h-[60vh] relative w-full max-w-[400px] min-w-[100vw] xs:min-w-[400px] bg-slate-100 dark:bg-primary-200/70 backdrop-blur-2xl rounded-lg flex-col ring-1 ring-slate-300 dark:ring-gray-700 overflow-hidden">
+				<button className="absolute top-2 right-2 p-2 bg-slate-400 dark:bg-primary-100 rounded-full text-slate-600 dark:text-white block sm:hidden" onClick={onClose}>
+					<CloseRounded sx={{ fontSize : 20}}/>
+				</button>
 				<div className="flex flex-1 h-full">
 					{!notifications && (
 						<div className="grid place-content-center w-full">

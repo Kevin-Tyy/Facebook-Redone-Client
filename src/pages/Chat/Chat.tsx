@@ -34,7 +34,7 @@ const Chat = () => {
 	return (
 		<div className="min-h-full  bg-white dark:bg-background-primary">
 			<div className="flex justify-center p-4 h-full">
-				<div className="w-full xl:w-4/5 flex gap-2 md:gap-8 h-[90vh]">
+				<div className="w-full xl:w-4/5 flex gap-2 md:gap-8 h-[80vh] sm:h-[90vh]">
 					<div className="hidden sm:flex flex-col gap-8 sticky top-0 w-[70px] md:w-[110px] xl:w-auto  bg-slate-200 dark:bg-primary-200 p-2 md:p-6 rounded-lg border dark:border-gray-800">
 						<div className="flex flex-col gap-6">
 							<div className="justify-between gap-44 hidden xl:flex">
@@ -90,7 +90,7 @@ const Chat = () => {
 						)}
 					</div>
 					<div className="flex-grow bg-slate-200 dark:bg-primary-200 rounded-lg border dark:border-gray-800 flex justify-center items-center">
-						<h1 className="text-2xl bg-gradient-to-r from-sky-600 to-violet-900 text-transparent bg-clip-text font-black p-10">
+						<h1 className="text-xl bg-gradient-to-r from-sky-600 to-violet-900 text-transparent text-center bg-clip-text font-black p-10">
 							Chats temporarily not available
 						</h1>
 					</div>

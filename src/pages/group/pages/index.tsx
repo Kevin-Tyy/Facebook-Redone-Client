@@ -79,7 +79,7 @@ const GroupPage = () => {
 			<div className="p-2 md:p-10 2xl:p-0 flex 2xl:justify-center">
 				<div className="w-full sm:pt-6 flex justify-center gap-6">
 					<Sidebar />
-					<section className="h-full min-h-screen w-full max-w-[850px]">
+					<section className="h-full min-h-screen w-full max-w-[750px]">
 						{!groupData ? (
 							<div className="w-full h-full grid place-content-center pb-[20vh]">
 								<CircularProgress />

@@ -83,7 +83,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 					<div className="flex justify-between items-start">
 						<Link to={`/profile/${creator?.userId}`}>
 							<div className="flex gap-3 items-center py-3 ">
-								<div className="bg-primary-100 p-[3px] rounded-full">
+								<div className="bg-slate-400 dark:bg-primary-100 p-[3px] rounded-full">
 									<img
 										src={
 											creator?.profileimage
@@ -107,7 +107,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 						</Link>
 						<div
 							onClick={() => setShowToggle(true)}
-							className="text-white self-start  rounded-full p-1 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-primary-100/60 ">
+							className="text-white self-start  rounded-full p-1 flex justify-center items-center cursor-pointer transition duration-300 hover:bg-slate-200/60 dark:hover:bg-primary-100/60 ">
 							<MoreHoriz sx={{ fontSize: 30 }} />
 						</div>
 					</div>
@@ -151,33 +151,33 @@ const PostBox: React.FC<PostBoxProps> = ({ post, fetchPosts }) => {
 							visible: { opacity: 1, y: 0 },
 						}}
 						ref={toggleRef}
-						className="absolute top-16 right-6 bg-primary-200/10 backdrop-blur-lg ring-1 rounded-xl ring-gray-700 p-1 z-50">
-						<ul className="text-white flex flex-col ">
+						className="absolute top-16 right-6 bg-slate-300/70 dark:bg-primary-200/10 backdrop-blur-lg ring-1 rounded-xl ring-slate-300 dark:ring-gray-700 p-1 z-50">
+						<ul className="text-slate-800 dark:text-white flex flex-col ">
 							{creator?.userId == userId && (
 								<li
 									onClick={handleDeleteRequest}
-									className="p-3 pr-10 flex gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+									className="p-3 pr-10 flex gap-3 hover:bg-slate-200/60 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 									{<HiOutlineTrash size={18} />}
 									Delete Post
 								</li>
 							)}
 							<li
 								onClick={() => setPostInView(true)}
-								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/60 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<AiOutlineEye size={18} />}
 								View Post
 							</li>
 							<li
 								onClick={() => setRepostModal(true)}
-								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/60 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<BsArrowRepeat size={18} />} Repost this
 							</li>
-							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+							<li className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/60 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<AiOutlineBell size={18} />} Mute Notifications
 							</li>
 							<li
 								onClick={() => setPostInView(true)}
-								className="p-3 pr-10 flex items-center gap-3 hover:bg-primary-100/50 transition rounded-md cursor-pointer">
+								className="p-3 pr-10 flex items-center gap-3 hover:bg-slate-200/60 dark:hover:bg-primary-100/50 transition rounded-md cursor-pointer">
 								{<FaRegComment />} Add your comment
 							</li>
 						</ul>

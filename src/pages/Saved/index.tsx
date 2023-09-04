@@ -49,9 +49,9 @@ const Saved = () => {
 							<PostLoader />
 						</div>
 					) : !savedPosts.length ? (
-						<div className="bg-primary-200 grid place-content-center rounded-lg">
+						<div className="bg-slate-200 dark:bg-primary-200 grid place-content-center rounded-lg">
 							<div className="m-10 flex flex-col items-center gap-3">
-								<div className="flex text-white items-center gap-3">
+								<div className="flex text-slate-600 dark:text-white items-center gap-3">
 									<BsBookmark size={20} />
 									<p className=" text-lg">You have not saved any posts yet</p>
 								</div>

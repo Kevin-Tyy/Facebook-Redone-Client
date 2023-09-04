@@ -93,6 +93,7 @@ export interface Notification {
 }
 
 export interface GroupMedia {
+	_id : string;
 	image : string;
 	text : string;
 	creator : Userdata

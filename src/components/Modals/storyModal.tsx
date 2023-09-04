@@ -106,13 +106,13 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 
 	return (
 		<Modal onClose={onClose} isOpen={isOpen}>
-			<div className="relative bg-slate-100 dark:bg-primary-200  ring-1 ring-inset ring-gray-700/50  w-full min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
+			<div className="relative bg-slate-100 dark:bg-primary-200  ring-1 ring-inset ring-gray-700/50  w-full min-w-[100vw] xs:min-w-[350px] xs:w-[400px] sm:w-[500px] p-3 rounded-lg">
 				<div className="p-3 border-b  border-slate-400 dark:border-gray-700">
 					<h1 className="text-2xl text-center font-bold  text-slate-500 dark:text-light">
 						Add to your story
 					</h1>
 				</div>
-				<div className="p-2">
+				<div className="py-2 sm:p-2">
 					<div className="flex items-center gap-2">
 						<div className="bg-blue-base p-1 rounded-full">
 							<img
@@ -185,7 +185,7 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 							sx={{
 								backgroundImage:
 									"linear-gradient(to right , #04477e , #791fe0  )",
-								p: 2,
+								p: 1.5,
 								color: "#d5d5d5",
 								textTransform: "capitalize",
 							}}
@@ -200,7 +200,7 @@ const StoryModal = ({ onClose, isOpen, fetchStories }: Props) => {
 				</div>
 			</div>
 			{showPicker && (
-				<div ref={pickerRef} className="absolute -bottom-20 -right-20">
+				<div ref={pickerRef} className="absolute -bottom-20 sm:-right-20">
 					<EmojiPicker onEmojiClick={onEmojiClick} theme={Theme.AUTO} />
 				</div>
 			)}
