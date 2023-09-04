@@ -35,11 +35,11 @@ const PostComponent = ({
 	return (
 		<div className="">
 			<div className="flex flex-col bg-slate-200 dark:bg-primary-200 rounded-2xl p-4 md:p-6 gap-6">
-				<div className="flex items-center gap-2 sm:gap-6">
+				<div className="flex items-center gap-2 sm:gap-5">
 					<div className="bg-slate-300 dark:bg-primary-100 p-[3px] rounded-full w-full max-w-fit">
 						<img
 							src={profileimage || placeholderAvatar}
-							className="w-14 h-12  rounded-full object-cover"
+							className="w-12 h-12  rounded-full object-cover"
 						/>
 					</div>
 					<p
