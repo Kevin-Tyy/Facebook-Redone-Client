@@ -7,13 +7,20 @@ const createNotification = (
 	link: string,
 	users?: string[]
 ) => {
-	axios.post(`${BaseURL}/notifications`, {
-		userId,
-		message,
-		dateTime: new Date(),
-		link,
-		users: users ? users : [],
-	});
+	axios
+		.post(`${BaseURL}/notifications`, {
+			userId,
+			message,
+			dateTime: new Date(),
+			link,
+			users: users ? users : [],
+		})
+		.then((response) => {
+			console.log(response);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 };
 
 export default createNotification;

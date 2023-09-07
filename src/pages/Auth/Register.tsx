@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../redux/features/AuthSlice";
 import { decodeToken } from "../../utils/decodeToken";
 import Logo from "../../components/Logo";
+import createNotification from "../../api/functions/notifications";
 
 const RegisterForm: FC = () => {
 	const navigate = useNavigate();
@@ -60,7 +61,14 @@ const RegisterForm: FC = () => {
 			} else {
 				toast.success(data?.msg);
 				const userInfo = decodeToken(data?.token);
+				console.log(data?.user);
 				dispatch(login(userInfo));
+				createNotification(
+					data?.user?.userId,
+					`Hello ${data?.user?.username}, thanks for joining facebook! Connect with your friends and share your favorite content in Facebook groups`,
+					"#",
+					[data?.user?._id]
+				);
 				setTimeout(() => {
 					navigate("/home");
 				}, 1500);
@@ -105,13 +113,15 @@ const RegisterForm: FC = () => {
 						</h1>
 					</div>
 					<hr className="border-1 border-slate-300 dark:border-gray-700" />
-					<Stepper activeStep={activeStep} alternativeLabel >
+					<Stepper activeStep={activeStep} alternativeLabel>
 						{steps.map((label, index) => (
 							<Step key={label}>
 								<StepLabel>
 									<p
 										className={`${
-											index == activeStep ? "text-slate-900 dark:text-white" : "text-gray-600"
+											index == activeStep
+												? "text-slate-900 dark:text-white"
+												: "text-gray-600"
 										}`}>
 										{label}
 									</p>
