@@ -3,7 +3,7 @@ import {
 	HiOutlineCamera,
 	HiOutlineVideoCamera,
 } from "react-icons/hi2";
-import PostModal from "../Modals/PostModal.tsx";
+import PostModal from "../Modals/PostModal";
 const utilObj = [
 	{ icon: <HiOutlineVideoCamera size={26} />, title: "Live Video" },
 	{ icon: <HiOutlineCamera size={26} />, title: "Photo/video" },
