@@ -1,1 +1,1 @@
-export const BaseURL  = 'http://localhost:4000/api'
+export const BaseURL  = 'https://proud-veil-jay.cyclic.app/api'
