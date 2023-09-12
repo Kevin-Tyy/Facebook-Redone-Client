@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Posts from "../../components/Posts";
-import Stories from "../../components/Posts/Story.tsx";
+import Stories from "../../components/Posts/Story";
 
 const Body: FC = () => {
 	return (

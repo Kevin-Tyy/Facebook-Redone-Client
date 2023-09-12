@@ -24,7 +24,6 @@ interface Auth {
             state.loggedIn = false;
         }
     }
-    
 });
 
 export const { login , logout } = AuthSlice.actions;
