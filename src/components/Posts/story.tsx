@@ -201,6 +201,7 @@ const Story = () => {
 									{isInView && (
 										<StoryPreview
 											onClose={() => setIsInView(false)}
+											isInView={isInView}
 											stories={stories}
 											toggleStoryModal={() => setIsToggled(true)}
 											setCurrentCreatorIndex={setCurrentCreatorIndex as any}

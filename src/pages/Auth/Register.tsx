@@ -61,7 +61,6 @@ const RegisterForm: FC = () => {
 			} else {
 				toast.success(data?.msg);
 				const userInfo = decodeToken(data?.token);
-				console.log(data?.user);
 				dispatch(login(userInfo));
 				createNotification(
 					data?.user?.userId,

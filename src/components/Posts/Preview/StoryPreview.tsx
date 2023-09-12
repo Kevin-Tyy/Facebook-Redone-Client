@@ -15,10 +15,12 @@ interface Props {
 	toggleStoryModal: () => void;
 	currentCreatorIndex: number;
 	setCurrentCreatorIndex: (args: any) => void;
+	isInView: boolean;
 }
 
 const StoryPreview = ({
 	onClose,
+	isInView,
 	stories,
 	currentCreatorIndex,
 	setCurrentCreatorIndex,
@@ -118,6 +120,19 @@ const StoryPreview = ({
 		return () => clearInterval(timer);
 	}, [progress]);
 
+	//binding esc for modal collapse
+	useEffect(() => {
+		const handleEscKeyPress = (event: any) => {
+			if (event.key === "Escape" && isInView) {
+				onClose();
+			}
+		};
+		window.addEventListener("keydown", handleEscKeyPress);
+		return () => {
+			window.removeEventListener("keydown", handleEscKeyPress);
+		};
+	}, [isInView]);
+	
 	return (
 		<div className="h-screen w-full fixed top-0 right-0 left-0 bottom-0 bg-white dark:bg-background-primary backdrop-blur-lg z-[10] flex justify-center">
 			<div className="h-screen flex flex-col sm:flex-row-reverse justify-between w-full">
@@ -223,7 +238,9 @@ const StoryPreview = ({
 					</div>
 
 					<div className="sm:border-t flex sm:block sm:w-full items-center gap-3 sm:border-gray-600 pt-2">
-						<p className="text-2xl  text-slate-700 dark:text-light xl:block hidden">Your story</p>
+						<p className="text-2xl  text-slate-700 dark:text-light xl:block hidden">
+							Your story
+						</p>
 						<div
 							className=" cursor-pointer active:bg-gray-600/10 transition rounded-lg"
 							onClick={toggleStoryModal}>
