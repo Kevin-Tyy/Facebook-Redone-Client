@@ -1,5 +1,5 @@
 import Box from "../../../components/Posts/PostComponents/PostBoxComponent";
-import ProfileDetail from "../../../components/Detail/ProfileDetail";
+import ProfileDetail from "../../../components/Detail/ProfileDetail.tsx";
 import Skeleton from "react-loading-skeleton";
 import PostSkeleton from "../../../components/Loaders/Skeleton/Post";
 import PostComponent from "../../../components/Posts/Post";

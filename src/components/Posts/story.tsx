@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import StoryModal from "../Modals/StoryModal";
+import StoryModal from "../Modals/StoryModal.tsx";
 import axios from "axios";
 import { BaseURL } from "../../utils/Link";
 import placeholderAvatar from "../../assets/avatar.webp";
