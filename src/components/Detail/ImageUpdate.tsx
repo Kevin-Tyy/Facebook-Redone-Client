@@ -1,6 +1,6 @@
 import { CameraAltRounded } from "@mui/icons-material";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
@@ -15,7 +15,6 @@ interface Props {
 }
 
 const ImageUpdate = ({ isOpen, onClose }: Props) => {
-	const dispatch = useDispatch();
 	const [uploadImage, setUploadImage] = useState<any>("");
 	const [loading, setLoading] = useState(false);
 	const serverSubmit = async () => {
