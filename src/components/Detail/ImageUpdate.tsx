@@ -1,7 +1,7 @@
 import { CameraAltRounded } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loggedInUser, updateImage } from "../../redux/features/AuthSlice";
+import { loggedInUser } from "../../redux/features/AuthSlice";
 import { UserInfo } from "../../types/types";
 import placeholderAvatar from "../../assets/avatar.webp";
 import { Button, CircularProgress } from "@mui/material";
@@ -32,7 +32,6 @@ const ImageUpdate = ({ isOpen, onClose }: Props) => {
 		}
 		if (data?.success) {
 			toast.success(data?.msg);
-			dispatch(updateImage(data?.userInfo?.profileimage));
 			setLoading(false);
 		} else {
 			toast.error(data?.msg);
